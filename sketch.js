@@ -22,8 +22,8 @@ function setup() {
 function draw() {
   background(level1);
   playerMovement();
-  player.v = player.v + player.a
-  player.y = player.y + player.v;
+  //player.v = player.v + player.a
+  //player.y = player.y + player.v;
   if (player.y + player.h >= windowHeight) {
     player.y = windowHeight - player.h;
   }
@@ -50,4 +50,7 @@ function draw() {
   }
 }
 function keyPressed() {
+  if (keyCode == 87) {
+    player.y = player.y - 20;
+  }
 }
