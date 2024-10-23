@@ -22,21 +22,21 @@ function setup() {
 function draw() {
   background(level1);
   playerMovement();
-  player.v = player.v + player.a
-  player.y = player.y + player.v;
+  //player.v = player.v + player.a
+  //player.y = player.y + player.v;
   if (player.y + player.h >= windowHeight) {
     player.y = windowHeight - player.h;
   }
 
   function playerMovement() {
-    if (keyIsDown(RIGHT_ARROW)) {
+    if (keyIsDown(68)) {
       player.x = player.x + 2;
       image(playerImage, player.x, player.y, player.w, player.h, frameWidth * currentFrame, frameHeight, frameWidth, frameHeight);
       currentFrame = floor(frame) % 8;
       frame = frame + 0.1;
 
     }
-    else if (keyIsDown(LEFT_ARROW)) {
+    else if (keyIsDown(65)) {
       player.x = player.x - 2;
       image(playerImage, player.x, player.y, player.w, player.h, frameWidth * currentFrame, frameHeight, frameWidth, frameHeight);
       currentFrame = floor(frame) % 8;
@@ -50,4 +50,7 @@ function draw() {
   }
 }
 function keyPressed() {
+  if (keyCode == 87) {
+    player.y = player.y - 20;
+  }
 }
