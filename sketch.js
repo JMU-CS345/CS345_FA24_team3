@@ -4,6 +4,8 @@ let walking = 2;
 let jumping = 3;
 let frameWidth = 24
 let frameHeight = 24;
+let currentFrame = 0;
+let frame = 1;
 var player = { x: 10, y: 0, w: 150, h: 150, v: 0, a: 1 }
 
 function preload() {
@@ -29,13 +31,16 @@ function draw() {
   function playerMovement() {
     if (keyIsDown(RIGHT_ARROW)) {
       player.x++;
-      image(playerImage, player.x, player.y, player.w, player.h, 100, 100, frameWidth, frameHeight);
+      image(playerImage, player.x, player.y, player.w, player.h, 24, 24, frameWidth, frameHeight);
     }
     else if (keyIsDown(LEFT_ARROW)) {
       player.x--;
+      image(playerImage, player.x, player.y, player.w, player.h, 24, 24, frameWidth, frameHeight);
     }
     else {
-      image(playerImage, player.x, player.y, player.w, player.h, 0, 0, frameWidth, frameHeight);
+      image(playerImage, player.x, player.y, player.w, player.h, frameWidth * currentFrame, 0, frameWidth, frameHeight);
+      currentFrame = floor(frame) % 2;
+      frame = frame + 0.05;
     }
   }
 }
