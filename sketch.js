@@ -29,14 +29,14 @@ function draw() {
   }
 
   function playerMovement() {
-    if (keyIsDown(RIGHT_ARROW)) {
+    if (keyIsDown(68) && player.x < windowWidth - player.w) {
       player.x = player.x + 2;
       image(playerImage, player.x, player.y, player.w, player.h, frameWidth * currentFrame, frameHeight, frameWidth, frameHeight);
       currentFrame = floor(frame) % 8;
       frame = frame + 0.1;
 
     }
-    else if (keyIsDown(LEFT_ARROW)) {
+    else if (keyIsDown(65) && player.x > 0) {
       player.x = player.x - 2;
       image(playerImage, player.x, player.y, player.w, player.h, frameWidth * currentFrame, frameHeight, frameWidth, frameHeight);
       currentFrame = floor(frame) % 8;
