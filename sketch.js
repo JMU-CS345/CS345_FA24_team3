@@ -6,6 +6,7 @@ let frameWidth = 24
 let frameHeight = 24;
 let currentFrame = 0;
 let frame = 1;
+let jumped = false;
 var player = { x: 10, y: 0, w: 150, h: 150, v: 0, a: 1 }
 
 function preload() {
@@ -42,6 +43,10 @@ function draw() {
       currentFrame = floor(frame) % 8;
       frame = frame + 0.1;
     }
+    else if (jumped == true) {
+      player.y--;
+      image(playerImage, player.x, player.y, player.w, player.h, frameWidth * currentFrame, 0, frameWidth, frameHeight);
+    }
     else {
       image(playerImage, player.x, player.y, player.w, player.h, frameWidth * currentFrame, 0, frameWidth, frameHeight);
       currentFrame = floor(frame) % 2;
@@ -51,6 +56,6 @@ function draw() {
 }
 function keyPressed() {
   if (keyCode == 87) {
-    player.y = player.y - 20;
+    jumped = true;
   }
 }
