@@ -6,8 +6,10 @@ let frameWidth = 24
 let frameHeight = 24;
 let currentFrame = 0;
 let frame = 1;
+let crouched = false;
 let jumped = false;
-var player = { x: 10, y: 0, w: 150, h: 150, v: 0, a: 1, jumpStrength: -15 }
+
+var player = { x: 10, y: 0, w: 150, h: 150, v: 0, a: 1, jumpStrength: -20 }
 
 function preload() {
   playerImage = loadImage("assets/Character.png");
@@ -32,26 +34,42 @@ function draw() {
   }
 
   function playerMovement() {
-    if (keyIsDown(68) && player.x < windowWidth - player.w) { // move right
-      player.x = player.x + 2;
+    if (keyIsDown(68) && player.x < windowWidth - player.w && !crouched) { // move right
       image(playerImage, player.x, player.y, player.w, player.h, frameWidth * currentFrame, frameHeight, frameWidth, frameHeight);
-      currentFrame = floor(frame) % 8;
-      frame = frame + 0.1;
+      if (keyIsDown(16)) {
+        player.x = player.x + 5;
+        currentFrame = floor(frame) % 8;
+        frame = frame + 0.2;
+      }
+      else {
+        player.x = player.x + 2;
+        currentFrame = floor(frame) % 8;
+        frame = frame + 0.1;
+      }
 
     }
-    else if (keyIsDown(65) && player.x > 0) { // move left
-      player.x = player.x - 2;
+    else if (keyIsDown(65) && player.x > 0 && !crouched) { // move left
       image(playerImage, player.x, player.y, player.w, player.h, frameWidth * currentFrame, frameHeight, frameWidth, frameHeight);
-      currentFrame = floor(frame) % 8;
-      frame = frame + 0.1;
+      if (keyIsDown(16)) {
+        player.x = player.x - 5;
+        currentFrame = floor(frame) % 8;
+        frame = frame + 0.2;
+      }
+      else {
+        player.x = player.x - 2;
+        currentFrame = floor(frame) % 8;
+        frame = frame + 0.1;
+      }
     }
-    else if (jumped == true) {
+    else if (jumped && !crouched) { //Jumping
       image(playerImage, player.x, player.y, player.w, player.h, frameWidth * currentFrame, frameHeight * jumping, frameWidth, frameHeight);
       currentFrame = floor(frame) % 8;
-      frame = frame + 0.1;
-      //player.y = player.y - 50;
+      frame = frame + 0.2;
     }
-    else {
+    else if (crouched) { //Crouching
+      image(playerImage, player.x, player.y, player.w, player.h, frameWidth * 7, frameHeight * 4, frameWidth, frameHeight);
+    }
+    else { //Idel 
       image(playerImage, player.x, player.y, player.w, player.h, frameWidth * currentFrame, 0, frameWidth, frameHeight);
       currentFrame = floor(frame) % 2;
       frame = frame + 0.05;
@@ -63,5 +81,14 @@ function keyPressed() {
     player.v = player.jumpStrength
     jumped = true;
 
+  }
+  if (keyCode == 83) {
+    crouched = true;
+  }
+}
+
+function keyReleased() {
+  if (keyCode == 83) {
+    crouched = false;
   }
 }
