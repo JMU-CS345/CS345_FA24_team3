@@ -18,10 +18,22 @@ function setup() {
 
 function draw() {
   background(level1);
+  playerMovement();
   player.v = player.v + player.a
   player.y = player.y + player.v;
   if (player.y + player.h >= windowHeight) {
     player.y = windowHeight - player.h;
   }
   image(playerImage, player.x, player.y, player.w, player.h, 0, 0, frameWidth, frameHeight);
+}
+
+function playerMovement() {
+  if (keyIsDown(RIGHT_ARROW)) {
+    player.x++;
+  }
+  if (keyIsDown(LEFT_ARROW)) {
+    player.x--;
+  }
+}
+function keyPressed() {
 }
