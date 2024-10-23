@@ -7,7 +7,7 @@ let frameHeight = 24;
 let currentFrame = 0;
 let frame = 1;
 let jumped = false;
-var player = { x: 10, y: 0, w: 150, h: 150, v: 0, a: 1 }
+var player = { x: 10, y: 0, w: 150, h: 150, v: 0, a: 1, jumpStrength: -15 }
 
 function preload() {
   playerImage = loadImage("assets/Character.png");
@@ -23,29 +23,33 @@ function setup() {
 function draw() {
   background(level1);
   playerMovement();
-  //player.v = player.v + player.a
-  //player.y = player.y + player.v;
+  player.v = player.v + player.a
+  player.y = player.y + player.v;
   if (player.y + player.h >= windowHeight) {
     player.y = windowHeight - player.h;
+    player.v = 0;
+    jumped = false;
   }
 
   function playerMovement() {
-    if (keyIsDown(68) && player.x < windowWidth - player.w) {
+    if (keyIsDown(68) && player.x < windowWidth - player.w) { // move right
       player.x = player.x + 2;
       image(playerImage, player.x, player.y, player.w, player.h, frameWidth * currentFrame, frameHeight, frameWidth, frameHeight);
       currentFrame = floor(frame) % 8;
       frame = frame + 0.1;
 
     }
-    else if (keyIsDown(65) && player.x > 0) {
+    else if (keyIsDown(65) && player.x > 0) { // move left
       player.x = player.x - 2;
       image(playerImage, player.x, player.y, player.w, player.h, frameWidth * currentFrame, frameHeight, frameWidth, frameHeight);
       currentFrame = floor(frame) % 8;
       frame = frame + 0.1;
     }
     else if (jumped == true) {
-      player.y--;
-      image(playerImage, player.x, player.y, player.w, player.h, frameWidth * currentFrame, 0, frameWidth, frameHeight);
+      image(playerImage, player.x, player.y, player.w, player.h, frameWidth * currentFrame, frameHeight * jumping, frameWidth, frameHeight);
+      currentFrame = floor(frame) % 8;
+      frame = frame + 0.1;
+      //player.y = player.y - 50;
     }
     else {
       image(playerImage, player.x, player.y, player.w, player.h, frameWidth * currentFrame, 0, frameWidth, frameHeight);
@@ -55,7 +59,9 @@ function draw() {
   }
 }
 function keyPressed() {
-  if (keyCode == 87) {
+  if (keyCode == 87 && jumped == false) {
+    player.v = player.jumpStrength
     jumped = true;
+
   }
 }
