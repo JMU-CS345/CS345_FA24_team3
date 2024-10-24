@@ -13,8 +13,9 @@ var player = { x: 10, y: 0, w: 150, h: 150, v: 0, a: 1, jumpStrength: -20 }
 
 function preload() {
   playerImage = loadImage("assets/Character.png"); // For Character going right
-  playerReverse = loadImage("assets/CharacterR.png"); //For Character going left 
+  playerReverse = loadImage("assets/CharacterR.png"); //For Character going left
   level1 = loadImage("assets/level1.png");
+  mapAssets = loadImage("assets/PlanetAssets.png");
 }
 
 function setup() {
@@ -25,6 +26,7 @@ function setup() {
 
 function draw() {
   background(level1);
+  DrawMap("map1");
   PlayerMovement();
   player.v = player.v + player.a
   player.y = player.y + player.v;
