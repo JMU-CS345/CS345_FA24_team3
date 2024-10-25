@@ -9,7 +9,7 @@ let frame = 1;
 let crouched = false;
 let jumped = false;
 
-var player = { x: 10, y: 0, w: 150, h: 150, v: 0, a: 1, jumpStrength: -20 }
+var player = { x: 10, y: 0, w: 150, h: 149, v: 0, a: 1, jumpStrength: -20 }
 var playerHitBox = { x: player.x, y: player.y, w: player.w - 20, h: player.h - 20 }
 function preload() {
   playerImage = loadImage("assets/Character.png"); // For Character going right
