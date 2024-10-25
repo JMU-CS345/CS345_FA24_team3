@@ -37,7 +37,7 @@ function draw() {
   }
 }
 function keyPressed() {
-  if (keyCode == 87 && jumped == false) {
+  if (keyCode == 87 || keyCode == 32 && jumped == false) {
     player.v = player.jumpStrength
     jumped = true;
 
