@@ -3,7 +3,7 @@ let standing = 1; //
 let walking = 2;  //Location in Sprite Sheet
 let jumping = 3;  //
 let frameWidth = 24
-let frameHeight = 24;
+let frameHeight = 23;
 let currentFrame = 0;
 let frame = 1;
 let crouched = false;
@@ -37,7 +37,7 @@ function draw() {
   }
 }
 function keyPressed() {
-  if (keyCode == 87 && jumped == false) { //keyCode == 87 || keyCode == 32 && jumped == false if we want infinite jump
+  if ((keyCode == 87 && jumped == false) || (keyCode == 32 && jumped == false)) { //keyCode == 87 || keyCode == 32 && jumped == false if we want infinite jump
     player.v = player.jumpStrength
     jumped = true;
 
