@@ -21,6 +21,7 @@ function preload() {
 function setup() {
   createCanvas(windowWidth, windowHeight);
   frameRate(60);
+  noSmooth();
   player.y = windowHeight - player.h;
 }
 
