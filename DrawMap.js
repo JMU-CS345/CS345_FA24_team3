@@ -13,8 +13,8 @@ function DrawMap(map) {
 
       image(mapAssets, windowWidth * 0.9, windowHeight * 0.1 + movement, 140, 140, 348, 805, 64, 56);
 
-      image(mapAssets, windowWidth * 0.1, windowHeight * 0 + movement, 140, 140, 1860, 950, 51, 50);
-
+      image(mapAssets, windowWidth * 0.1, windowHeight * 0 + movement, 140, 140, 1860, 940, 51, 50);
+      ellipse(windowWidth * 0.1, windowHeight * 0 + movement, 20, 20);
       image(mapAssets, windowWidth * 0.75, windowHeight * 0.4 + movement, 140, 140, 1440, 38, 49, 48);
       break;
   }
