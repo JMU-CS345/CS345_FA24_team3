@@ -39,14 +39,18 @@ function draw() {
 
   for (let i = 0; i < platforms.length; i++) {
     if (isColliding(player, platforms[i])) {
-      if (collisionDirection(platforms[i]) == "bottom") {
-        player.y = platform.y + platform.h;
-      } else if (collisionDirection(platforms[i]) == "top") {
-        player.y = platform.y - player.h;
-      } else if (collisionDirection(platforms[i]) == "left") {
-        player.x = platform.x + platform.w;
-      } else if (collisionDirection(platforms[i]) == "right") {
-        player.x = platform.x - player.w;
+      if (collisionDirection(player, platforms[i]) == "bottom") {
+        player.y = 0;
+        //player.y = platform.y + platform.h;
+      } else if (collisionDirection(player, platforms[i]) == "top") {
+        player.y = windowHeight;
+        //player.y = platform.y - player.h;
+      } else if (collisionDirection(player, platforms[i]) == "left") {
+        player.x = 0;
+        //player.x = platform.x + platform.w;
+      } else if (collisionDirection(player, platforms[i]) == "right") {
+        player.x = windowWidth;
+        //player.x = platform.x - player.w;
       }
     }
   }
@@ -91,20 +95,20 @@ function keyReleased() {
 }
 
 function collisionDirection(player, platform) {
-  //colliding with the top, bottom, left, and right of the platform, respectively
-  bottomCollision = (player.y + player.h) - platform.y;
+  //colliding with the top, bottom, right and left of the platform, respectively
   topCollision = (platform.y + platform.h) - player.y;
-  leftCollision = (player.x + player.w) - platform.x;
+  bottomCollision = (player.y + player.h) - platform.y;
   rightCollision = (platform.x + platform.w) - player.x;
+  leftCollision = (player.x + player.w) - platform.x;
 
   // Find the smallest collision distance (indicating the direction of collision)
-  if (bottomCollision < topCollision && bottomCollision < leftCollision && bottomCollision < rightCollision) {
-    return 'bottom';  // Colliding with the top of the platform
-  } else if (topCollision < bottomCollision && topCollision < leftCollision && topCollision < rightCollision) {
-    return 'top';  // Colliding with the bottom of the platform
-  } else if (leftCollision < rightCollision && leftCollision < bottomCollision && leftCollision < topCollision) {
-    return 'left';  // Colliding with the right side of the platform
+  if (topCollision < bottomCollision && topCollision < leftCollision && topCollision < rightCollision) {
+    return 'top';  // Colliding with the top of the platform
+  } else if (bottomCollision < topCollision && bottomCollision < leftCollision && bottomCollision < rightCollision) {
+    return 'bottom';  // Colliding with the bottom of the platform
+  } else if (rightCollision < leftCollision && rightCollision < bottomCollision && rightCollision < topCollision) {
+    return 'right';  // Colliding with the right side of the platform
   } else {
-    return 'right';  // Colliding with the left side of the platform
+    return 'left';  // Colliding with the left side of the platform
   }
 }
