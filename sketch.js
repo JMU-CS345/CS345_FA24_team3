@@ -10,7 +10,7 @@ let crouched = false;
 let jumped = false;
 let platforms = []; //platform imp starts here
 
-var player = { x: 10, y: 0, w: 150, h: 150, v: 0, a: 1, jumpStrength: -30 };
+var player = { x: 10, y: 0, w: 150, h: 145, v: 0, a: 1, jumpStrength: -30 };
 
 function preload() {
   playerImage = loadImage("assets/Character.png"); // For Character going right
