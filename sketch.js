@@ -31,7 +31,6 @@ function setup() {
 function draw() {
   background(level1);
   DrawMap("map1");
-
   color = 'purple';
   for (let i = 0; i < platforms.length; i++) {
     fill(color);
@@ -75,10 +74,9 @@ function draw() {
   PlayerMovement();
 }
 function keyPressed() {
-  if ((keyCode == 87 && jumped == false) || (keyCode == 32 && jumped == false)) { //keyCode == 87 || keyCode == 32 && jumped == false if we want infinite jump
-    player.v = player.jumpStrength
+  if ((keyCode == 87 || keyCode == 32) && !jumped) {
+    player.v = player.jumpStrength;
     jumped = true;
-
   }
   if (keyCode == 83) {
     crouched = true;
