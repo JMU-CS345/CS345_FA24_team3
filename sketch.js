@@ -26,7 +26,7 @@ function setup() {
   player.y = windowHeight - player.h;
   platforms.push({ x: 500, y: 625, w: 200, h: 20 });
   platforms.push({ x: 200, y: 450, w: 200, h: 20 });
-  platforms.push({ x: 900, y: 250, w: 300, h: 20 });
+  platforms.push({ x: 970, y: 250, w: 300, h: 20 });
   platforms.push({ x: 600, y: 350, w: 200, h: 20 });
 }
 
@@ -75,7 +75,7 @@ function draw() {
   PlayerMovement();
 }
 function keyPressed() {
-  if ((keyCode == 87 || keyCode == 32) && !jumped) {
+  if ((keyCode == 87 || keyCode == 32) && !jumped && !crouched) {
     player.v = player.jumpStrength;
     jumped = true;
   }
