@@ -10,8 +10,8 @@ let crouched = false;
 let jumped = false;
 let platforms = []; //platform imp starts here
 
-var player = { x: 10, y: 0, w: 150, h: 150, v: 0, a: 1, jumpStrength: -20 }
-
+var player = { x: 10, y: 0, w: 150, h: 149, v: 0, a: 1, jumpStrength: -20 }
+var playerHitBox = { x: player.x, y: player.y, w: player.w - 20, h: player.h - 20 }
 function preload() {
   playerImage = loadImage("assets/Character.png"); // For Character going right
   playerReverse = loadImage("assets/CharacterR.png"); //For Character going left
@@ -22,6 +22,7 @@ function preload() {
 function setup() {
   createCanvas(windowWidth, windowHeight);
   frameRate(60);
+  noSmooth();
   player.y = windowHeight - player.h;
   platforms.push({ x: 400, y: 625, w: 200, h: 20 });
   platforms.push({ x: 200, y: 450, w: 200, h: 20 });
@@ -74,7 +75,7 @@ function draw() {
   PlayerMovement();
 }
 function keyPressed() {
-  if ((keyCode == 87 || keyCode == 32) && jumped == false) {
+  if ((keyCode == 87 && jumped == false) || (keyCode == 32 && jumped == false)) { //keyCode == 87 || keyCode == 32 && jumped == false if we want infinite jump
     player.v = player.jumpStrength
     jumped = true;
 
