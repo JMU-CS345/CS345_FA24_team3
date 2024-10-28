@@ -23,8 +23,8 @@ function setup() {
   createCanvas(windowWidth, windowHeight);
   frameRate(60);
   player.y = windowHeight - player.h;
-  platforms.push({ x: 100, y: 350, w: 200, h: 20 });
-  platforms.push({ x: 200, y: 550, w: 200, h: 20 });
+  platforms.push({ x: 400, y: 625, w: 200, h: 20 });
+  platforms.push({ x: 200, y: 450, w: 200, h: 20 });
 }
 
 function draw() {
@@ -37,48 +37,44 @@ function draw() {
     rect(platforms[i].x, platforms[i].y, platforms[i].w, platforms[i].h);
   }
 
+
+  let isOnPlatform = false;
+
   for (let i = 0; i < platforms.length; i++) {
     if (isColliding(player, platforms[i])) {
-      if (collisionDirection(player, platforms[i]) == "bottom") {
-        player.y = 0;
-        //player.y = platform.y + platform.h;
-      } else if (collisionDirection(player, platforms[i]) == "top") {
-        player.y = windowHeight;
-        //player.y = platform.y - player.h;
-      } else if (collisionDirection(player, platforms[i]) == "left") {
-        player.x = 0;
-        //player.x = platform.x + platform.w;
-      } else if (collisionDirection(player, platforms[i]) == "right") {
-        player.x = windowWidth;
-        //player.x = platform.x - player.w;
+      let direction = collisionDirection(player, platforms[i]);
+      if (direction == "top") {
+        player.y = platforms[i].y - player.h;
+        player.v = 0;
+        jumped = false;
+        isOnPlatform = true;
+      } else if (direction == "bottom") {
+        player.y = platforms[i].y + platforms[i].h;
+        player.v = 0;
+      } else if (direction == "left") {
+        player.x = platforms[i].x - player.w;
+      } else if (direction == "right") {
+        player.x = platforms[i].x + platforms[i].w;
       }
     }
   }
 
-  function isColliding(player, platform) {
-    // Check if player is above platform
-    if (player.y + player.h < platform.y) return false;
-    // Check if player is below platform
-    if (player.y > platform.y + platform.h) return false;
-    // Check if player is to the left of platform
-    if (player.x + player.w < platform.x) return false;
-    // Check if player is to the right of platform
-    if (player.x > platform.x + platform.w) return false;
-    // If none of the above conditions are true, there is a collision
-    return true;
+  if (!isOnPlatform) {
+    player.v += player.a;
   }
 
-  PlayerMovement();
-  player.v = player.v + player.a
-  player.y = player.y + player.v;
+  player.y += player.v;
+
   if (player.y + player.h >= windowHeight) {
     player.y = windowHeight - player.h;
     player.v = 0;
     jumped = false;
   }
+
+  PlayerMovement();
 }
 function keyPressed() {
-  if (keyCode == 87 || keyCode == 32 && jumped == false) {
+  if ((keyCode == 87 || keyCode == 32) && jumped == false) {
     player.v = player.jumpStrength
     jumped = true;
 
@@ -94,12 +90,26 @@ function keyReleased() {
   }
 }
 
+function isColliding(player, platform) {
+  // Check if player is above platform
+  if (player.y + player.h < platform.y) return false;
+  // Check if player is below platform
+  if (player.y > platform.y + platform.h) return false;
+  // Check if player is to the left of platform
+  if (player.x + player.w < platform.x) return false;
+  // Check if player is to the right of platform
+  if (player.x > platform.x + platform.w) return false;
+  // If none of the above conditions are true, there is a collision
+  return true;
+}
+
 function collisionDirection(player, platform) {
   //colliding with the top, bottom, right and left of the platform, respectively
-  topCollision = (platform.y + platform.h) - player.y;
-  bottomCollision = (player.y + player.h) - platform.y;
-  rightCollision = (platform.x + platform.w) - player.x;
+  topCollision = (player.y + player.h) - platform.y;
+  bottomCollision = (platform.y + platform.h) - player.y;
   leftCollision = (player.x + player.w) - platform.x;
+  rightCollision = (platform.x + platform.w) - player.x;
+
 
   // Find the smallest collision distance (indicating the direction of collision)
   if (topCollision < bottomCollision && topCollision < leftCollision && topCollision < rightCollision) {
