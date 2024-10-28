@@ -9,9 +9,12 @@ let frame = 1;
 let crouched = false;
 let jumped = false;
 let platforms = []; //platform imp starts here
+<<<<<<< Updated upstream
+=======
 
-var player = { x: 10, y: 0, w: 150, h: 149, v: 0, a: 1, jumpStrength: -20 }
-var playerHitBox = { x: player.x, y: player.y, w: player.w - 20, h: player.h - 20 }
+var player = { x: 10, y: 0, w: 150, h: 150, v: 0, a: 1, jumpStrength: -20 }
+>>>>>>> Stashed changes
+
 function preload() {
   playerImage = loadImage("assets/Character.png"); // For Character going right
   playerReverse = loadImage("assets/CharacterR.png"); //For Character going left
@@ -22,10 +25,16 @@ function preload() {
 function setup() {
   createCanvas(windowWidth, windowHeight);
   frameRate(60);
-  noSmooth();
   player.y = windowHeight - player.h;
+<<<<<<< Updated upstream
   platforms.push({ x: 400, y: 625, w: 200, h: 20 });
   platforms.push({ x: 200, y: 450, w: 200, h: 20 });
+=======
+  platforms.push({ x: 500, y: 625, w: 200, h: 20 });
+  platforms.push({ x: 200, y: 450, w: 200, h: 20 });
+  platforms.push({ x: 900, y: 250, w: 300, h: 20 });
+  platforms.push({ x: 600, y: 350, w: 200, h: 20 });
+>>>>>>> Stashed changes
 }
 
 function draw() {
@@ -38,8 +47,13 @@ function draw() {
     rect(platforms[i].x, platforms[i].y, platforms[i].w, platforms[i].h);
   }
 
+<<<<<<< Updated upstream
 
   let isOnPlatform = false;
+=======
+  player.v += player.a;
+  player.y += player.v;
+>>>>>>> Stashed changes
 
   for (let i = 0; i < platforms.length; i++) {
     if (isColliding(player, platforms[i])) {
@@ -48,7 +62,10 @@ function draw() {
         player.y = platforms[i].y - player.h;
         player.v = 0;
         jumped = false;
+<<<<<<< Updated upstream
         isOnPlatform = true;
+=======
+>>>>>>> Stashed changes
       } else if (direction == "bottom") {
         player.y = platforms[i].y + platforms[i].h;
         player.v = 0;
@@ -60,6 +77,7 @@ function draw() {
     }
   }
 
+<<<<<<< Updated upstream
   if (!isOnPlatform) {
     player.v += player.a;
   }
@@ -67,6 +85,9 @@ function draw() {
   player.y += player.v;
 
   if (player.y + player.h >= windowHeight) {
+=======
+  if ((player.y + player.h) >= windowHeight) {
+>>>>>>> Stashed changes
     player.y = windowHeight - player.h;
     player.v = 0;
     jumped = false;
@@ -75,7 +96,7 @@ function draw() {
   PlayerMovement();
 }
 function keyPressed() {
-  if ((keyCode == 87 && jumped == false) || (keyCode == 32 && jumped == false)) { //keyCode == 87 || keyCode == 32 && jumped == false if we want infinite jump
+  if ((keyCode == 87 || keyCode == 32) && jumped == false) {
     player.v = player.jumpStrength
     jumped = true;
 
@@ -111,7 +132,10 @@ function collisionDirection(player, platform) {
   leftCollision = (player.x + player.w) - platform.x;
   rightCollision = (platform.x + platform.w) - player.x;
 
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
   // Find the smallest collision distance (indicating the direction of collision)
   if (topCollision < bottomCollision && topCollision < leftCollision && topCollision < rightCollision) {
     return 'top';  // Colliding with the top of the platform
