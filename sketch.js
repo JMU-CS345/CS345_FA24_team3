@@ -40,7 +40,6 @@ function setup() {
 function draw() {
   background(level1);
   DrawMap("map1");
-
   color = 'purple';
   for (let i = 0; i < platforms.length; i++) {
     fill(color);
@@ -96,10 +95,14 @@ function draw() {
   PlayerMovement();
 }
 function keyPressed() {
+<<<<<<< HEAD
   if ((keyCode == 87 || keyCode == 32) && jumped == false) {
     player.v = player.jumpStrength
+=======
+  if ((keyCode == 87 || keyCode == 32) && !jumped) {
+    player.v = player.jumpStrength;
+>>>>>>> 6e50a3b1bde0ef8ed1a42ede50136865c441ccbf
     jumped = true;
-
   }
   if (keyCode == 83) {
     crouched = true;
