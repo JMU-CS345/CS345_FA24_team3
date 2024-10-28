@@ -22,6 +22,7 @@ function preload() {
 function setup() {
   createCanvas(windowWidth, windowHeight);
   frameRate(60);
+  noSmooth();
   player.y = windowHeight - player.h;
   platforms.push({ x: 500, y: 625, w: 200, h: 20 });
   platforms.push({ x: 200, y: 450, w: 200, h: 20 });
