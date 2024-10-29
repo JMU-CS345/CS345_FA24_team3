@@ -35,7 +35,7 @@ function updatePortals() {
 }
 // Creates new projectile/portal
 function shootPortal(direction, colorP) {
-    let speed = 10;
+    let speed = 20;
     let vx = 0, vy = 0;
     if (projectiles.length == 1 && projectiles[0].c == colorP) {
         return;
