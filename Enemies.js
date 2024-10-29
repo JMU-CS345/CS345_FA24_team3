@@ -44,7 +44,6 @@ class Alien extends Enemy {
         this.direction = Math.random() < 0.5 ? -1 : 1;
 
         this.currentFrame = 0;
-        this.idleTracker = 0;
         this.frameCounter = 0;
         this.frameDelay = 10;
     }
@@ -61,7 +60,6 @@ class Alien extends Enemy {
             } else if (this.direction == -1) {
                 this.currentFrame = 6;
             }
-            this.idleTracker = 0;
         } else if (this.frameCounter >= this.frameDelay) {
             if (this.direction == 1) {
                 if (this.currentFrame == 5) {
@@ -85,15 +83,17 @@ class Alien extends Enemy {
         image(Alien.asset, this.x, this.y, this.w, this.h, sx, 0, Alien.FRAME_WIDTH, Alien.FRAME_HEIGHT);
     }
 
-    updateAlien() {
-        this.updateAnimation();
-        this.draw();
-        this.move();
-    }
-
     move() {
         this.x += this.direction * this.speed;
         if (this.x >= windowWidth - 120 || this.x <= -120)
             this.direction *= -1;
+    }
+
+    // todo rest of methods.
+
+    updateAlien() {
+        this.updateAnimation();
+        this.draw();
+        this.move();
     }
 }
