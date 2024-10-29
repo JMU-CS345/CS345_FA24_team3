@@ -1,22 +1,31 @@
 let numFramesY = 12;
-let standing = 1; //
-let walking = 2;  //Location in Sprite Sheet
+let standing = 1;
+let walking = 2;  // Location in Sprite Sheet
 let jumping = 3;  //
-let frameWidth = 24
+let frameWidth = 24;
 let frameHeight = 24;
 let currentFrame = 0;
 let frame = 1;
 let crouched = false;
 let jumped = false;
-let platforms = []; //platform imp starts here
+let purplePortalExist = false;
+let goldPortalExist = false;
+let projectiles = []; // Array of portal projectiles 
+let platforms = []; // platform imp starts here
+let pX = 0; // Purple Portal X value
+let pY = 0; // Purple Portal Y Value
+let gX = 0; // Gold Portal X Value 
+let gY = 0; // Gold Portal Y Value
 
 var player = { x: 10, y: 0, w: 150, h: 145, v: 0, a: 1, jumpStrength: -30 };
 
 function preload() {
   playerImage = loadImage("assets/Character.png"); // For Character going right
-  playerReverse = loadImage("assets/CharacterR.png"); //For Character going left
+  playerReverse = loadImage("assets/CharacterR.png"); // For Character going left
   level1 = loadImage("assets/level1.png");
   mapAssets = loadImage("assets/PlanetAssets.png");
+  portalPurpleImage = loadImage("assets/portalPurple.png");
+  portalGoldImage = loadImage("assets/portalGold.png");
 }
 
 function setup() {
@@ -33,7 +42,7 @@ function setup() {
 function draw() {
   background(level1);
   DrawMap("map1");
-  color = 'purple';
+  color = 'white';
   for (let i = 0; i < platforms.length; i++) {
     fill(color);
     rect(platforms[i].x, platforms[i].y, platforms[i].w, platforms[i].h);
@@ -65,15 +74,41 @@ function draw() {
     player.v += player.a;
   }
 
-
   if (player.y + player.h >= windowHeight) {
     player.y = windowHeight - player.h;
     player.v = 0;
     jumped = false;
   }
 
+  // Handling portal shooting
+  if (keyIsDown(81)) { // PURPLE PORTALS with Q
+    if (keyIsDown(RIGHT_ARROW)) {
+      shootPortal("right", "purple");
+    } else if (keyIsDown(LEFT_ARROW)) {
+      shootPortal("left", "purple");
+    } else if (keyIsDown(DOWN_ARROW)) {
+      shootPortal("down", "purple");
+    } else if (keyIsDown(UP_ARROW)) {
+      shootPortal("up", "purple");
+    }
+  }
+
+  if (keyIsDown(69)) { // GOLD PORTALS with E
+    if (keyIsDown(RIGHT_ARROW)) {
+      shootPortal("right", "gold");
+    } else if (keyIsDown(LEFT_ARROW)) {
+      shootPortal("left", "gold");
+    } else if (keyIsDown(DOWN_ARROW)) {
+      shootPortal("down", "gold");
+    } else if (keyIsDown(UP_ARROW)) {
+      shootPortal("up", "gold");
+    }
+  }
+  updatePortals();
   PlayerMovement();
+  drawPortals();
 }
+
 function keyPressed() {
   if ((keyCode == 87 || keyCode == 32) && !jumped && !crouched) {
     player.v = player.jumpStrength;
@@ -104,11 +139,11 @@ function isColliding(player, platform) {
 }
 
 function collisionDirection(player, platform) {
-  //colliding with the top, bottom, right and left of the platform, respectively
-  topCollision = (player.y + player.h) - platform.y;
-  bottomCollision = (platform.y + platform.h) - player.y;
-  leftCollision = (player.x + player.w) - platform.x;
-  rightCollision = (platform.x + platform.w) - player.x;
+  // Colliding with the top, bottom, right, and left of the platform, respectively
+  let topCollision = (player.y + player.h) - platform.y;
+  let bottomCollision = (platform.y + platform.h) - player.y;
+  let leftCollision = (player.x + player.w) - platform.x;
+  let rightCollision = (platform.x + platform.w) - player.x;
 
   // Find the smallest collision distance (indicating the direction of collision)
   if (topCollision < bottomCollision && topCollision < leftCollision && topCollision < rightCollision) {
