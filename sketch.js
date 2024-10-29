@@ -19,6 +19,9 @@ let gY = 0; // Gold Portal Y Value
 
 var player = { x: 10, y: 0, w: 150, h: 145, v: 0, a: 1, jumpStrength: -30 };
 
+let alienImage; // so enemies file can read it
+let aiean1;
+
 function preload() {
   playerImage = loadImage("assets/Character.png"); // For Character going right
   playerReverse = loadImage("assets/CharacterR.png"); // For Character going left
@@ -26,6 +29,7 @@ function preload() {
   mapAssets = loadImage("assets/PlanetAssets.png");
   portalPurpleImage = loadImage("assets/portalPurple.png");
   portalGoldImage = loadImage("assets/portalGold.png");
+  alienImage = loadImage("assets/alien.png");
 }
 
 function setup() {
@@ -37,6 +41,8 @@ function setup() {
   platforms.push({ x: 200, y: 450, w: 200, h: 20 });
   platforms.push({ x: 970, y: 250, w: 300, h: 20 });
   platforms.push({ x: 600, y: 350, w: 200, h: 20 });
+  alien1 = new Alien(600, windowHeight - 120, 120, 120);
+  Alien.asset = alienImage;
 }
 
 function draw() {
@@ -107,6 +113,7 @@ function draw() {
   updatePortals();
   PlayerMovement();
   drawPortals();
+  alien1.updateAlien();
 }
 
 function keyPressed() {
