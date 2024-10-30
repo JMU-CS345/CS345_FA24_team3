@@ -20,7 +20,7 @@ let gY = 0; // Gold Portal Y Value
 var player = { x: 10, y: 0, w: 150, h: 145, v: 0, a: 1, jumpStrength: -30 };
 
 let alienImage; // so enemies file can read it
-let aiean1;
+let alien1;
 
 // ================
 // map movement
@@ -28,7 +28,7 @@ let aiean1;
 
 //just supposed to be a small bounce to make our maps more alive
 
-// the vairable that will hold the small movement
+// the variable that will hold the small movement
 let mapScroll = 0;
 // a control variable to help slow down the bounce
 let moveControl = 0;
@@ -50,7 +50,7 @@ function mapMovement() {
   } else { // subtract until you reach zero
     moveControl--;
     if (moveControl % 10 == 0) {
-      //every time you get a number divisable by 10 subtract a pixel from the asset
+      //every time you get a number divisible by 10 subtract a pixel from the asset
       mapScroll--;
     } //when you get to zero the bounce is complete
     if (moveControl == 0) {
@@ -103,8 +103,9 @@ function draw() {
   noFill();
   noStroke();
 
-  // load the maps continously to make the hit boxes bounce
+  // load the maps continuously to make the hit boxes bounce
   platforms = GetMap("map1");
+  //platforms.push({ x: 970, y: 750, w: 300, h: 20 });
   for (let i = 0; i < platforms.length; i++) {
 
     rect(platforms[i].x, platforms[i].y, platforms[i].w, platforms[i].h);
@@ -114,8 +115,8 @@ function draw() {
   player.y += player.v;
 
   for (let i = 0; i < platforms.length; i++) {
-    if (isColliding(player, platforms[i])) {
-      let direction = collisionDirection(player, platforms[i]);
+    if (isColliding(player, playerHitBox, platforms[i])) {
+      let direction = collisionDirection(player, playerHitBox, platforms[i]);
       if (direction == "top") {
         player.y = platforms[i].y - player.h;
         player.v = 0;
@@ -125,9 +126,9 @@ function draw() {
         player.y = platforms[i].y + platforms[i].h;
         player.v = 0;
       } else if (direction == "left") {
-        player.x = platforms[i].x - player.w;
+        player.x = platforms[i].x - player.w + 40;
       } else if (direction == "right") {
-        player.x = platforms[i].x + platforms[i].w;
+        player.x = platforms[i].x + platforms[i].w - 40;
       }
     }
   }
@@ -166,7 +167,7 @@ function draw() {
       shootPortal("up", "gold");
     }
   }
-  if (isColliding(player, alien1) && collisionDirection(player, alien1) == 'top') {
+  if (isColliding(player, playerHitBox, alien1) && collisionDirection(player, playerHitBox, alien1) == 'top') {
     alien1.dead = true;
   }
   updatePortals();
@@ -215,25 +216,25 @@ function updateHitbox() {
 }
 
 
-function isColliding(player, platform) {
+function isColliding(player, playerHitBox, platform) {
   // Check if player is above platform
   if (player.y + player.h < platform.y) return false;
   // Check if player is below platform
-  if (player.y > platform.y + platform.h) return false;
+  if (playerHitBox.y > platform.y + platform.h) return false;
   // Check if player is to the left of platform
-  if (player.x + player.w < platform.x) return false;
+  if (playerHitBox.x + playerHitBox.w < platform.x) return false;
   // Check if player is to the right of platform
-  if (player.x > platform.x + platform.w) return false;
+  if (playerHitBox.x > platform.x + platform.w) return false;
   // If none of the above conditions are true, there is a collision
   return true;
 }
 
-function collisionDirection(player, platform) {
+function collisionDirection(player, playerHitBox, platform) {
   // Colliding with the top, bottom, right, and left of the platform, respectively
   let topCollision = (player.y + player.h) - platform.y;
-  let bottomCollision = (platform.y + platform.h) - player.y;
-  let leftCollision = (player.x + player.w) - platform.x;
-  let rightCollision = (platform.x + platform.w) - player.x;
+  let bottomCollision = (platform.y + platform.h) - playerHitBox.y;
+  let leftCollision = (playerHitBox.x + playerHitBox.w) - platform.x;
+  let rightCollision = (platform.x + platform.w) - playerHitBox.x;
 
   // Find the smallest collision distance (indicating the direction of collision)
   if (topCollision < bottomCollision && topCollision < leftCollision && topCollision < rightCollision) {
