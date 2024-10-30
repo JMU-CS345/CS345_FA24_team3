@@ -1,3 +1,4 @@
+let verticle = false;
 function updatePortals() {
     // Update and draw all projectiles
     for (let i = projectiles.length - 1; i >= 0; i--) {
@@ -40,10 +41,22 @@ function shootPortal(direction, colorP) {
     if (projectiles.length == 1 && projectiles[0].c == colorP) {
         return;
     }
-    if (direction == "up") vy = -speed;
-    else if (direction == "down") vy = speed;
-    else if (direction == "left") vx = -speed;
-    else if (direction == "right") vx = speed;
+    if (direction == "up") {
+        vy = -speed;
+        verticle = false;
+    }
+    else if (direction == "down") {
+        vy = speed;
+        verticle = false;
+    }
+    else if (direction == "left") {
+        vx = -speed;
+        verticle = true;
+    }
+    else if (direction == "right") {
+        vx = speed;
+        verticle = true;
+    }
     if (projectiles.length < 2) {
         let projectile = {
             x: player.x + player.w / 2,
@@ -60,10 +73,20 @@ function shootPortal(direction, colorP) {
 }
 function drawPortals() {
     if (purplePortalExist) {
-        image(portalPurpleImage, pX - (player.w / 2), pY, player.w, player.h / 5);
+        if (verticle) {
+            image(portalPurpleImage, pX - (player.w / 2), pY, player.w / 5, player.h);
+        }
+        else {
+            image(portalPurpleImage, pX - (player.w / 2), pY, player.w, player.h / 5);
+        }
     }
     if (goldPortalExist) {
-        image(portalGoldImage, gX - (player.w / 2), gY, player.w, player.h / 5);
+        if (verticle) {
+            image(portalGoldImage, gX - (player.w / 2), gY, player.w / 5, player.h);
+        }
+        else {
+            image(portalGoldImage, gX - (player.w / 2), gY, player.w, player.h / 5);
+        }
 
     }
 }
