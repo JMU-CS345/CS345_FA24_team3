@@ -41,7 +41,7 @@ function setup() {
   platforms.push({ x: 200, y: 450, w: 200, h: 20 });
   platforms.push({ x: 970, y: 250, w: 300, h: 20 });
   platforms.push({ x: 600, y: 350, w: 200, h: 20 });
-  alien1 = new Alien(600, windowHeight - 120, 120, 120);
+  alien1 = new Alien(600, windowHeight - 120, 120, 120, false);
   Alien.asset = alienImage;
 }
 
@@ -110,10 +110,18 @@ function draw() {
       shootPortal("up", "gold");
     }
   }
+  if (isColliding(player, alien1) && collisionDirection(player, alien1) == 'top') {
+    alien1.dead = true;
+  }
   updatePortals();
   PlayerMovement();
   drawPortals();
-  alien1.updateAlien();
+  if (alien1.dead) {
+    alien1.killed();
+  }
+  else {
+    alien1.updateAlien();
+  }
 }
 
 function keyPressed() {

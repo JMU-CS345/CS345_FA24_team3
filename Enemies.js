@@ -1,5 +1,5 @@
 class Enemy {
-    constructor(x, y, w, h) {
+    constructor(x, y, w, h, dead) {
         if (new.target == Enemy)
             throw new Error("Specify what enemy instance is being constructed")
 
@@ -7,6 +7,7 @@ class Enemy {
         this.y = y;
         this.w = w;
         this.h = h;
+        this.dead = dead;
     }
 
     move() {
@@ -87,6 +88,9 @@ class Alien extends Enemy {
         this.x += this.direction * this.speed;
         if (this.x >= windowWidth - 120 || this.x <= -120)
             this.direction *= -1;
+    }
+    killed() {
+        image(Alien.asset, this.x, this.y, this.w, this.h, Alien.FRAME_WIDTH * 14, 0, Alien.FRAME_WIDTH, Alien.FRAME_HEIGHT);
     }
 
     // todo rest of methods.
