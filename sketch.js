@@ -10,17 +10,61 @@ let crouched = false;
 let jumped = false;
 let purplePortalExist = false;
 let goldPortalExist = false;
-let projectiles = []; // Array of portal projectiles 
+let projectiles = []; // Array of portal projectiles
 let platforms = []; // platform imp starts here
 let pX = 0; // Purple Portal X value
 let pY = 0; // Purple Portal Y Value
-let gX = 0; // Gold Portal X Value 
+let gX = 0; // Gold Portal X Value
 let gY = 0; // Gold Portal Y Value
 
 var player = { x: 10, y: 0, w: 150, h: 145, v: 0, a: 1, jumpStrength: -30 };
 
 let alienImage; // so enemies file can read it
 let aiean1;
+
+// ================
+// map movement
+// ================
+
+//just supposed to be a small bounce to make our maps more alive
+
+// the vairable that will hold the small movement
+let mapScroll = 0;
+// a control variable to help slow down the bounce
+let moveControl = 0;
+// another control variable to assure the bounce lands in the same position
+let moveWait = true;
+
+function mapMovement() {
+
+  if (moveControl < 100 && moveWait == true) {
+    //count to 100
+    moveControl++;
+    if (moveControl % 10 == 0) {
+      //whenever the remainder is 0 move add a pixel for the bounce
+      mapScroll++;
+    }
+    if (moveControl >= 100) { // time to start moving the asset back down
+      moveWait = false;
+    }
+  } else { // subtract until you reach zero
+    moveControl--;
+    if (moveControl % 10 == 0) {
+      //every time you get a number divisable by 10 subtract a pixel from the asset
+      mapScroll--;
+    } //when you get to zero the bounce is complete
+    if (moveControl == 0) {
+      moveWait = true
+    }
+  }
+}
+
+
+var player = { x: 10, y: 0, w: 150, h: 150, v: 0, a: 1, jumpStrength: -30 };
+//the player hit box for collision
+var playerHitBox = { x: player.x, y: player.y, w: player.w - 100, h: player.h - 100 };
+
+
 
 function preload() {
   playerImage = loadImage("assets/Character.png"); // For Character going right
@@ -30,6 +74,8 @@ function preload() {
   portalPurpleImage = loadImage("assets/portalPurple.png");
   portalGoldImage = loadImage("assets/portalGold.png");
   alienImage = loadImage("assets/alien.png");
+  mapAssets = loadImage("assets/PlanetAssets.png"); //space stuff
+
 }
 
 function setup() {
@@ -48,9 +94,19 @@ function setup() {
 function draw() {
   background(level1);
   DrawMap("map1");
-  color = 'white';
+  DrawMap("map1"); //draw the first level
+  //use to see hitboxes and platforms easily
+  //fill("purple");
+  //rect(playerHitBox.x, playerHitBox.y, playerHitBox.w, playerHitBox.h);
+
+  // make the hitboxes invisible
+  noFill();
+  noStroke();
+
+  // load the maps continously to make the hit boxes bounce
+  platforms = GetMap("map1");
   for (let i = 0; i < platforms.length; i++) {
-    fill(color);
+
     rect(platforms[i].x, platforms[i].y, platforms[i].w, platforms[i].h);
   }
   let isOnPlatform = false;
@@ -114,6 +170,7 @@ function draw() {
   PlayerMovement();
   drawPortals();
   alien1.updateAlien();
+  updateHitbox(); // keep the hitbox up to date with the player
 }
 
 function keyPressed() {
@@ -131,6 +188,16 @@ function keyReleased() {
     crouched = false;
   }
 }
+
+//used to keep the hitbox up to date with the player
+function updateHitbox() {
+  playerHitBox = {
+    //the player's hit box should barley ovelap with the sprite
+    // serves as a collision box and hurtbox.
+    x: player.x + 40, y: player.y + 40, w: player.w - 80, h: player.h - 40
+  };
+}
+
 
 function isColliding(player, platform) {
   // Check if player is above platform
