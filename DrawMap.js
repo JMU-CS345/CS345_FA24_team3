@@ -7,8 +7,8 @@ let newLevel = true;
 var mapPlatforms;
 
 function DrawMap(map) {
-  mapMovement();
-  switch (map) {
+  mapMovement(); //update map bounce
+  switch (map) { //switch based on which map is needed
     case "map1":
 
       mapPlatforms = GetMap(map);
