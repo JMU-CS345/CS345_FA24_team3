@@ -12,6 +12,7 @@ var purpleP = { x: -1, y: -1, w: -1, h: -1, verticle: false };
 var goldP = { x: -1, y: -1, w: -1, h: -1, verticle: false };
 let projectiles = []; // Array of portal projectiles
 let platforms = []; // platform imp starts here
+let curDirection = null;
 
 var player = { x: 10, y: 0, w: 150, h: 145, v: 0, a: 1, jumpStrength: -30 };
 
@@ -89,15 +90,25 @@ function setup() {
 
 function draw() {
   background(level1);
-  DrawMap("map1");
   DrawMap("map1"); //draw the first level
   //use to see hitboxes and platforms easily
   fill("white");
-  //rect(playerHitBox.x, playerHitBox.y, playerHitBox.w, playerHitBox.h);
-
+  /*rect(playerHitBox.x, playerHitBox.y, playerHitBox.w, playerHitBox.h);
+  if (purpleP.x != -1) {
+    rect(purpleP.x, purpleP.y, purpleP.w, purpleP.h); // Do purpole Portal
+  }
+  if (goldP.x != -1) {
+    rect(goldP.x, goldP.y, goldP.w, goldP.h); // Do purpole Portal
+  }*/
   // make the hitboxes invisible
   //noFill();
   noStroke();
+  if (player.v > 0) {
+    curDirection == 'down'
+  }
+  else {
+    curDirection = 'up';
+  }
 
   // load the maps continuously to make the hit boxes bounce
   platforms = GetMap("map1");
@@ -169,12 +180,54 @@ function draw() {
   //Teleportation
   if (purpleP.x != -1 && goldP.x != -1) {
     if (isCollidingPlayer(player, playerHitBox, purpleP)) {
-      player.x = goldP.x;
-      player.y = goldP.y - 10;
+      if (purpleP.verticle) {
+        if (curDirection == 'right' && goldP.verticle) {
+          player.x = goldP.x + 20;
+          player.y = goldP.y - goldP.h;
+        }
+        else if (curDirection == 'left' && goldP.verticle) {
+          player.x = goldP.x - 20;
+          player.y = goldP.y - goldP.h;
+        }
+      } else if (!purpleP.verticle) {
+        if (curDirection == "up" && !goldP.verticle) {
+          player.x = goldP.x + player.h / 2;
+          player.y = goldP.y + 20;
+        }
+        else if (curDirection == "down" && !goldP.verticle) {
+          player.x = goldP.x + player.h / 2;
+          player.y = goldP.y - 20;
+        }
+      }
+      else {
+        player.x = gold.x;
+        player.y = gold.y;
+      }
     }
     if (isCollidingPlayer(player, playerHitBox, goldP)) {
-      player.x = purpleP.x;
-      player.y = purpleP.y - 10;
+      if (goldP.verticle) {
+        if (curDirection == 'right' && purpleP.verticle) {
+          player.x = purpleP.x + 20;
+          player.y = purpleP.y - purpleP.h;
+        }
+        else if (curDirection == 'left' && purpleP.verticle) {
+          player.x = purpleP.x - 20;
+          player.y = purpleP.y - purpleP.h;
+        }
+      } else if (!goldP.verticle) {
+        if (curDirection == "up" && !purpleP.verticle) {
+          player.x = purpleP.x + player.h / 2;
+          player.y = purpleP.y + 20;
+        }
+        else if (curDirection == "down" && !purpleP.verticle) {
+          player.x = purpleP.x + player.h / 2;
+          player.y = purpleP.y - 20;
+        }
+      }
+      else {
+        player.x = gold.x;
+        player.y = gold.y;
+      }
     }
   }
   updatePortals();

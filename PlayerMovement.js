@@ -3,6 +3,7 @@ let sprintingSpeed = 8;
 
 function PlayerMovement() {
   if (keyIsDown(68) && player.x < windowWidth - 100 && !crouched) { // move right
+    curDirection = 'right';
     image(playerImage, player.x, player.y, player.w, player.h, frameWidth * currentFrame, frameHeight, frameWidth, frameHeight);
     if (keyIsDown(16)) {
       player.x = player.x + sprintingSpeed;
@@ -17,6 +18,7 @@ function PlayerMovement() {
 
   }
   else if (keyIsDown(65) && player.x > -50 && !crouched) { // move left
+    curDirection = 'left';
     image(playerReverse, player.x, player.y, player.w, player.h, frameWidth * currentFrame, frameHeight, frameWidth, frameHeight);
     if (keyIsDown(16)) {
       player.x = player.x - sprintingSpeed;

@@ -15,27 +15,31 @@ function updatePortals() {
         for (let j = 0; j < platforms.length; j++) {
             if (isCollidingObject(proj, platforms[j])) {
                 if (proj.c == "purple") {
-                    purpleP.y = proj.y;
-                    purpleP.x = proj.x;
                     if (verticleP) {
+                        purpleP.y = proj.y - player.h / 2;
+                        purpleP.x = proj.x;
                         purpleP.w = player.w / 5;
                         purpleP.h = player.h;
                     }
                     else {
+                        purpleP.y = proj.y;
+                        purpleP.x = proj.x - player.h / 2;
                         purpleP.h = player.w / 5;
                         purpleP.w = player.h;
                     }
                     purpleP.verticle = verticleP;
                 }
                 else if (proj.c == "gold") {
-                    goldP.y = proj.y;
-                    goldP.x = proj.x;
                     goldP.verticle = verticleG;
                     if (verticleG) {
+                        goldP.y = proj.y - player.h / 2;
+                        goldP.x = proj.x;
                         goldP.w = player.w / 5;
                         goldP.h = player.h;
                     }
                     else {
+                        goldP.y = proj.y;
+                        goldP.x = proj.x - player.h / 2;
                         goldP.h = player.w / 5;
                         goldP.w = player.h;
                     }
@@ -110,9 +114,9 @@ function shootPortal(direction, colorP) {
 }
 function drawPortals() {
     if (purpleP.x != -1) {
-        image(portalPurpleImage, purpleP.x - (player.w / 2), purpleP.y, purpleP.w, purpleP.h);
+        image(portalPurpleImage, purpleP.x, purpleP.y, purpleP.w, purpleP.h);
     }
     if (goldP.x != -1) {
-        image(portalGoldImage, goldP.x - (player.w / 2), goldP.y, goldP.w, goldP.h);
+        image(portalGoldImage, goldP.x, goldP.y, goldP.w, goldP.h);
     }
 }
