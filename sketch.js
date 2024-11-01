@@ -8,8 +8,8 @@ let currentFrame = 0;
 let frame = 1;
 let crouched = false;
 let jumped = false;
-var purpleP = { x: -1, y: -1, verticle: false };
-var goldP = { x: -1, y: -1, verticle: false };
+var purpleP = { x: -1, y: -1, w: -1, h: -1, verticle: false };
+var goldP = { x: -1, y: -1, w: -1, h: -1, verticle: false };
 let projectiles = []; // Array of portal projectiles
 let platforms = []; // platform imp starts here
 
@@ -165,6 +165,17 @@ function draw() {
   }
   if (isCollidingPlayer(player, playerHitBox, alien1) && collisionDirectionPlayer(player, playerHitBox, alien1) == 'top') {
     alien1.dead = true;
+  }
+  //Teleportation
+  if (purpleP.x != -1 && goldP.x != -1) {
+    if (isCollidingPlayer(player, playerHitBox, purpleP)) {
+      player.x = goldP.x;
+      player.y = goldP.y - 10;
+    }
+    if (isCollidingPlayer(player, playerHitBox, goldP)) {
+      player.x = purpleP.x;
+      player.y = purpleP.y - 10;
+    }
   }
   updatePortals();
   PlayerMovement();

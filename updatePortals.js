@@ -17,12 +17,28 @@ function updatePortals() {
                 if (proj.c == "purple") {
                     purpleP.y = proj.y;
                     purpleP.x = proj.x;
+                    if (verticleP) {
+                        purpleP.w = player.w / 5;
+                        purpleP.h = player.h;
+                    }
+                    else {
+                        purpleP.h = player.w / 5;
+                        purpleP.w = player.h;
+                    }
                     purpleP.verticle = verticleP;
                 }
                 else if (proj.c == "gold") {
                     goldP.y = proj.y;
                     goldP.x = proj.x;
                     goldP.verticle = verticleG;
+                    if (verticleG) {
+                        goldP.w = player.w / 5;
+                        goldP.h = player.h;
+                    }
+                    else {
+                        goldP.h = player.w / 5;
+                        goldP.w = player.h;
+                    }
                 }
                 projectiles.splice(i, 1); // Remove projectile on collision
                 break;
@@ -94,20 +110,9 @@ function shootPortal(direction, colorP) {
 }
 function drawPortals() {
     if (purpleP.x != -1) {
-        if (purpleP.verticle) {
-            image(portalPurpleImage, purpleP.x - (player.w / 2), purpleP.y, player.w / 5, player.h);
-        }
-        else {
-            image(portalPurpleImage, purpleP.x - (player.w / 2), purpleP.y, player.w, player.h / 5);
-        }
+        image(portalPurpleImage, purpleP.x - (player.w / 2), purpleP.y, purpleP.w, purpleP.h);
     }
     if (goldP.x != -1) {
-        if (goldP.verticle) {
-            image(portalGoldImage, goldP.x - (player.w / 2), goldP.y, player.w / 5, player.h);
-        }
-        else {
-            image(portalGoldImage, goldP.x - (player.w / 2), goldP.y, player.w, player.h / 5);
-        }
-
+        image(portalGoldImage, goldP.x - (player.w / 2), goldP.y, goldP.w, goldP.h);
     }
 }
