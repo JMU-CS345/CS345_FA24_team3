@@ -96,11 +96,11 @@ function draw() {
   DrawMap("map1");
   DrawMap("map1"); //draw the first level
   //use to see hitboxes and platforms easily
-  //fill("purple");
+  fill("white");
   //rect(playerHitBox.x, playerHitBox.y, playerHitBox.w, playerHitBox.h);
 
   // make the hitboxes invisible
-  noFill();
+  //noFill();
   noStroke();
 
   // load the maps continuously to make the hit boxes bounce
