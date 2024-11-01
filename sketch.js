@@ -174,9 +174,12 @@ function draw() {
       shootPortal("up", "gold");
     }
   }
-  if (isCollidingPlayer(player, playerHitBox, alien1) && collisionDirectionPlayer(player, playerHitBox, alien1) == 'top') {
+  if (isCollidingPlayer(player, playerHitBox, alien1) && collisionDirectionPlayer(player, playerHitBox, alien1) == 'top' && !isFalling(player)) {
     alien1.dead = true;
+  } else if (isCollidingPlayer(player, playerHitBox, alien1) && collisionDirectionPlayer(player, playerHitBox, alien1) != 'top' && !alien1.dead) {
+    rect(100, 100, 100, 100); //this is what happens when player dies, will change once we determine what should happen on death.
   }
+
   //Teleportation
   if (purpleP.x != -1 && goldP.x != -1) {
     if (isCollidingPlayer(player, playerHitBox, purpleP)) {
@@ -258,6 +261,11 @@ function keyReleased() {
   }
 }
 
+function isFalling(player) {
+  if (player.v < 0) { return true }
+  return false;
+}
+
 //used to keep the hitbox up to date with the player
 function updateHitbox() {
   if (crouched) {
@@ -284,7 +292,7 @@ function isCollidingPlayer(player, playerHitBox, platform) {
   // Check if player is to the left of platform
   if (playerHitBox.x + playerHitBox.w < platform.x) return false;
   // Check if player is to the right of platform
-  if (playerHitBox.x > platform.x + platform.w) return false;
+  if (playerHitBox.x > platform.x + platform.w - 2) return false;
   // If none of the above conditions are true, there is a collision
   return true;
 }
