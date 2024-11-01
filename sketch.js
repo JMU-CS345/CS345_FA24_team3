@@ -8,14 +8,10 @@ let currentFrame = 0;
 let frame = 1;
 let crouched = false;
 let jumped = false;
-let purplePortalExist = false;
-let goldPortalExist = false;
+var purpleP = { x: -1, y: -1, verticle: false };
+var goldP = { x: -1, y: -1, verticle: false };
 let projectiles = []; // Array of portal projectiles
 let platforms = []; // platform imp starts here
-let pX = 0; // Purple Portal X value
-let pY = 0; // Purple Portal Y Value
-let gX = 0; // Gold Portal X Value
-let gY = 0; // Gold Portal Y Value
 
 var player = { x: 10, y: 0, w: 150, h: 145, v: 0, a: 1, jumpStrength: -30 };
 

@@ -1,4 +1,5 @@
-let verticle = false;
+let verticleP = false;
+let verticleG = false;
 function updatePortals() {
     // Update and draw all projectiles
     for (let i = projectiles.length - 1; i >= 0; i--) {
@@ -14,14 +15,14 @@ function updatePortals() {
         for (let j = 0; j < platforms.length; j++) {
             if (isCollidingObject(proj, platforms[j])) {
                 if (proj.c == "purple") {
-                    purplePortalExist = true;
-                    pX = proj.x;
-                    pY = proj.y;
+                    purpleP.y = proj.y;
+                    purpleP.x = proj.x;
+                    purpleP.verticle = verticleP;
                 }
                 else if (proj.c == "gold") {
-                    goldPortalExist = true;
-                    gX = proj.x;
-                    gY = proj.y;
+                    goldP.y = proj.y;
+                    goldP.x = proj.x;
+                    goldP.verticle = verticleG;
                 }
                 projectiles.splice(i, 1); // Remove projectile on collision
                 break;
@@ -43,19 +44,39 @@ function shootPortal(direction, colorP) {
     }
     if (direction == "up") {
         vy = -speed;
-        verticle = false;
+        if (colorP == 'purple') {
+            verticleP = false;
+        }
+        else {
+            verticleG = false;
+        }
     }
     else if (direction == "down") {
         vy = speed;
-        verticle = false;
+        if (colorP == 'purple') {
+            verticleP = false;
+        }
+        else {
+            verticleG = false;
+        }
     }
     else if (direction == "left") {
         vx = -speed;
-        verticle = true;
+        if (colorP == 'purple') {
+            verticleP = true;
+        }
+        else {
+            verticleG = true;
+        }
     }
     else if (direction == "right") {
         vx = speed;
-        verticle = true;
+        if (colorP == 'purple') {
+            verticleP = true;
+        }
+        else {
+            verticleG = true;
+        }
     }
     if (projectiles.length < 2) {
         let projectile = {
@@ -72,20 +93,20 @@ function shootPortal(direction, colorP) {
 
 }
 function drawPortals() {
-    if (purplePortalExist) {
-        if (verticle) {
-            image(portalPurpleImage, pX - (player.w / 2), pY, player.w / 5, player.h);
+    if (purpleP.x != -1) {
+        if (purpleP.verticle) {
+            image(portalPurpleImage, purpleP.x - (player.w / 2), purpleP.y, player.w / 5, player.h);
         }
         else {
-            image(portalPurpleImage, pX - (player.w / 2), pY, player.w, player.h / 5);
+            image(portalPurpleImage, purpleP.x - (player.w / 2), purpleP.y, player.w, player.h / 5);
         }
     }
-    if (goldPortalExist) {
-        if (verticle) {
-            image(portalGoldImage, gX - (player.w / 2), gY, player.w / 5, player.h);
+    if (goldP.x != -1) {
+        if (goldP.verticle) {
+            image(portalGoldImage, goldP.x - (player.w / 2), goldP.y, player.w / 5, player.h);
         }
         else {
-            image(portalGoldImage, gX - (player.w / 2), gY, player.w, player.h / 5);
+            image(portalGoldImage, goldP.x - (player.w / 2), goldP.y, player.w, player.h / 5);
         }
 
     }
