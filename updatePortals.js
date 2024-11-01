@@ -12,7 +12,7 @@ function updatePortals() {
 
         // Check for collision with platforms
         for (let j = 0; j < platforms.length; j++) {
-            if (isColliding(proj, platforms[j])) {
+            if (isCollidingObject(proj, platforms[j])) {
                 if (proj.c == "purple") {
                     purplePortalExist = true;
                     pX = proj.x;
