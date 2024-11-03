@@ -14,8 +14,6 @@ let projectiles = []; // Array of portal projectiles
 let platforms = []; // platform imp starts here
 let curDirection = null;
 
-var player = { x: 10, y: 0, w: 150, h: 145, v: 0, a: 1, jumpStrength: -30 };
-
 let alienImage; // so enemies file can read it
 let alien1;
 
@@ -67,7 +65,7 @@ function preload() {
   playerImage = loadImage("assets/Character.png"); // For Character going right
   playerReverse = loadImage("assets/CharacterR.png"); // For Character going left
   level1 = loadImage("assets/level1.png");
-  mapAssets = loadImage("assets/PlanetAssets.png");
+  mapAssets_SpaceStation = loadImage("assets/asset.png");
   portalPurpleImage = loadImage("assets/portalPurple.png");
   portalGoldImage = loadImage("assets/portalGold.png");
   alienImage = loadImage("assets/alien.png");
@@ -90,9 +88,8 @@ function setup() {
 
 function draw() {
   background(level1);
-  DrawMap("map1"); //draw the first level
+  //DrawMap("map1"); //draw the first level
   //use to see hitboxes and platforms easily
-  fill("white");
   /*rect(playerHitBox.x, playerHitBox.y, playerHitBox.w, playerHitBox.h);
   if (purpleP.x != -1) {
     rect(purpleP.x, purpleP.y, purpleP.w, purpleP.h); // Do purpole Portal
@@ -102,7 +99,7 @@ function draw() {
   }*/
   // make the hitboxes invisible
   //noFill();
-  noStroke();
+  //noStroke();
   if (player.v > 0) {
     curDirection == 'down'
   }
@@ -111,8 +108,19 @@ function draw() {
   }
 
   // load the maps continuously to make the hit boxes bounce
-  platforms = GetMap("map1");
+  platforms = GetMap("portals_tutorial");
   //platforms.push({ x: 970, y: 750, w: 300, h: 20 });
+  DrawMap("portals_tutorial"); //draw the first level
+  //use to see hitboxes and platforms easily
+  fill("purple");
+  //rect(playerHitBox.x, playerHitBox.y, playerHitBox.w, playerHitBox.h);
+
+  // make the hitboxes invisible
+  //noFill();
+  //noStroke();
+
+  // load the maps continously to make the hit boxes bounce
+  platforms = GetMap("portals_tutorial");
   for (let i = 0; i < platforms.length; i++) {
 
     rect(platforms[i].x, platforms[i].y, platforms[i].w, platforms[i].h);
