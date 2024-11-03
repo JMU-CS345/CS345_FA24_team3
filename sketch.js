@@ -108,9 +108,8 @@ function draw() {
   }
 
   // load the maps continuously to make the hit boxes bounce
-  platforms = GetMap("portals_tutorial");
   //platforms.push({ x: 970, y: 750, w: 300, h: 20 });
-  DrawMap("portals_tutorial"); //draw the first level
+  DrawMap("map1"); //draw the first level
   //use to see hitboxes and platforms easily
   fill("purple");
   //rect(playerHitBox.x, playerHitBox.y, playerHitBox.w, playerHitBox.h);
@@ -120,7 +119,7 @@ function draw() {
   //noStroke();
 
   // load the maps continously to make the hit boxes bounce
-  platforms = GetMap("portals_tutorial");
+  platforms = GetMap("map1");
   for (let i = 0; i < platforms.length; i++) {
 
     rect(platforms[i].x, platforms[i].y, platforms[i].w, platforms[i].h);
