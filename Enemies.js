@@ -94,8 +94,15 @@ class Alien extends Enemy {
         if (this.x >= windowWidth - 120 || this.x <= -120)
             this.direction *= -1;
     }
+
     killed() {
         image(Alien.asset, this.x, this.y, this.w, this.h, Alien.FRAME_WIDTH * 14, 0, Alien.FRAME_WIDTH, Alien.FRAME_HEIGHT);
+    }
+
+    attack(player) {
+        player.x = 10;
+        player.y = windowHeight - 100;
+        player.v = 0;
     }
 
     // todo rest of methods.

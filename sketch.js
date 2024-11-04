@@ -168,7 +168,7 @@ function draw() {
     enemy.v += enemy.a;
     enemy.y += enemy.v;
 
-    let isOnPlatform = false;
+    let enemyIsOnPlatform = false;
 
     for (let j = 0; j < platforms.length; j++) {
       if (isCollidingEnemy(enemy, platforms[j])) {
@@ -185,7 +185,7 @@ function draw() {
       }
     }
 
-    if (!isOnPlatform) {
+    if (!enemyIsOnPlatform) {
       enemy.v += enemy.a;
     }
 
@@ -226,8 +226,8 @@ function draw() {
       enemy.dead = true;
       enemy.deathTime = millis();
     } else if (isCollidingPlayer(player, playerHitBox, enemy) && collisionDirectionPlayer(player, playerHitBox, enemy) != 'top' && !enemy.dead) {
-      player.dead = true;
-      //this is what happens when player dies, will change once we determine what should happen on death.
+      enemy.attack(player);
+      rect(100, 100, 100, 100); //this is what happens when player dies, will change once we determine what should happen on death.
     }
   }
 
