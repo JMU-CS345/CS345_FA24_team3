@@ -55,7 +55,7 @@ function mapMovement() {
 }
 
 
-var player = { x: 10, y: 0, w: 150, h: 150, v: 0, a: 1, jumpStrength: -30 };
+var player = { x: 10, y: 0, w: 150, h: 150, v: 0, a: 1, jumpStrength: -30, dead: false };
 //the player hit box for collision
 var playerHitBox = { x: player.x, y: player.y, w: player.w - 100, h: player.h - 100 };
 
@@ -70,6 +70,7 @@ function preload() {
   portalGoldImage = loadImage("assets/portalGold.png");
   alienImage = loadImage("assets/alien.png");
   mapAssets = loadImage("assets/PlanetAssets.png"); //space stuff
+  //font = loadFont("assests/font.otf");
 
 }
 
@@ -225,7 +226,8 @@ function draw() {
       enemy.dead = true;
       enemy.deathTime = millis();
     } else if (isCollidingPlayer(player, playerHitBox, enemy) && collisionDirectionPlayer(player, playerHitBox, enemy) != 'top' && !enemy.dead) {
-      rect(100, 100, 100, 100); //this is what happens when player dies, will change once we determine what should happen on death.
+      player.dead = true;
+      //this is what happens when player dies, will change once we determine what should happen on death.
     }
   }
 
@@ -281,6 +283,19 @@ function draw() {
         player.y = gold.y;
       }
     }
+  }
+  if (player.dead) {
+    background('black');
+    fill('red');
+    textSize(100);
+    textFont("times new roman");
+    text("You Died.", 550, 100);
+    for (i = 0; i < enemies.length; i++) {
+      enemies[i] = null;
+      enemies.splice(i, 1);
+    }
+    //Write code to restart level
+    //Have a timer so that the death screen is only a few seconds then the map reloads
   }
   updatePortals();
   PlayerMovement();
