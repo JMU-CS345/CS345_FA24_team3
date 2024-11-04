@@ -130,3 +130,34 @@ function DrawMap(map) {
       break;
   }
 }
+//just supposed to be a small bounce to make our maps more alive
+
+// the variable that will hold the small movement
+let mapScroll = 0;
+// a control variable to help slow down the bounce
+let moveControl = 0;
+// another control variable to assure the bounce lands in the same position
+let moveWait = true;
+function mapMovement() {
+
+  if (moveControl < 100 && moveWait == true) {
+    //count to 100
+    moveControl++;
+    if (moveControl % 10 == 0) {
+      //whenever the remainder is 0 move add a pixel for the bounce
+      mapScroll++;
+    }
+    if (moveControl >= 100) { // time to start moving the asset back down
+      moveWait = false;
+    }
+  } else { // subtract until you reach zero
+    moveControl--;
+    if (moveControl % 10 == 0) {
+      //every time you get a number divisible by 10 subtract a pixel from the asset
+      mapScroll--;
+    } //when you get to zero the bounce is complete
+    if (moveControl == 0) {
+      moveWait = true
+    }
+  }
+}

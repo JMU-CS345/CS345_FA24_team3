@@ -120,3 +120,29 @@ function drawPortals() {
         image(portalGoldImage, goldP.x, goldP.y, goldP.w, goldP.h);
     }
 }
+function portalInput() {
+    // Handling portal shooting
+    if (keyIsDown(81)) { // PURPLE PORTALS with Q
+        if (keyIsDown(RIGHT_ARROW)) {
+            shootPortal("right", "purple");
+        } else if (keyIsDown(LEFT_ARROW)) {
+            shootPortal("left", "purple");
+        } else if (keyIsDown(DOWN_ARROW)) {
+            shootPortal("down", "purple");
+        } else if (keyIsDown(UP_ARROW)) {
+            shootPortal("up", "purple");
+        }
+    }
+
+    if (keyIsDown(69)) { // GOLD PORTALS with E
+        if (keyIsDown(RIGHT_ARROW)) {
+            shootPortal("right", "gold");
+        } else if (keyIsDown(LEFT_ARROW)) {
+            shootPortal("left", "gold");
+        } else if (keyIsDown(DOWN_ARROW)) {
+            shootPortal("down", "gold");
+        } else if (keyIsDown(UP_ARROW)) {
+            shootPortal("up", "gold");
+        }
+    }
+}
