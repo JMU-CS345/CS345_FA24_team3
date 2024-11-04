@@ -55,7 +55,7 @@ function mapMovement() {
 }
 
 
-var player = { x: 10, y: 0, w: 150, h: 150, v: 0, a: 1, jumpStrength: -30, dead: false };
+var player = { x: 10, y: 0, w: 150, h: 150, v: 0, a: 1, jumpStrength: -30, dead: false, health: 3 };
 //the player hit box for collision
 var playerHitBox = { x: player.x, y: player.y, w: player.w - 100, h: player.h - 100 };
 
@@ -227,7 +227,10 @@ function draw() {
       enemy.deathTime = millis();
     } else if (isCollidingPlayer(player, playerHitBox, enemy) && collisionDirectionPlayer(player, playerHitBox, enemy) != 'top' && !enemy.dead) {
       enemy.attack(player);
-      rect(100, 100, 100, 100); //this is what happens when player dies, will change once we determine what should happen on death.
+      player.health--;
+      if (player.health == 0) {
+        player.dead = true;
+      }
     }
   }
 
