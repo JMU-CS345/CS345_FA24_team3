@@ -122,8 +122,8 @@ function draw() {
   rect(playerHitBox.x, playerHitBox.y, playerHitBox.w, playerHitBox.h);
 
   // make the hitboxes invisible
-  //noFill();
-  //noStroke();
+  noFill();
+  noStroke();
 
   // load the maps continously to make the hit boxes bounce
 
