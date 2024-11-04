@@ -444,6 +444,10 @@ function nextLevel(gameMap) {
       if (playerHitBox.y > windowHeight * 0.457 + mapScroll && playerHitBox.y < windowHeight * 0.457 + mapScroll + 80 && playerHitBox.x > windowWidth * 0.72 && playerHitBox.x < windowWidth * 0.72 + 80) {
         mapLevel = "portals_tutorial"
         platforms = GetMap("portals_tutorial");
+        for (i = 0; i < enemies.length; i++) {
+          enemies[i] = null;
+          enemies.splice(i, 1);
+        }
 
       }
       break;
