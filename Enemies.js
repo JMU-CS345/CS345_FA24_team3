@@ -1,5 +1,5 @@
 class Enemy {
-    constructor(x, y, w, h, dead) {
+    constructor(x, y, w, h) {
         if (new.target == Enemy)
             throw new Error("Specify what enemy instance is being constructed")
 
@@ -7,7 +7,12 @@ class Enemy {
         this.y = y;
         this.w = w;
         this.h = h;
-        this.dead = dead;
+
+        this.v = 0;
+        this.a = 1;
+
+        this.deadTimer = null;
+        this.dead = false;
     }
 
     move() {

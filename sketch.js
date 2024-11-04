@@ -12,10 +12,10 @@ var purpleP = { x: -1, y: -1, w: -1, h: -1, verticle: false };
 var goldP = { x: -1, y: -1, w: -1, h: -1, verticle: false };
 let projectiles = []; // Array of portal projectiles
 let platforms = []; // platform imp starts here
+let enemies = [] // Array of enemies
 let curDirection = null;
 
 let alienImage; // so enemies file can read it
-let alien1;
 
 // ================
 // map movement
@@ -82,7 +82,10 @@ function setup() {
   platforms.push({ x: 200, y: 450, w: 200, h: 20 });
   platforms.push({ x: 970, y: 250, w: 300, h: 20 });
   platforms.push({ x: 600, y: 350, w: 200, h: 20 });
-  alien1 = new Alien(600, windowHeight - 120, 120, 120, false);
+  alien1 = new Alien(600, windowHeight - 120, 120, 120);
+  alien2 = new Alien(732, 360, 120, 120);
+  alien3 = new Alien(340, 480, 120, 120);
+  enemies.push(alien1, alien2, alien3);
   Alien.asset = alienImage;
 }
 
@@ -128,6 +131,7 @@ function draw() {
   player.v += player.a;
   player.y += player.v;
 
+
   for (let i = 0; i < platforms.length; i++) {
     if (isCollidingPlayer(player, playerHitBox, platforms[i])) {
       let direction = collisionDirectionPlayer(player, playerHitBox, platforms[i]);
@@ -157,6 +161,39 @@ function draw() {
     jumped = false;
   }
 
+  for (let i = 0; i < enemies.length; i++) {
+    let enemy = enemies[i];
+
+    enemy.v += enemy.a;
+    enemy.y += enemy.v;
+
+    let isOnPlatform = false;
+
+    for (let j = 0; j < platforms.length; j++) {
+      if (isCollidingEnemy(enemy, platforms[j])) {
+        let direction = collisionDirectionObject(enemy, platforms[j]);
+
+        if (direction === "top") {
+          enemy.y = platforms[j].y - enemy.h;
+          enemy.v = 0;
+          onPlatform = true;
+        } else if (direction === "bottom") {
+          enemy.y = platforms[j].y + platforms[j].h;
+          enemy.v = 0;
+        }
+      }
+    }
+
+    if (!isOnPlatform) {
+      enemy.v += enemy.a;
+    }
+
+    if (enemy.y + enemy.h >= windowHeight) {
+      enemy.y = windowHeight - enemy.h;
+      enemy.v = 0;
+    }
+  }
+
   // Handling portal shooting
   if (keyIsDown(81)) { // PURPLE PORTALS with Q
     if (keyIsDown(RIGHT_ARROW)) {
@@ -181,10 +218,15 @@ function draw() {
       shootPortal("up", "gold");
     }
   }
-  if (isCollidingPlayer(player, playerHitBox, alien1) && collisionDirectionPlayer(player, playerHitBox, alien1) == 'top' && !isFalling(player)) {
-    alien1.dead = true;
-  } else if (isCollidingPlayer(player, playerHitBox, alien1) && collisionDirectionPlayer(player, playerHitBox, alien1) != 'top' && !alien1.dead) {
-    rect(100, 100, 100, 100); //this is what happens when player dies, will change once we determine what should happen on death.
+  for (let i = 0; i < enemies.length; i++) {
+    let enemy = enemies[i];
+
+    if (isCollidingPlayer(player, playerHitBox, enemy) && collisionDirectionPlayer(player, playerHitBox, enemy) == 'top' && !isFalling(player)) {
+      enemy.dead = true;
+      enemy.deathTime = millis();
+    } else if (isCollidingPlayer(player, playerHitBox, enemy) && collisionDirectionPlayer(player, playerHitBox, enemy) != 'top' && !enemy.dead) {
+      rect(100, 100, 100, 100); //this is what happens when player dies, will change once we determine what should happen on death.
+    }
   }
 
   //Teleportation
@@ -243,13 +285,23 @@ function draw() {
   updatePortals();
   PlayerMovement();
   drawPortals();
-  if (alien1.dead) {
-    alien1.killed();
-  }
-  else {
-    alien1.updateAlien();
+
+  for (let i = 0; i < enemies.length; i++) {
+    let enemy = enemies[i];
+
+    if (enemy.dead) {
+      enemy.killed();
+      if (millis() - enemy.deathTime >= 1000) {
+        enemies[i] = null;
+        enemies.splice(i, 1);
+      }
+    }
+    else {
+      enemy.updateAlien();
+    }
   }
   updateHitbox();
+  console.log(enemies);
 }
 
 function keyPressed() {
@@ -315,6 +367,15 @@ function isCollidingObject(player, platform) {
   // If none of the above conditions are true, there is a collision
   return true;
 }
+
+function isCollidingEnemy(enemy, platform) {
+  if (enemy.y + enemy.h < platform.y) return false;
+  if (enemy.y > platform.y + platform.h) return false;
+  if (enemy.x + enemy.w < platform.x) return false;
+  if (enemy.x > platform.x + platform.w) return false;
+  return true;
+}
+
 
 function collisionDirectionPlayer(player, playerHitBox, platform) {
   // Colliding with the top, bottom, right, and left of the platform, respectively
