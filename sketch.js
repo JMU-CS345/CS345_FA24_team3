@@ -70,7 +70,7 @@ function preload() {
   portalGoldImage = loadImage("assets/portalGold.png");
   alienImage = loadImage("assets/alien.png");
   mapAssets = loadImage("assets/PlanetAssets.png"); //space stuff
-  //font = loadFont("assests/font.otf");
+  heart = loadImage("assets/Heart.png");
 
 }
 
@@ -303,6 +303,7 @@ function draw() {
   updatePortals();
   PlayerMovement();
   drawPortals();
+  Health();
 
   for (let i = 0; i < enemies.length; i++) {
     let enemy = enemies[i];
