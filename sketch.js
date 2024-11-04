@@ -324,6 +324,7 @@ function draw() {
   }
   updateHitbox();
   console.log(enemies);
+  noFill();
   nextLevel("map1");
 }
 
