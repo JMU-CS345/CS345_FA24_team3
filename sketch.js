@@ -118,12 +118,12 @@ function draw() {
   //platforms.push({ x: 970, y: 750, w: 300, h: 20 });
 
   //use to see hitboxes and platforms easily
-  //fill("purple");
-  rect(playerHitBox.x, playerHitBox.y, playerHitBox.w, playerHitBox.h);
+  fill("purple");
+  //rect(playerHitBox.x, playerHitBox.y, playerHitBox.w, playerHitBox.h);
 
   // make the hitboxes invisible
-  noFill();
-  noStroke();
+  // noStroke();
+  // noFill();
 
   // load the maps continously to make the hit boxes bounce
 
