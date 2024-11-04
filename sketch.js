@@ -17,6 +17,9 @@ let curDirection = null;
 
 let alienImage; // so enemies file can read it
 
+
+let mapLevel = "map1";
+
 // ================
 // map movement
 // ================
@@ -88,11 +91,14 @@ function setup() {
   alien3 = new Alien(340, 480, 120, 120);
   enemies.push(alien1, alien2, alien3);
   Alien.asset = alienImage;
+
+  platforms = GetMap("map1");
+
 }
 
 function draw() {
   background(level1);
-  //DrawMap("map1"); //draw the first level
+  DrawMap(mapLevel); //draw the first level
   //use to see hitboxes and platforms easily
   /*rect(playerHitBox.x, playerHitBox.y, playerHitBox.w, playerHitBox.h);
   if (purpleP.x != -1) {
@@ -101,9 +107,6 @@ function draw() {
   if (goldP.x != -1) {
     rect(goldP.x, goldP.y, goldP.w, goldP.h); // Do purpole Portal
   }*/
-  // make the hitboxes invisible
-  //noFill();
-  //noStroke();
   if (player.v > 0) {
     curDirection == 'down'
   }
@@ -113,17 +116,17 @@ function draw() {
 
   // load the maps continuously to make the hit boxes bounce
   //platforms.push({ x: 970, y: 750, w: 300, h: 20 });
-  DrawMap("map1"); //draw the first level
+
   //use to see hitboxes and platforms easily
-  fill("purple");
-  //rect(playerHitBox.x, playerHitBox.y, playerHitBox.w, playerHitBox.h);
+  //fill("purple");
+  rect(playerHitBox.x, playerHitBox.y, playerHitBox.w, playerHitBox.h);
 
   // make the hitboxes invisible
   //noFill();
   //noStroke();
 
   // load the maps continously to make the hit boxes bounce
-  platforms = GetMap("map1");
+
   for (let i = 0; i < platforms.length; i++) {
 
     rect(platforms[i].x, platforms[i].y, platforms[i].w, platforms[i].h);
@@ -321,6 +324,7 @@ function draw() {
   }
   updateHitbox();
   console.log(enemies);
+  nextLevel("map1");
 }
 
 function keyPressed() {
@@ -360,6 +364,7 @@ function updateHitbox() {
     };
   }
 }
+
 
 
 function isCollidingPlayer(player, playerHitBox, platform) {
@@ -430,5 +435,17 @@ function collisionDirectionObject(player, platform) {
     return 'right';  // Colliding with the right side of the platform
   } else {
     return 'left';  // Colliding with the left side of the platform
+  }
+}
+
+function nextLevel(gameMap) {
+  switch (gameMap) {
+    case "map1":
+      if (playerHitBox.y > windowHeight * 0.457 + mapScroll && playerHitBox.y < windowHeight * 0.457 + mapScroll + 80 && playerHitBox.x > windowWidth * 0.72 && playerHitBox.x < windowWidth * 0.72 + 80) {
+        mapLevel = "portals_tutorial"
+        platforms = GetMap("portals_tutorial");
+
+      }
+      break;
   }
 }
