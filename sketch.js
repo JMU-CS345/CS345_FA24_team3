@@ -8,8 +8,8 @@ let currentFrame = 0;
 let frame = 1;
 let crouched = false;
 let jumped = false;
-var purpleP = { x: -1, y: -1, w: -1, h: -1, verticle: false };
-var goldP = { x: -1, y: -1, w: -1, h: -1, verticle: false };
+var purpleP = { x: -1, y: -1, w: -1, h: -1, verticle: false, direction: 'none' };
+var goldP = { x: -1, y: -1, w: -1, h: -1, verticle: false, direction: 'none' };
 let projectiles = []; // Array of portal projectiles
 let platforms = []; // platform imp starts here
 let enemies = [] // Array of enemies
@@ -18,7 +18,7 @@ let alienImage; // so enemies file can read it
 let mapLevel = "map1";
 var player = { x: 10, y: 0, w: 150, h: 150, v: 0, a: 1, jumpStrength: -30, dead: false, health: 3 };
 //the player hit box for collision
-var playerHitBox = { x: player.x, y: player.y, w: player.w - 100, h: player.h - 100 };
+var playerHitBox = { x: player.x, y: player.y, w: player.w - 100, h: player.h - 100, moving: false };
 
 
 
@@ -41,10 +41,6 @@ function setup() {
   frameRate(60);
   noSmooth();
   player.y = windowHeight - player.h;
-  platforms.push({ x: 500, y: 625, w: 200, h: 20 });
-  platforms.push({ x: 200, y: 450, w: 200, h: 20 });
-  platforms.push({ x: 970, y: 250, w: 300, h: 20 });
-  platforms.push({ x: 600, y: 350, w: 200, h: 20 });
   alien1 = new Alien(600, windowHeight - 120, 120, 120);
   alien2 = new Alien(732, 360, 120, 120);
   alien3 = new Alien(340, 480, 120, 120);
@@ -64,10 +60,10 @@ function draw() {
     background(level2);
     //Code for DrawMap for this level
   }
-  if (player.v > 0) {
-    curDirection == 'down'
+  if (player.v > 0 && !player.moving) {
+    curDirection = 'down'
   }
-  else {
+  else if (player.v < 0 && !player.moving) {
     curDirection = 'up';
   }
   //use to see hitboxes and platforms easily
@@ -165,8 +161,8 @@ function draw() {
     }
   }
   portalInput();
-  Death();
   Teleportation();
+  Death();
   updatePortals();
   PlayerMovement();
   drawPortals();
@@ -187,13 +183,12 @@ function draw() {
     }
   }
   updateHitbox();
-  console.log(enemies);
   noFill();
   nextLevel("map1");
 }
 
 function keyPressed() {
-  if ((keyCode == 87 || keyCode == 32) && !jumped && !crouched) {
+  if ((keyCode == 87 || keyCode == 32) && !jumped && !crouched && !player.dead) {
     player.v = player.jumpStrength;
     jumped = true;
   }
@@ -244,9 +239,10 @@ function updateHitbox() {
 function nextLevel(gameMap) {
   switch (gameMap) {
     case "map1":
-      if (playerHitBox.y > windowHeight * 0.457 + mapScroll && playerHitBox.y < windowHeight * 0.457 + mapScroll + 80 && playerHitBox.x > windowWidth * 0.72 && playerHitBox.x < windowWidth * 0.72 + 80) {
+      if (playerHitBox.y > windowHeight * 0.457 + mapScroll && playerHitBox.y < windowHeight * 0.457 + mapScroll + 80 && playerHitBox.x > windowWidth * 0.72 && playerHitBox.x < windowWidth * 0.72 + 80 && mapLevel == "map1") {
         mapLevel = "portals_tutorial"
         platforms = GetMap("portals_tutorial");
+        console.log(platforms);
         for (i = 0; i < enemies.length; i++) {
           enemies[i] = null;
           enemies.splice(i);

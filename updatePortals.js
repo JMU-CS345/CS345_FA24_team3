@@ -14,6 +14,7 @@ function updatePortals() {
         // Check for collision with platforms
         for (let j = 0; j < platforms.length; j++) {
             if (isCollidingObject(proj, platforms[j])) {
+                collisionDirection = collisionDirectionObject(proj, platforms[j]);
                 if (proj.c == "purple") {
                     if (verticleP) {
                         purpleP.y = proj.y - player.h / 2;
@@ -28,9 +29,11 @@ function updatePortals() {
                         purpleP.w = player.h;
                     }
                     purpleP.verticle = verticleP;
+                    purpleP.direction = collisionDirection;
                 }
                 else if (proj.c == "gold") {
                     goldP.verticle = verticleG;
+                    goldP.direction = collisionDirection;
                     if (verticleG) {
                         goldP.y = proj.y - player.h / 2;
                         goldP.x = proj.x;
