@@ -31,6 +31,7 @@ function preload() {
   portalPurpleImage = loadImage("assets/portalPurple.png");
   portalGoldImage = loadImage("assets/portalGold.png");
   alienImage = loadImage("assets/alien.png");
+  alienEnragedImage = loadImage("assets/alienEnraged.png");
   mapAssets = loadImage("assets/PlanetAssets.png"); //space stuff
   heart = loadImage("assets/Heart.png");
 
