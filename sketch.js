@@ -33,6 +33,8 @@ function preload() {
   portalGoldImage = loadImage("assets/portalGold.png");
   alienImage = loadImage("assets/alien.png");
   alienEnragedImage = loadImage("assets/alienEnraged.png");
+  robotShoot = loadImage("assets/Robot_fire.png");
+  robotWalk = loadImage("assets/Robot_walk.png");
   mapAssets = loadImage("assets/PlanetAssets.png"); //space stuff
   heart = loadImage("assets/Heart.png");
 
@@ -46,8 +48,11 @@ function setup() {
   alien1 = new Alien(600, windowHeight - 120, 120, 120);
   alien2 = new Alien(732, 360, 120, 120);
   alien3 = new Alien(340, 480, 120, 120);
-  enemies.push(alien1, alien2, alien3);
+  robot1 = new Robot(550, 240, 120, 120);
+  enemies.push(alien1, alien2, alien3, robot1);
   Alien.asset = alienImage;
+  Robot.assetShoot = robotShoot;
+  Robot.assetWalk = robotWalk;
 
 
 }
@@ -177,7 +182,7 @@ function draw() {
       }
     }
     else {
-      enemy.updateAlien();
+      enemy.update();
     }
   }
   updateHitbox();
@@ -199,7 +204,8 @@ function keyPressed() {
     alien1 = new Alien(600, windowHeight - 120, 120, 120); // CHANGE THIS CODE SO THAT THE ALIENS ARE CORRECT FOR EACH LEVEL
     alien2 = new Alien(732, 360, 120, 120);
     alien3 = new Alien(340, 480, 120, 120);
-    enemies.push(alien1, alien2, alien3);
+    robot1 = new Robot(550, 240, 120, 120);
+    enemies.push(alien1, alien2, alien3, robot1);
     Alien.asset = alienImage;
     player.health = 3;
   }
