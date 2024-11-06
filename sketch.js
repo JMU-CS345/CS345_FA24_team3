@@ -51,14 +51,7 @@ function setup() {
 }
 
 function draw() {
-  if (mapLevel == "map1") {
-    background(level1);
-    DrawMap(mapLevel); //draw the first level
-  }
-  if (mapLevel == "portals_tutorial") {
-    background(level2);
-    //Code for DrawMap for this level
-  }
+
   GameState(mapLevel)
   if (player.v > 0 && !player.moving) {
     curDirection = 'down'
@@ -291,3 +284,7 @@ function nextLevel(gameMap) {
             return 'left';  // Colliding with the left side of the platform
           }
         }
+      }
+  }
+}
+
