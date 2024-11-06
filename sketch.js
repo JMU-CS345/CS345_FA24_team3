@@ -52,13 +52,14 @@ function setup() {
 }
 
 function draw() {
+  ellipse(player.x, player.y, player.w, player.h);
   if (mapLevel == "map1") {
     background(level1);
     DrawMap(mapLevel); //draw the first level
   }
   if (mapLevel == "portals_tutorial") {
     background(level2);
-    //Code for DrawMap for this level
+    DrawMap(mapLevel);
   }
   if (player.v > 0 && !player.moving) {
     curDirection = 'down'
@@ -247,7 +248,6 @@ function nextLevel(gameMap) {
           enemies[i] = null;
           enemies.splice(i);
         }
-        background(level2);
         purpleP.x = -1;
         goldP.x = -1;
 
