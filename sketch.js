@@ -48,19 +48,12 @@ function setup() {
   enemies.push(alien1, alien2, alien3);
   Alien.asset = alienImage;
 
-  platforms = GetMap("map1");
 
 }
 
 function draw() {
-  if (mapLevel == "map1") {
-    background(level1);
-    DrawMap(mapLevel); //draw the first level
-  }
-  if (mapLevel == "portals_tutorial") {
-    background(level2);
-    //Code for DrawMap for this level
-  }
+
+  GameState(mapLevel)
   if (player.v > 0 && !player.moving) {
     curDirection = 'down'
   }
@@ -69,6 +62,9 @@ function draw() {
   }
   //use to see hitboxes and platforms easily
   fill("purple");
+  // fill("purple")
+
+  //rect(playerHitBox.x, playerHitBox.y, playerHitBox.w, playerHitBox.h);
 
   // make the hitboxes invisible
   // noStroke();
@@ -169,6 +165,7 @@ function draw() {
   drawPortals();
   Health();
 
+
   for (let i = 0; i < enemies.length; i++) {
     let enemy = enemies[i];
 
@@ -185,7 +182,6 @@ function draw() {
   }
   updateHitbox();
   noFill();
-  nextLevel("map1");
 }
 
 function keyPressed() {
@@ -253,7 +249,43 @@ function nextLevel(gameMap) {
         goldP.x = -1;
 
 
+        function collisionDirectionPlayer(player, playerHitBox, platform) {
+          // Colliding with the top, bottom, right, and left of the platform, respectively
+          let topCollision = (player.y + player.h) - platform.y;
+          let bottomCollision = (platform.y + platform.h) - playerHitBox.y;
+          let leftCollision = (playerHitBox.x + playerHitBox.w) - platform.x;
+          let rightCollision = (platform.x + platform.w) - playerHitBox.x;
+
+          // Find the smallest collision distance (indicating the direction of collision)
+          if (topCollision < bottomCollision && topCollision < leftCollision && topCollision < rightCollision) {
+            return 'top';  // Colliding with the top of the platform
+          } else if (bottomCollision < topCollision && bottomCollision < leftCollision && bottomCollision < rightCollision) {
+            return 'bottom';  // Colliding with the bottom of the platform
+          } else if (rightCollision < leftCollision && rightCollision < bottomCollision && rightCollision < topCollision) {
+            return 'right';  // Colliding with the right side of the platform
+          } else {
+            return 'left';  // Colliding with the left side of the platform
+          }
+        }
+        function collisionDirectionObject(player, platform) {
+          // Colliding with the top, bottom, right, and left of the platform, respectively
+          let topCollision = (player.y + player.h) - platform.y;
+          let bottomCollision = (platform.y + platform.h) - player.y;
+          let leftCollision = (player.x + player.w) - platform.x;
+          let rightCollision = (platform.x + platform.w) - player.x;
+
+          // Find the smallest collision distance (indicating the direction of collision)
+          if (topCollision < bottomCollision && topCollision < leftCollision && topCollision < rightCollision) {
+            return 'top';  // Colliding with the top of the platform
+          } else if (bottomCollision < topCollision && bottomCollision < leftCollision && bottomCollision < rightCollision) {
+            return 'bottom';  // Colliding with the bottom of the platform
+          } else if (rightCollision < leftCollision && rightCollision < bottomCollision && rightCollision < topCollision) {
+            return 'right';  // Colliding with the right side of the platform
+          } else {
+            return 'left';  // Colliding with the left side of the platform
+          }
+        }
       }
-      break;
   }
 }
+
