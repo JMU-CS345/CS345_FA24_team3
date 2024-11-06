@@ -1,5 +1,5 @@
-let verticleP = false;
-let verticleG = false;
+let verticalP = false;
+let verticalG = false;
 function updatePortals() {
     // Update and draw all projectiles
     for (let i = projectiles.length - 1; i >= 0; i--) {
@@ -16,7 +16,7 @@ function updatePortals() {
             if (isCollidingObject(proj, platforms[j])) {
                 collisionDirection = collisionDirectionObject(proj, platforms[j]);
                 if (proj.c == "purple") {
-                    if (verticleP) {
+                    if (verticalP) {
                         purpleP.y = proj.y - player.h / 2;
                         purpleP.x = proj.x;
                         purpleP.w = player.w / 5;
@@ -28,13 +28,13 @@ function updatePortals() {
                         purpleP.h = player.w / 5;
                         purpleP.w = player.h;
                     }
-                    purpleP.verticle = verticleP;
+                    purpleP.vertical = verticalP;
                     purpleP.direction = collisionDirection;
                 }
                 else if (proj.c == "gold") {
-                    goldP.verticle = verticleG;
+                    goldP.vertical = verticalG;
                     goldP.direction = collisionDirection;
-                    if (verticleG) {
+                    if (verticalG) {
                         goldP.y = proj.y - player.h / 2;
                         goldP.x = proj.x;
                         goldP.w = player.w / 5;
@@ -68,37 +68,37 @@ function shootPortal(direction, colorP) {
     if (direction == "up") {
         vy = -speed;
         if (colorP == 'purple') {
-            verticleP = false;
+            verticalP = false;
         }
         else {
-            verticleG = false;
+            verticalG = false;
         }
     }
     else if (direction == "down") {
         vy = speed;
         if (colorP == 'purple') {
-            verticleP = false;
+            verticalP = false;
         }
         else {
-            verticleG = false;
+            verticalG = false;
         }
     }
     else if (direction == "left") {
         vx = -speed;
         if (colorP == 'purple') {
-            verticleP = true;
+            verticalP = true;
         }
         else {
-            verticleG = true;
+            verticalG = true;
         }
     }
     else if (direction == "right") {
         vx = speed;
         if (colorP == 'purple') {
-            verticleP = true;
+            verticalP = true;
         }
         else {
-            verticleG = true;
+            verticalG = true;
         }
     }
     if (projectiles.length < 2) {
