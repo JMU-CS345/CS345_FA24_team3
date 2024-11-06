@@ -64,7 +64,7 @@ function draw() {
   fill("purple");
   // fill("purple")
 
-  //rect(playerHitBox.x, playerHitBox.y, playerHitBox.w, playerHitBox.h);
+  rect(playerHitBox.x, playerHitBox.y, playerHitBox.w, playerHitBox.h);
 
   // make the hitboxes invisible
   // noStroke();
@@ -222,7 +222,7 @@ function updateHitbox() {
     playerHitBox = {
       //the player's hit box should barely overlap with the sprite
       // serves as a collision box and hurtbox.
-      x: player.x + 40, y: player.y + 95, w: player.w - 45, h: player.h - 90
+      x: player.x + 40, y: player.y + 60, w: player.w - 80, h: player.h - 60
     };
   } else {
     playerHitBox = {
