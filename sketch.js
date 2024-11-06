@@ -51,7 +51,6 @@ function setup() {
 }
 
 function draw() {
-
   GameState(mapLevel)
   if (player.v > 0 && !player.moving) {
     curDirection = 'down'
@@ -246,44 +245,6 @@ function nextLevel(gameMap) {
         background(level2);
         purpleP.x = -1;
         goldP.x = -1;
-
-
-        function collisionDirectionPlayer(player, playerHitBox, platform) {
-          // Colliding with the top, bottom, right, and left of the platform, respectively
-          let topCollision = (player.y + player.h) - platform.y;
-          let bottomCollision = (platform.y + platform.h) - playerHitBox.y;
-          let leftCollision = (playerHitBox.x + playerHitBox.w) - platform.x;
-          let rightCollision = (platform.x + platform.w) - playerHitBox.x;
-
-          // Find the smallest collision distance (indicating the direction of collision)
-          if (topCollision < bottomCollision && topCollision < leftCollision && topCollision < rightCollision) {
-            return 'top';  // Colliding with the top of the platform
-          } else if (bottomCollision < topCollision && bottomCollision < leftCollision && bottomCollision < rightCollision) {
-            return 'bottom';  // Colliding with the bottom of the platform
-          } else if (rightCollision < leftCollision && rightCollision < bottomCollision && rightCollision < topCollision) {
-            return 'right';  // Colliding with the right side of the platform
-          } else {
-            return 'left';  // Colliding with the left side of the platform
-          }
-        }
-        function collisionDirectionObject(player, platform) {
-          // Colliding with the top, bottom, right, and left of the platform, respectively
-          let topCollision = (player.y + player.h) - platform.y;
-          let bottomCollision = (platform.y + platform.h) - player.y;
-          let leftCollision = (player.x + player.w) - platform.x;
-          let rightCollision = (platform.x + platform.w) - player.x;
-
-          // Find the smallest collision distance (indicating the direction of collision)
-          if (topCollision < bottomCollision && topCollision < leftCollision && topCollision < rightCollision) {
-            return 'top';  // Colliding with the top of the platform
-          } else if (bottomCollision < topCollision && bottomCollision < leftCollision && bottomCollision < rightCollision) {
-            return 'bottom';  // Colliding with the bottom of the platform
-          } else if (rightCollision < leftCollision && rightCollision < bottomCollision && rightCollision < topCollision) {
-            return 'right';  // Colliding with the right side of the platform
-          } else {
-            return 'left';  // Colliding with the left side of the platform
-          }
-        }
       }
   }
 }
