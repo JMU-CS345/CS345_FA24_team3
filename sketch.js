@@ -23,6 +23,7 @@ var playerHitBox = { x: player.x, y: player.y, w: player.w - 100, h: player.h - 
 
 
 function preload() {
+  startScreen = loadImage("assets/GALAXYMASTER2.png");
   playerImage = loadImage("assets/Character.png"); // For Character going right
   playerReverse = loadImage("assets/CharacterR.png"); // For Character going left
   level1 = loadImage("assets/level1.png");

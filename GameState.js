@@ -5,7 +5,6 @@
 function GameState(state) {
   switch (state) {
     case "title":
-
       break;
 
     case "map1":
