@@ -35,6 +35,7 @@ function preload() {
   alienEnragedImage = loadImage("assets/alienEnraged.png");
   robotShoot = loadImage("assets/Robot_fire.png");
   robotWalk = loadImage("assets/Robot_walk.png");
+  laser = loadImage("assets/laser.png");
   mapAssets = loadImage("assets/PlanetAssets.png"); //space stuff
   heart = loadImage("assets/Heart.png");
 
@@ -48,12 +49,12 @@ function setup() {
   alien1 = new Alien(600, windowHeight - 120, 120, 120);
   alien2 = new Alien(732, 360, 120, 120);
   alien3 = new Alien(340, 480, 120, 120);
-  robot1 = new Robot(550, 240, 120, 120);
+  robot1 = new Robot(1000, 240, 120, 120);
   enemies.push(alien1, alien2, alien3, robot1);
   Alien.asset = alienImage;
   Robot.assetShoot = robotShoot;
   Robot.assetWalk = robotWalk;
-
+  Laser.assetLaser = laser;
 
 }
 
@@ -151,17 +152,45 @@ function draw() {
   for (let i = 0; i < enemies.length; i++) {
     let enemy = enemies[i];
 
+    let detection = enemy.playerDetected(player.x, player.y, Robot.shootingRange);
+
+    if (detection != false && enemy instanceof Robot) {
+
+      if (enemy.currentFrame == 0) {
+        if (detection === "Left") {
+          enemy.direction = -1;
+        } else if (detection == "Right") {
+          enemy.direction = 1;
+        }
+      }
+
+      if (enemy.currentFrame == 1) {
+        enemy.shootAtPlayer(player);
+      }
+    }
+
     if (isCollidingPlayer(player, playerHitBox, enemy) && collisionDirectionPlayer(player, playerHitBox, enemy) == 'top' && !isFalling(player)) {
       enemy.dead = true;
       enemy.deathTime = millis();
-    } else if (isCollidingPlayer(player, playerHitBox, enemy) && collisionDirectionPlayer(player, playerHitBox, enemy) != 'top' && !enemy.dead) {
+    }
+
+    if (isCollidingPlayer(player, playerHitBox, enemy) && collisionDirectionPlayer(player, playerHitBox, enemy) != 'top' && !enemy.dead) {
       enemy.attack(player);
       player.health--;
-      if (player.health <= 0) {
-        player.dead = true;
+    }
+
+    if (enemy instanceof Robot) {
+      if (enemy.checkLaserHitsPlayer(player)) {
+        enemy.attack(player);
+        player.health--;
       }
     }
+
+    if (player.health <= 0) {
+      player.dead = true;
+    }
   }
+
   portalInput();
   Teleportation();
   Death();
@@ -204,7 +233,7 @@ function keyPressed() {
     alien1 = new Alien(600, windowHeight - 120, 120, 120); // CHANGE THIS CODE SO THAT THE ALIENS ARE CORRECT FOR EACH LEVEL
     alien2 = new Alien(732, 360, 120, 120);
     alien3 = new Alien(340, 480, 120, 120);
-    robot1 = new Robot(550, 240, 120, 120);
+    robot1 = new Robot(1000, 240, 120, 120);
     enemies.push(alien1, alien2, alien3, robot1);
     Alien.asset = alienImage;
     player.health = 3;
