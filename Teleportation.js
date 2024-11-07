@@ -1,5 +1,20 @@
+var canTeleport = true;
+var teleportationtimer = 0;
+
+const voidDuration = 500; // doing this is delta time, (0.5 seconds)
+
 function Teleportation() {
     //Teleportation
+
+    if (!canTeleport) {
+        teleportationtimer += deltaTime;
+        if (teleportationtimer >= voidDuration) {
+            teleportationtimer = 0;
+            canTeleport = true;
+        }
+        return; // exit early to prevent teleportation during cooldown
+    }           // so that it will already be reset when player teleports
+
     if (purpleP.x != -1 && goldP.x != -1) {
         if (isCollidingPlayer(player, playerHitBox, purpleP)) {
             if (purpleP.vertical) {
@@ -46,6 +61,7 @@ function Teleportation() {
                     }
                 }
             }
+            canTeleport = false;
         }
         if (isCollidingPlayer(player, playerHitBox, goldP)) {
             if (goldP.vertical) {
@@ -92,6 +108,7 @@ function Teleportation() {
                     }
                 }
             }
+            canTeleport = false;
         }
     }
 }
