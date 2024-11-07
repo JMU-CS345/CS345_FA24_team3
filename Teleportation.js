@@ -34,7 +34,7 @@ function Teleportation() {
                     }
                     else { // Portal above platform
                         player.x = goldP.x;
-                        player.y = goldP.y - 5;
+                        player.y = goldP.y - 150;
                     }
                 }
             }
@@ -56,7 +56,7 @@ function Teleportation() {
                     }
                     else {// Portal above platform
                         player.x = goldP.x;
-                        player.y = goldP.y - 5;
+                        player.y = goldP.y - 150;
                     }
                 }
             }
@@ -81,7 +81,7 @@ function Teleportation() {
                     }
                     else { // Portal above platform
                         player.x = purpleP.x;
-                        player.y = purpleP.y - 5;
+                        player.y = purpleP.y - 150;
                     }
                 }
             }
@@ -103,7 +103,7 @@ function Teleportation() {
                     }
                     else {// Portal above platform
                         player.x = purpleP.x;
-                        player.y = purpleP.y - 5;
+                        player.y = purpleP.y - 150;
                     }
                 }
             }

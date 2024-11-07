@@ -46,11 +46,11 @@ function setup() {
   frameRate(60);
   noSmooth();
   player.y = windowHeight - player.h;
-  //alien1 = new Alien(600, windowHeight - 120, 120, 120);
-  //alien2 = new Alien(732, 360, 120, 120);
-  //alien3 = new Alien(340, 480, 120, 120);
-  //robot1 = new Robot(1000, 240, 120, 120);
-  //enemies.push(alien1, alien2, alien3, robot1);
+  alien1 = new Alien(600, windowHeight - 120, 120, 120);
+  alien2 = new Alien(732, 360, 120, 120);
+  alien3 = new Alien(340, 480, 120, 120);
+  robot1 = new Robot(1000, 240, 120, 120);
+  enemies.push(alien1, alien2, alien3, robot1);
   Alien.asset = alienImage;
   Robot.assetShoot = robotShoot;
   Robot.assetWalk = robotWalk;
