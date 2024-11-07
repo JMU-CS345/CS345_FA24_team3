@@ -1,5 +1,4 @@
-function Teleportation() {
-    //Teleportation
+function Teleportation() {    //Teleportation
     if (purpleP.x != -1 && goldP.x != -1) {
         if (isCollidingPlayer(player, playerHitBox, purpleP)) {
             if (purpleP.vertical) {
