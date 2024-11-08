@@ -15,24 +15,24 @@ class Enemy {
         this.dead = false;
     }
 
-    move() {
-        throw new Error("Specify what enemy instance must move().");
+    attack(player) {
+        player.x = 10;
+        player.y = windowHeight - 100;
+        player.v = 0;
     }
 
-    attack() {
-        throw new Error("Specify what enemy instance must attack().");
-    }
+    playerDetected(pX, pY, minD) {
 
-    killed() {
-        throw new Error("Specify what enemy instance must killed().");
-    }
+        // not changing direction here, just detecting
 
-    playerDetected() {
-        throw new Error("Specify what enemy instance must playerDetected().");
-    }
-
-    hitbox() {
-        throw new Error("Specify what enemy instance must hitBox().");
+        if (dist(pX, pY, this.x, this.y) <= minD) {
+            if (pX < this.x) {
+                return "Left";      // player left of enemy
+            } else {
+                return "Right";     // player right of enemy
+            }
+        }
+        return false;               // player not detected
     }
 }
 
@@ -40,6 +40,7 @@ class Enemy {
 
 class Alien extends Enemy {
     static asset = null;
+
     static FRAME_WIDTH = 48;
     static FRAME_HEIGHT = 48;
 
@@ -99,17 +100,172 @@ class Alien extends Enemy {
         image(Alien.asset, this.x, this.y, this.w, this.h, Alien.FRAME_WIDTH * 14, 0, Alien.FRAME_WIDTH, Alien.FRAME_HEIGHT);
     }
 
-    attack(player) {
-        player.x = 10;
-        player.y = windowHeight - 100;
-        player.v = 0;
-    }
-
-    // todo rest of methods.
-
-    updateAlien() {
+    update() {
         this.updateAnimation();
         this.draw();
         this.move();
     }
 }
+
+// =====================================================================
+
+class Robot extends Enemy {
+    static assetWalk = null;
+
+    static FRAME_WIDTH = 48;
+    static FRAME_HEIGHT = 48;
+
+    static shootIntervals = 2000;
+    static shootingRange = 1000;
+
+    constructor(x, y, w, h) {
+        super(x, y, w, h);
+
+        this.speed = 1.25;
+        this.direction = Math.random() < 0.5 ? -1 : 1;
+
+        this.currentFrame = 0;
+        this.frameCounter = 0;
+        this.frameDelay = 14;
+
+        this.shotTimer = 0;
+        this.canShoot = false;
+        this.multiShotPrevention = false;
+
+        this.projectiles = [];
+    }
+
+    updateAnimation() {
+        this.frameCounter++;
+
+        if (this.frameCounter >= this.frameDelay) {
+            this.currentFrame = (this.currentFrame + 1) % 6;
+            this.frameCounter = 0;
+        }
+    }
+
+    draw() {
+        push();
+
+        if (this.direction == -1) {
+            translate(this.x + this.w, this.y);
+            scale(-1, 1);
+        } else {
+            translate(this.x, this.y);
+        }
+
+        var sx = this.currentFrame * Robot.FRAME_WIDTH;
+        image(Robot.assetWalk, 0, 0, this.w, this.h, sx, 0, Robot.FRAME_WIDTH, Robot.FRAME_HEIGHT);
+
+        pop();
+
+        for (let i = 0; i < this.projectiles.length; i++) {
+            this.projectiles[i].draw();
+        }
+    }
+
+    move() {
+        this.x += this.direction * this.speed;
+        if (this.x >= windowWidth - 120 || this.x <= -120)
+            this.direction *= -1;
+    }
+
+    killed() {
+        image(Alien.asset, this.x, this.y, this.w, this.h, Alien.FRAME_WIDTH * 14, 0, Alien.FRAME_WIDTH, Alien.FRAME_HEIGHT);
+    }
+
+    shootAtPlayer(player) {
+        if (this.multiShotPrevention == false) {
+            const laserX = this.x + this.w / 2;
+            const laserY = this.y + this.h / 2;
+
+            const targetX = player.x + player.w / 2;
+            const targetY = player.y + player.h / 2;
+
+            const laser = new Laser(laserX, laserY, targetX, targetY);
+            this.projectiles.push(laser);
+        }
+
+        this.multiShotPrevention = true;
+    }
+
+    updateProjectiles(player) {
+        for (let i = this.projectiles.length - 1; i >= 0; i--) {
+            const laser = this.projectiles[i];
+            laser.move();
+            laser.draw();
+
+            if (!laser.active || laser.x < 0 || laser.x > width || laser.y < 0 || laser.y > height) {
+                this.projectiles.splice(i, 1);
+            }
+        }
+    }
+
+    checkLaserHitsPlayer(player) {
+        for (let i = this.projectiles.length - 1; i >= 0; i--) {
+            const laser = this.projectiles[i];
+
+            if (
+                laser.x < player.x + player.w &&
+                laser.x + laser.w > player.x &&
+                laser.y < player.y + player.h &&
+                laser.y + laser.h > player.y
+            ) {
+                this.projectiles.splice(i, 1);
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+    update() {
+        this.updateAnimation();
+        this.draw();
+        this.move();
+
+        this.shotTimer += deltaTime;
+        if (this.shotTimer >= Robot.shootIntervals) {
+            this.canShoot = true;
+            this.shotTimer = 0;
+            this.multiShotPrevention = false;
+        }
+
+        this.updateProjectiles();
+    }
+
+}
+
+class Laser {
+    static assetLaser = null;
+
+    constructor(x, y, targetX, targetY) {
+        this.x = x;
+        this.y = y;
+
+        this.w = 50;
+        this.h = 50;
+
+        this.speed = 4.5;
+
+        const dx = targetX - x;
+        const dy = targetY - y;
+        const magnitude = Math.sqrt(dx * dx + dy * dy);
+
+        this.vx = (dx / magnitude) * this.speed;
+        this.vy = (dy / magnitude) * this.speed;
+
+        this.active = true;
+    }
+
+    move() {
+        this.x += this.vx;
+        this.y += this.vy;
+    }
+
+    draw() {
+        image(Laser.assetLaser, this.x, this.y, this.w, this.h);
+    }
+}
+
+// =====================================================================

@@ -14,7 +14,6 @@ let projectiles = []; // Array of portal projectiles
 let platforms = []; // platform imp starts here
 let enemies = [] // Array of enemies
 let curDirection = null;
-let alienImage; // so enemies file can read it
 let mapLevel = "map1";
 var player = { x: 10, y: 0, w: 150, h: 150, v: 0, a: 1, jumpStrength: -30, dead: false, health: 3 };
 //the player hit box for collision
@@ -23,6 +22,7 @@ var playerHitBox = { x: player.x, y: player.y, w: player.w - 100, h: player.h - 
 
 
 function preload() {
+  startScreen = loadImage("assets/GALAXYMASTER2.png");
   playerImage = loadImage("assets/Character.png"); // For Character going right
   playerReverse = loadImage("assets/CharacterR.png"); // For Character going left
   level1 = loadImage("assets/level1.png");
@@ -31,6 +31,10 @@ function preload() {
   portalPurpleImage = loadImage("assets/portalPurple.png");
   portalGoldImage = loadImage("assets/portalGold.png");
   alienImage = loadImage("assets/alien.png");
+  alienEnragedImage = loadImage("assets/alienEnraged.png");
+  robotShoot = loadImage("assets/Robot_fire.png");
+  robotWalk = loadImage("assets/Robot_walk.png");
+  laser = loadImage("assets/laser.png");
   mapAssets = loadImage("assets/PlanetAssets.png"); //space stuff
   heart = loadImage("assets/Heart.png");
 
@@ -44,16 +48,16 @@ function setup() {
   alien1 = new Alien(600, windowHeight - 120, 120, 120);
   alien2 = new Alien(732, 360, 120, 120);
   alien3 = new Alien(340, 480, 120, 120);
-  enemies.push(alien1, alien2, alien3);
+  robot1 = new Robot(1000, 240, 120, 120);
+  enemies.push(alien1, alien2, alien3, robot1);
   Alien.asset = alienImage;
-
+  Robot.assetWalk = robotWalk;
+  Laser.assetLaser = laser;
 
 }
 
 function draw() {
-
-  GameState(mapLevel);
-
+  GameState(mapLevel)
   if (player.v > 0 && !player.moving) {
     curDirection = 'down'
   }
@@ -146,17 +150,43 @@ function draw() {
   for (let i = 0; i < enemies.length; i++) {
     let enemy = enemies[i];
 
+    let detection = enemy.playerDetected(player.x, player.y, Robot.shootingRange);
+
+    if (detection != false && enemy instanceof Robot) {
+
+      if (enemy.currentFrame == 0) {
+        if (detection === "Left") {
+          enemy.direction = -1;
+        } else if (detection == "Right") {
+          enemy.direction = 1;
+        }
+      }
+      enemy.shootAtPlayer(player);
+
+    }
+
     if (isCollidingPlayer(player, playerHitBox, enemy) && collisionDirectionPlayer(player, playerHitBox, enemy) == 'top' && !isFalling(player)) {
       enemy.dead = true;
       enemy.deathTime = millis();
-    } else if (isCollidingPlayer(player, playerHitBox, enemy) && collisionDirectionPlayer(player, playerHitBox, enemy) != 'top' && !enemy.dead) {
+    }
+
+    if (isCollidingPlayer(player, playerHitBox, enemy) && collisionDirectionPlayer(player, playerHitBox, enemy) != 'top' && !enemy.dead) {
       enemy.attack(player);
       player.health--;
-      if (player.health <= 0) {
-        player.dead = true;
+    }
+
+    if (enemy instanceof Robot) {
+      if (enemy.checkLaserHitsPlayer(player)) {
+        enemy.attack(player);
+        player.health--;
       }
     }
+
+    if (player.health <= 0) {
+      player.dead = true;
+    }
   }
+
   portalInput();
   Teleportation();
   Death();
@@ -177,7 +207,7 @@ function draw() {
       }
     }
     else {
-      enemy.updateAlien();
+      enemy.update();
     }
   }
   updateHitbox();
@@ -199,7 +229,8 @@ function keyPressed() {
     alien1 = new Alien(600, windowHeight - 120, 120, 120); // CHANGE THIS CODE SO THAT THE ALIENS ARE CORRECT FOR EACH LEVEL
     alien2 = new Alien(732, 360, 120, 120);
     alien3 = new Alien(340, 480, 120, 120);
-    enemies.push(alien1, alien2, alien3);
+    robot1 = new Robot(1000, 240, 120, 120);
+    enemies.push(alien1, alien2, alien3, robot1);
     Alien.asset = alienImage;
     player.health = 3;
   }
@@ -233,75 +264,21 @@ function updateHitbox() {
   }
 }
 
-
-
-function isCollidingPlayer(player, playerHitBox, platform) {
-  // Check if player is above platform
-  if (player.y + player.h < platform.y) return false;
-  // Check if player is below platform
-  if (playerHitBox.y > platform.y + platform.h) return false;
-  // Check if player is to the left of platform
-  if (playerHitBox.x + playerHitBox.w < platform.x) return false;
-  // Check if player is to the right of platform
-  if (playerHitBox.x > platform.x + platform.w - 2) return false;
-  // If none of the above conditions are true, there is a collision
-  return true;
-}
-function isCollidingObject(player, platform) {
-  // Check if player is above platform
-  if (player.y + player.h < platform.y) return false;
-  // Check if player is below platform
-  if (player.y > platform.y + platform.h) return false;
-  // Check if player is to the left of platform
-  if (player.x + player.w < platform.x) return false;
-  // Check if player is to the right of platform
-  if (player.x > platform.x + platform.w) return false;
-  // If none of the above conditions are true, there is a collision
-  return true;
-}
-
-function isCollidingEnemy(enemy, platform) {
-  if (enemy.y + enemy.h < platform.y) return false;
-  if (enemy.y > platform.y + platform.h) return false;
-  if (enemy.x + enemy.w < platform.x) return false;
-  if (enemy.x > platform.x + platform.w) return false;
-  return true;
-}
-
-
-function collisionDirectionPlayer(player, playerHitBox, platform) {
-  // Colliding with the top, bottom, right, and left of the platform, respectively
-  let topCollision = (player.y + player.h) - platform.y;
-  let bottomCollision = (platform.y + platform.h) - playerHitBox.y;
-  let leftCollision = (playerHitBox.x + playerHitBox.w) - platform.x;
-  let rightCollision = (platform.x + platform.w) - playerHitBox.x;
-
-  // Find the smallest collision distance (indicating the direction of collision)
-  if (topCollision < bottomCollision && topCollision < leftCollision && topCollision < rightCollision) {
-    return 'top';  // Colliding with the top of the platform
-  } else if (bottomCollision < topCollision && bottomCollision < leftCollision && bottomCollision < rightCollision) {
-    return 'bottom';  // Colliding with the bottom of the platform
-  } else if (rightCollision < leftCollision && rightCollision < bottomCollision && rightCollision < topCollision) {
-    return 'right';  // Colliding with the right side of the platform
-  } else {
-    return 'left';  // Colliding with the left side of the platform
+function nextLevel(gameMap) {
+  switch (gameMap) {
+    case "map1":
+      if (playerHitBox.y > windowHeight * 0.457 + mapScroll && playerHitBox.y < windowHeight * 0.457 + mapScroll + 80 && playerHitBox.x > windowWidth * 0.72 && playerHitBox.x < windowWidth * 0.72 + 80 && mapLevel == "map1") {
+        mapLevel = "portals_tutorial"
+        platforms = GetMap("portals_tutorial");
+        console.log(platforms);
+        for (i = 0; i < enemies.length; i++) {
+          enemies[i] = null;
+          enemies.splice(i);
+        }
+        background(level2);
+        purpleP.x = -1;
+        goldP.x = -1;
+      }
   }
 }
-function collisionDirectionObject(player, platform) {
-  // Colliding with the top, bottom, right, and left of the platform, respectively
-  let topCollision = (player.y + player.h) - platform.y;
-  let bottomCollision = (platform.y + platform.h) - player.y;
-  let leftCollision = (player.x + player.w) - platform.x;
-  let rightCollision = (platform.x + platform.w) - player.x;
 
-  // Find the smallest collision distance (indicating the direction of collision)
-  if (topCollision < bottomCollision && topCollision < leftCollision && topCollision < rightCollision) {
-    return 'top';  // Colliding with the top of the platform
-  } else if (bottomCollision < topCollision && bottomCollision < leftCollision && bottomCollision < rightCollision) {
-    return 'bottom';  // Colliding with the bottom of the platform
-  } else if (rightCollision < leftCollision && rightCollision < bottomCollision && rightCollision < topCollision) {
-    return 'right';  // Colliding with the right side of the platform
-  } else {
-    return 'left';  // Colliding with the left side of the platform
-  }
-}
