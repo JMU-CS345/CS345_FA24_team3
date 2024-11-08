@@ -15,13 +15,14 @@ let platforms = []; // platform imp starts here
 let enemies = [] // Array of enemies
 let curDirection = null;
 let alienImage; // so enemies file can read it
-let mapLevel = "map1";
+let mapLevel = "title";
 var player = { x: 10, y: 0, w: 150, h: 150, v: 0, a: 1, jumpStrength: -30, dead: false, health: 3 };
 //the player hit box for collision
 var playerHitBox = { x: player.x, y: player.y, w: player.w - 100, h: player.h - 100, moving: false };
 var canGetHurt = true;
 var hurtTimer = 0;
 
+let gameStart = false;
 
 
 function preload() {
@@ -40,7 +41,7 @@ function preload() {
   laser = loadImage("assets/Laser.png");
   mapAssets = loadImage("assets/PlanetAssets.png"); //space stuff
   heart = loadImage("assets/Heart.png");
-
+  titleScreen = loadImage("assets/GALAXYMASTER2.png");
 }
 
 function setup() {
@@ -54,7 +55,6 @@ function setup() {
   robot1 = new Robot(1000, 240, 120, 120);
   enemies.push(alien1, alien2, alien3, robot1);
   Alien.asset = alienImage;
-  Robot.assetShoot = robotShoot;
   Robot.assetWalk = robotWalk;
   Laser.assetLaser = laser;
 
@@ -69,7 +69,6 @@ function draw() {
     curDirection = 'up';
   }
   //use to see hitboxes and platforms easily
-  fill("purple");
   // fill("purple")
 
   //rect(playerHitBox.x, playerHitBox.y, playerHitBox.w, playerHitBox.h);
@@ -165,10 +164,8 @@ function draw() {
           enemy.direction = 1;
         }
       }
+      enemy.shootAtPlayer(player);
 
-      if (enemy.currentFrame == 1) {
-        enemy.shootAtPlayer(player);
-      }
     }
 
     if (isCollidingPlayer(player, playerHitBox, enemy) && collisionDirectionPlayer(player, playerHitBox, enemy) == 'top' && !isFalling(player)) {
@@ -195,16 +192,20 @@ function draw() {
     }
   }
 
-  portalInput();
-  Teleportation();
-  Death();
-  updatePortals();
-  PlayerMovement();
-  drawPortals();
-  Health();
+  if (gameStart == true) {
+    portalInput();
+    Teleportation();
+    Death();
+    updatePortals();
+    PlayerMovement();
+    drawPortals();
+    Health();
+    updateHitbox();
+    noFill();
+  }
 
 
-  for (let i = 0; i < enemies.length; i++) {
+  for (let i = 0; i < enemies.length && gameStart == true; i++) {
     let enemy = enemies[i];
 
     if (enemy.dead) {
@@ -218,8 +219,6 @@ function draw() {
       enemy.update();
     }
   }
-  updateHitbox();
-  noFill();
 }
 
 function keyPressed() {
@@ -230,6 +229,11 @@ function keyPressed() {
   if (keyCode == 83) {
     crouched = true;
   }
+
+  if (keyCode == 13 && gameStart == false) {
+    gameStart = true;
+  }
+
   if (keyCode == 13 && player.dead) {
     player.dead = false;
     background(level1);
@@ -261,7 +265,7 @@ function updateHitbox() {
     playerHitBox = {
       //the player's hit box should barely overlap with the sprite
       // serves as a collision box and hurtbox.
-      x: player.x + 40, y: player.y + 95, w: player.w - 45, h: player.h - 90
+      x: player.x + 40, y: player.y + 60, w: player.w - 80, h: player.h - 60
     };
   } else {
     playerHitBox = {
@@ -289,4 +293,3 @@ function nextLevel(gameMap) {
       }
   }
 }
-
