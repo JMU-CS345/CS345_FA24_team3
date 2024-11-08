@@ -9,6 +9,37 @@ var mapPlatforms;
 function DrawMap(map) {
   mapMovement(); //update map bounce
   switch (map) { //switch based on which map is needed
+    case "title":
+
+      //background
+      image(mapAssets_SpaceStation, 0, 0, windowWidth, windowHeight, 266, 25, 535, 807);
+      //Title
+      image(titleScreen, windowWidth * 0.25, windowHeight * 0.02 + mapScroll, 700, 500);
+
+      image(mapAssets, windowWidth * 0.8, windowHeight * 0.1 + mapScroll, 90, 90, 1680, 940, 55, 52);
+
+
+
+      //Planets
+      image(mapAssets, windowWidth * 0.8, windowHeight * 0.6 + mapScroll, 60, 70, 340, 885, 79, 76);
+      image(mapAssets, windowWidth * 0.15, windowHeight * 0.7 + mapScroll, 90, 90, 890, 765, 57, 51);
+
+      //Cosmetics
+      image(mapAssets, windowWidth * 0.79, windowHeight * 0.585 + mapScroll, 90, 90, 917, 354, 102, 109);
+      image(mapAssets, windowWidth * 0.1, windowHeight * 0.05 + mapScroll, 60, 70, 610, 746, 66, 65);
+
+      //Comets
+      image(mapAssets, windowWidth * 0.9, windowHeight * 0.25 + mapScroll, 90, 90, 3, 230, 40, 50);
+      image(mapAssets, windowWidth * 0.05, windowHeight * 0.4 + mapScroll, 60, 70, 176, 59, 51, 41);
+
+
+      textSize(100);
+      fill("white");
+      textFont("Courier New");
+      text("Press Enter!", windowWidth * 0.25, windowHeight * 0.9 + mapScroll);
+
+      break;
+
     case "map1":
 
       mapPlatforms = GetMap(map);

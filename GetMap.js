@@ -31,6 +31,6 @@ function GetMap(level) {
         t_Block_Left_Wall, left_Ceiling, right_Floor, b_Block_Right_Wall, b_Block_Left_Wall,
         b_Block_Floor, left_Floor,
       ];
-      return map;
+      return map
   }
 }

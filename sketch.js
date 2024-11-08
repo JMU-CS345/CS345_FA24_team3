@@ -14,11 +14,13 @@ let projectiles = []; // Array of portal projectiles
 let platforms = []; // platform imp starts here
 let enemies = [] // Array of enemies
 let curDirection = null;
-let mapLevel = "map1";
+let alienImage; // so enemies file can read it
+let mapLevel = "title";
 var player = { x: 10, y: 0, w: 150, h: 150, v: 0, a: 1, jumpStrength: -30, dead: false, health: 3 };
 //the player hit box for collision
 var playerHitBox = { x: player.x, y: player.y, w: player.w - 100, h: player.h - 100, moving: false };
 
+let gameStart = false;
 
 
 function preload() {
@@ -37,7 +39,7 @@ function preload() {
   laser = loadImage("assets/laser.png");
   mapAssets = loadImage("assets/PlanetAssets.png"); //space stuff
   heart = loadImage("assets/Heart.png");
-
+  titleScreen = loadImage("assets/GALAXYMASTER2.png");
 }
 
 function setup() {
@@ -65,10 +67,9 @@ function draw() {
     curDirection = 'up';
   }
   //use to see hitboxes and platforms easily
-  fill("purple");
   // fill("purple")
 
-  rect(playerHitBox.x, playerHitBox.y, playerHitBox.w, playerHitBox.h);
+  //rect(playerHitBox.x, playerHitBox.y, playerHitBox.w, playerHitBox.h);
 
   // make the hitboxes invisible
   // noStroke();
@@ -187,16 +188,20 @@ function draw() {
     }
   }
 
-  portalInput();
-  Teleportation();
-  Death();
-  updatePortals();
-  PlayerMovement();
-  drawPortals();
-  Health();
+  if (gameStart == true) {
+    portalInput();
+    Teleportation();
+    Death();
+    updatePortals();
+    PlayerMovement();
+    drawPortals();
+    Health();
+    updateHitbox();
+    noFill();
+  }
 
 
-  for (let i = 0; i < enemies.length; i++) {
+  for (let i = 0; i < enemies.length && gameStart == true; i++) {
     let enemy = enemies[i];
 
     if (enemy.dead) {
@@ -210,8 +215,6 @@ function draw() {
       enemy.update();
     }
   }
-  updateHitbox();
-  noFill();
 }
 
 function keyPressed() {
@@ -222,6 +225,11 @@ function keyPressed() {
   if (keyCode == 83) {
     crouched = true;
   }
+
+  if (keyCode == 13 && gameStart == false) {
+    gameStart = true;
+  }
+
   if (keyCode == 13 && player.dead) {
     player.dead = false;
     background(level1);
@@ -281,4 +289,3 @@ function nextLevel(gameMap) {
       }
   }
 }
-
