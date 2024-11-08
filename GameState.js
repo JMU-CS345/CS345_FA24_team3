@@ -33,6 +33,14 @@ function nextState(state) {
     case "title":
       if (gameStart == true) {
         mapLevel = "map1";
+        alien1 = new Alien(600, windowHeight - 120, 120, 120);
+        alien2 = new Alien(732, 360, 120, 120);
+        alien3 = new Alien(340, 480, 120, 120);
+        robot1 = new Robot(1000, 240, 120, 120);
+        enemies.push(alien1, alien2, alien3, robot1);
+        Alien.asset = alienImage;
+        Robot.assetWalk = robotWalk;
+        Laser.assetLaser = laser;
       }
       break;
     case "map1":
