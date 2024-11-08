@@ -19,6 +19,8 @@ let mapLevel = "map1";
 var player = { x: 10, y: 0, w: 150, h: 150, v: 0, a: 1, jumpStrength: -30, dead: false, health: 3 };
 //the player hit box for collision
 var playerHitBox = { x: player.x, y: player.y, w: player.w - 100, h: player.h - 100, moving: false };
+var canGetHurt = true;
+var hurtTimer = 0;
 
 
 
@@ -35,7 +37,7 @@ function preload() {
   alienEnragedImage = loadImage("assets/alienEnraged.png");
   robotShoot = loadImage("assets/Robot_fire.png");
   robotWalk = loadImage("assets/Robot_walk.png");
-  laser = loadImage("assets/laser.png");
+  laser = loadImage("assets/Laser.png");
   mapAssets = loadImage("assets/PlanetAssets.png"); //space stuff
   heart = loadImage("assets/Heart.png");
 
@@ -174,15 +176,17 @@ function draw() {
       enemy.deathTime = millis();
     }
 
-    if (isCollidingPlayer(player, playerHitBox, enemy) && collisionDirectionPlayer(player, playerHitBox, enemy) != 'top' && !enemy.dead) {
+    if (isCollidingPlayer(player, playerHitBox, enemy) && collisionDirectionPlayer(player, playerHitBox, enemy) != 'top' && !enemy.dead && canGetHurt) {
       enemy.attack(player);
       player.health--;
+      canGetHurt = false;
     }
 
     if (enemy instanceof Robot) {
-      if (enemy.checkLaserHitsPlayer(player)) {
+      if (enemy.checkLaserHitsPlayer(player) && canGetHurt) {
         enemy.attack(player);
         player.health--;
+        canGetHurt = false;
       }
     }
 

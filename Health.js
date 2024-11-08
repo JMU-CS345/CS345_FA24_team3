@@ -11,10 +11,26 @@ function Health() {
     } else if (player.health === 1) {
         cropWidth = 40;
     }
-
     // Draw the heart image without warping
     if (player.health > 0) {
-        image(heart, heartX, heartY, cropWidth * 1.5, heartSize, 0, 0, cropWidth, 100);
+        if (!canGetHurt) {
+            if (frameCount % 7 == 0) {
+                image(heart, heartX, heartY, cropWidth * 1.5, heartSize, 0, 0, cropWidth, 100);
+            }
+        }
+        else {
+            image(heart, heartX, heartY, cropWidth * 1.5, heartSize, 0, 0, cropWidth, 100);
+        }
+    }
+
+    const voidDurationHurt = 1000; // doing this is delta time, (1 seconds)
+    if (!canGetHurt) {
+        hurtTimer += deltaTime;
+        if (hurtTimer >= voidDurationHurt) {
+            hurtTimer = 0;
+            canGetHurt = true;
+        }
+        return; // exit early to prevent teleportation during cooldown
     }
 }
 function Death() {
