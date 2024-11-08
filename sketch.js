@@ -36,7 +36,7 @@ function preload() {
   alienEnragedImage = loadImage("assets/alienEnraged.png");
   robotShoot = loadImage("assets/Robot_fire.png");
   robotWalk = loadImage("assets/Robot_walk.png");
-  laser = loadImage("assets/laser.png");
+  laser = loadImage("assets/Laser.png");
   mapAssets = loadImage("assets/PlanetAssets.png"); //space stuff
   heart = loadImage("assets/Heart.png");
   titleScreen = loadImage("assets/GALAXYMASTER2.png");
