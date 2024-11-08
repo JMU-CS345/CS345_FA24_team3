@@ -110,14 +110,13 @@ class Alien extends Enemy {
 // =====================================================================
 
 class Robot extends Enemy {
-    static assetShoot = null;
     static assetWalk = null;
 
     static FRAME_WIDTH = 48;
     static FRAME_HEIGHT = 48;
 
-    static shootIntervals = 5000;
-    static shootingRange = 850;
+    static shootIntervals = 2000;
+    static shootingRange = 1000;
 
     constructor(x, y, w, h) {
         super(x, y, w, h);
@@ -155,16 +154,9 @@ class Robot extends Enemy {
             translate(this.x, this.y);
         }
 
-        var sx;
+        var sx = this.currentFrame * Robot.FRAME_WIDTH;
+        image(Robot.assetWalk, 0, 0, this.w, this.h, sx, 0, Robot.FRAME_WIDTH, Robot.FRAME_HEIGHT);
 
-        if (this.canShoot && this.currentFrame == 1 && this.playerDetected(player.x, player.y, Robot.shootingRange)) {
-            this.canShoot = false;
-            sx = this.currentFrame * Robot.FRAME_WIDTH;
-            image(Robot.assetShoot, 0, 0, this.w, this.h, sx, 0, Robot.FRAME_WIDTH, Robot.FRAME_HEIGHT);
-        } else {
-            sx = this.currentFrame * Robot.FRAME_WIDTH;
-            image(Robot.assetWalk, 0, 0, this.w, this.h, sx, 0, Robot.FRAME_WIDTH, Robot.FRAME_HEIGHT);
-        }
         pop();
 
         for (let i = 0; i < this.projectiles.length; i++) {

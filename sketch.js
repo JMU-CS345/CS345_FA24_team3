@@ -14,7 +14,6 @@ let projectiles = []; // Array of portal projectiles
 let platforms = []; // platform imp starts here
 let enemies = [] // Array of enemies
 let curDirection = null;
-let alienImage; // so enemies file can read it
 let mapLevel = "map1";
 var player = { x: 10, y: 0, w: 150, h: 150, v: 0, a: 1, jumpStrength: -30, dead: false, health: 3 };
 //the player hit box for collision
@@ -52,7 +51,6 @@ function setup() {
   robot1 = new Robot(1000, 240, 120, 120);
   enemies.push(alien1, alien2, alien3, robot1);
   Alien.asset = alienImage;
-  Robot.assetShoot = robotShoot;
   Robot.assetWalk = robotWalk;
   Laser.assetLaser = laser;
 
@@ -163,10 +161,8 @@ function draw() {
           enemy.direction = 1;
         }
       }
+      enemy.shootAtPlayer(player);
 
-      if (enemy.currentFrame == 1) {
-        enemy.shootAtPlayer(player);
-      }
     }
 
     if (isCollidingPlayer(player, playerHitBox, enemy) && collisionDirectionPlayer(player, playerHitBox, enemy) == 'top' && !isFalling(player)) {
