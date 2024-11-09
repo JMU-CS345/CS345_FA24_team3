@@ -186,7 +186,7 @@ function draw() {
         } else {
           enemy.direction = -1;
         }
-        enemy.speed = 6;
+        enemy.speed = 4;
       } else {
         enemy.speed = 2;
       }
