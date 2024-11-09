@@ -179,6 +179,19 @@ function draw() {
       }
     }
 
+    if (enemy instanceof EnragedAlien) {
+      if (player.x + player.w + 250 > enemy.x && player.x - 250 < enemy.x) {
+        if (player.x > enemy.x) {
+          enemy.direction = 1;
+        } else {
+          enemy.direction = -1;
+        }
+        enemy.speed = 6;
+      } else {
+        enemy.speed = 2;
+      }
+    }
+
     if (player.health <= 0) {
       player.dead = true;
     }
@@ -233,8 +246,9 @@ function keyPressed() {
     alien1 = new Alien(600, windowHeight - 120, 120, 120); // CHANGE THIS CODE SO THAT THE ALIENS ARE CORRECT FOR EACH LEVEL
     alien2 = new Alien(732, 360, 120, 120);
     alien3 = new Alien(340, 480, 120, 120);
-    robot1 = new Robot(1000, 240, 120, 120);
-    enemies.push(alien1, alien2, alien3, robot1);
+    eAlien1 = new EnragedAlien(1200, windowHeight - 120, 120, 120);
+    robot1 = new Robot(1000, windowHeight - 120, 120, 120);
+    enemies.push(alien1, alien2, alien3, eAlien1, robot1);
     Alien.asset = alienImage;
     player.health = 3;
   }
