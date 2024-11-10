@@ -31,6 +31,7 @@ function preload() {
   playerReverse = loadImage("assets/CharacterR.png"); // For Character going left
   level1 = loadImage("assets/level1.png");
   level2 = loadImage("assets/level2.png");
+  level3 = loadImage("assets/level3.png");
   mapAssets_SpaceStation = loadImage("assets/asset.png");
   portalPurpleImage = loadImage("assets/portalPurple.png");
   portalGoldImage = loadImage("assets/portalGold.png");
@@ -49,11 +50,19 @@ function setup() {
   frameRate(60);
   noSmooth();
   player.y = windowHeight - player.h;
+  alien1 = new Alien(600, windowHeight - 120, 120, 120);
+  alien2 = new Alien(732, 360, 120, 120);
+  alien3 = new Alien(340, 480, 120, 120);
+  robot1 = new Robot(1000, 240, 120, 120);
+  //enemies.push(alien1, alien2, alien3, robot1);
+  Alien.asset = alienImage;
+  Robot.assetWalk = robotWalk;
+  Laser.assetLaser = laser;
 
 }
 
 function draw() {
-  GameState(mapLevel)
+  GameState(mapLevel);
   if (player.v > 0 && !player.moving) {
     curDirection = 'down'
   }
@@ -281,23 +290,3 @@ function updateHitbox() {
     };
   }
 }
-
-function nextLevel(gameMap) {
-  switch (gameMap) {
-    case "map1":
-      if (playerHitBox.y > windowHeight * 0.457 + mapScroll && playerHitBox.y < windowHeight * 0.457 + mapScroll + 80 && playerHitBox.x > windowWidth * 0.72 && playerHitBox.x < windowWidth * 0.72 + 80 && mapLevel == "map1") {
-        mapLevel = "portals_tutorial"
-        platforms = GetMap("portals_tutorial");
-        console.log(platforms);
-        for (i = 0; i < enemies.length; i++) {
-          enemies[i] = null;
-          enemies.splice(i);
-        }
-        background(level2);
-        purpleP.x = -1;
-        goldP.x = -1;
-      }
-  }
-}
-
-
