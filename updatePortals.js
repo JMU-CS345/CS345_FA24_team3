@@ -10,21 +10,21 @@ function updatePortals() {
         ellipse(proj.x, proj.y, 15, 15); // Draw projectile
 
         // Update projectile position
-        proj.x += proj.vx * 15;
-        proj.y += proj.vy * 15;
+        proj.x += proj.vx * 20;
+        proj.y += proj.vy * 20;
 
         // Check for collision with platforms
         for (let j = 0; j < platforms.length; j++) {
             if (isCollidingObject(proj, platforms[j])) {
                 collisionDirection = collisionDirectionObject(proj, platforms[j]);
                 if (proj.c == "purple") {
-                    if (verticalP) {
+                    if (collisionDirection == "right" || collisionDirection == "left") {
                         purpleP.y = proj.y - player.h / 2;
                         purpleP.x = proj.x;
                         purpleP.w = player.w / 5;
                         purpleP.h = player.h;
                     }
-                    else {
+                    else if (collisionDirection == "top" || collisionDirection == "bottom") {
                         purpleP.y = proj.y;
                         purpleP.x = proj.x - player.h / 2;
                         purpleP.h = player.w / 5;
@@ -36,13 +36,13 @@ function updatePortals() {
                 else if (proj.c == "gold") {
                     goldP.vertical = verticalG;
                     goldP.direction = collisionDirection;
-                    if (verticalG) {
+                    if (collisionDirection == "right" || collisionDirection == "left") {
                         goldP.y = proj.y - player.h / 2;
                         goldP.x = proj.x;
                         goldP.w = player.w / 5;
                         goldP.h = player.h;
                     }
-                    else {
+                    else if (collisionDirection == "top" || collisionDirection == "bottom") {
                         goldP.y = proj.y;
                         goldP.x = proj.x - player.h / 2;
                         goldP.h = player.w / 5;
@@ -70,8 +70,8 @@ function shootPortal(passedMouseX, passedMouseY, colorP) {
     }
 
     // Debugging purposes
-    console.log("mouseX: ", passedMouseX, "mouseY: ", passedMouseY)
-    console.log("playerX: ", player.x, "playerY: ", player.y)
+    // console.log("mouseX: ", passedMouseX, "mouseY: ", passedMouseY)
+    // console.log("playerX: ", player.x, "playerY: ", player.y)
 
     xTarget = passedMouseX - player.x;
     yTarget = passedMouseY - player.y;
@@ -79,37 +79,6 @@ function shootPortal(passedMouseX, passedMouseY, colorP) {
     // Normalize
     xTarget /= portalTarget;
     yTarget /= portalTarget;
-
-    // Figure out portal bullet direction to get correct portal rotation
-    // if (passedMouseY < player.y) { // up
-    //     if (colorP == 'purple') {
-    //         verticalP = false;
-    //     }
-    //     else {
-    //         verticalG = false;
-    //     }
-    // } else if (passedMouseY > player.y) { // down
-    //     if (colorP == 'purple') {
-    //         verticalP = false;
-    //     }
-    //     else {
-    //         verticalG = false;
-    //     }
-    // } else if (passedMouseX < player.x) { // left
-    //     if (colorP == 'purple') {
-    //         verticalP = true;
-    //     }
-    //     else {
-    //         verticalG = true;
-    //     }
-    // } else if (passedMouseX > player.x) {
-    //     if (colorP == 'purple') {
-    //         verticalP = true;
-    //     }
-    //     else {
-    //         verticalG = true;
-    //     }
-    // }
 
     if (projectiles.length < 2) {
         let projectile = {
