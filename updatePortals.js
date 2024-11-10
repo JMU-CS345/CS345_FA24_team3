@@ -17,20 +17,22 @@ function updatePortals() {
         for (let j = 0; j < platforms.length; j++) {
             if (isCollidingObject(proj, platforms[j])) {
                 collisionDirection = collisionDirectionObject(proj, platforms[j]);
+                console.log(collisionDirection); // DEBUGGING
                 if (proj.c == "purple") {
                     if (collisionDirection == "right" || collisionDirection == "left") {
                         purpleP.y = proj.y - player.h / 2;
                         purpleP.x = proj.x;
                         purpleP.w = player.w / 5;
                         purpleP.h = player.h;
+                        purpleP.vertical = true;
                     }
                     else if (collisionDirection == "top" || collisionDirection == "bottom") {
                         purpleP.y = proj.y;
                         purpleP.x = proj.x - player.h / 2;
                         purpleP.h = player.w / 5;
                         purpleP.w = player.h;
+                        purpleP.vertical = false;
                     }
-                    purpleP.vertical = verticalP;
                     purpleP.direction = collisionDirection;
                 }
                 else if (proj.c == "gold") {
@@ -41,13 +43,16 @@ function updatePortals() {
                         goldP.x = proj.x;
                         goldP.w = player.w / 5;
                         goldP.h = player.h;
+                        goldP.vertical = true;
                     }
                     else if (collisionDirection == "top" || collisionDirection == "bottom") {
                         goldP.y = proj.y;
                         goldP.x = proj.x - player.h / 2;
                         goldP.h = player.w / 5;
                         goldP.w = player.h;
+                        goldP.vertical = false;
                     }
+                    goldP.direction = collisionDirection;
                 }
                 projectiles.splice(i, 1); // Remove projectile on collision
                 break;
