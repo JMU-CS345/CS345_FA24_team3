@@ -1,5 +1,7 @@
 let verticalP = false;
 let verticalG = false;
+let portalColor = "purple";
+
 function updatePortals() {
     // Update and draw all projectiles
     for (let i = projectiles.length - 1; i >= 0; i--) {
@@ -8,8 +10,8 @@ function updatePortals() {
         ellipse(proj.x, proj.y, 15, 15); // Draw projectile
 
         // Update projectile position
-        proj.x += proj.vx;
-        proj.y += proj.vy;
+        proj.x += proj.vx * 15;
+        proj.y += proj.vy * 15;
 
         // Check for collision with platforms
         for (let j = 0; j < platforms.length; j++) {
@@ -58,63 +60,72 @@ function updatePortals() {
         }
     }
 }
-// Creates new projectile/portal
-function shootPortal(direction, colorP) {
-    let speed = 10;
-    let vx = 0, vy = 0;
+
+// Creates a new portal bullet
+function shootPortal(passedMouseX, passedMouseY, colorP) {
+    let xTarget, yTarget;
+
     if (projectiles.length == 1 && projectiles[0].c == colorP) {
         return;
     }
-    if (direction == "up") {
-        vy = -speed;
-        if (colorP == 'purple') {
-            verticalP = false;
-        }
-        else {
-            verticalG = false;
-        }
-    }
-    else if (direction == "down") {
-        vy = speed;
-        if (colorP == 'purple') {
-            verticalP = false;
-        }
-        else {
-            verticalG = false;
-        }
-    }
-    else if (direction == "left") {
-        vx = -speed;
-        if (colorP == 'purple') {
-            verticalP = true;
-        }
-        else {
-            verticalG = true;
-        }
-    }
-    else if (direction == "right") {
-        vx = speed;
-        if (colorP == 'purple') {
-            verticalP = true;
-        }
-        else {
-            verticalG = true;
-        }
-    }
+
+    // Debugging purposes
+    console.log("mouseX: ", passedMouseX, "mouseY: ", passedMouseY)
+    console.log("playerX: ", player.x, "playerY: ", player.y)
+
+    xTarget = passedMouseX - player.x;
+    yTarget = passedMouseY - player.y;
+    portalTarget = sqrt((xTarget * xTarget) + (yTarget * yTarget));
+    // Normalize
+    xTarget /= portalTarget;
+    yTarget /= portalTarget;
+
+    // Figure out portal bullet direction to get correct portal rotation
+    // if (passedMouseY < player.y) { // up
+    //     if (colorP == 'purple') {
+    //         verticalP = false;
+    //     }
+    //     else {
+    //         verticalG = false;
+    //     }
+    // } else if (passedMouseY > player.y) { // down
+    //     if (colorP == 'purple') {
+    //         verticalP = false;
+    //     }
+    //     else {
+    //         verticalG = false;
+    //     }
+    // } else if (passedMouseX < player.x) { // left
+    //     if (colorP == 'purple') {
+    //         verticalP = true;
+    //     }
+    //     else {
+    //         verticalG = true;
+    //     }
+    // } else if (passedMouseX > player.x) {
+    //     if (colorP == 'purple') {
+    //         verticalP = true;
+    //     }
+    //     else {
+    //         verticalG = true;
+    //     }
+    // }
+
     if (projectiles.length < 2) {
         let projectile = {
             x: player.x + player.w / 2,
             y: player.y + player.h / 2,
             w: 10,
             h: 10,
-            vx: vx,
-            vy: vy,
+            vx: xTarget,
+            vy: yTarget,
             c: colorP
         };
         projectiles.push(projectile);
     }
 
 }
+
 function drawPortals() {
     if (purpleP.x != -1) {
         image(portalPurpleImage, purpleP.x, purpleP.y, purpleP.w, purpleP.h);
@@ -123,29 +134,19 @@ function drawPortals() {
         image(portalGoldImage, goldP.x, goldP.y, goldP.w, goldP.h);
     }
 }
-function portalInput() {
-    // Handling portal shooting
-    if (keyIsDown(81)) { // PURPLE PORTALS with Q
-        if (keyIsDown(RIGHT_ARROW)) {
-            shootPortal("right", "purple");
-        } else if (keyIsDown(LEFT_ARROW)) {
-            shootPortal("left", "purple");
-        } else if (keyIsDown(DOWN_ARROW)) {
-            shootPortal("down", "purple");
-        } else if (keyIsDown(UP_ARROW)) {
-            shootPortal("up", "purple");
-        }
+
+// Shoot portal with left click
+function mousePressed() {
+    shootPortal(mouseX, mouseY, portalColor);
+}
+
+// Change portal color by pressing Q to purple, E to gold
+function changePortalColor() {
+    if (keyIsDown(81)) {
+        portalColor = "purple";
     }
 
-    if (keyIsDown(69)) { // GOLD PORTALS with E
-        if (keyIsDown(RIGHT_ARROW)) {
-            shootPortal("right", "gold");
-        } else if (keyIsDown(LEFT_ARROW)) {
-            shootPortal("left", "gold");
-        } else if (keyIsDown(DOWN_ARROW)) {
-            shootPortal("down", "gold");
-        } else if (keyIsDown(UP_ARROW)) {
-            shootPortal("up", "gold");
-        }
+    if (keyIsDown(69)) {
+        portalColor = "gold";
     }
 }

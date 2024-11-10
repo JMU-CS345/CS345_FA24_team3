@@ -198,7 +198,7 @@ function draw() {
   }
 
   if (gameStart == true) {
-    portalInput();
+    changePortalColor();
     Teleportation();
     Death();
     updatePortals();
@@ -299,3 +299,5 @@ function nextLevel(gameMap) {
       }
   }
 }
+
+
