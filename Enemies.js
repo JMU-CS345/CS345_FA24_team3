@@ -266,6 +266,18 @@ class Robot extends Enemy {
             laser.move();
             laser.draw();
 
+            for (let j = 0; j < platforms.length; j++) {
+                if (
+                    laser.x < platforms[j].x + platforms[j].w &&
+                    laser.x + laser.w > platforms[j].x &&
+                    laser.y < platforms[j].y + platforms[j].h &&
+                    laser.y + laser.h > platforms[j].y
+                ) {
+                    this.projectiles.splice(i, 1);
+                    break;
+                }
+            }
+
             if (!laser.active || laser.x < 0 || laser.x > width || laser.y < 0 || laser.y > height) {
                 this.projectiles.splice(i, 1);
             }
