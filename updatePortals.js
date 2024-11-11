@@ -10,8 +10,8 @@ function updatePortals() {
         ellipse(proj.x, proj.y, 15, 15); // Draw projectile
 
         // Update projectile position
-        proj.x += proj.vx * 12; // Have to do this speed to prevent clipping
-        proj.y += proj.vy * 12;
+        proj.x += proj.vx * 10; // Have to do this speed to prevent clipping
+        proj.y += proj.vy * 10;
 
         // Check for collision with platforms
         for (let j = 0; j < platforms.length; j++) {
@@ -78,8 +78,8 @@ function shootPortal(passedMouseX, passedMouseY, colorP) {
     // console.log("mouseX: ", passedMouseX, "mouseY: ", passedMouseY)
     // console.log("playerX: ", player.x, "playerY: ", player.y)
 
-    xTarget = passedMouseX - player.x;
-    yTarget = passedMouseY - player.y;
+    xTarget = passedMouseX - player.x - 70;
+    yTarget = passedMouseY - player.y - 50;
     portalTarget = sqrt((xTarget * xTarget) + (yTarget * yTarget));
     // Normalize
     xTarget /= portalTarget;
