@@ -10,8 +10,8 @@ function updatePortals() {
         ellipse(proj.x, proj.y, 15, 15); // Draw projectile
 
         // Update projectile position
-        proj.x += proj.vx * 20;
-        proj.y += proj.vy * 20;
+        proj.x += proj.vx * 12; // Have to do this speed to prevent clipping
+        proj.y += proj.vy * 12;
 
         // Check for collision with platforms
         for (let j = 0; j < platforms.length; j++) {
