@@ -14,29 +14,29 @@ function DrawMap(map) {
       //background
       image(mapAssets_SpaceStation, 0, 0, windowWidth, windowHeight, 266, 25, 535, 807);
       //Title
-      image(titleScreen, windowWidth * 0.25, windowHeight * 0.02 + mapScroll, 700, 500);
+      image(titleScreen, windowWidth * 0.25 * windowWidth / 1600, windowHeight * 0.02 * windowHeight / 900 + mapScroll, 700, 500);
 
-      image(mapAssets, windowWidth * 0.8, windowHeight * 0.1 + mapScroll, 90, 90, 1680, 940, 55, 52);
+      image(mapAssets, windowWidth * 0.8 * windowWidth / 1600, windowHeight * 0.1 * windowHeight / 900 + mapScroll, 90, 90, 1680, 940, 55, 52);
 
 
 
       //Planets
-      image(mapAssets, windowWidth * 0.8, windowHeight * 0.6 + mapScroll, 60, 70, 340, 885, 79, 76);
-      image(mapAssets, windowWidth * 0.15, windowHeight * 0.7 + mapScroll, 90, 90, 890, 765, 57, 51);
+      image(mapAssets, windowWidth * 0.8 * windowWidth / 1600, windowHeight * 0.6 * windowHeight / 900 + mapScroll, 60, 70, 340, 885, 79, 76);
+      image(mapAssets, windowWidth * 0.1 * windowWidth / 1600, windowHeight * 0.9 * windowHeight / 900 + mapScroll, 90, 90, 890, 765, 57, 51);
 
       //Cosmetics
-      image(mapAssets, windowWidth * 0.79, windowHeight * 0.585 + mapScroll, 90, 90, 917, 354, 102, 109);
-      image(mapAssets, windowWidth * 0.1, windowHeight * 0.05 + mapScroll, 60, 70, 610, 746, 66, 65);
+      image(mapAssets, windowWidth * 0.79 * windowWidth / 1600, windowHeight * 0.585 * windowHeight / 900 + mapScroll, 90, 90, 917, 354, 102, 109);
+      image(mapAssets, windowWidth * 0.1 * windowWidth / 1600, windowHeight * 0.05 * windowHeight / 900 + mapScroll, 60, 70, 610, 746, 66, 65);
 
       //Comets
-      image(mapAssets, windowWidth * 0.9, windowHeight * 0.25 + mapScroll, 90, 90, 3, 230, 40, 50);
-      image(mapAssets, windowWidth * 0.05, windowHeight * 0.4 + mapScroll, 60, 70, 176, 59, 51, 41);
+      image(mapAssets, windowWidth * 0.9 * windowWidth / 1600, windowHeight * 0.9 * windowHeight / 900 + mapScroll, 90, 90, 3, 230, 40, 50);
+      image(mapAssets, windowWidth * 0.05 * windowWidth / 1600, windowHeight * 0.4 * windowHeight / 900 + mapScroll, 60, 70, 176, 59, 51, 41);
 
 
       textSize(100);
       fill("white");
       textFont("Courier New");
-      text("Press Enter!", windowWidth * 0.25, windowHeight * 0.9 + mapScroll);
+      text("Press Enter!", windowWidth * 0.25 * windowWidth / 1600, windowHeight * 1.1 * windowHeight / 900 + mapScroll);
 
       break;
 
@@ -49,16 +49,16 @@ function DrawMap(map) {
       image(mapAssets, mapPlatforms[0].x, mapPlatforms[0].y + mapScroll, mapPlatforms[0].w, mapPlatforms[0].h, 346, 481, 114, 31);
 
       //A little floating and moving rock
-      image(mapAssets, windowWidth * 0.4 + (mapScroll % 2), windowHeight * 0.75 + mapScroll, 80, 80, 812, 87, 44, 48);
+      image(mapAssets, windowWidth * 0.4 * windowWidth / 1600 + (mapScroll % 2), windowHeight * 0.75 * windowHeight / 900 + mapScroll, 80, 80, 812, 87, 44, 48);
 
       //The second platform to jump on
       image(mapAssets, mapPlatforms[1].x, mapPlatforms[1].y + mapScroll, mapPlatforms[1].w, mapPlatforms[1].h, 539, 474, 112, 41);
 
-      image(mapAssets, windowWidth * 0.9, windowHeight * 0.1 + mapScroll, 140, 140, 348, 805, 64, 56);
+      image(mapAssets, windowWidth * 0.9 * windowWidth / 1600, windowHeight * 0.1 * windowHeight / 900 + mapScroll, 140, 140, 348, 805, 64, 56);
 
-      image(mapAssets, windowWidth * 0.1, windowHeight * 0 + mapScroll, 140, 140, 1860, 940, 53, 50);
+      image(mapAssets, windowWidth * 0.1 * windowWidth / 1600, windowHeight * 0 * windowHeight / 900 + mapScroll, 140, 140, 1860, 940, 53, 50);
 
-      image(mapAssets, windowWidth * 0.7, windowHeight * 0.4 + mapScroll, 140, 140, 1440, 38, 49, 48);
+      image(mapAssets, windowWidth * 0.7 * windowWidth / 1600, windowHeight * 0.4 * windowHeight / 900 + mapScroll, 140, 140, 1440, 38, 49, 48);
       break;
 
 

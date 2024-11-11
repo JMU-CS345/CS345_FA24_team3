@@ -45,7 +45,7 @@ function nextState(state) {
         alien3 = new Alien(340, 480, 120, 120);
         eAlien1 = new EnragedAlien(1200, windowWidth - 120, 120, 120);
         robot1 = new Robot(1000, windowWidth - 120, 120, 120);
-        enemies.push(alien1, alien2, alien3, eAlien1, robot1);
+        //enemies.push(alien1, alien2, alien3, eAlien1, robot1);
         Alien.asset = alienImage;
         EnragedAlien.asset = alienEnragedImage
         Robot.assetWalk = robotWalk;
