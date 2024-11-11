@@ -43,12 +43,18 @@ function preload() {
   mapAssets = loadImage("assets/PlanetAssets.png"); //space stuff
   heart = loadImage("assets/Heart.png");
   titleScreen = loadImage("assets/GALAXYMASTER2.png");
+  bMusic = loadSound('music/Loops/mp3/3.mp3');
 }
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
   frameRate(60);
   noSmooth();
+  if (bMusic.isLoaded()) {
+    bMusic.loop(); // Play in a loop once loaded
+  } else {
+    bMusic.onended(() => bMusic.loop()); // Retry playing once it's fully loaded
+  }
   player.y = windowHeight - player.h;
   alien1 = new Alien(600, windowHeight - 120, 120, 120);
   alien2 = new Alien(732, 360, 120, 120);
