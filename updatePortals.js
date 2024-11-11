@@ -123,4 +123,13 @@ function changePortalColor() {
     if (keyIsDown(69)) {
         portalColor = "gold";
     }
+
+    if (portalColor == "purple") {
+        fill(69, 0, 132);
+    }
+
+    if (portalColor == "gold") {
+        fill(203, 182, 119);
+    }
+    square(windowWidth - 95, 125, 35);
 }
