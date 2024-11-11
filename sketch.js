@@ -133,7 +133,15 @@ function draw() {
         if (direction === "top") {
           enemy.y = platforms[j].y - enemy.h;
           enemy.v = 0;
-          onPlatform = true;
+          enemyIsOnPlatform = true;
+
+          if (enemy.x <= platforms[j].x) {
+            enemy.x = platforms[j].x;
+            enemy.direction = 1;
+          } else if (enemy.x + enemy.w >= platforms[j].x + platforms[j].w) {
+            enemy.x = platforms[j].x + platforms[j].w - enemy.w;
+            enemy.direction = -1;
+          }
         } else if (direction === "bottom") {
           enemy.y = platforms[j].y + platforms[j].h;
           enemy.v = 0;
