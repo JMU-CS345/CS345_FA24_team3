@@ -53,7 +53,8 @@ function nextState(state) {
       }
       break;
     case "map1":
-      if (playerHitBox.y > windowHeight * 0.457 + mapScroll && playerHitBox.y < windowHeight * 0.457 + mapScroll + 80 && playerHitBox.x > windowWidth * 0.72 && playerHitBox.x < windowWidth * 0.72 + 80 && mapLevel == "map1") {
+      //0.69 was 0.72, Hopefully this fixed this entry into portal tutorial
+      if (playerHitBox.y > windowHeight * 0.457 + mapScroll && playerHitBox.y < windowHeight * 0.457 + mapScroll + 80 && playerHitBox.x > windowWidth * 0.69 && playerHitBox.x < windowWidth * 0.69 + 80 && mapLevel == "map1") {
         mapLevel = "portals_tutorial";
         for (i = 0; i < enemies.length; i++) {
           enemies[i] = null;
