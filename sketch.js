@@ -43,19 +43,20 @@ function preload() {
   mapAssets = loadImage("assets/PlanetAssets.png"); //space stuff
   heart = loadImage("assets/Heart.png");
   titleScreen = loadImage("assets/GALAXYMASTER2.png");
-  bMusic = loadSound('music/Loops/mp3/3.mp3');
+  bMusic = loadSound('music/loading.wav'); // Background Music]
+  gunSound = loadSound('music/gun.wav');
+  hurtSound = loadSound('music/hurt.wav');
+  portalSound = loadSound('music/portal.wav');
+  nextLevel = loadSound('music/newLevel.wav');
+  killEnemy = loadSound('music/killEnemy.wav')
 }
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
   frameRate(60);
   noSmooth();
-  if (bMusic.isLoaded()) {
-    bMusic.loop(); // Play in a loop once loaded
-  } else {
-    bMusic.onended(() => bMusic.loop()); // Retry playing once it's fully loaded
-  }
   player.y = windowHeight - player.h;
+  player.jumpStrength = windowHeight * 0.037 * -1
   alien1 = new Alien(600, windowHeight - 120, 120, 120);
   alien2 = new Alien(732, 360, 120, 120);
   alien3 = new Alien(340, 480, 120, 120);
@@ -185,12 +186,14 @@ function draw() {
 
     if (isCollidingPlayer(player, playerHitBox, enemy) && collisionDirectionPlayer(player, playerHitBox, enemy) == 'top' && !isFalling(player)) {
       enemy.dead = true;
+      killEnemy.play();
       enemy.deathTime = millis();
     }
 
     if (isCollidingPlayer(player, playerHitBox, enemy) && collisionDirectionPlayer(player, playerHitBox, enemy) != 'top' && !enemy.dead && canGetHurt) {
       enemy.attack(player);
       player.health--;
+      hurtSound.play();
       canGetHurt = false;
     }
 
@@ -198,6 +201,7 @@ function draw() {
       if (enemy.checkLaserHitsPlayer(player) && canGetHurt) {
         enemy.attack(player);
         player.health--;
+        hurtSound.play();
         canGetHurt = false;
       }
     }

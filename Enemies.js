@@ -247,6 +247,7 @@ class Robot extends Enemy {
 
     shootAtPlayer(player) {
         if (this.multiShotPrevention == false) {
+            gunSound.play();
             const laserX = this.x + this.w / 2;
             const laserY = this.y + this.h / 2;
 

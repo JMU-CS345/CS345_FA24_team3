@@ -39,13 +39,14 @@ function nextState(state) {
   switch (state) {
     case "title":
       if (gameStart == true) {
+        bMusic.loop();
         mapLevel = "map1";
         alien1 = new Alien(600, windowHeight - 120, 120, 120);
         alien2 = new Alien(732, 360, 120, 120);
         alien3 = new Alien(340, 480, 120, 120);
         eAlien1 = new EnragedAlien(1200, windowWidth - 120, 120, 120);
         robot1 = new Robot(1000, windowWidth - 120, 120, 120);
-        //enemies.push(alien1, alien2, alien3, eAlien1, robot1);
+        enemies.push(alien1, alien2, alien3, eAlien1, robot1);
         Alien.asset = alienImage;
         EnragedAlien.asset = alienEnragedImage
         Robot.assetWalk = robotWalk;
@@ -55,6 +56,7 @@ function nextState(state) {
     case "map1":
       //0.69 was 0.72, Hopefully this fixed this entry into portal tutorial
       if (playerHitBox.y > windowHeight * 0.457 + mapScroll && playerHitBox.y < windowHeight * 0.457 + mapScroll + 80 && playerHitBox.x > windowWidth * 0.69 && playerHitBox.x < windowWidth * 0.69 + 80 && mapLevel == "map1") {
+        nextLevel.play();
         mapLevel = "portals_tutorial";
         for (i = 0; i < enemies.length; i++) {
           enemies[i] = null;

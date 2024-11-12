@@ -16,6 +16,7 @@ function updatePortals() {
         // Check for collision with platforms
         for (let j = 0; j < platforms.length; j++) {
             if (isCollidingObject(proj, platforms[j])) {
+                portalSound.play();
                 collisionDirection = collisionDirectionObject(proj, platforms[j]);
                 console.log(collisionDirection); // DEBUGGING
                 if (proj.c == "purple") {
