@@ -29,16 +29,16 @@ function GetMap(level) {
         x: windowWidth * 0.012, y: 0, h: 20, w: windowWidth * 0.325
       };
       let pt_t_Block_Right_Wall = {
-        x: windowWidth * 0.33, y: windowHeight * 0.012, h: windowHeight * 0.37, w: 30
+        x: windowWidth * 0.592, y: windowHeight * 0.012, h: windowHeight * 0.37, w: 30
       };
       let pt_t_Block_Ceiling = {
         x: windowWidth * 0.34, y: windowHeight * 0.355, h: 30, w: windowWidth * 0.265
       };
       let pt_t_Block_Left_Wall = {
-        x: windowWidth * 0.592, y: windowHeight * 0.012, h: windowHeight * 0.37, w: 30
+        x: windowWidth * 0.332, y: windowHeight * 0.012, h: windowHeight * 0.37, w: 30
       };
       let pt_right_Floor = {
-        x: windowWidth * 0.61, y: windowHeight - 15, h: 30, w: windowWidth * 0.4
+        x: windowWidth * 0.61, y: windowHeight - 15, h: 30, w: windowWidth * 0.38
       };
       let pt_b_Block_Right_Wall = {
         x: windowWidth * 0.595, y: windowHeight * 0.66, h: windowHeight * 0.33, w: 30
@@ -52,7 +52,7 @@ function GetMap(level) {
       let pt_left_Floor = {
         x: windowWidth * 0.015, y: windowHeight - 15, h: 30, w: windowWidth * 0.32
       };
-      map = [pt_left_Wall, pt_right_Wall, pt_right_Ceiling, pt_t_Block_Right_Wall, pt_t_Block_Ceiling,
+      map = [pt_left_Wall, pt_right_Wall, pt_right_Ceiling, pt_t_Block_Right_Wall, pt_t_Block_Ceiling, //4
         pt_t_Block_Left_Wall, pt_left_Ceiling, pt_right_Floor, pt_b_Block_Right_Wall, pt_b_Block_Left_Wall,
         pt_b_Block_Floor, pt_left_Floor,
       ];
