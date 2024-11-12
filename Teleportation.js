@@ -1,7 +1,8 @@
+ 
 var canTeleport = true;
 var teleportationtimer = 0;
 
-const voidDuration = 500; // doing this is delta time, (0.5 seconds)
+const voidDuration = 1000; // doing this is delta time, (0.5 seconds)
 
 function Teleportation() {
     //Teleportation
@@ -19,7 +20,7 @@ function Teleportation() {
             if (purpleP.vertical) {
                 if (goldP.vertical) { //Enter Portal is Vertical and Exit Portal is Vertical
                     if (goldP.direction == 'left') { //Portal on left side of platform
-                        player.x = goldP.x - 5
+                        player.x = goldP.x - 100
                         player.y = goldP.y;
                     }
                     else { // Portal on right side of platform
@@ -28,7 +29,7 @@ function Teleportation() {
                     }
                 }
                 else if (!goldP.vertical) { // Enter portal is Vertical and Exit Portal is not
-                    if (goldP.direction == 'bottom') { // Portal is below platform 
+                    if (goldP.direction == 'bottom') { // Portal is below platform
                         player.x = goldP.x;
                         player.y = goldP.y + (goldP.h);
                     }
@@ -39,9 +40,9 @@ function Teleportation() {
                 }
             }
             else if (!purpleP.vertical) {
-                if (goldP.vertical) { // Enter portal is not vertical and Exit portal is vertical 
+                if (goldP.vertical) { // Enter portal is not vertical and Exit portal is vertical
                     if (goldP.direction == 'left') {//Portal on left side of platform
-                        player.x = goldP.x - 5;
+                        player.x = goldP.x - 100;
                         player.y = goldP.y;
                     }
                     else {// Portal on right side of platform
@@ -50,7 +51,7 @@ function Teleportation() {
                     }
                 }
                 else if (!goldP.vertical) { // Enter portal is not vertical and Exit portal is not Vertical
-                    if (goldP.direction == 'bottom') {// Portal is below platform 
+                    if (goldP.direction == 'bottom') {// Portal is below platform
                         player.x = goldP.x;
                         player.y = goldP.y + goldP.h;
                     }
@@ -66,16 +67,16 @@ function Teleportation() {
             if (goldP.vertical) {
                 if (purpleP.vertical) { //Enter Portal is Vertical and Exit Portal is Vertical
                     if (purpleP.direction == 'left') { //Portal on left side of platform
-                        player.x = purpleP.x - 5
+                        player.x = purpleP.x - 100
                         player.y = purpleP.y;
                     }
                     else { // Portal on right side of platform
-                        player.x = purpleP.x + (purpleP.w);
+                        player.x = purpleP.x + (purpleP.w); // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! FIX
                         player.y = purpleP.y;
                     }
                 }
                 else if (!purpleP.vertical) { // Enter portal is Vertical and Exit Portal is not
-                    if (purpleP.direction == 'bottom') { // Portal is below platform 
+                    if (purpleP.direction == 'bottom') { // Portal is below platform
                         player.x = purpleP.x;
                         player.y = purpleP.y + (purpleP.h);
                     }
@@ -86,9 +87,9 @@ function Teleportation() {
                 }
             }
             else if (!goldP.vertical) {
-                if (purpleP.vertical) { // Enter portal is not vertical and Exit portal is vertical 
+                if (purpleP.vertical) { // Enter portal is not vertical and Exit portal is vertical
                     if (purpleP.direction == 'left') {//Portal on left side of platform
-                        player.x = purpleP.x - 5
+                        player.x = purpleP.x - 100;
                         player.y = purpleP.y;
                     }
                     else {// Portal on right side of platform
@@ -97,7 +98,7 @@ function Teleportation() {
                     }
                 }
                 else if (!purpleP.vertical) { // Enter portal is not vertical and Exit portal is not Vertical
-                    if (purpleP.direction == 'bottom') {// Portal is below platform 
+                    if (purpleP.direction == 'bottom') {// Portal is below platform
                         player.x = purpleP.x;
                         player.y = purpleP.y + (purpleP.h);
                     }
