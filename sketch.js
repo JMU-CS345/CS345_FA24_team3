@@ -15,14 +15,14 @@ let platforms = []; // platform imp starts here
 let enemies = [] // Array of enemies
 let curDirection = null;
 let alienImage; // so enemies file can read it
-let mapLevel = "title";
+let mapLevel = "portals_tutorial";
 var player = { x: 10, y: 0, w: 150, h: 150, v: 0, a: 1, jumpStrength: -30, dead: false, health: 3 };
 //the player hit box for collision
 var playerHitBox = { x: player.x, y: player.y, w: player.w - 100, h: player.h - 100, moving: false };
 var canGetHurt = true;
 var hurtTimer = 0;
 
-let gameStart = false;
+let gameStart = true;
 
 
 function preload() {
@@ -82,8 +82,8 @@ function draw() {
   //rect(playerHitBox.x, playerHitBox.y, playerHitBox.w, playerHitBox.h);
 
   // make the hitboxes invisible
-  // noStroke();
-  // noFill();
+  //noStroke();
+  noFill();
 
   // load the maps continously to make the hit boxes bounce
 

@@ -63,8 +63,10 @@ function DrawMap(map) {
 
 
     case "portals_tutorial":
+      mapPlatforms = GetMap(map);
+
       // left side wall
-      image(mapAssets_SpaceStation, 0, 30, 30, 730, 181, 103, 23, 32);
+      image(mapAssets_SpaceStation, mapPlatforms[0].x, mapPlatforms[0].y, mapPlatforms[0].w, mapPlatforms[0].h, 181, 103, 23, 32);
 
       //Top Left ceiling
       image(mapAssets_SpaceStation, 25, -10, 475, 30, 145, 121, 30, 21);
@@ -74,7 +76,7 @@ function DrawMap(map) {
 
 
       //Bottom Left Corner
-      image(mapAssets_SpaceStation, 4, 720, 30, 30, 146, 67, 29, 22);
+      image(mapAssets_SpaceStation, 5, 720, 30, 30, 146, 67, 29, 22);
       image(mapAssets_SpaceStation, 0, 720, 20, 30, 190, 71, 10, 25);
 
       //Top Left Corner
@@ -86,7 +88,7 @@ function DrawMap(map) {
       image(mapAssets_SpaceStation, 1520, 0, 20, 30, 190, 71, 10, 25);
 
       // Right Wall
-      image(mapAssets_SpaceStation, 1510, 25, 30, 710, 180, 69, 22, 31);
+      image(mapAssets_SpaceStation, mapPlatforms[1].x, mapPlatforms[1].y, mapPlatforms[1].w, mapPlatforms[1].h, 180, 69, 22, 31);
 
       //Bottom Right Corner
       image(mapAssets_SpaceStation, 1499, 720, 29, 30, 199, 35, 23, 23);

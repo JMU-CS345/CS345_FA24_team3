@@ -17,40 +17,40 @@ function GetMap(level) {
 
     case "portals_tutorial":
       let pt_left_Wall = {
-        x: 0, y: 0 + 20, h: windowHeight - 50, w: 30
+        x: 0, y: windowHeight * 0.027 * windowHeight / 900, h: windowHeight - 20, w: 30
       };
       let pt_right_Wall = {
-        x: windowWidth * 1.025 * windowWidth / 1600, y: 0, h: windowHeight - 10, w: 30
+        x: windowWidth * 1.0235 * windowWidth / 1600, y: windowHeight * 0.015 * windowHeight / 900, h: windowHeight - 10, w: 30
       };
       let pt_right_Ceiling = {
-        x: windowWidth * 0.012 * windowWidth / 1600, y: windowHeight * 0.015 * windowHeight / 900, h: 10, w: windowHeight * 0.8 * windowHeight / 900
+        x: windowWidth * 0.012 * windowWidth / 1600, y: 0, h: 20, w: windowWidth * 0.34 * windowWidth / 1600
       };
       let pt_left_Ceiling = {
-        x: 930, y: 10, h: 10, w: 590
+        x: windowWidth * 0.63 * windowWidth / 1600, y: 0, h: 20, w: windowWidth * 0.4 * windowWidth / 1600
       };
       let pt_t_Block_Right_Wall = {
-        x: 510, y: -2, h: 300, w: 10
+        x: windowWidth * 0.345 * windowWidth / 1600, y: windowHeight * 0.015 * windowHeight / 900, h: 290, w: 30
       };
       let pt_t_Block_Ceiling = {
-        x: 515, y: 285, h: 12, w: 420
+        x: windowWidth * 0.345 * windowWidth / 1600, y: windowHeight * 0.43 * windowHeight / 900, h: 30, w: windowWidth * 0.29 * windowWidth / 1600
       };
       let pt_t_Block_Left_Wall = {
-        x: 930, y: 5, h: 290, w: 10
+        x: windowWidth * 0.619 * windowWidth / 1600, y: windowHeight * 0.015 * windowHeight / 900, h: windowHeight * 0.45 * windowHeight / 900, w: 30
       };
       let pt_right_Floor = {
-        x: 940, y: 730, h: 10, w: 580
+        x: windowWidth * 0.635 * windowWidth / 1600, y: windowHeight * 1.178 * windowHeight / 900, h: 30, w: windowWidth * 0.4 * windowWidth / 1600
       };
       let pt_b_Block_Right_Wall = {
-        x: 935, y: 480, h: 260, w: 10
+        x: windowWidth * 0.62 * windowWidth / 1600, y: windowHeight * 0.79 * windowHeight / 900, h: windowHeight * 0.4 * windowHeight / 900, w: 30
       };
       let pt_b_Block_Left_Wall = {
-        x: 510, y: 480, h: 260, w: 10
+        x: windowWidth * 0.345 * windowWidth / 1600, y: windowHeight * 0.79 * windowHeight / 900, h: windowHeight * 0.4 * windowHeight / 900, w: 30
       };
       let pt_b_Block_Floor = {
-        x: 510, y: 480, h: 10, w: 430
+        x: windowWidth * 0.35 * windowWidth / 1600, y: windowHeight * 0.775 * windowHeight / 900, h: 30, w: windowWidth * 0.285 * windowWidth / 1600
       };
       let pt_left_Floor = {
-        x: 200, y: 730, h: 10, w: 320
+        x: windowWidth * 0.015 * windowWidth / 1600, y: windowHeight * 1.178 * windowHeight / 900, h: 30, w: windowWidth * 0.34 * windowWidth / 1600
       };
       map = [pt_left_Wall, pt_right_Wall, pt_right_Ceiling, pt_t_Block_Right_Wall, pt_t_Block_Ceiling,
         pt_t_Block_Left_Wall, pt_left_Ceiling, pt_right_Floor, pt_b_Block_Right_Wall, pt_b_Block_Left_Wall,
