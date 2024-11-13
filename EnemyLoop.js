@@ -120,9 +120,5 @@ function enemyLoop() {
         else {
             enemy.update();
         }
-
-        if (player.health <= 0) {
-            player.dead = true;
-        }
     }
 }

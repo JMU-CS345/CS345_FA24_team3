@@ -125,6 +125,10 @@ function draw() {
 
   enemyLoop();
 
+  if (player.health <= 0) {
+    player.dead = true;
+  }
+
 
   if (gameStart == true) {
     changePortalColor();
