@@ -123,103 +123,7 @@ function draw() {
     jumped = false;
   }
 
-  for (let i = 0; i < enemies.length; i++) {
-    let enemy = enemies[i];
-
-    enemy.v += enemy.a;
-    enemy.y += enemy.v;
-
-    let enemyIsOnPlatform = false;
-
-    for (let j = 0; j < platforms.length; j++) {
-      if (isCollidingEnemy(enemy, platforms[j])) {
-        let direction = collisionDirectionObject(enemy, platforms[j]);
-
-        if (direction === "top") {
-          enemy.y = platforms[j].y - enemy.h;
-          enemy.v = 0;
-          enemyIsOnPlatform = true;
-
-          if (enemy.x <= platforms[j].x) {
-            enemy.x = platforms[j].x;
-            enemy.direction = 1;
-          } else if (enemy.x + enemy.w >= platforms[j].x + platforms[j].w) {
-            enemy.x = platforms[j].x + platforms[j].w - enemy.w;
-            enemy.direction = -1;
-          }
-        } else if (direction === "bottom") {
-          enemy.y = platforms[j].y + platforms[j].h;
-          enemy.v = 0;
-        }
-      }
-    }
-
-    if (!enemyIsOnPlatform) {
-      enemy.v += enemy.a;
-    }
-
-    if (enemy.y + enemy.h >= windowHeight) {
-      enemy.y = windowHeight - enemy.h;
-      enemy.v = 0;
-    }
-  }
-
-  for (let i = 0; i < enemies.length; i++) {
-    let enemy = enemies[i];
-
-    /*if (enemy instanceof Alien)
-      return;*/
-    let detection = null;
-    if (enemy instanceof Robot) {
-      detection = enemy.playerDetected(player.x, player.y, Robot.shootingRange);
-      enemy.shootAtPlayer(player);
-    } else if (enemy instanceof EnragedAlien) {
-      detection = enemy.playerDetected(player.x, player.y, Robot.shootingRange);
-    }
-    if (detection != false) {
-      if (enemy instanceof EnragedAlien) {
-        enemy.speed = 4;
-      }
-      if (enemy.currentFrame == 0) {
-        if (detection === "Left") {
-          enemy.direction = -1;
-        } else if (detection === "Right") {
-          enemy.direction = 1;
-        }
-      }
-    }
-    else {
-      if (enemy instanceof EnragedAlien) {
-        enemy.speed = 2;
-      }
-    }
-
-    if (isCollidingPlayer(player, playerHitBox, enemy) && collisionDirectionPlayer(player, playerHitBox, enemy) == 'top' && !isFalling(player)) {
-      enemy.dead = true;
-      killEnemy.play();
-      enemy.deathTime = millis();
-    }
-
-    if (isCollidingPlayer(player, playerHitBox, enemy) && collisionDirectionPlayer(player, playerHitBox, enemy) != 'top' && !enemy.dead && canGetHurt) {
-      enemy.attack(player);
-      player.health--;
-      hurtSound.play();
-      canGetHurt = false;
-    }
-
-    if (enemy instanceof Robot) {
-      if (enemy.checkLaserHitsPlayer(player) && canGetHurt) {
-        enemy.attack(player);
-        player.health--;
-        hurtSound.play();
-        canGetHurt = false;
-      }
-    }
-
-    if (player.health <= 0) {
-      player.dead = true;
-    }
-  }
+  enemyLoop();
 
 
   if (gameStart == true) {
@@ -232,22 +136,6 @@ function draw() {
     Health();
     updateHitbox();
     noFill();
-  }
-
-
-  for (let i = 0; i < enemies.length && gameStart == true; i++) {
-    let enemy = enemies[i];
-
-    if (enemy.dead) {
-      enemy.killed();
-      if (millis() - enemy.deathTime >= 1000) {
-        enemies[i] = null;
-        enemies.splice(i, 1);
-      }
-    }
-    else {
-      enemy.update();
-    }
   }
 }
 
@@ -274,7 +162,6 @@ function keyPressed() {
     eAlien1 = new EnragedAlien(1200, windowHeight - 120, 120, 120);
     robot1 = new Robot(1000, windowHeight - 120, 120, 120);
     enemies.push(alien1, alien2, alien3, eAlien1, robot1);
-    Alien.asset = alienImage;
     player.health = 3;
   }
 }

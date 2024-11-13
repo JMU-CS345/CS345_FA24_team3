@@ -115,6 +115,8 @@ class EnragedAlien extends Enemy {
     static FRAME_WIDTH = 48;
     static FRAME_HEIGHT = 48;
 
+    static detectionRange = 1000;
+
     constructor(x, y, w, h) {
         super(x, y, w, h);
 
@@ -124,6 +126,9 @@ class EnragedAlien extends Enemy {
         this.currentFrame = 0;
         this.frameCounter = 0;
         this.frameDelay = 10;
+
+        this.updateTimer = 0;
+
     }
 
     updateAnimation() {
@@ -198,6 +203,8 @@ class Robot extends Enemy {
         this.currentFrame = 0;
         this.frameCounter = 0;
         this.frameDelay = 14;
+
+        this.updateTimer = 0;
 
         this.shotTimer = 0;
         this.canShoot = false;
