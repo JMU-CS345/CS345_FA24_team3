@@ -169,9 +169,16 @@ function draw() {
   for (let i = 0; i < enemies.length; i++) {
     let enemy = enemies[i];
 
-    let detection = enemy.playerDetected(player.x, player.y, Robot.shootingRange);
+    if (enemy instanceof Alien)
+      return;
 
-    if (detection != false && enemy instanceof Robot) {
+    if (enemy instanceof Robot) {
+      let decection = enemy.playerDetected(player.x, player.y, Robot.shootingRange);
+      enemy.shootAtPlayer(player);
+    } else if (enemy instanceof EnragedAlien) {
+      let decection = enemy.playerDetected(player.x, player.y, Robot.shootingRange);
+    }
+    if (detection != false) {
 
       if (enemy.currentFrame == 0) {
         if (detection === "Left") {
@@ -180,8 +187,6 @@ function draw() {
           enemy.direction = 1;
         }
       }
-      enemy.shootAtPlayer(player);
-
     }
 
     if (isCollidingPlayer(player, playerHitBox, enemy) && collisionDirectionPlayer(player, playerHitBox, enemy) == 'top' && !isFalling(player)) {
@@ -203,19 +208,6 @@ function draw() {
         player.health--;
         hurtSound.play();
         canGetHurt = false;
-      }
-    }
-
-    if (enemy instanceof EnragedAlien) {
-      if (player.x + player.w + 250 > enemy.x && player.x - 250 < enemy.x) {
-        if (player.x > enemy.x) {
-          enemy.direction = 1;
-        } else {
-          enemy.direction = -1;
-        }
-        enemy.speed = 4;
-      } else {
-        enemy.speed = 2;
       }
     }
 

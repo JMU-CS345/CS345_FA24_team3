@@ -115,6 +115,8 @@ class EnragedAlien extends Enemy {
     static FRAME_WIDTH = 48;
     static FRAME_HEIGHT = 48;
 
+    static dectectionRange = 800;
+
     constructor(x, y, w, h) {
         super(x, y, w, h);
 
