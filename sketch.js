@@ -177,13 +177,20 @@ function draw() {
       detection = enemy.playerDetected(player.x, player.y, Robot.shootingRange);
     }
     if (detection != false) {
-
+      if (enemy instanceof EnragedAlien) {
+        enemy.speed = 4;
+      }
       if (enemy.currentFrame == 0) {
         if (detection === "Left") {
           enemy.direction = -1;
         } else if (detection === "Right") {
           enemy.direction = 1;
         }
+      }
+    }
+    else {
+      if (enemy instanceof EnragedAlien) {
+        enemy.speed = 2;
       }
     }
 
