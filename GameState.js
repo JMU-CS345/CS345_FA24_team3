@@ -41,12 +41,17 @@ function nextState(state) {
       if (gameStart == true) {
         bMusic.loop();
         mapLevel = "map1";
-        alien1 = new Alien(600, windowHeight - 120, 120, 120);
-        alien2 = new Alien(732, 360, 120, 120);
-        alien3 = new Alien(340, 480, 120, 120);
-        eAlien1 = new EnragedAlien(1200, windowWidth - 120, 120, 120);
-        robot1 = new Robot(1000, windowWidth - 120, 120, 120);
-        //enemies.push(alien1, alien2, alien3, eAlien1, robot1);
+
+
+        //The WindowHeight / 6.5 and WindowWidth / 12 are for making the enemies change size based on the screen size
+
+
+        alien1 = new Alien(600, windowHeight - 120, windowWidth / 12, windowHeight / 6.5);
+        alien2 = new Alien(732, 360, windowWidth / 12, windowHeight / 6.5);
+        alien3 = new Alien(340, 480, windowWidth / 12, windowHeight / 6.5);
+        eAlien1 = new EnragedAlien(1200, windowWidth - 120, windowWidth / 12, windowHeight / 6.5);
+        robot1 = new Robot(1000, windowWidth - 120, windowWidth / 12, windowHeight / 6.5);
+        enemies.push(alien1, alien2, alien3, eAlien1, robot1);
         Alien.asset = alienImage;
         EnragedAlien.asset = alienEnragedImage
         Robot.assetWalk = robotWalk;

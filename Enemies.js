@@ -290,10 +290,10 @@ class Robot extends Enemy {
             const laser = this.projectiles[i];
 
             if (
-                laser.x < player.x + player.w &&
-                laser.x + laser.w > player.x &&
-                laser.y < player.y + player.h &&
-                laser.y + laser.h > player.y
+                laser.x < playerHitBox.x + playerHitBox.w &&
+                laser.x + laser.w > playerHitBox.x &&
+                laser.y < playerHitBox.y + playerHitBox.h &&
+                laser.y + laser.h > playerHitBox.y
             ) {
                 this.projectiles.splice(i, 1);
                 return true;
@@ -327,8 +327,8 @@ class Laser {
         this.x = x;
         this.y = y;
 
-        this.w = 50;
-        this.h = 50;
+        this.w = windowWidth / 100;
+        this.h = windowHeight / 100;
 
         this.speed = 4.5;
 
@@ -348,7 +348,7 @@ class Laser {
     }
 
     draw() {
-        image(Laser.assetLaser, this.x, this.y, this.w, this.h);
+        image(Laser.assetLaser, this.x, this.y, this.w, this.h, 50, 50, 25, 25);
     }
 }
 
