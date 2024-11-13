@@ -115,8 +115,6 @@ class EnragedAlien extends Enemy {
     static FRAME_WIDTH = 48;
     static FRAME_HEIGHT = 48;
 
-    static dectectionRange = 800;
-
     constructor(x, y, w, h) {
         super(x, y, w, h);
 
@@ -244,7 +242,7 @@ class Robot extends Enemy {
     }
 
     killed() {
-        image(Alien.asset, this.x, this.y, this.w, this.h, Alien.FRAME_WIDTH * 14, 0, Alien.FRAME_WIDTH, Alien.FRAME_HEIGHT);
+        image(deadRobot, this.x, this.y + this.h / 3, this.w, this.h, 0, 0, Robot.FRAME_HEIGHT, Robot.FRAME_WIDTH);
     }
 
     shootAtPlayer(player) {

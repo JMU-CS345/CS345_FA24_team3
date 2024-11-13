@@ -15,14 +15,14 @@ let platforms = []; // platform imp starts here
 let enemies = [] // Array of enemies
 let curDirection = null;
 let alienImage; // so enemies file can read it
-let mapLevel = "portals_tutorial";
+let mapLevel = "title";
 var player = { x: 10, y: 0, w: 150, h: 150, v: 0, a: 1, jumpStrength: -30, dead: false, health: 3 };
 //the player hit box for collision
 var playerHitBox = { x: player.x, y: player.y, w: player.w - 100, h: player.h - 100, moving: false };
 var canGetHurt = true;
 var hurtTimer = 0;
 
-let gameStart = true;
+let gameStart = false;
 
 
 function preload() {
@@ -48,7 +48,8 @@ function preload() {
   hurtSound = loadSound('music/hurt.wav');
   portalSound = loadSound('music/portal.wav');
   nextLevel = loadSound('music/newLevel.wav');
-  killEnemy = loadSound('music/killEnemy.wav')
+  killEnemy = loadSound('music/killEnemy.wav');
+  deadRobot = loadImage('assets/deadRobot.png');
 }
 
 function setup() {
@@ -166,21 +167,21 @@ function draw() {
   for (let i = 0; i < enemies.length; i++) {
     let enemy = enemies[i];
 
-    if (enemy instanceof Alien)
-      return;
-
+    /*if (enemy instanceof Alien)
+      return;*/
+    let detection = null;
     if (enemy instanceof Robot) {
-      let decection = enemy.playerDetected(player.x, player.y, Robot.shootingRange);
+      detection = enemy.playerDetected(player.x, player.y, Robot.shootingRange);
       enemy.shootAtPlayer(player);
     } else if (enemy instanceof EnragedAlien) {
-      let decection = enemy.playerDetected(player.x, player.y, Robot.shootingRange);
+      detection = enemy.playerDetected(player.x, player.y, Robot.shootingRange);
     }
     if (detection != false) {
 
       if (enemy.currentFrame == 0) {
         if (detection === "Left") {
           enemy.direction = -1;
-        } else if (detection == "Right") {
+        } else if (detection === "Right") {
           enemy.direction = 1;
         }
       }
@@ -212,6 +213,7 @@ function draw() {
       player.dead = true;
     }
   }
+
 
   if (gameStart == true) {
     changePortalColor();
