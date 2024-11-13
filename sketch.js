@@ -123,8 +123,6 @@ function draw() {
     jumped = false;
   }
 
-  enemyLoop();
-
 
   if (gameStart == true) {
     changePortalColor();
@@ -136,6 +134,7 @@ function draw() {
     Health();
     updateHitbox();
     noFill();
+    enemyLoop();
   }
 }
 
