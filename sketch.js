@@ -123,6 +123,9 @@ function draw() {
     jumped = false;
   }
 
+  if (player.health <= 0) {
+    player.dead = true;
+  }
 
   if (gameStart == true) {
     changePortalColor();
