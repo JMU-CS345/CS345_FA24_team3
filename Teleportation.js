@@ -1,7 +1,7 @@
 var canTeleport = true;
 var teleportationtimer = 0;
 
-const voidDuration = 1000; // in deltaTime, (0.5 seconds)
+const voidDuration = 1000; // in deltaTime, (1 second)
 
 function Teleportation() {
     // If teleportation is on cooldown, update the timer
@@ -28,7 +28,7 @@ function Teleportation() {
             if (entry.vertical) {
                 if (exit.vertical) { // Entry is vertical, Exit is vertical
                     if (exit.direction === 'left') {
-                        player.x = exit.x - 100;
+                        player.x = exit.x - 200;
                     } else {
                         player.x = exit.x + exit.w;
                     }
@@ -45,7 +45,7 @@ function Teleportation() {
             } else { // Entry is horizontal
                 if (exit.vertical) { // Exit is vertical
                     if (exit.direction === 'left') {
-                        player.x = exit.x - 100;
+                        player.x = exit.x - 200;
                     } else {
                         player.x = exit.x + exit.w;
                     }
