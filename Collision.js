@@ -10,6 +10,20 @@ function isCollidingPlayer(player, playerHitBox, platform) {
     // If none of the above conditions are true, there is a collision
     return true;
 }
+
+function isCollidingPlayerWithEnemy(player, playerHitBox, enemy) {
+    // Check if player is above enemy
+    if (player.y + player.h < enemy.y) return false;
+    // Check if player is below enemy
+    if (playerHitBox.y > enemy.y + enemy.h) return false;
+    // Check if player is to the left of enemy
+    if (playerHitBox.x + playerHitBox.w < enemy.x + enemy.hitboxOffsetX) return false;
+    // Check if player is to the right of enemy
+    if (playerHitBox.x > (enemy.x - enemy.hitboxOffsetX) + (enemy.w - enemy.hitboxWidth)) return false;
+    return true;
+}
+
+
 function isCollidingObject(player, platform) {
     // Check if player is above platform
     if (player.y + player.h < platform.y) return false;
