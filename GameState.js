@@ -1,3 +1,7 @@
+/*These variables are for the "blue black hole portal" to finish each level
+Initiate the x and y values for the levels portal to know when the player
+contacts the portal*/
+
 var goal1 = { x: -1, y: -1, w: 140, h: 140 };
 var goaltutorial = { x: -1, y: -1, w: 140, h: 140 };
 var goal3 = { x: -1, y: -1, w: 140, h: 140 };
@@ -65,7 +69,7 @@ function nextState(state) {
       break;
     case "map1":
       //0.69 was 0.72, Hopefully this fixed this entry into portal tutorial
-      if (playerHitBox.y > goal1.y && playerHitBox.y < goal1.y + goal1.h && playerHitBox.x > goal1.x && playerHitBox.x < goal1.x + goal1.w && mapLevel == "map1") {
+      if (isCollidingObject(playerHitBox, goal1) && mapLevel == "map1") {
         nextLevel.play();
         mapLevel = "portals_tutorial";
         for (i = 0; i < enemies.length; i++) {
