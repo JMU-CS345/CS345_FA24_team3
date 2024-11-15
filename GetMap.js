@@ -9,9 +9,9 @@ function GetMap(level) {
   switch (level) {
     case "map1":
       let platform1 = {
-        x: (windowWidth * 0.2) * windowWidth / 1600, y: (windowHeight * 0.9) * windowHeight / 900 + mapScroll, w: asteriodBeltWidth * 1.5, h: asteriodBeltHeight, type: "platform"
+        x: (windowWidth * 0.2), y: (windowHeight * 0.8) + mapScroll, w: asteriodBeltWidth * 1.5, h: asteriodBeltHeight, type: "platform"
       };
-      let platform2 = { x: windowWidth * 0.45 * windowWidth / 1600, y: windowHeight * 0.6 * windowHeight / 900 + mapScroll, w: asteriodBeltWidth * 1.5, h: asteriodBeltHeight, type: "platform" };
+      let platform2 = { x: windowWidth * 0.45, y: windowHeight * 0.6 + mapScroll, w: asteriodBeltWidth * 1.5, h: asteriodBeltHeight, type: "platform" };
       map = [platform1, platform2];
       return map;
 
@@ -59,25 +59,25 @@ function GetMap(level) {
       return map
     case "map3":
       //outer box
-      let m3_right_wall = { x: 1510, y: 0, h: 620, w: 30 };
-      let m3_right_inner_wall = { x: 1400, y: 610, h: 140, w: 30 };
-      let m3_right_floor = { x: 1400, y: 610, h: 30, w: 120 };
-      let m3_top_left_wall = { x: 20, y: 10, h: 262, w: 30 };
-      let m3_left_ceiling = { x: 20, y: 10, h: 30, w: 205 };
-      let m3_left_middle_wall = { x: 20, y: 300, h: 145, w: 30 };
+      let m3_right_wall = { x: windowWidth * 0.984, y: 0, h: windowHeight * 0.85, w: 30 };
+      let m3_right_floor = { x: windowWidth * 0.92, y: windowHeight * 0.815, h: 30, w: windowWidth * 0.065 };
+      let m3_right_inner_wall = { x: windowWidth * 0.911, y: windowHeight * 0.83, h: windowHeight * 0.19, w: 30 };
+      let m3_top_left_wall = { x: 0, y: windowHeight * 0.03, h: windowHeight * 0.33, w: 30 }
+      let m3_left_ceiling = { x: windowWidth * 0.02, y: 0, h: 30, w: windowWidth * 0.126 };
+      let m3_left_middle_wall = { x: 0, y: windowHeight * 0.415, h: windowHeight * 0.175, w: 30 };
 
       //top left platform
-      let m3_left_top_platform_top = { x: 20, y: 270, h: 10, w: 215 };
-      let m3_left_top_platform_side = { x: 230, y: 270, h: 40, w: 10 };
-      let m3_left_top_platform_bottom = { x: 20, y: 302, h: 10, w: 220 };
+      let m3_left_top_platform_top = { x: windowWidth * 0.02, y: windowHeight * 0.36, h: 30, w: windowWidth * 0.13 };
+      let m3_left_top_platform_side = { x: windowWidth * 0.149, y: windowHeight * 0.365, h: windowWidth * 0.025, w: 15 };
+      let m3_left_top_platform_bottom = { x: windowWidth * 0.02, y: windowHeight * 0.378, h: 30, w: windowWidth * 0.13 };
 
       //lower left platform
-      let m3_left_lower_platform_top = { x: 20, y: 435, h: 10, w: 215 };
-      let m3_left_lower_platform_side = { x: 230, y: 435, h: 40, w: 10 };
-      let m3_left_lower_platform_bottom = { x: 0, y: 465, h: 10, w: 230 };
+      let m3_left_lower_platform_top = { x: windowWidth * 0.02, y: windowHeight * 0.58, h: 30, w: windowWidth * 0.13 };
+      let m3_left_lower_platform_side = { x: windowWidth * 0.149, y: windowHeight * 0.585, h: windowWidth * 0.023, w: 15 };
+      let m3_left_lower_platform_bottom = { x: 0, y: windowHeight * 0.595, h: 30, w: windowWidth * 0.15 };
 
       //asteriod Belt
-      let asteriod_Belt_platform = { x: 960, y: 300 + mapScroll, h: 10, w: 400 };
+      let asteriod_Belt_platform = { x: windowWidth * 0.62, y: windowHeight * 0.4 + mapScroll, h: 10, w: windowWidth * 0.27 };
 
 
       map = [m3_right_wall, m3_top_left_wall, m3_left_ceiling,

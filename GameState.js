@@ -21,6 +21,7 @@ function GameState(state) {
       background(level2);
       platforms = GetMap(state);
       DrawMap(state);
+      nextState(state);
       break;
 
     case "map3":
@@ -60,7 +61,7 @@ function nextState(state) {
       break;
     case "map1":
       //0.69 was 0.72, Hopefully this fixed this entry into portal tutorial
-      if (playerHitBox.y > windowHeight * 0.457 + mapScroll && playerHitBox.y < windowHeight * 0.457 + mapScroll + 80 && playerHitBox.x > windowWidth * 0.69 && playerHitBox.x < windowWidth * 0.69 + 80 && mapLevel == "map1") {
+      if (playerHitBox.y > windowHeight * 0.457 + mapScroll && playerHitBox.y < windowHeight * 0.457 + mapScroll + 80 && playerHitBox.x > windowWidth * 0.69 && playerHitBox.x < windowWidth * 0.69 + 80) {
         nextLevel.play();
         mapLevel = "portals_tutorial";
         for (i = 0; i < enemies.length; i++) {
@@ -70,14 +71,24 @@ function nextState(state) {
         background(level2);
         purpleP.x = -1;
         goldP.x = -1;
-
-
       }
       break;
 
     case "portals_tutorial":
-      break;
+      if (playerHitBox.y > windowHeight * 0.21 + mapScroll && playerHitBox.y < (windowHeight * 0.21) + mapScroll + 120 && playerHitBox.x > windowWidth * 0.11 && playerHitBox.x < (windowWidth * 0.11) + 100) {
+        mapLevel = "map3"
+        background(level3);
+        purpleP.x = -1;
+        goldP.x = -1;
 
+        player.x = windowWidth * 0.1;
+        player.y = windowHeight * 0.9;
+
+      }
+      break;
+    case "map3":
+      //if () { }
+      break;
 
 
   }
