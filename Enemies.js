@@ -13,6 +13,11 @@ class Enemy {
 
         this.deadTimer = null;
         this.dead = false;
+
+        this.hitboxOffsetX = 30;
+        this.hitboxOffsetY = 0;
+        this.hitboxWidth = 30;
+        this.hitboxHeight = 0;
     }
 
     attack(player) {
@@ -33,6 +38,16 @@ class Enemy {
             }
         }
         return false;               // player not detected
+    }
+
+    // Calculate and return the hitbox
+    getHitbox() {
+        return {
+            x: this.x + this.hitboxOffsetX,
+            y: this.y + this.hitboxOffsetY,
+            width: this.hitboxWidth,
+            height: this.hitboxHeight,
+        };
     }
 }
 

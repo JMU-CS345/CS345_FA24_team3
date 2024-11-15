@@ -2,8 +2,6 @@ let numFramesY = 12;
 let standing = 1;
 let walking = 2;  // Location in Sprite Sheet
 let jumping = 3;  //
-let frameWidth = 24;
-let frameHeight = 24;
 let currentFrame = 0;
 let frame = 1;
 let crouched = false;
@@ -15,14 +13,16 @@ let platforms = []; // platform imp starts here
 let enemies = [] // Array of enemies
 let curDirection = null;
 let alienImage; // so enemies file can read it
-let mapLevel = "map3";
+
 var player = { x: 10, y: 0, w: 150, h: 150, v: 0, a: 1, jumpStrength: -30, dead: false, health: 3 };
 //the player hit box for collision
 var playerHitBox = { x: player.x, y: player.y, w: player.w - 100, h: player.h - 100, moving: false };
 var canGetHurt = true;
 var hurtTimer = 0;
 
-let gameStart = true;
+let mapLevel = ["title", "map1", "portals_tutorial", "map3"];
+let curLevel = 0;
+let gameStart = false;
 
 
 function preload() {
@@ -67,7 +67,9 @@ function setup() {
 }
 
 function draw() {
-  GameState(mapLevel);
+  if (player.dead == false) {
+    GameState(mapLevel[curLevel]);
+  }
   if (player.v > 0 && !player.moving) {
     curDirection = 'down'
   }
@@ -124,13 +126,12 @@ function draw() {
   }
 
   if (player.health <= 0) {
-    player.dead = true;
+    GameState("death");
   }
 
   if (gameStart == true) {
     changePortalColor();
     Teleportation();
-    Death();
     updatePortals();
     PlayerMovement();
     drawPortals();
@@ -154,17 +155,14 @@ function keyPressed() {
     gameStart = true;
   }
 
+  //whenever player presses enter to continue restart the current level
   if (keyCode == 13 && player.dead) {
-    player.dead = false;
-    background(level1);
-    DrawMap(mapLevel);
-    alien1 = new Alien(600, windowHeight - 120, 120, 120); // CHANGE THIS CODE SO THAT THE ALIENS ARE CORRECT FOR EACH LEVEL
-    alien2 = new Alien(732, 360, 120, 120);
-    alien3 = new Alien(340, 480, 120, 120);
-    eAlien1 = new EnragedAlien(1200, windowHeight - 120, 120, 120);
-    robot1 = new Robot(1000, windowHeight - 120, 120, 120);
-    enemies.push(alien1, alien2, alien3, eAlien1, robot1);
-    player.health = 3;
+    player.dead = false; //no longer dead
+    player.health = 3; //full health
+    nextState(mapLevel[--curLevel]); //have to call the previous state
+    if (curLevel > 1) { // no repeating music
+      bMusic.loop(); //resume background music
+    }
   }
 }
 

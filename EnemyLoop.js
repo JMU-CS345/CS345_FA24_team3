@@ -4,6 +4,7 @@ function enemyLoop() {
         let detection = false;
         let canUpdateDirection = false;
 
+
         // this to next comment is about platforms collision
         enemy.v += enemy.a;
         enemy.y += enemy.v;
@@ -19,11 +20,9 @@ function enemyLoop() {
                     enemy.v = 0;
                     enemyIsOnPlatform = true;
 
-                    if (enemy.x <= platforms[j].x) {
-                        enemy.x = platforms[j].x;
+                    if (enemy.x + enemy.hitboxOffsetX <= platforms[j].x) {
                         enemy.direction = 1;
-                    } else if (enemy.x + enemy.w >= platforms[j].x + platforms[j].w) {
-                        enemy.x = platforms[j].x + platforms[j].w - enemy.w;
+                    } else if ((enemy.x - enemy.hitboxOffsetX) + (enemy.w - enemy.hitboxWidth) >= platforms[j].x + platforms[j].w) {
                         enemy.direction = -1;
                     }
                 } else if (direction === "bottom") {
@@ -43,14 +42,14 @@ function enemyLoop() {
         }
 
         // player collison for killing enemies
-        if (isCollidingPlayer(player, playerHitBox, enemy) && collisionDirectionPlayer(player, playerHitBox, enemy) == 'top' && !isFalling(player)) {
+        if (isCollidingPlayerWithEnemy(player, playerHitBox, enemy) && collisionDirectionPlayer(player, playerHitBox, enemy) == 'top' && !isFalling(player)) {
             enemy.dead = true;
             killEnemy.play();
             enemy.deathTime = millis();
         }
 
         // player collison for getting hurt
-        if (isCollidingPlayer(player, playerHitBox, enemy) && collisionDirectionPlayer(player, playerHitBox, enemy) != 'top' && !enemy.dead && canGetHurt) {
+        if (isCollidingPlayerWithEnemy(player, playerHitBox, enemy) && collisionDirectionPlayer(player, playerHitBox, enemy) != 'top' && !enemy.dead && canGetHurt) {
             enemy.attack(player);
             player.health--;
             hurtSound.play();

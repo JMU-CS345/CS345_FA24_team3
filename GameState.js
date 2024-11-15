@@ -1,5 +1,8 @@
-
-
+/*These variables are for the "blue black hole portal" to finish each level
+Initiate the x and y values for the levels portal to know when the player
+contacts the portal*/
+var goal = { x: -1, y: -1, w: 140, h: 140 };
+let restartLevel = false;
 
 
 function GameState(state) {
@@ -30,7 +33,14 @@ function GameState(state) {
       DrawMap(state);
       break;
 
+    case "death":
+      player.dead = true;
+      restartLevel = true;
+      Death();
+      break;
+
   }
+
 }
 
 
@@ -39,14 +49,16 @@ function GameState(state) {
 function nextState(state) {
   switch (state) {
     case "title":
-      if (gameStart == true) {
+      if (gameStart == true || restartLevel == true) {
         bMusic.loop();
-        mapLevel = "map1";
-
-
+        curLevel++;
         //The WindowHeight / 6.5 and WindowWidth / 12 are for making the enemies change size based on the screen size
 
+        //setting up goal
+        goal.x = windowWidth * 0.7;
+        goal.y = windowHeight * 0.4 + mapScroll;
 
+        //Enemies
         alien1 = new Alien(600, windowHeight - 120, windowWidth / 12, windowHeight / 6.5);
         alien2 = new Alien(732, 360, windowWidth / 12, windowHeight / 6.5);
         alien3 = new Alien(340, 480, windowWidth / 12, windowHeight / 6.5);
@@ -57,39 +69,88 @@ function nextState(state) {
         EnragedAlien.asset = alienEnragedImage
         Robot.assetWalk = robotWalk;
         Laser.assetLaser = laser;
+
+        //Starting Location for this map
+        player.x = windowWidth * 0.1;
+        player.y = windowHeight * 0.9;
+
+        //making sure to clear the restart if applicable
+        restartLevel = false;
       }
       break;
     case "map1":
       //0.69 was 0.72, Hopefully this fixed this entry into portal tutorial
-      if (playerHitBox.y > windowHeight * 0.457 + mapScroll && playerHitBox.y < windowHeight * 0.457 + mapScroll + 80 && playerHitBox.x > windowWidth * 0.69 && playerHitBox.x < windowWidth * 0.69 + 80) {
-        nextLevel.play();
-        mapLevel = "portals_tutorial";
+      //check if the player is touching the goal or need to restart the level
+      if (isCollidingObject(playerHitBox, goal) || restartLevel == true) {
+
+        //clean up this level
+
+        //clear enemies
         for (i = 0; i < enemies.length; i++) {
           enemies[i] = null;
           enemies.splice(i);
         }
-        background(level2);
+
+        //Clear the portals
         purpleP.x = -1;
         goldP.x = -1;
+
+        //Do the things needed for the next level
+
+        //LEVEL UP
+        nextLevel.play();
+        curLevel++;
+
+        //background
+        background(level2);
+
+        //Setting up goal
+        goal.x = windowWidth * 0.11;
+        goal.y = windowHeight * 0.21 + mapScroll;
+
+        //Enemies
+        alien1 = new Alien(600, windowHeight - 120, windowWidth / 12, windowHeight / 6.5);
+        Alien.asset = alienImage;
+        enemies.push(alien1);
+
+        //Player spawn
+        player.x = windowWidth * 0.1;
+        player.y = windowHeight * 0.9;
+
+        //making sure to clear the restart if applicable
+        restartLevel = false;
       }
       break;
 
     case "portals_tutorial":
-      if (playerHitBox.y > windowHeight * 0.21 + mapScroll && playerHitBox.y < (windowHeight * 0.21) + mapScroll + 120 && playerHitBox.x > windowWidth * 0.11 && playerHitBox.x < (windowWidth * 0.11) + 100) {
-        mapLevel = "map3"
-        background(level3);
+      //checking if the player is touching the goal or need to restart the level
+      if (isCollidingObject(playerHitBox, goal) || restartLevel == true) {
+
+        //clean up this level
+
+        //clean up the portals
         purpleP.x = -1;
         goldP.x = -1;
 
+        //Set up the things for the next level
+
+        //LEVEL UP
+        curLevel++;
+
+        //background for next level
+        background(level3);
+
+        //set spawn point for next level
         player.x = windowWidth * 0.1;
         player.y = windowHeight * 0.9;
 
+        //make sure to clear restart if applicable
+        restartLevel = false;
       }
       break;
     case "map3":
       //if () { }
       break;
-
 
   }
 }

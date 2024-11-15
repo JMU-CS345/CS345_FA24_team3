@@ -1,5 +1,7 @@
 let walkingSpeed = 4;
 let sprintingSpeed = 8;
+let frameWidth = 24;
+let frameHeight = 24;
 
 function PlayerMovement() {
   if (keyIsDown(68) && player.x < windowWidth - 100 && !crouched && !player.dead) { // move right
