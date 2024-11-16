@@ -144,12 +144,42 @@ function nextState(state) {
         player.x = windowWidth * 0.1;
         player.y = windowHeight * 0.9;
 
+        //Set up the goal for next level
+        goal.x = windowWidth * 0.73;
+        goal.y = windowHeight * 0.05;
+
         //make sure to clear restart if applicable
         restartLevel = false;
       }
       break;
     case "map3":
-      //if () { }
+      if (isCollidingObject(playerHitBox, goal) || restartLevel == true) {
+
+        //clean up this level
+
+        //clean up the portals
+        purpleP.x = -1;
+        goldP.x = -1;
+
+        //Set up the things for the next level
+
+        //LEVEL UP
+        curLevel++;
+
+        //background for next level
+        background(level3);
+
+        //set spawn point for next level
+        player.x = windowWidth * 0.1;
+        player.y = windowHeight * 0.9;
+
+        //Set up the goal for next level
+        goal.x = windowWidth * 0.73;
+        goal.y = windowHeight * 0.05;
+
+        //make sure to clear restart if applicable
+        restartLevel = false;
+      }
       break;
 
   }

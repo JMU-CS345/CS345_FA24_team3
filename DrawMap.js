@@ -1,10 +1,7 @@
 
 
-
-
-let newLevel = true;
-
 var mapPlatforms;
+
 
 function DrawMap(map) {
   mapMovement(); //update map bounce
@@ -116,44 +113,45 @@ function DrawMap(map) {
       //Corners
 
       //Block top top right corner
-      image(mapAssets_SpaceStation, windowWidth * 0.597, windowHeight * 0.0015, 30, 30, 145, 35, 21, 23);
+      image(mapAssets_SpaceStation, windowWidth * 0.597, windowHeight * 0.012, windowWidth * 0.02, windowHeight * 0.04, 145, 35, 21, 23);
 
-      //Block top bottom innner right inner left corner
-      image(mapAssets_SpaceStation, windowWidth * 0.598, windowHeight * 0.368, 20, 20, 208, 124, 16, 13);
+      //Block top innner right corner
+      image(mapAssets_SpaceStation, windowWidth * 0.597, windowHeight * 0.37, windowWidth * 0.015, windowHeight * 0.025, 208, 124, 16, 13);
 
       //Top Right Corner
-      image(mapAssets_SpaceStation, windowWidth * 0.975, windowHeight * 0.0015, 35, 30, 176, 34, 21, 24);
+      image(mapAssets_SpaceStation, windowWidth * 0.977, windowHeight * 0.015, windowWidth * 0.02, windowHeight * 0.04, 176, 34, 21, 24);
 
       //Block Bottom left outer Corner
-      image(mapAssets_SpaceStation, windowWidth * 0.3315, windowHeight * 0.645, 20, 20, 208, 62, 14, 16);
+      image(mapAssets_SpaceStation, windowWidth * 0.331, windowHeight * 0.645, windowWidth * 0.015, windowHeight * 0.025, 208, 62, 14, 16);
 
-      //Block top bottom left inner right corner
-      image(mapAssets_SpaceStation, windowWidth * 0.332, windowHeight * 0.3683, 20, 20, 208, 102, 16, 16);
+      //Block top bottom left inner corner
+      image(mapAssets_SpaceStation, windowWidth * 0.332, windowHeight * 0.367, windowWidth * 0.015, windowHeight * 0.029, 208, 102, 16, 16);
 
       // Block top left outer right corner
-      image(mapAssets_SpaceStation, windowWidth * 0.325, windowHeight * 0.003, 30, 30, 176, 34, 21, 24);
+      image(mapAssets_SpaceStation, windowWidth * 0.325, windowHeight * 0.014, windowWidth * 0.02, windowHeight * 0.04, 176, 34, 21, 24);
 
       //Block Bottom right outer corner
-      image(mapAssets_SpaceStation, windowWidth * 0.6009, windowHeight * 0.645, 20, 20, 207, 82, 15, 16);
+      image(mapAssets_SpaceStation, windowWidth * 0.5995, windowHeight * 0.645, windowWidth * 0.015, windowHeight * 0.025, 207, 82, 15, 16);
 
       //Block Bottom inner right corner
-      image(mapAssets_SpaceStation, windowWidth * 0.596, windowHeight * 0.964, 35, 30, 146, 67, 29, 22);
+      image(mapAssets_SpaceStation, windowWidth * 0.598, windowHeight * 0.964, windowWidth * 0.02, windowHeight * 0.04, 146, 67, 29, 22);
 
       //Block Bottom right Corner
-      image(mapAssets_SpaceStation, windowWidth * 0.324, windowHeight * 0.964, 29, 30, 199, 35, 23, 23);
+      image(mapAssets_SpaceStation, windowWidth * 0.3235, windowHeight * 0.965, windowWidth * 0.02, windowHeight * 0.04, 199, 35, 23, 23);
 
       //Bottom Left Corner
-      image(mapAssets_SpaceStation, windowWidth * 0.0009, windowHeight - 28, 35, 35, 146, 67, 29, 22);
+      image(mapAssets_SpaceStation, -5, windowHeight * 0.9635, windowWidth * 0.03, windowHeight * 0.04, 146, 67, 29, 22);
 
       //Top Left Corner
-      image(mapAssets_SpaceStation, windowWidth * 0.0035, windowHeight * 0.0009, 35, 35, 144, 36, 23, 23);
+      image(mapAssets_SpaceStation, windowWidth * 0.005, windowHeight * 0.014, windowWidth * 0.02, windowHeight * 0.04, 144, 36, 23, 23);
 
       //Bottom Right Corner
-      image(mapAssets_SpaceStation, windowWidth * 0.977, windowHeight * 0.965, 29, 30, 199, 35, 23, 23);
+      image(mapAssets_SpaceStation, windowWidth * 0.976, windowHeight * 0.965, windowWidth * 0.02, windowHeight * 0.04, 199, 35, 23, 23);
 
 
       //goal
       image(mapAssets, windowWidth * 0.1, windowHeight * 0.2 + mapScroll, 140, 140, 1440, 38, 49, 48);
+
       break;
 
     case "map3":
@@ -209,41 +207,44 @@ function DrawMap(map) {
       //Corners
 
       //Bottom right platform corner
-      image(mapAssets_SpaceStation, windowWidth * 0.977, windowHeight * 0.8, 29, 30, 199, 35, 23, 23);
+      image(mapAssets_SpaceStation, windowWidth * 0.9735, windowHeight * 0.8, windowWidth * 0.025, windowHeight * 0.04, 199, 35, 23, 23);
 
       //Top left platform bottom corner
-      image(mapAssets_SpaceStation, windowWidth * 0.005, windowHeight * 0.388, 30, 30, 144, 36, 23, 23);
+      image(mapAssets_SpaceStation, windowWidth * 0.0025, windowHeight * 0.389, windowWidth * 0.025, windowHeight * 0.04, 144, 36, 23, 23);
       image(mapAssets_SpaceStation, 0, windowHeight * 0.388, windowWidth * 0.009, windowHeight * 0.05, 190, 71, 10, 25);
 
 
       //Top left platform inner top corner
-      image(mapAssets_SpaceStation, windowWidth * 0.149, windowHeight * 0.359, 16, 16, 238, 50, 16, 16);
+      image(mapAssets_SpaceStation, windowWidth * 0.149, windowHeight * 0.359, windowWidth * 0.01, windowHeight * 0.025, 238, 50, 16, 16);
 
       //Top left platform inner bottom corner
-      image(mapAssets_SpaceStation, windowWidth * 0.149, windowHeight * 0.393, 16, 16, 236, 106, 16, 16);
+      image(mapAssets_SpaceStation, windowWidth * 0.149, windowHeight * 0.391, windowWidth * 0.01, windowHeight * 0.025, 236, 106, 16, 16);
 
       //Top left platform inner top corner
-      image(mapAssets_SpaceStation, windowWidth * 0.149, windowHeight * 0.579, 16, 16, 238, 50, 16, 16);
+      image(mapAssets_SpaceStation, windowWidth * 0.149, windowHeight * 0.579, windowWidth * 0.01, windowHeight * 0.025, 238, 50, 16, 16);
 
       //Top left platform inner bottom corner
-      image(mapAssets_SpaceStation, windowWidth * 0.149, windowHeight * 0.61, 16, 16, 236, 106, 16, 16);
+      image(mapAssets_SpaceStation, windowWidth * 0.149, windowHeight * 0.607, windowWidth * 0.01, windowHeight * 0.025, 236, 106, 16, 16);
 
       //Middle left outer corner
-      image(mapAssets_SpaceStation, windowWidth * 0.003, windowHeight * 0.564, 30, 30, 146, 67, 29, 22);
+      image(mapAssets_SpaceStation, windowWidth * 0.0005, windowHeight * 0.564, windowWidth * 0.025, windowHeight * 0.04, 146, 67, 29, 22);
       image(mapAssets_SpaceStation, 0, windowHeight * 0.56, windowWidth * 0.01, windowHeight * 0.04, 190, 71, 10, 25);
 
       //Bottom right inner corner
-      image(mapAssets_SpaceStation, windowWidth * 0.911, windowHeight * 0.815, 17, 17, 238, 69, 16, 16);
+      image(mapAssets_SpaceStation, windowWidth * 0.9112, windowHeight * 0.813, windowWidth * 0.01, windowHeight * 0.025, 238, 69, 16, 16);
 
       //Top Left Corner
-      image(mapAssets_SpaceStation, windowWidth * 0.005, windowHeight * 0.013, 30, 30, 144, 36, 23, 23);
+      image(mapAssets_SpaceStation, windowWidth * 0.0025, windowHeight * 0.013, windowWidth * 0.025, windowHeight * 0.04, 144, 36, 23, 23);
       image(mapAssets_SpaceStation, 0, 0, windowWidth * 0.1, windowHeight * 0.02, 190, 71, 10, 25);
       image(mapAssets_SpaceStation, 0, 0, windowWidth * 0.01, windowHeight * 0.1, 190, 71, 10, 25);
 
       //Top platform corner
-      image(mapAssets_SpaceStation, windowWidth * 0.0033, windowHeight * 0.346, 30, 30, 146, 67, 29, 25);
+      image(mapAssets_SpaceStation, windowWidth * 0.0005, windowHeight * 0.346, windowWidth * 0.025, windowHeight * 0.04, 146, 67, 29, 25);
       image(mapAssets_SpaceStation, 0, windowHeight * 0.35, windowWidth * 0.01, windowHeight * 0.05, 190, 71, 10, 25);
 
+
+      //goal
+      image(mapAssets, windowWidth * 0.73, windowHeight * 0.05 + mapScroll, 140, 140, 1440, 38, 49, 48);
       break;
   }
 }

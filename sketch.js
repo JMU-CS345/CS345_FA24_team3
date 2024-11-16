@@ -1,3 +1,19 @@
+
+//Portal Objects
+var purpleP = { x: -1, y: -1, w: -1, h: -1, vertical: false, direction: 'none' };
+var goldP = { x: -1, y: -1, w: -1, h: -1, vertical: false, direction: 'none' };
+
+let curDirection = null;
+
+
+//Enemy variables
+
+let alienImage; // so enemies file can read it
+let projectiles = []; // Array of portal projectiles
+let enemies = [] // Array of enemies
+
+//player variables
+
 let numFramesY = 12;
 let standing = 1;
 let walking = 2;  // Location in Sprite Sheet
@@ -6,26 +22,28 @@ let currentFrame = 0;
 let frame = 1;
 let crouched = false;
 let jumped = false;
-var purpleP = { x: -1, y: -1, w: -1, h: -1, vertical: false, direction: 'none' };
-var goldP = { x: -1, y: -1, w: -1, h: -1, vertical: false, direction: 'none' };
-let projectiles = []; // Array of portal projectiles
-let platforms = []; // platform imp starts here
-let enemies = [] // Array of enemies
-let curDirection = null;
-let alienImage; // so enemies file can read it
-
-var player = { x: 10, y: 0, w: 150, h: 150, v: 0, a: 1, jumpStrength: -30, dead: false, health: 3 };
-//the player hit box for collision
-var playerHitBox = { x: player.x, y: player.y, w: player.w - 100, h: player.h - 100, moving: false };
 var canGetHurt = true;
 var hurtTimer = 0;
 
+//player object
+var player = { x: 10, y: 900, w: 150, h: 150, v: 0, a: 1, jumpStrength: -30, dead: false, health: 3 };
+//the player hit box for collision
+var playerHitBox = { x: player.x, y: player.y, w: player.w - 100, h: player.h - 100, moving: false };
+
+//Map/Game State variables
+
+let platforms = []; // platform imp starts here
 let mapLevel = ["title", "map1", "portals_tutorial", "map3"];
-let curLevel = 0;
-let gameStart = false;
+let curLevel = 3;
+let gameStart = true;
+let standard_inner_corner_width = windowWidth * 0.02;
+let standard_inner_corner_height = windowHeight * 0.02;
+let standard_platform_size = windowWidth * 0.02;
 
 
 function preload() {
+
+  //contains all of our assets :]
   startScreen = loadImage("assets/GALAXYMASTER2.png");
   playerImage = loadImage("assets/Character.png"); // For Character going right
   playerReverse = loadImage("assets/CharacterR.png"); // For Character going left
