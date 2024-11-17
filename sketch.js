@@ -34,7 +34,7 @@ var playerHitBox = { x: player.x, y: player.y, w: player.w - 100, h: player.h - 
 
 let platforms = []; // platform imp starts here
 let mapLevel = ["title", "map1", "portals_tutorial", "map3"];
-let curLevel = 3;
+let curLevel = 2;
 let gameStart = true;
 let standard_inner_corner_width = windowWidth * 0.02;
 let standard_inner_corner_height = windowHeight * 0.02;

@@ -109,12 +109,14 @@ function nextState(state) {
         goal.y = windowHeight * 0.21 + mapScroll;
 
         //Enemies
-        alien1 = new Alien(600, windowHeight - 120, windowWidth / 12, windowHeight / 6.5);
+        alien1 = new Alien(windowWidth * 0.1, windowHeight - 120, windowWidth / 12, windowHeight / 6.5);
+        robot1 = new Robot(windowWidth / 2, windowHeight / 2, windowWidth / 12, windowHeight / 6.5);
         Alien.asset = alienImage;
-        enemies.push(alien1);
+        Robot.asset = robotWalk;
+        enemies.push(alien1, robot1);
 
         //Player spawn
-        player.x = windowWidth * 0.1;
+        player.x = windowWidth * 0.8;
         player.y = windowHeight * 0.9;
 
         //making sure to clear the restart if applicable
@@ -128,6 +130,11 @@ function nextState(state) {
 
         //clean up this level
 
+        //Clear Enemies
+        for (i = 0; i < enemies.length; i++) {
+          enemies[i] = null;
+          enemies.splice(i);
+        }
         //clean up the portals
         purpleP.x = -1;
         goldP.x = -1;
@@ -147,6 +154,15 @@ function nextState(state) {
         //Set up the goal for next level
         goal.x = windowWidth * 0.73;
         goal.y = windowHeight * 0.05;
+
+        eAlien1 = new EnragedAlien(windowWidth * 0.6, windowHeight - 120, windowWidth / 12, windowHeight / 6.5);
+        eAlien2 = new EnragedAlien(windowWidth * 0.4, windowHeight - 120, windowWidth / 12, windowHeight / 6.5);
+        robot1 = new Robot(windowWidth * 0.1, windowHeight / 4, windowWidth / 12, windowHeight / 6.5);
+        robot2 = new Robot(windowWidth * 0.1, windowHeight / 3, windowWidth / 12, windowHeight / 6.5);
+        EnragedAlien.asset = alienEnragedImage;
+        Robot.asset = robotWalk;
+
+        enemies.push(eAlien1, eAlien2, robot1, robot2);
 
         //make sure to clear restart if applicable
         restartLevel = false;
