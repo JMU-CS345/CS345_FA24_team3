@@ -29,6 +29,13 @@ function enemyLoop() {
                     enemy.y = platforms[j].y + platforms[j].h;
                     enemy.v = 0;
                 }
+                else if (direction === "right") {
+                    enemy.direction = 1;
+                }
+                else if (direction === "left") {
+                    enemy.direction = -1;
+                }
+                //ADD LEFT AND RIGHT
             }
 
             if (!enemyIsOnPlatform) {
