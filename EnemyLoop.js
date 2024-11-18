@@ -20,7 +20,7 @@ function enemyLoop() {
                     enemy.v = 0;
                     enemyIsOnPlatform = true;
 
-                    if (enemy.x + enemy.hitboxOffsetX <= platforms[j].x) {
+                    if (enemy.x + enemy.hitboxOffsetX + enemy.hitboxWidth <= platforms[j].x) {
                         enemy.direction = 1;
                     } else if ((enemy.x - enemy.hitboxOffsetX) + (enemy.w - enemy.hitboxWidth) >= platforms[j].x + platforms[j].w) {
                         enemy.direction = -1;
