@@ -65,6 +65,11 @@ function nextState(state) {
         goal.x = windowWidth * 0.7;
         goal.y = windowHeight * 0.4 + mapScroll;
 
+        //Starting Location for this map
+        playerSpawn.x = windowWidth * 0.1;
+        playerSpawn.y = windowHeight * 0.9;
+        spawnPlayer();
+
         //Enemies
         alien1 = new Alien(600, windowHeight - 120, windowWidth / 12, windowHeight / 6.5);
         alien2 = new Alien(732, 360, windowWidth / 12, windowHeight / 6.5);
@@ -76,10 +81,6 @@ function nextState(state) {
         EnragedAlien.asset = alienEnragedImage
         Robot.assetWalk = robotWalk;
         Laser.assetLaser = laser;
-
-        //Starting Location for this map
-        playerSpawn.x = windowWidth * 0.1;
-        playerSpawn.y = windowHeight * 0.9;
 
         //making sure to clear the restart if applicable
         restartLevel = false;
@@ -115,16 +116,17 @@ function nextState(state) {
         goal.x = windowWidth * 0.11;
         goal.y = windowHeight * 0.21 + mapScroll;
 
+        //Player spawn
+        playerSpawn.x = windowWidth * 0.8;
+        playerSpawn.y = windowHeight * 0.9;
+        spawnPlayer();
+
         //Enemies
         alien1 = new Alien(windowWidth * 0.1, windowHeight - 120, windowWidth / 12, windowHeight / 6.5);
         robot1 = new Robot(windowWidth / 2, windowHeight / 2, windowWidth / 12, windowHeight / 6.5);
         Alien.asset = alienImage;
         Robot.asset = robotWalk;
         enemies.push(alien1, robot1);
-
-        //Player spawn
-        playerSpawn.x = windowWidth * 0.8;
-        playerSpawn.y = windowHeight * 0.9;
 
         //making sure to clear the restart if applicable
         restartLevel = false;
@@ -157,6 +159,7 @@ function nextState(state) {
         //set spawn point for next level
         playerSpawn.x = windowWidth * 0.1;
         playerSpawn.y = windowHeight * 0.9;
+        spawnPlayer();
 
         //Set up the goal for next level
         goal.x = windowWidth * 0.73;
@@ -188,6 +191,11 @@ function nextState(state) {
         purpleP.x = -1;
         goldP.x = -1;
 
+        //set spawn point for next level
+        playerSpawn.x = windowWidth * 0.01;
+        playerSpawn.y = windowHeight * 0.45;
+        spawnPlayer();
+
         //Set up the things for the next level
 
         curLevel++;
@@ -203,10 +211,6 @@ function nextState(state) {
         //If no textures, just use colored platforms. Must change to false after other level
         drawColoredPlatforms = true;
 
-        //set spawn point for next level
-        playerSpawn.x = windowWidth * 0.01;
-        playerSpawn.y = windowHeight * 0.45;
-
         //Set up the goal for next level
         goal.x = windowWidth * 0.73;
         goal.y = windowHeight * 0.05;
@@ -218,4 +222,10 @@ function nextState(state) {
 
     case "map4":
   }
+}
+
+//Sets the Player Spawn Point at the beginning of a level 
+function spawnPlayer() {
+  player.x = playerSpawn.x;
+  player.y = playerSpawn.y;
 }
