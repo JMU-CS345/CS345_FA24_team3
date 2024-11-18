@@ -1,3 +1,4 @@
+let drawColoredPlatforms = false;
 
 //Portal Objects
 var purpleP = { x: -1, y: -1, w: -1, h: -1, vertical: false, direction: 'none' };
@@ -33,9 +34,9 @@ var playerHitBox = { x: player.x, y: player.y, w: player.w - 100, h: player.h - 
 //Map/Game State variables
 
 let platforms = []; // platform imp starts here
-let mapLevel = ["title", "map1", "portals_tutorial", "map3"];
-let curLevel = 2;
-let gameStart = true;
+let mapLevel = ["title", "map1", "portals_tutorial", "map3", "map4"];
+let curLevel = 0;
+let gameStart = false;
 let standard_inner_corner_width = windowWidth * 0.02;
 let standard_inner_corner_height = windowHeight * 0.02;
 let standard_platform_size = windowWidth * 0.02;
@@ -95,13 +96,20 @@ function draw() {
     curDirection = 'up';
   }
   //use to see hitboxes and platforms easily
-  //fill("")
+  //fill("gray")
 
   //rect(playerHitBox.x, playerHitBox.y, playerHitBox.w, playerHitBox.h);
 
   // make the hitboxes invisible
-  noStroke();
-  //noFill();
+
+  if (drawColoredPlatforms == true) {
+    stroke(0);
+    strokeWeight(3);
+    fill("gray");
+  } else {
+    noStroke();
+    noFill();
+  }
 
   // load the maps continously to make the hit boxes bounce
 

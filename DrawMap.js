@@ -246,6 +246,11 @@ function DrawMap(map) {
       //goal
       image(mapAssets, windowWidth * 0.73, windowHeight * 0.05 + mapScroll, 140, 140, 1440, 38, 49, 48);
       break;
+
+    case "map4":
+      mapPlatforms = GetMap(map);
+      image(mapAssets, windowWidth * 0.93, windowHeight * 0.45 + mapScroll, 140, 140, 1440, 38, 49, 48);
+      break;
   }
 }
 

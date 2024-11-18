@@ -31,6 +31,13 @@ function GameState(state) {
       background(level3);
       platforms = GetMap(state);
       DrawMap(state);
+      nextState(state);
+      break;
+
+    case "map4":
+      background(level1);
+      platforms = GetMap(state);
+      DrawMap(state);
       break;
 
     case "death":
@@ -62,9 +69,9 @@ function nextState(state) {
         alien1 = new Alien(600, windowHeight - 120, windowWidth / 12, windowHeight / 6.5);
         alien2 = new Alien(732, 360, windowWidth / 12, windowHeight / 6.5);
         alien3 = new Alien(340, 480, windowWidth / 12, windowHeight / 6.5);
-        eAlien1 = new EnragedAlien(1200, windowWidth - 120, windowWidth / 12, windowHeight / 6.5);
-        robot1 = new Robot(1000, windowWidth - 120, windowWidth / 12, windowHeight / 6.5);
-        enemies.push(alien1, alien2, alien3, eAlien1, robot1);
+        // eAlien1 = new EnragedAlien(1200, windowWidth - 120, windowWidth / 12, windowHeight / 6.5);
+        // robot1 = new Robot(1000, windowWidth - 120, windowWidth / 12, windowHeight / 6.5);
+        enemies.push(alien1, alien2, alien3);
         Alien.asset = alienImage;
         EnragedAlien.asset = alienEnragedImage
         Robot.assetWalk = robotWalk;
@@ -172,6 +179,10 @@ function nextState(state) {
       if (isCollidingObject(playerHitBox, goal) || restartLevel == true) {
 
         //clean up this level
+        for (i = 0; i < enemies.length; i++) {
+          enemies[i] = null;
+          enemies.splice(i);
+        }
 
         //clean up the portals
         purpleP.x = -1;
@@ -179,15 +190,22 @@ function nextState(state) {
 
         //Set up the things for the next level
 
-        //LEVEL UP
         curLevel++;
+        background(level1);
 
-        //background for next level
-        background(level3);
+        robot1 = new Robot(800, windowWidth - 120, windowWidth / 12, windowHeight / 6.5);
+        robot2 = new Robot(1200, windowWidth - 120, windowWidth / 12, windowHeight / 6.5);
+        robot3 = new Robot(1600, windowWidth - 120, windowWidth / 12, windowHeight / 6.5);
+        //robot4 = new Robot(1050, windowWidth - 120, windowWidth / 12, windowHeight / 6.5);
+        // robot5 = new Robot(1350, windowWidth - 120, windowWidth / 12, windowHeight / 6.5);
+        enemies.push(robot1, robot2, robot3);
+
+        //If no textures, just use colored platforms. Must change to false after other level
+        drawColoredPlatforms = true;
 
         //set spawn point for next level
-        player.x = windowWidth * 0.1;
-        player.y = windowHeight * 0.9;
+        player.x = windowWidth * 0.01;
+        player.y = windowHeight * 0.5;
 
         //Set up the goal for next level
         goal.x = windowWidth * 0.73;
@@ -198,5 +216,6 @@ function nextState(state) {
       }
       break;
 
+    case "map4":
   }
 }
