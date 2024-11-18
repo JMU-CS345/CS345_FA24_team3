@@ -78,8 +78,8 @@ function nextState(state) {
         Laser.assetLaser = laser;
 
         //Starting Location for this map
-        player.x = windowWidth * 0.1;
-        player.y = windowHeight * 0.9;
+        playerSpawn.x = windowWidth * 0.1;
+        playerSpawn.y = windowHeight * 0.9;
 
         //making sure to clear the restart if applicable
         restartLevel = false;
@@ -123,8 +123,8 @@ function nextState(state) {
         enemies.push(alien1, robot1);
 
         //Player spawn
-        player.x = windowWidth * 0.8;
-        player.y = windowHeight * 0.9;
+        playerSpawn.x = windowWidth * 0.8;
+        playerSpawn.y = windowHeight * 0.9;
 
         //making sure to clear the restart if applicable
         restartLevel = false;
@@ -155,8 +155,8 @@ function nextState(state) {
         background(level3);
 
         //set spawn point for next level
-        player.x = windowWidth * 0.1;
-        player.y = windowHeight * 0.9;
+        playerSpawn.x = windowWidth * 0.1;
+        playerSpawn.y = windowHeight * 0.9;
 
         //Set up the goal for next level
         goal.x = windowWidth * 0.73;
@@ -204,8 +204,8 @@ function nextState(state) {
         drawColoredPlatforms = true;
 
         //set spawn point for next level
-        player.x = windowWidth * 0.01;
-        player.y = windowHeight * 0.5;
+        playerSpawn.x = windowWidth * 0.01;
+        playerSpawn.y = windowHeight * 0.45;
 
         //Set up the goal for next level
         goal.x = windowWidth * 0.73;

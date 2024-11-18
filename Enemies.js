@@ -21,8 +21,8 @@ class Enemy {
     }
 
     attack(player) {
-        player.x = 10;
-        player.y = windowHeight - 100;
+        player.x = playerSpawn.x;
+        player.y = playerSpawn.y;
         player.v = 0;
     }
 

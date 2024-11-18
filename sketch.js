@@ -30,9 +30,10 @@ var hurtTimer = 0;
 var player = { x: 10, y: 900, w: 150, h: 150, v: 0, a: 1, jumpStrength: -30, dead: false, health: 3 };
 //the player hit box for collision
 var playerHitBox = { x: player.x, y: player.y, w: player.w - 100, h: player.h - 100, moving: false };
+//Player Spawn Point
+var playerSpawn = { x: 10, y: -1 };
 
 //Map/Game State variables
-
 let platforms = []; // platform imp starts here
 let mapLevel = ["title", "map1", "portals_tutorial", "map3", "map4"];
 let curLevel = 0;
@@ -76,7 +77,9 @@ function setup() {
   createCanvas(windowWidth, windowHeight);
   frameRate(60);
   noSmooth();
-  player.y = windowHeight - player.h;
+  playerSpawn.y = windowHeight - player.h;
+  player.x = playerSpawn.x;
+  player.y = playerSpawn.y;
   player.w = windowWidth / 9;
   player.h = windowHeight / 5;
   player.jumpStrength = windowHeight * 0.037 * -1
