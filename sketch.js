@@ -63,6 +63,7 @@ function preload() {
   heart = loadImage("assets/Heart.png");
   titleScreen = loadImage("assets/GALAXYMASTER2.png");
   bMusic = loadSound('music/loading.wav'); // Background Music]
+  bossMusic = loadSound('music/BOSS.ogg'); // Boss Battle Music 
   gunSound = loadSound('music/gun.wav');
   hurtSound = loadSound('music/hurt.wav');
   portalSound = loadSound('music/portal.wav');
