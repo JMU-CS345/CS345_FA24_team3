@@ -70,6 +70,7 @@ function preload() {
   portalSound = loadSound('music/portal.wav');
   nextLevel = loadSound('music/newLevel.wav');
   killEnemy = loadSound('music/killEnemy.wav');
+  deadSound = loadSound('music/deadNoise.mp3');
   deadRobot = loadImage('assets/deadRobot.png');
 }
 

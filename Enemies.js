@@ -18,6 +18,8 @@ class Enemy {
         this.hitboxOffsetY = 0;
         this.hitboxWidth = 30;
         this.hitboxHeight = 0;
+        this.canTeleport = true;
+        this.teleportationTimer = 0;
     }
 
     attack(player) {

@@ -1,3 +1,4 @@
+var canTeleportPlayer = true;
 var canTeleport = true;
 var teleportationtimer = 0;
 
@@ -13,13 +14,11 @@ function Teleportation() {
         }
         return; // exit early to prevent teleportation during cooldown
     }
-
     // Array of portal pairs to loop through
     const portals = [
         { entry: purpleP, exit: goldP },
         { entry: goldP, exit: purpleP }
     ];
-
     for (const portal of portals) {
         const { entry, exit } = portal;
 
@@ -64,6 +63,74 @@ function Teleportation() {
             // Disable teleportation and break out of the loop after teleporting
             canTeleport = false;
             break;
+        }
+    }
+
+}
+function enemyTeleport(enemy) {
+    // Array of portal pairs to loop through
+    const portals = [
+        { entry: purpleP, exit: goldP },
+        { entry: goldP, exit: purpleP }
+    ];
+
+    for (const portal of portals) {
+        const { entry, exit } = portal;
+        // Skip enemies that are on cooldown
+        if (!enemy.canTeleport) {
+            enemy.teleportationTimer += deltaTime;
+            if (enemy.teleportationTimer >= voidDuration) {
+                enemy.teleportationTimer = 0;
+                enemy.canTeleport = true;
+            }
+            continue; // Skip to the next enemy
+        }
+        if (isCollidingObject(enemy, entry) && purpleP.x != -1 && goldP.x != -1) {
+            //console.log(`Enemy collided with ${entry === purpleP ? 'Purple' : 'Gold'} portal`);
+            enemy.v = 0;
+            if (entry.vertical) {
+                if (exit.vertical) { // Entry is vertical, Exit is vertical
+                    if (exit.direction === 'left') {
+                        enemy.x = exit.x - 200;
+                        enemy.direction = -1;
+                    } else {
+                        enemy.x = exit.x + exit.w;
+                        enemy.direction = 1;
+                    }
+                    enemy.y = exit.y;
+                } else { // Entry is vertical, Exit is horizontal
+                    if (exit.direction === 'bottom') {
+                        enemy.x = exit.x;
+                        enemy.y = exit.y + exit.h;
+                    } else {
+                        enemy.x = exit.x;
+                        enemy.y = exit.y - 150;
+                    }
+                }
+            } else { // Entry is horizontal
+                if (exit.vertical) { // Exit is vertical
+                    if (exit.direction === 'left') {
+                        enemy.x = exit.x - 200;
+                        enemy.direction = -1;
+                    } else {
+                        enemy.x = exit.x + exit.w;
+                        enemy.direction = 1;
+                    }
+                    enemy.y = exit.y;
+                } else { // Exit is horizontal
+                    if (exit.direction === 'bottom') {
+                        enemy.x = exit.x;
+                        enemy.y = exit.y + exit.h;
+                    } else {
+                        enemy.x = exit.x;
+                        enemy.y = exit.y - 150;
+                    }
+                }
+            }
+            //console.log(`Enemy teleported to ${enemy.x}, ${enemy.y}`);
+            enemy.canTeleport = false;
+
+            // Disable teleportation and break out of the loop after teleporting
         }
     }
 }

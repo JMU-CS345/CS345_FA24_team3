@@ -1,6 +1,7 @@
 function enemyLoop() {
     for (let i = 0; i < enemies.length; i++) {
         let enemy = enemies[i];
+        enemyTeleport(enemy);
         let detection = false;
         let canUpdateDirection = false;
 
@@ -59,7 +60,12 @@ function enemyLoop() {
         if (isCollidingPlayerWithEnemy(player, playerHitBox, enemy) && collisionDirectionPlayer(player, playerHitBox, enemy) != 'top' && !enemy.dead && canGetHurt) {
             enemy.attack(player);
             player.health--;
-            hurtSound.play();
+            if (player.health <= 0) {
+                deadSound.play();
+            }
+            else {
+                hurtSound.play();
+            }
             canGetHurt = false;
         }
 

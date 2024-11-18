@@ -57,6 +57,7 @@ function nextState(state) {
   switch (state) {
     case "title":
       if (gameStart == true || restartLevel == true) {
+        //drawColoredPlatforms = true;
         bMusic.loop();
         curLevel++;
         //The WindowHeight / 6.5 and WindowWidth / 12 are for making the enemies change size based on the screen size
