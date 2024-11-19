@@ -23,8 +23,7 @@ class Enemy {
     }
 
     attack(player) {
-        player.x = playerSpawn.x;
-        player.y = playerSpawn.y;
+        spawnPlayer();
         player.v = 0;
     }
 

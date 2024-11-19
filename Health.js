@@ -48,9 +48,5 @@ function Death() {
     }
     purpleP.x = -1;
     goldP.x = -1;
-
-
-    //Write code to restart level
-    //Have a timer so that the death screen is only a few seconds then the map reloads
   }
 }

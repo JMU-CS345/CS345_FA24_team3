@@ -79,8 +79,7 @@ function setup() {
   frameRate(60);
   noSmooth();
   playerSpawn.y = windowHeight - player.h;
-  player.x = playerSpawn.x;
-  player.y = playerSpawn.y;
+  spawnPlayer();
   player.w = windowWidth / 9;
   player.h = windowHeight / 5;
   player.jumpStrength = windowHeight * 0.037 * -1
@@ -159,7 +158,7 @@ function draw() {
   if (player.health <= 0) {
     GameState("death");
   }
-
+  console.log(playerSpawn.x, playerSpawn.y);
   if (gameStart == true) {
     changePortalColor();
     Teleportation();
@@ -190,6 +189,8 @@ function keyPressed() {
   if (keyCode == 13 && player.dead) {
     player.dead = false; //no longer dead
     player.health = 3; //full health
+    spawnPlayer();
+
     nextState(mapLevel[--curLevel]); //have to call the previous state
     if (curLevel > 1) { // no repeating music
       bMusic.loop(); //resume background music
