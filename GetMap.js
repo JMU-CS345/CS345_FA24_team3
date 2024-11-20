@@ -93,12 +93,12 @@ function GetMap(level) {
     case "map4":
       //Starting square player stands on
       let l4_p1 = {
-        x: windowWidth * 0.0005, y: windowHeight * 0.88, w: asteriodBeltWidth * 1.5, h: asteriodBeltHeight, type: "platform"
+        x: windowWidth * 0.0005, y: windowHeight * 0.88, w: asteriodBeltWidth * 1.0, h: asteriodBeltHeight, type: "platform"
       };
 
       //Wall next to player blocking projectiles
       let l4_p2 = {
-        x: windowWidth * 0.1276, y: windowHeight * 0.5185, w: asteriodBeltWidth * 0.28, h: asteriodBeltHeight * 7, type: "platform"
+        x: windowWidth * 0.1276, y: windowHeight * 0.5185, w: asteriodBeltWidth * 0.28, h: asteriodBeltHeight * 6.8, type: "platform"
       };
 
       //Bottom left platform
