@@ -11,9 +11,9 @@ function GetMap(level) {
   switch (level) {
     case "map1":
       let platform1 = {
-        x: (windowWidth * 0.2), y: (windowHeight * 0.8) + mapScroll, w: asteriodBeltWidth * 1.5, h: asteriodBeltHeight, type: "platform"
+        x: (windowWidth * 0.2), y: (windowHeight * 0.75) + mapScroll, w: asteriodBeltWidth * 1.5, h: asteriodBeltHeight, type: "platform"
       };
-      let platform2 = { x: windowWidth * 0.45, y: windowHeight * 0.6 + mapScroll, w: asteriodBeltWidth * 1.5, h: asteriodBeltHeight, type: "platform" };
+      let platform2 = { x: windowWidth * 0.5, y: windowHeight * 0.6 + mapScroll, w: asteriodBeltWidth * 1.5, h: asteriodBeltHeight, type: "platform" };
       map = [platform1, platform2];
       return map;
 

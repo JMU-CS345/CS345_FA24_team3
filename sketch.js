@@ -164,11 +164,11 @@ function draw() {
     Teleportation();
     updatePortals();
     PlayerMovement();
+    enemyLoop();
     drawPortals();
     Health();
     updateHitbox();
     noFill();
-    enemyLoop();
   }
 }
 
