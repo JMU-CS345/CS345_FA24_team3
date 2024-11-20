@@ -90,7 +90,7 @@ function nextState(state) {
     case "map1":
       //0.69 was 0.72, Hopefully this fixed this entry into portal tutorial
       //check if the player is touching the goal or need to restart the level
-      if (isCollidingObject(playerHitBox, goal) || restartLevel == true) {
+      if ((isCollidingObject(playerHitBox, goal) || restartLevel == true) && !checkPlayerMoveAndJump()) {
 
         //clean up this level
 
@@ -136,7 +136,7 @@ function nextState(state) {
 
     case "portals_tutorial":
       //checking if the player is touching the goal or need to restart the level
-      if (isCollidingObject(playerHitBox, goal) || restartLevel == true) {
+      if ((isCollidingObject(playerHitBox, goal) || restartLevel == true) && !checkPlayerMoveAndJump()) {
 
         //clean up this level
 
@@ -180,7 +180,7 @@ function nextState(state) {
       }
       break;
     case "map3":
-      if (isCollidingObject(playerHitBox, goal) || restartLevel == true) {
+      if ((isCollidingObject(playerHitBox, goal) || restartLevel == true) && !checkPlayerMoveAndJump()) {
 
         //clean up this level
         for (i = 0; i < enemies.length; i++) {
@@ -229,4 +229,12 @@ function nextState(state) {
 function spawnPlayer() {
   player.x = playerSpawn.x;
   player.y = playerSpawn.y;
+}
+
+//Checks if player is moveing and jumping
+function checkPlayerMoveAndJump() {
+  if (jumped && (keyIsDown(68) || keyIsDown(65))) {
+    return true;
+  }
+  return false;
 }

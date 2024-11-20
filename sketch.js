@@ -86,6 +86,7 @@ function setup() {
   Alien.asset = alienImage;
   Robot.assetWalk = robotWalk;
   Laser.assetLaser = laser;
+  GameState(mapLevel[curLevel]);
 
 }
 
@@ -162,8 +163,8 @@ function draw() {
   if (gameStart == true) {
     changePortalColor();
     Teleportation();
-    updatePortals();
     PlayerMovement();
+    updatePortals();
     enemyLoop();
     drawPortals();
     Health();
