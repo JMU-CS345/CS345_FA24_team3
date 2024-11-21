@@ -159,7 +159,6 @@ function draw() {
   if (player.health <= 0) {
     GameState("death");
   }
-  console.log(playerSpawn.x, playerSpawn.y);
   if (gameStart == true) {
     changePortalColor();
     Teleportation();
