@@ -36,7 +36,8 @@ class Boss {
 
     }
 }
-class Laser {
+
+class Laserbeam {
     static assetLaser = null;
 
     constructor(x, y, targetX, targetY) {
@@ -67,6 +68,7 @@ class Laser {
         image(Laser.assetLaser, this.x, this.y, this.w, this.h, 50, 50, 25, 25);
     }
 }
+
 class Fist {
     constructor(x, y, targetX, targetY) {
 
