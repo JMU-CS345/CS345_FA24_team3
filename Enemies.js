@@ -377,7 +377,7 @@ class Laser {
 
 // =====================================================================
 
-class Boss {
+class Boss extends Enemy {
 
     static asset = null;
 
@@ -387,12 +387,10 @@ class Boss {
     constructor(x, y, w, h) {
         if (new.target == Enemy)
             throw new Error("Specify what enemy instance is being constructed")
-        this.x = x;
-        this.y = y;
-        this.direction = 0;
+        super(x, y, w, h);
+
+        this.direction = 1;
         this.directionY = 0;
-        this.w = w;
-        this.h = h;
 
         this.speed = 1.5
 
@@ -405,6 +403,7 @@ class Boss {
         this.a = 1;
 
         this.canShoot = false;
+        this.detectionRange = windowWidth;
 
         this.currentFrame = 0;
         this.frameCounter = 0;
@@ -419,24 +418,18 @@ class Boss {
     shootAtPlayer(player) {
 
     }
-    assignMovementDirection() {
-        //timer before boss battle begins so he doesn't immediately chase?
-        /*if (player.x > this.x) {
-            this.directionX = 1;
-            //update frames
+    assignMovementDirection(player) {
+        if (player.x > this.x) {
+            this.direction = 1; // Move right
         } else if (player.x < this.x) {
-            this.directionX = -1;
-        } else {
-            this.directionX = 0;
+            this.direction = -1; // Move left
         }
 
         if (player.y > this.y) {
-            this.directionY = 1;
+            this.directionY = 1; // Move down
         } else if (player.y < this.y) {
-            this.directionY = -1;
-        } else {
-            this.directionY = 0;
-        }*/
+            this.directionY = -1; // Move up
+        }
     }
     updateProjectiles() {
 
@@ -446,13 +439,22 @@ class Boss {
         image(Boss.asset, this.x, this.y, this.w, this.h, sx + 25, 0 + 25, Alien.FRAME_WIDTH, Alien.FRAME_HEIGHT);
     }
     move() {
-        this.x += this.speed;
-        this.y += this.speed;
+        this.x += this.speed * this.direction;
+        this.y += this.speed * this.directionY;
+
+        // Ensure the boss stays within the game window bounds
+        if (this.x <= 0 || this.x >= windowWidth - this.w) {
+            this.direction *= -1;
+        }
+        if (this.y <= 0 || this.y >= windowHeight - this.h) {
+            this.directionY *= -1;
+        }
     }
     killed() {
 
     }
     update() {
+        this.assignMovementDirection(player);
         this.draw();
         this.move();
     }

@@ -110,10 +110,6 @@ function enemyLoop() {
 
         }
 
-        if (enemy instanceof Boss) {
-            canUpdateDirection = true;
-        }
-
         // for enemies that can detect
         if (detection) {
 
@@ -125,6 +121,11 @@ function enemyLoop() {
                 }
                 enemy.updateTimer = 0;
             }
+        }
+
+        // boss enemy
+        if (enemy instanceof Boss) {
+            enemy.assignMovementDirection(player);
         }
 
         // enemy update cycle
