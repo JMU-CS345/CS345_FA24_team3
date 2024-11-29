@@ -136,7 +136,7 @@ function GetMap(level) {
         l4_p6_middle_up, l4_p7_right_bottom, l4_p8_right_up];
       return map;
 
-    case "map5":
+    case "map7":
       //the top platform
       let l5_top_p1 = { x: 0, y: windowHeight * 0.2, w: windowWidth * 0.2, h: windowHeight * 0.05 };
       let l5_top_p2 = { x: windowWidth * 0.3, y: windowHeight * 0.2, w: windowWidth, h: windowHeight * 0.05 };
@@ -159,7 +159,7 @@ function GetMap(level) {
       map = [l5_top_p1, l5_top_p2, l5_mid_p1, l5_bottom_right_piece, l5_bottom_left_piece, l5_left_wall, l5_right_wall];
       return map;
 
-    case "map6":
+    case "map8":
 
       // left wall
       let l6_left_wall = { x: windowWidth * 0.25, y: windowHeight * 0.85, w: windowWidth * 0.025, h: windowHeight * 0.15 };

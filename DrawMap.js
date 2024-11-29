@@ -246,7 +246,7 @@ function DrawMap(map) {
       image(mapAssets, windowWidth * 0.93, windowHeight * 0.45 + mapScroll, 140, 140, 1440, 38, 49, 48);
       break;
 
-    case "map5":
+    case "map7":
       //top platform left side
 
       //top portion
@@ -281,7 +281,7 @@ function DrawMap(map) {
       image(mapAssets, windowWidth * 0.05, windowHeight * 0.8 + mapScroll, 140, 140, 1440, 38, 49, 48);
       break;
 
-    case "map6":
+    case "map8":
 
       //left outer wall
       image(mapAssets_SpaceStation, platforms[0].x, platforms[0].y, platforms[0].w, platforms[0].h, 180, 69, 22, 31);

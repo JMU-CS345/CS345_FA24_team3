@@ -35,7 +35,7 @@ var playerSpawn = { x: 10, y: -1 };
 
 //Map/Game State variables
 let platforms = []; // platform imp starts here
-let mapLevel = ["title", "map1", "portals_tutorial", "map3", "map4", "map5", "map6"];
+let mapLevel = ["title", "map1", "portals_tutorial", "map3", "map4", "map7", "map8"];
 let curLevel = 0;
 let gameStart = false;
 let standard_platform_size = windowWidth * 0.02;

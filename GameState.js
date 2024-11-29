@@ -37,13 +37,13 @@ function GameState(state) {
       nextState(state);
       break;
 
-    case "map5":
+    case "map7":
       background(level2);
       DrawMap(state);
       nextState(state);
       break;
 
-    case "map6":
+    case "map8":
       background(level3);
       DrawMap(state);
       break;
@@ -285,7 +285,7 @@ function nextState(state) {
       }
       break;
 
-    case "map5":
+    case "map7":
       if ((isCollidingObject(playerHitBox, goal) || restartLevel == true) && !checkPlayerMoveAndJump()) {
 
         //clean up this level
@@ -327,7 +327,7 @@ function nextState(state) {
         restartLevel = false;
       }
       break;
-    case "map6":
+    case "map8":
       if ((isCollidingObject(playerHitBox, goal) || restartLevel == true) && !checkPlayerMoveAndJump()) {
 
         //clean up this level
