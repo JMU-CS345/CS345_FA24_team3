@@ -376,3 +376,128 @@ class Laser {
 }
 
 // =====================================================================
+
+class Boss {
+
+    static asset = null;
+
+    static FRAME_WIDTH = 48;
+    static FRAME_HEIGHT = 48;
+
+    constructor(x, y, w, h) {
+        if (new.target == Enemy)
+            throw new Error("Specify what enemy instance is being constructed")
+        this.x = x;
+        this.y = y;
+        this.direction = 0;
+        this.directionY = 0;
+        this.w = w;
+        this.h = h;
+
+        this.speed = 1.5
+
+        this.hitboxOffsetX = 0;
+        this.hitboxOffsetY = 0;
+        this.hitboxWidth = 30;
+        this.hitboxHeight = 0;
+
+        this.v = 0;
+        this.a = 1;
+
+        this.canShoot = false;
+
+        this.currentFrame = 0;
+        this.frameCounter = 0;
+        this.frameDelay = 10;
+
+        this.updateTimer = 0;
+    }
+    attack(player) {
+        spawnPlayer();
+        player.v = 0;
+    }
+    shootAtPlayer(player) {
+
+    }
+    assignMovementDirection() {
+        //timer before boss battle begins so he doesn't immediately chase?
+        /*if (player.x > this.x) {
+            this.directionX = 1;
+            //update frames
+        } else if (player.x < this.x) {
+            this.directionX = -1;
+        } else {
+            this.directionX = 0;
+        }
+
+        if (player.y > this.y) {
+            this.directionY = 1;
+        } else if (player.y < this.y) {
+            this.directionY = -1;
+        } else {
+            this.directionY = 0;
+        }*/
+    }
+    updateProjectiles() {
+
+    }
+    draw() {
+        const sx = this.currentFrame * Boss.FRAME_WIDTH;
+        image(Boss.asset, this.x, this.y, this.w, this.h, sx + 25, 0 + 25, Alien.FRAME_WIDTH, Alien.FRAME_HEIGHT);
+    }
+    move() {
+        this.x += this.speed;
+        this.y += this.speed;
+    }
+    killed() {
+
+    }
+    update() {
+        this.draw();
+        this.move();
+    }
+}
+
+class Laserbeam {
+    static assetLaser = null;
+
+    constructor(x, y, targetX, targetY) {
+        this.x = x;
+        this.y = y;
+
+        this.w = windowWidth / 100;
+        this.h = windowHeight / 100;
+
+        this.speed = 4.5;
+
+        const dx = targetX - x;
+        const dy = targetY - y;
+        const magnitude = Math.sqrt(dx * dx + dy * dy);
+
+        this.vx = (dx / magnitude) * this.speed;
+        this.vy = (dy / magnitude) * this.speed;
+
+        this.active = true;
+    }
+
+    move() {
+        this.x += this.vx;
+        this.y += this.vy;
+    }
+
+    draw() {
+        image(Laser.assetLaser, this.x, this.y, this.w, this.h, 50, 50, 25, 25);
+    }
+}
+
+class Fist {
+    constructor(x, y, targetX, targetY) {
+
+    }
+    move() {
+
+    }
+    draw() {
+
+    }
+}

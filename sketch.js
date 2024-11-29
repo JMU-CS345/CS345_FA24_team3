@@ -60,11 +60,14 @@ function preload() {
   robotShoot = loadImage("assets/Robot_fire.png");
   robotWalk = loadImage("assets/Robot_walk.png");
   laser = loadImage("assets/Laser.png");
+  bossImage = loadImage("assets/boss.png");
+  bossFist = loadImage("assets/boss_fist.png");
+  bossLaser = loadImage("assets/boss_laser.png");
   mapAssets = loadImage("assets/PlanetAssets.png"); //space stuff
   heart = loadImage("assets/Heart.png");
   titleScreen = loadImage("assets/GALAXYMASTER2.png");
   bMusic = loadSound('music/loading.wav'); // Background Music]
-  bossMusic = loadSound('music/BOSS.ogg'); // Boss Battle Music 
+  bossMusic = loadSound('music/BOSS.ogg'); // Boss Battle Music
   gunSound = loadSound('music/gun.wav');
   hurtSound = loadSound('music/hurt.wav');
   portalSound = loadSound('music/portal.wav');
@@ -82,10 +85,7 @@ function setup() {
   spawnPlayer();
   player.w = windowWidth / 9;
   player.h = windowHeight / 5;
-  player.jumpStrength = windowHeight * 0.037 * -1
-  Alien.asset = alienImage;
-  Robot.assetWalk = robotWalk;
-  Laser.assetLaser = laser;
+  player.jumpStrength = windowHeight * 0.037 * -1;
   GameState(mapLevel[curLevel]);
 
 }

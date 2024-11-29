@@ -75,13 +75,15 @@ function nextState(state) {
         alien1 = new Alien(600, windowHeight - 120, windowWidth / 12, windowHeight / 6.5);
         alien2 = new Alien(732, 360, windowWidth / 12, windowHeight / 6.5);
         alien3 = new Alien(340, 480, windowWidth / 12, windowHeight / 6.5);
+        boss1 = new Boss(100, 100, windowWidth / 9, windowHeight / 4.875);
         // eAlien1 = new EnragedAlien(1200, windowWidth - 120, windowWidth / 12, windowHeight / 6.5);
         // robot1 = new Robot(1000, windowWidth - 120, windowWidth / 12, windowHeight / 6.5);
-        enemies.push(alien1, alien2, alien3);
+        enemies.push(alien1, alien2, alien3, boss1);
         Alien.asset = alienImage;
         EnragedAlien.asset = alienEnragedImage
         Robot.assetWalk = robotWalk;
         Laser.assetLaser = laser;
+        Boss.asset = bossImage;
 
         //making sure to clear the restart if applicable
         restartLevel = false;
@@ -225,7 +227,7 @@ function nextState(state) {
   }
 }
 
-//Sets the Player Spawn Point at the beginning of a level 
+//Sets the Player Spawn Point at the beginning of a level
 function spawnPlayer() {
   player.x = playerSpawn.x;
   player.y = playerSpawn.y;

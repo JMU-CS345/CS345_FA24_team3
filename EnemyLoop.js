@@ -7,53 +7,55 @@ function enemyLoop() {
 
 
         // this to next comment is about platforms collision
-        enemy.v += enemy.a;
-        enemy.y += enemy.v;
+        if (!(enemy instanceof Boss)) {
+            enemy.v += enemy.a;
+            enemy.y += enemy.v;
 
-        let enemyIsOnPlatform = false;
+            let enemyIsOnPlatform = false;
 
-        for (let j = 0; j < platforms.length; j++) {
-            if (isCollidingEnemy(enemy, platforms[j])) {
-                let direction = collisionDirectionObject(enemy, platforms[j]);
+            for (let j = 0; j < platforms.length; j++) {
+                if (isCollidingEnemy(enemy, platforms[j])) {
+                    let direction = collisionDirectionObject(enemy, platforms[j]);
 
-                if (direction === "top") {
-                    enemy.y = platforms[j].y - enemy.h;
-                    enemy.v = 0;
-                    enemyIsOnPlatform = true;
+                    if (direction === "top") {
+                        enemy.y = platforms[j].y - enemy.h;
+                        enemy.v = 0;
+                        enemyIsOnPlatform = true;
 
-                    if (enemy.x + enemy.hitboxOffsetX + enemy.hitboxWidth <= platforms[j].x) {
+                        if (enemy.x + enemy.hitboxOffsetX + enemy.hitboxWidth <= platforms[j].x) {
+                            enemy.direction = 1;
+                        } else if ((enemy.x - enemy.hitboxOffsetX) + (enemy.w - enemy.hitboxWidth) >= platforms[j].x + platforms[j].w) {
+                            enemy.direction = -1;
+                        }
+                    } else if (direction === "bottom") {
+                        enemy.y = platforms[j].y + platforms[j].h;
+                        enemy.v = 0;
+                    }
+                    else if (direction === "right") {
                         enemy.direction = 1;
-                    } else if ((enemy.x - enemy.hitboxOffsetX) + (enemy.w - enemy.hitboxWidth) >= platforms[j].x + platforms[j].w) {
+                    }
+                    else if (direction === "left") {
                         enemy.direction = -1;
                     }
-                } else if (direction === "bottom") {
-                    enemy.y = platforms[j].y + platforms[j].h;
+                    //ADD LEFT AND RIGHT
+                }
+
+                if (!enemyIsOnPlatform) {
+                    enemy.v += enemy.a;
+                }
+
+                if (enemy.y + enemy.h >= windowHeight) {
+                    enemy.y = windowHeight - enemy.h;
                     enemy.v = 0;
                 }
-                else if (direction === "right") {
-                    enemy.direction = 1;
-                }
-                else if (direction === "left") {
-                    enemy.direction = -1;
-                }
-                //ADD LEFT AND RIGHT
             }
 
-            if (!enemyIsOnPlatform) {
-                enemy.v += enemy.a;
+            // player collison for killing enemies
+            if (isCollidingPlayerWithEnemy(player, playerHitBox, enemy) && collisionDirectionPlayer(player, playerHitBox, enemy) == 'top' && !isFalling(player)) {
+                enemy.dead = true;
+                killEnemy.play();
+                enemy.deathTime = millis();
             }
-
-            if (enemy.y + enemy.h >= windowHeight) {
-                enemy.y = windowHeight - enemy.h;
-                enemy.v = 0;
-            }
-        }
-
-        // player collison for killing enemies
-        if (isCollidingPlayerWithEnemy(player, playerHitBox, enemy) && collisionDirectionPlayer(player, playerHitBox, enemy) == 'top' && !isFalling(player)) {
-            enemy.dead = true;
-            killEnemy.play();
-            enemy.deathTime = millis();
         }
 
         // player collison for getting hurt
@@ -106,6 +108,10 @@ function enemyLoop() {
 
             enemy.updateTimer += 12
 
+        }
+
+        if (enemy instanceof Boss) {
+            canUpdateDirection = true;
         }
 
         // for enemies that can detect
