@@ -1,7 +1,5 @@
 
 
-var mapPlatforms;
-
 
 function DrawMap(map) {
   mapMovement(); //update map bounce
@@ -39,17 +37,16 @@ function DrawMap(map) {
 
     case "map1":
 
-      mapPlatforms = GetMap(map);
 
       //the first platform
       //an asteriod belt to jump on.
-      image(mapAssets, mapPlatforms[0].x, mapPlatforms[0].y + mapScroll, mapPlatforms[0].w, mapPlatforms[0].h, 346, 481, 114, 31);
+      image(mapAssets, platforms[0].x, platforms[0].y + mapScroll, platforms[0].w, platforms[0].h, 346, 481, 114, 31);
 
       //A little floating and moving rock
       image(mapAssets, windowWidth * 0.4 + (mapScroll % 2), windowHeight * 0.75 + mapScroll, 80, 80, 812, 87, 44, 48);
 
       //The second platform to jump on
-      image(mapAssets, mapPlatforms[1].x, mapPlatforms[1].y + mapScroll, mapPlatforms[1].w, mapPlatforms[1].h, 539, 474, 112, 41);
+      image(mapAssets, platforms[1].x, platforms[1].y + mapScroll, platforms[1].w, platforms[1].h, 539, 474, 112, 41);
 
       image(mapAssets, windowWidth * 0.9, windowHeight * 0.1 + mapScroll, 140, 140, 348, 805, 64, 56);
 
@@ -60,27 +57,26 @@ function DrawMap(map) {
 
 
     case "portals_tutorial":
-      mapPlatforms = GetMap(map);
 
       // left side wall
-      image(mapAssets_SpaceStation, mapPlatforms[0].x, mapPlatforms[0].y, mapPlatforms[0].w, mapPlatforms[0].h, 181, 103, 23, 32);
+      image(mapAssets_SpaceStation, platforms[0].x, platforms[0].y, platforms[0].w, platforms[0].h, 181, 103, 23, 32);
 
       //Top Left ceiling
-      image(mapAssets_SpaceStation, mapPlatforms[6].x, mapPlatforms[6].y, mapPlatforms[6].w, mapPlatforms[6].h, 145, 121, 30, 21);
+      image(mapAssets_SpaceStation, platforms[6].x, platforms[6].y, platforms[6].w, platforms[6].h, 145, 121, 30, 21);
 
       //Top Right Ceiling
-      image(mapAssets_SpaceStation, mapPlatforms[2].x, mapPlatforms[2].y, mapPlatforms[2].w, mapPlatforms[2].h, 145, 121, 30, 21);
+      image(mapAssets_SpaceStation, platforms[2].x, platforms[2].y, platforms[2].w, platforms[2].h, 145, 121, 30, 21);
 
       // Right Wall
-      image(mapAssets_SpaceStation, mapPlatforms[1].x, mapPlatforms[1].y, mapPlatforms[1].w, mapPlatforms[1].h, 180, 69, 22, 31);
+      image(mapAssets_SpaceStation, platforms[1].x, platforms[1].y, platforms[1].w, platforms[1].h, 180, 69, 22, 31);
 
       //Floor
 
       //Bottom Right Floor
-      image(mapAssets_SpaceStation, mapPlatforms[7].x, mapPlatforms[7].y, mapPlatforms[7].w, mapPlatforms[7].h, 145, 94, 30, 23);
+      image(mapAssets_SpaceStation, platforms[7].x, platforms[7].y, platforms[7].w, platforms[7].h, 145, 94, 30, 23);
 
       //Bottom Left Floor
-      image(mapAssets_SpaceStation, mapPlatforms[11].x, mapPlatforms[11].y, mapPlatforms[11].w, mapPlatforms[11].h, 145, 94, 30, 23);
+      image(mapAssets_SpaceStation, platforms[11].x, platforms[11].y, platforms[11].w, platforms[11].h, 145, 94, 30, 23);
 
       // Block top
 
@@ -88,13 +84,13 @@ function DrawMap(map) {
       image(mapAssets_SpaceStation, windowWidth * 0.333, 0, windowWidth * 0.27, windowHeight * 0.38, 190, 71, 10, 25);
 
       // Block top left wall
-      image(mapAssets_SpaceStation, mapPlatforms[5].x, mapPlatforms[5].y, mapPlatforms[5].w, mapPlatforms[5].h, 180, 69, 22, 31);
+      image(mapAssets_SpaceStation, platforms[5].x, platforms[5].y, platforms[5].w, platforms[5].h, 180, 69, 22, 31);
 
       //Block top bottom wall
-      image(mapAssets_SpaceStation, mapPlatforms[4].x, mapPlatforms[4].y, mapPlatforms[4].w, mapPlatforms[4].h, 145, 121, 30, 21);
+      image(mapAssets_SpaceStation, platforms[4].x, platforms[4].y, platforms[4].w, platforms[4].h, 145, 121, 30, 21);
 
       //Block top right wall
-      image(mapAssets_SpaceStation, mapPlatforms[3].x, mapPlatforms[3].y, mapPlatforms[3].w, mapPlatforms[3].h, 181, 103, 23, 32);
+      image(mapAssets_SpaceStation, platforms[3].x, platforms[3].y, platforms[3].w, platforms[3].h, 181, 103, 23, 32);
 
       //Block Bottom
 
@@ -102,13 +98,13 @@ function DrawMap(map) {
       image(mapAssets_SpaceStation, windowWidth * 0.35, windowHeight * 0.65, windowWidth * 0.25, windowHeight * 0.38, 190, 71, 10, 25);
 
       //Block Bottom right wall
-      image(mapAssets_SpaceStation, mapPlatforms[8].x, mapPlatforms[8].y, mapPlatforms[8].w, mapPlatforms[8].h, 181, 103, 23, 32);
+      image(mapAssets_SpaceStation, platforms[8].x, platforms[8].y, platforms[8].w, platforms[8].h, 181, 103, 23, 32);
 
       //Block Bottom Floor
-      image(mapAssets_SpaceStation, mapPlatforms[10].x, mapPlatforms[10].y, mapPlatforms[10].w, mapPlatforms[10].h, 145, 94, 30, 23);
+      image(mapAssets_SpaceStation, platforms[10].x, platforms[10].y, platforms[10].w, platforms[10].h, 145, 94, 30, 23);
 
       //Block Bottom left wall
-      image(mapAssets_SpaceStation, mapPlatforms[9].x, mapPlatforms[9].y, mapPlatforms[9].w, mapPlatforms[9].h, 180, 69, 22, 31);
+      image(mapAssets_SpaceStation, platforms[9].x, platforms[9].y, platforms[9].w, platforms[9].h, 180, 69, 22, 31);
 
       //Corners
 
@@ -156,47 +152,46 @@ function DrawMap(map) {
 
     case "map3":
 
-      mapPlatforms = GetMap(map);
 
       //Platform Connecting
       //Top left connecting corner pieces
-      image(mapAssets_SpaceStation, mapPlatforms[6].x, mapPlatforms[6].y, mapPlatforms[6].w, mapPlatforms[6].h, 181, 103, 23, 32);
+      image(mapAssets_SpaceStation, platforms[6].x, platforms[6].y, platforms[6].w, platforms[6].h, 181, 103, 23, 32);
       //bottom platform connecting corner pieces
-      image(mapAssets_SpaceStation, mapPlatforms[11].x, mapPlatforms[11].y, mapPlatforms[11].w, mapPlatforms[11].h, 181, 103, 23, 32);
+      image(mapAssets_SpaceStation, platforms[11].x, platforms[11].y, platforms[11].w, platforms[11].h, 181, 103, 23, 32);
 
       //main map pieces
       //Right wall
-      image(mapAssets_SpaceStation, mapPlatforms[0].x, mapPlatforms[0].y, mapPlatforms[0].w, mapPlatforms[0].h, 180, 69, 22, 31);
+      image(mapAssets_SpaceStation, platforms[0].x, platforms[0].y, platforms[0].w, platforms[0].h, 180, 69, 22, 31);
 
       //Top left side wall
-      image(mapAssets_SpaceStation, mapPlatforms[1].x, mapPlatforms[1].y, mapPlatforms[1].w, mapPlatforms[1].h, 181, 103, 23, 32);
+      image(mapAssets_SpaceStation, platforms[1].x, platforms[1].y, platforms[1].w, platforms[1].h, 181, 103, 23, 32);
 
       //Top left platform floor
-      image(mapAssets_SpaceStation, mapPlatforms[5].x, mapPlatforms[5].y, mapPlatforms[5].w, mapPlatforms[5].h, 145, 94, 30, 23);
+      image(mapAssets_SpaceStation, platforms[5].x, platforms[5].y, platforms[5].w, platforms[5].h, 145, 94, 30, 23);
 
       //Top left platform bottom
-      image(mapAssets_SpaceStation, mapPlatforms[7].x, mapPlatforms[7].y, mapPlatforms[7].w, mapPlatforms[7].h, 145, 121, 30, 23);
+      image(mapAssets_SpaceStation, platforms[7].x, platforms[7].y, platforms[7].w, platforms[7].h, 145, 121, 30, 23);
 
       //Middle left wall
-      image(mapAssets_SpaceStation, mapPlatforms[8].x, mapPlatforms[8].y, mapPlatforms[8].w, mapPlatforms[8].h, 181, 103, 23, 32);
+      image(mapAssets_SpaceStation, platforms[8].x, platforms[8].y, platforms[8].w, platforms[8].h, 181, 103, 23, 32);
 
       //Middle left platform top
-      image(mapAssets_SpaceStation, mapPlatforms[10].x, mapPlatforms[10].y, mapPlatforms[10].w, mapPlatforms[10].h, 145, 94, 30, 23);
+      image(mapAssets_SpaceStation, platforms[10].x, platforms[10].y, platforms[10].w, platforms[10].h, 145, 94, 30, 23);
 
       //Top left platform bottom
-      image(mapAssets_SpaceStation, mapPlatforms[12].x, mapPlatforms[12].y, mapPlatforms[12].w, mapPlatforms[12].h, 145, 121, 30, 23);
+      image(mapAssets_SpaceStation, platforms[12].x, platforms[12].y, platforms[12].w, platforms[12].h, 145, 121, 30, 23);
 
       //Top Left ceiling
-      image(mapAssets_SpaceStation, mapPlatforms[2].x, mapPlatforms[2].y, mapPlatforms[2].w, mapPlatforms[2].h, 145, 121, 30, 21);
+      image(mapAssets_SpaceStation, platforms[2].x, platforms[2].y, platforms[2].w, platforms[2].h, 145, 121, 30, 21);
 
       //Bottom right corner floor
-      image(mapAssets_SpaceStation, mapPlatforms[9].x, mapPlatforms[9].y, mapPlatforms[9].w, mapPlatforms[9].h, 145, 94, 30, 23);
+      image(mapAssets_SpaceStation, platforms[9].x, platforms[9].y, platforms[9].w, platforms[9].h, 145, 94, 30, 23);
 
       //Bottom right inner wall
-      image(mapAssets_SpaceStation, mapPlatforms[3].x, mapPlatforms[3].y, mapPlatforms[3].w, mapPlatforms[3].h, 180, 69, 22, 31);
+      image(mapAssets_SpaceStation, platforms[3].x, platforms[3].y, platforms[3].w, platforms[3].h, 180, 69, 22, 31);
 
       //Top right asteriod belt
-      image(mapAssets, mapPlatforms[4].x, mapPlatforms[4].y - 20, mapPlatforms[4].w, mapPlatforms[4].h + 50, 346, 481, 114, 31);
+      image(mapAssets, platforms[4].x, platforms[4].y - 20, platforms[4].w, platforms[4].h + 50, 346, 481, 114, 31);
 
       //Top grey area for platform
       image(mapAssets_SpaceStation, windowWidth * 0.001, windowHeight * 0.37, windowWidth * 0.03, windowHeight * 0.03, 190, 71, 10, 25);
@@ -248,8 +243,110 @@ function DrawMap(map) {
       break;
 
     case "map4":
-      mapPlatforms = GetMap(map);
       image(mapAssets, windowWidth * 0.93, windowHeight * 0.45 + mapScroll, 140, 140, 1440, 38, 49, 48);
+      break;
+
+    case "map5":
+      //top platform left side
+
+      //top portion
+      image(mapAssets_SpaceStation, platforms[0].x, platforms[0].y, platforms[0].w, platforms[0].h, 145, 94, 30, 23);
+      image(mapAssets_SpaceStation, platforms[1].x, platforms[1].y, platforms[1].w, platforms[1].h, 145, 94, 30, 23);
+
+      //middle platform
+      image(mapAssets_SpaceStation, platforms[2].x, platforms[2].y, platforms[2].w, platforms[2].h, 145, 94, 30, 23);
+
+      //Bottom platform right
+      image(mapAssets_SpaceStation, platforms[3].x, platforms[3].y, platforms[3].w, platforms[3].h, 145, 94, 30, 23);
+
+      //Bottom platform left
+      image(mapAssets_SpaceStation, platforms[4].x, platforms[4].y, platforms[4].w, platforms[4].h, 145, 94, 30, 23);
+
+
+      //left platform wall
+      image(mapAssets_SpaceStation, platforms[5].x, platforms[5].y, platforms[5].w, platforms[5].h, 180, 69, 22, 31);
+
+      //right wall
+      image(mapAssets_SpaceStation, platforms[6].x, platforms[6].y, platforms[6].w, platforms[6].h, 180, 69, 22, 31);
+
+
+      //Bottom right corner
+      image(mapAssets_SpaceStation, windowWidth * 0.9805, windowHeight * 0.738, windowWidth * 0.025, windowHeight * 0.04, 199, 35, 23, 23);
+      image(mapAssets_SpaceStation, windowWidth * 0.98, windowHeight * 0.77, windowWidth * 0.02, windowHeight * 0.028, 190, 71, 10, 25);
+
+
+
+      //goal
+
+      image(mapAssets, windowWidth * 0.05, windowHeight * 0.8 + mapScroll, 140, 140, 1440, 38, 49, 48);
+      break;
+
+    case "map6":
+
+      //left outer wall
+      image(mapAssets_SpaceStation, platforms[0].x, platforms[0].y, platforms[0].w, platforms[0].h, 180, 69, 22, 31);
+
+      //left inner wall
+      image(mapAssets_SpaceStation, platforms[1].x, platforms[1].y, platforms[1].w, platforms[1].h, 180, 69, 22, 31);
+
+      //right outer wall
+      image(mapAssets_SpaceStation, platforms[2].x, platforms[2].y, platforms[2].w, platforms[2].h, 181, 103, 23, 32);
+
+      //right inner wall
+      image(mapAssets_SpaceStation, platforms[3].x, platforms[3].y, platforms[3].w, platforms[3].h, 181, 103, 23, 32);
+
+      //roof
+      image(mapAssets_SpaceStation, platforms[4].x, platforms[4].y, platforms[4].w, platforms[4].h, 145, 121, 30, 21);
+
+
+      //left platform
+
+      //left platform wall
+      image(mapAssets_SpaceStation, platforms[5].x, platforms[5].y, platforms[5].w, platforms[5].h, 181, 103, 23, 32);
+
+      //left platform
+      image(mapAssets_SpaceStation, platforms[6].x, platforms[6].y, platforms[6].w, platforms[6].h, 145, 94, 30, 23);
+
+      //middle platform
+
+      //middle platform
+      image(mapAssets_SpaceStation, platforms[7].x, platforms[7].y, platforms[7].w, platforms[7].h, 145, 94, 30, 23);
+
+
+      //right platform
+
+      //right platform wall
+      image(mapAssets_SpaceStation, platforms[8].x, platforms[8].y, platforms[8].w, platforms[8].h, 180, 69, 22, 31);
+
+      //right platform
+      image(mapAssets_SpaceStation, platforms[9].x, platforms[9].y, platforms[9].w, platforms[9].h, 145, 94, 30, 23);
+
+
+
+      // corners
+
+      //Top left corner
+      image(mapAssets_SpaceStation, windowWidth * 0.0065, windowHeight * 0.019, windowWidth * 0.025, windowHeight * 0.04, 144, 36, 23, 23);
+      image(mapAssets_SpaceStation, 0, 0, windowWidth * 0.03, windowHeight * 0.025, 190, 71, 10, 25);
+
+      //Bottom left corner
+      image(mapAssets_SpaceStation, windowWidth * 0.0035, windowHeight * 0.236, windowWidth * 0.025, windowHeight * 0.04, 146, 67, 29, 22);
+      image(mapAssets_SpaceStation, 0, windowHeight * 0.236, windowWidth * 0.01, windowHeight * 0.04, 190, 71, 10, 25);
+
+
+      //Bottom right corner
+      image(mapAssets_SpaceStation, windowWidth * 0.971, windowHeight * 0.237, windowWidth * 0.025, windowHeight * 0.04, 199, 35, 23, 23);
+      image(mapAssets_SpaceStation, windowWidth * 0.99, windowHeight * 0.23, windowWidth * 0.01, windowHeight * 0.04, 190, 71, 10, 25);
+
+
+      //Top Right Corner
+      image(mapAssets_SpaceStation, windowWidth * 0.9715, windowHeight * 0.017, windowWidth * 0.025, windowHeight * 0.05, 176, 34, 21, 24);
+      image(mapAssets_SpaceStation, windowWidth * 0.97, 0, windowWidth * 0.03, windowHeight * 0.02, 190, 71, 10, 25);
+
+
+      //goal
+      image(mapAssets, windowWidth * 0.45, windowHeight * 0.05 + mapScroll, 140, 140, 1440, 38, 49, 48);
+
       break;
   }
 }

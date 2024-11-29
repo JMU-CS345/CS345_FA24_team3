@@ -59,6 +59,7 @@ function GetMap(level) {
         pt_b_Block_Floor, pt_left_Floor,
       ];
       return map
+
     case "map3":
       //outer box
       let m3_right_wall = { x: windowWidth * 0.984, y: 0, h: windowHeight * 0.85, w: standard_platform_size };
@@ -133,6 +134,68 @@ function GetMap(level) {
 
       map = [l4_p1, l4_p2, l4_p3_left_bottom, l4_p4_left_up, l4_p5_middle_bottom,
         l4_p6_middle_up, l4_p7_right_bottom, l4_p8_right_up];
+      return map;
+
+    case "map5":
+      //the top platform
+      let l5_top_p1 = { x: 0, y: windowHeight * 0.2, w: windowWidth * 0.2, h: windowHeight * 0.05 };
+      let l5_top_p2 = { x: windowWidth * 0.3, y: windowHeight * 0.2, w: windowWidth, h: windowHeight * 0.05 };
+
+
+      //middle platform
+      let l5_mid_p1 = { x: windowWidth * 0.2, y: windowHeight * 0.45, w: windowWidth * 0.2, h: windowHeight * 0.05 };
+
+
+      //Bottom pieces
+      let l5_bottom_right_piece = { x: 0, y: windowHeight * 0.75, w: windowWidth * 0.2, h: windowHeight * 0.05 };
+      let l5_bottom_left_piece = { x: windowWidth * 0.8, y: windowHeight * 0.75, w: windowWidth * 0.2, h: windowHeight * 0.05 };
+
+      //left platform wall
+      let l5_left_wall = { x: windowWidth * 0.75, y: windowHeight * 0.25, w: windowWidth * 0.025, h: windowHeight * 0.4 };
+
+      //right wall
+      let l5_right_wall = { x: windowWidth * 0.99, y: windowHeight * 0.25, w: windowWidth * 0.025, h: windowHeight * 0.53 };
+
+      map = [l5_top_p1, l5_top_p2, l5_mid_p1, l5_bottom_right_piece, l5_bottom_left_piece, l5_left_wall, l5_right_wall];
+      return map;
+
+    case "map6":
+
+      // left wall
+      let l6_left_wall = { x: windowWidth * 0.25, y: windowHeight * 0.85, w: windowWidth * 0.025, h: windowHeight * 0.15 };
+
+      //left innner wall
+      let l6_left_inner_wall = { x: windowWidth * 0.4, y: windowHeight * 0.75, w: windowWidth * 0.025, h: windowHeight * 0.25 };
+
+      // right wall
+      let l6_right_wall = { x: windowWidth * 0.75, y: windowHeight * 0.85, w: windowWidth * 0.025, h: windowHeight * 0.2 };
+
+      //right innner walls
+      let l6_right_inner_wall = { x: windowWidth * 0.6, y: windowHeight * 0.75, w: windowWidth * 0.025, h: windowHeight * 0.3 };
+
+      //Roof
+      let l6_roof = { x: 0, y: 0, w: windowWidth, h: windowHeight * 0.05 };
+
+      //top left wall
+      let l6_top_left_wall = { x: 0, y: 0, w: windowWidth * 0.025, h: windowHeight * 0.3 };
+
+      //top right wall
+      let l6_top_right_wall = { x: windowWidth * 0.98, y: 0, w: windowWidth * 0.025, h: windowHeight * 0.29 };
+
+      //top left platform
+      let l6_top_left_platform = { x: 0, y: windowHeight * 0.25, w: windowWidth * 0.2, h: windowHeight * 0.05 };
+
+      //top middle platform
+      let l6_top_middle_platform = { x: windowWidth * 0.4, y: windowHeight * 0.25, w: windowWidth * 0.2, h: windowHeight * 0.05 };
+
+      //top right platform
+      let l6_top_right_platform = { x: windowWidth * 0.8, y: windowHeight * 0.25, w: windowWidth * 0.2, h: windowHeight * 0.05 };
+
+
+      map = [l6_left_wall, l6_left_inner_wall, l6_right_wall, l6_right_inner_wall, l6_roof,
+        l6_top_left_wall, l6_top_left_platform, l6_top_middle_platform, l6_top_right_wall,
+        l6_top_right_platform
+      ];
       return map;
   }
 }

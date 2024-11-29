@@ -35,11 +35,9 @@ var playerSpawn = { x: 10, y: -1 };
 
 //Map/Game State variables
 let platforms = []; // platform imp starts here
-let mapLevel = ["title", "map1", "portals_tutorial", "map3", "map4"];
+let mapLevel = ["title", "map1", "portals_tutorial", "map3", "map4", "map5", "map6"];
 let curLevel = 0;
 let gameStart = false;
-let standard_inner_corner_width = windowWidth * 0.02;
-let standard_inner_corner_height = windowHeight * 0.02;
 let standard_platform_size = windowWidth * 0.02;
 
 
@@ -112,7 +110,7 @@ function draw() {
     strokeWeight(3);
     fill("gray");
   } else {
-    noStroke();
+    //noStroke();
     noFill();
   }
 
@@ -168,7 +166,6 @@ function draw() {
     drawPortals();
     Health();
     updateHitbox();
-    noFill();
   }
 }
 

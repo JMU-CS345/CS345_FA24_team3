@@ -15,28 +15,36 @@ function GameState(state) {
 
     case "map1":
       background(level1);
-      platforms = GetMap(state);
       DrawMap(state);
       nextState(state);
       break;
 
     case "portals_tutorial":
       background(level2);
-      platforms = GetMap(state);
       DrawMap(state);
       nextState(state);
       break;
 
     case "map3":
       background(level3);
-      platforms = GetMap(state);
       DrawMap(state);
       nextState(state);
       break;
 
     case "map4":
       background(level1);
-      platforms = GetMap(state);
+      DrawMap(state);
+      nextState(state);
+      break;
+
+    case "map5":
+      background(level2);
+      DrawMap(state);
+      nextState(state);
+      break;
+
+    case "map6":
+      background(level3);
       DrawMap(state);
       break;
 
@@ -60,6 +68,8 @@ function nextState(state) {
         //drawColoredPlatforms = true;
         bMusic.loop();
         curLevel++;
+
+        platforms = GetMap(mapLevel[curLevel]);
         //The WindowHeight / 6.5 and WindowWidth / 12 are for making the enemies change size based on the screen size
 
         //setting up goal
@@ -70,6 +80,9 @@ function nextState(state) {
         playerSpawn.x = windowWidth * 0.1;
         playerSpawn.y = windowHeight * 0.9;
         spawnPlayer();
+
+        //If no textures, just use colored platforms. Must change to false after other level
+        drawColoredPlatforms = true;
 
         //Enemies
         alien1 = new Alien(600, windowHeight - 120, windowWidth / 12, windowHeight / 6.5);
@@ -111,9 +124,13 @@ function nextState(state) {
         //LEVEL UP
         nextLevel.play();
         curLevel++;
+        platforms = GetMap(mapLevel[curLevel]);
 
         //background
         background(level2);
+
+        //If no textures, just use colored platforms. Must change to false after other level
+        drawColoredPlatforms = false;
 
         //Setting up goal
         goal.x = windowWidth * 0.11;
@@ -155,6 +172,7 @@ function nextState(state) {
 
         //LEVEL UP
         curLevel++;
+        platforms = GetMap(mapLevel[curLevel]);
 
         //background for next level
         background(level3);
@@ -203,6 +221,7 @@ function nextState(state) {
 
         curLevel++;
         background(level1);
+        platforms = GetMap(mapLevel[curLevel]);
 
         robot1 = new Robot(800, windowWidth - 120, windowWidth / 12, windowHeight / 6.5);
         robot2 = new Robot(1200, windowWidth - 120, windowWidth / 12, windowHeight / 6.5);
@@ -215,8 +234,8 @@ function nextState(state) {
         drawColoredPlatforms = true;
 
         //Set up the goal for next level
-        goal.x = windowWidth * 0.73;
-        goal.y = windowHeight * 0.05;
+        goal.x = windowWidth * 0.93;
+        goal.y = windowHeight * 0.45;
 
         //make sure to clear restart if applicable
         restartLevel = false;
@@ -224,6 +243,125 @@ function nextState(state) {
       break;
 
     case "map4":
+      if ((isCollidingObject(playerHitBox, goal) || restartLevel == true) && !checkPlayerMoveAndJump()) {
+
+        //clean up this level
+        for (i = 0; i < enemies.length; i++) {
+          enemies[i] = null;
+          enemies.splice(i);
+        }
+
+        //clean up the portals
+        purpleP.x = -1;
+        goldP.x = -1;
+
+        //set spawn point for next level
+        playerSpawn.x = windowWidth * 0.01;
+        playerSpawn.y = windowHeight * 0.01;
+        spawnPlayer();
+
+        //Set up the things for the next level
+
+        curLevel++;
+        background(level1);
+        platforms = GetMap(mapLevel[curLevel]);
+
+        eAlien1 = new EnragedAlien(windowWidth * 0.6, windowHeight - 120, windowWidth / 12, windowHeight / 6.5);
+        eAlien2 = new EnragedAlien(windowWidth * 0.4, windowHeight - 120, windowWidth / 12, windowHeight / 6.5);
+
+        eAlien3 = new EnragedAlien(windowWidth * 0.5, windowHeight - 120, windowWidth / 12, windowHeight / 6.5);
+        eAlien4 = new EnragedAlien(windowWidth * 0.3, windowHeight - 120, windowWidth / 12, windowHeight / 6.5);
+        enemies.push(eAlien1, eAlien2, eAlien3, eAlien4);
+
+        //If no textures, just use colored platforms. Must change to false after other level
+        drawColoredPlatforms = false;
+
+        //Set up the goal for next level
+        goal.x = windowWidth * 0.05;
+        goal.y = windowHeight * 0.8 + mapScroll;
+
+        //make sure to clear restart if applicable
+        restartLevel = false;
+      }
+      break;
+
+    case "map5":
+      if ((isCollidingObject(playerHitBox, goal) || restartLevel == true) && !checkPlayerMoveAndJump()) {
+
+        //clean up this level
+        for (i = 0; i < enemies.length; i++) {
+          enemies[i] = null;
+          enemies.splice(i);
+        }
+
+        //clean up the portals
+        purpleP.x = -1;
+        goldP.x = -1;
+
+        //set spawn point for next level
+        playerSpawn.x = windowWidth * 0.01;
+        playerSpawn.y = windowHeight * 0.8;
+        spawnPlayer();
+
+        //Set up the things for the next level
+
+        curLevel++;
+        background(level3);
+        platforms = GetMap(mapLevel[curLevel]);
+
+        //enemies for next level
+        robot1 = new Robot(windowWidth * 0.1, windowHeight * 0.15, windowWidth / 12, windowHeight / 6.5);
+        robot2 = new Robot(windowWidth * 0.4, windowHeight * 0.15, windowWidth / 12, windowHeight / 6.5);
+        robot3 = new Robot(windowWidth * 0.9, windowHeight * 0.15, windowWidth / 12, windowHeight / 6.5);
+
+        enemies.push(robot1, robot2, robot3);
+
+        //If no textures, just use colored platforms. Must change to false after other level
+        drawColoredPlatforms = false;
+
+        //Set up the goal for next level
+        goal.x = windowWidth * 0.45;
+        goal.y = windowHeight * 0.05;
+
+        //make sure to clear restart if applicable
+        restartLevel = false;
+      }
+      break;
+    case "map6":
+      if ((isCollidingObject(playerHitBox, goal) || restartLevel == true) && !checkPlayerMoveAndJump()) {
+
+        //clean up this level
+        for (i = 0; i < enemies.length; i++) {
+          enemies[i] = null;
+          enemies.splice(i);
+        }
+
+        //clean up the portals
+        purpleP.x = -1;
+        goldP.x = -1;
+
+        //set spawn point for next level
+        playerSpawn.x = windowWidth * 0.01;
+        playerSpawn.y = windowHeight * 0.01;
+        spawnPlayer();
+
+        //Set up the things for the next level
+
+        curLevel++;
+        background(level2);
+        platforms = GetMap(mapLevel[curLevel]);
+
+        //If no textures, just use colored platforms. Must change to false after other level
+        drawColoredPlatforms = false;
+
+        //Set up the goal for next level
+        goal.x = windowWidth * 0.73;
+        goal.y = windowHeight * 0.05;
+
+        //make sure to clear restart if applicable
+        restartLevel = false;
+      }
+      break;
   }
 }
 
