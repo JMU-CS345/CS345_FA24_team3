@@ -392,7 +392,8 @@ class Boss extends Enemy {
         this.direction = 1;
         this.directionY = 0;
 
-        this.speed = 1.5
+        this.speedX = 2;
+        this.speedY = 1.5;
 
         this.hitboxOffsetX = 0;
         this.hitboxOffsetY = 0;
@@ -439,8 +440,8 @@ class Boss extends Enemy {
         image(Boss.asset, this.x, this.y, this.w, this.h, sx + 25, 0 + 25, Alien.FRAME_WIDTH, Alien.FRAME_HEIGHT);
     }
     move() {
-        this.x += this.speed * this.direction;
-        this.y += this.speed * this.directionY;
+        this.x += this.speedX * this.direction;
+        this.y += this.speedY * this.directionY;
 
         // Ensure the boss stays within the game window bounds
         if (this.x <= 0 || this.x >= windowWidth - this.w) {

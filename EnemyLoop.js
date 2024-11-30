@@ -125,7 +125,7 @@ function enemyLoop() {
 
         // boss enemy
         if (enemy instanceof Boss) {
-            enemy.assignMovementDirection(player);
+            enemy.assignMovementDirection(player); // similar functionality to the above if statement
         }
 
         // enemy update cycle
