@@ -94,46 +94,62 @@ function GetMap(level) {
     case "map4":
       //Starting square player stands on
       let l4_p1 = {
-        x: windowWidth * 0.0005, y: windowHeight * 0.88, w: asteriodBeltWidth * 1.0, h: asteriodBeltHeight, type: "platform"
+        x: windowWidth * 0.0005, y: windowHeight * 0.88, w: windowWidth * 0.142, h: windowHeight * 0.07, type: "platform"
       };
 
       //Wall next to player blocking projectiles
       let l4_p2 = {
-        x: windowWidth * 0.1276, y: windowHeight * 0.5185, w: asteriodBeltWidth * 0.28, h: asteriodBeltHeight * 6.8, type: "platform"
+        x: windowWidth * 0.1076, y: windowHeight * 0.5185, w: windowWidth * 0.0349, h: windowHeight * 0.3616, type: "platform"
       };
 
       //Bottom left platform
       let l4_p3_left_bottom = {
-        x: windowWidth * 0.2, y: (windowHeight * 0.5) + mapScroll, w: asteriodBeltWidth * 0.7, h: asteriodBeltHeight, type: "platform"
+        x: windowWidth * 0.15, y: (windowHeight * 0.5) + mapScroll, w: windowWidth * 0.08, h: windowHeight * 0.07, type: "platform"
       };
 
       //Upper left platform
       let l4_p4_left_up = {
-        x: windowWidth * 0.2, y: windowHeight * 0.001, w: asteriodBeltWidth * 0.7, h: asteriodBeltHeight, type: "platform"
+        x: windowWidth * 0.15, y: windowHeight * 0.001, w: windowWidth * 0.08, h: windowHeight * 0.07, type: "platform"
       };
 
       //Bottom middle platform
       let l4_p5_middle_bottom = {
-        x: windowWidth * 0.5, y: (windowHeight * 0.5) + mapScroll, w: asteriodBeltWidth * 0.7, h: asteriodBeltHeight, type: "platform"
+        x: windowWidth * 0.5, y: (windowHeight * 0.5) + mapScroll, w: windowWidth * 0.08, h: windowHeight * 0.07, type: "platform"
       };
 
       //Upper middle platform
       let l4_p6_middle_up = {
-        x: windowWidth * 0.5, y: windowHeight * 0.001, w: asteriodBeltWidth * 0.7, h: asteriodBeltHeight, type: "platform"
+        x: windowWidth * 0.5, y: windowHeight * 0.001, w: windowWidth * 0.08, h: windowHeight * 0.07, type: "platform"
       };
 
       //Bottom middle platform
       let l4_p7_right_bottom = {
-        x: windowWidth * 0.8, y: (windowHeight * 0.5) + mapScroll, w: asteriodBeltWidth * 0.7, h: asteriodBeltHeight, type: "platform"
+        x: windowWidth * 0.85, y: (windowHeight * 0.5) + mapScroll, w: windowWidth * 0.08, h: windowHeight * 0.07, type: "platform"
       };
 
       //Upper middle platform
       let l4_p8_right_up = {
-        x: windowWidth * 0.8, y: windowHeight * 0.001, w: asteriodBeltWidth * 0.7, h: asteriodBeltHeight, type: "platform"
+        x: windowWidth * 0.85, y: windowHeight * 0.001, w: windowWidth * 0.08, h: windowHeight * 0.07, type: "platform"
       };
 
       map = [l4_p1, l4_p2, l4_p3_left_bottom, l4_p4_left_up, l4_p5_middle_bottom,
         l4_p6_middle_up, l4_p7_right_bottom, l4_p8_right_up];
+      return map;
+
+    case "map5":
+      //Starting square player stands on
+      let l5_p1 = {
+        x: windowWidth * 0.0005, y: windowHeight * 0.88, w: windowWidth * 0.162, h: windowHeight * 0.07, type: "platform"
+      };
+
+      // JAIL
+      let jail1 = {
+        x: windowWidth / 2 * 0.85, y: windowHeight * 0.5, w: windowWidth * 0.162, h: windowHeight * 0.07, type: "platform"
+      };
+      let jail2 = {
+        x: windowWidth / 2 * 0.85, y: windowHeight * 0.5, w: windowWidth * 0.162, h: windowHeight * 0.07, type: "platform"
+      };
+      map = [l5_p1, jail1, jail2];
       return map;
 
     case "map7":

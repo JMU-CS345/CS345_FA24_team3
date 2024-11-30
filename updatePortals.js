@@ -79,8 +79,8 @@ function shootPortal(passedMouseX, passedMouseY, colorP) {
     // console.log("mouseX: ", passedMouseX, "mouseY: ", passedMouseY)
     // console.log("playerX: ", player.x, "playerY: ", player.y)
 
-    xTarget = passedMouseX - player.x - 70;
-    yTarget = passedMouseY - player.y - 50;
+    xTarget = passedMouseX - player.x - windowWidth * 0.07;
+    yTarget = passedMouseY - player.y - windowHeight * 0.05;
     portalTarget = sqrt((xTarget * xTarget) + (yTarget * yTarget));
     // Normalize
     xTarget /= portalTarget;

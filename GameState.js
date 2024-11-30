@@ -37,6 +37,13 @@ function GameState(state) {
       nextState(state);
       break;
 
+    case "map5":
+      background(level2);
+      platforms = GetMap(state);
+      DrawMap(state);
+      nextState(map);
+      break;
+
     case "map7":
       background(level2);
       DrawMap(state);
@@ -226,8 +233,8 @@ function nextState(state) {
         robot1 = new Robot(800, windowWidth - 120, windowWidth / 12, windowHeight / 6.5);
         robot2 = new Robot(1200, windowWidth - 120, windowWidth / 12, windowHeight / 6.5);
         robot3 = new Robot(1600, windowWidth - 120, windowWidth / 12, windowHeight / 6.5);
-        //robot4 = new Robot(1050, windowWidth - 120, windowWidth / 12, windowHeight / 6.5);
-        // robot5 = new Robot(1350, windowWidth - 120, windowWidth / 12, windowHeight / 6.5);
+        robot4 = new Robot(1050, windowWidth - 120, windowWidth / 12, windowHeight / 6.5);
+        robot5 = new Robot(1350, windowWidth - 120, windowWidth / 12, windowHeight / 6.5);
         enemies.push(robot1, robot2, robot3);
 
         //If no textures, just use colored platforms. Must change to false after other level
