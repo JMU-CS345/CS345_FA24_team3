@@ -235,7 +235,7 @@ function nextState(state) {
         robot3 = new Robot(1600, windowWidth - 120, windowWidth / 12, windowHeight / 6.5);
         robot4 = new Robot(1050, windowWidth - 120, windowWidth / 12, windowHeight / 6.5);
         robot5 = new Robot(1350, windowWidth - 120, windowWidth / 12, windowHeight / 6.5);
-        enemies.push(robot1, robot2, robot3);
+        enemies.push(robot1, robot2, robot3, robot4);
 
         //If no textures, just use colored platforms. Must change to false after other level
         drawColoredPlatforms = true;
