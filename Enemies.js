@@ -502,7 +502,7 @@ class Boss extends Enemy {
     drawBossHealthBar(currentHealth) {
         const barWidth = windowWidth / 3;
         const barHeight = 20;
-        const x = (windowWidth - barWidth) / 2;y
+        const x = (windowWidth - barWidth) / 2;
         const y = 50;
     
         const healthRatio = currentHealth / Boss.maxHealth;
