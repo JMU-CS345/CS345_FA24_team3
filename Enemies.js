@@ -391,6 +391,8 @@ class Boss extends Enemy {
     static chargeInterval = 2000;
     static fireIntervals = 1000;
 
+    static maxHealth = 3;
+
     constructor(x, y, w, h) {
         
         super(x, y, w, h);
@@ -419,6 +421,8 @@ class Boss extends Enemy {
         this.changeSwitchDir = true;
         this.fireTimer = 0;
         this.isFiring = false;
+
+        this.currentHealth = Boss.maxHealth;
 
     }
     attack(player) {
@@ -494,6 +498,27 @@ class Boss extends Enemy {
             image(Boss.asset, this.x, this.y, this.w, this.h, sx, 0, 100, 100);
         }
     }
+
+    drawBossHealthBar(currentHealth) {
+        const barWidth = windowWidth / 3;
+        const barHeight = 20;
+        const x = (windowWidth - barWidth) / 2;y
+        const y = 50;
+    
+        const healthRatio = currentHealth / Boss.maxHealth;
+        const healthWidth = barWidth * healthRatio;
+    
+        fill(100,0,0);
+        rect(x, y, barWidth, barHeight);
+    
+        fill(255, 0, 0);
+        rect(x, y, healthWidth, barHeight);
+    
+        noFill();
+        stroke(0);
+        rect(x, y, barWidth, barHeight);
+    }
+
     move() {
 
         this.x += this.speedX * this.direction;
