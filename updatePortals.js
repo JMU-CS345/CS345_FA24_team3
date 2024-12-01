@@ -134,3 +134,12 @@ function changePortalColor() {
     }
     square(windowWidth - 95, 125, 35);
 }
+//Destroys the Portals
+function destroyPortal() {
+    purpleP.x = -1;
+    goldP.x = -1;
+    purpleP.vertical = false;
+    purpleP.directon = 'none';
+    goldP.vertical = false;
+    goldP.directon = 'none';
+}
