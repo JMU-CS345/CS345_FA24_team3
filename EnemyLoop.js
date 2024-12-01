@@ -124,6 +124,9 @@ function enemyLoop() {
         }
 
         // boss enemy
+        if (enemy.checkProjHitsPlayer(player)) {
+            console.log("Laser collision detected!");
+        }
         if (enemy instanceof Boss) {
             enemy.assignMovementDirection(player); // similar functionality to the above if statement
 
@@ -135,7 +138,7 @@ function enemyLoop() {
                 hurtSound.play();
                 canGetHurt = false;
             }
-            
+
             enemy.projTimer += 16;
         }
 

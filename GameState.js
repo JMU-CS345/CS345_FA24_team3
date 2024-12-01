@@ -107,10 +107,10 @@ function nextState(state) {
         boss1 = new Boss(100, 100, windowWidth / 9, windowHeight / 4.875);
         // eAlien1 = new EnragedAlien(1200, windowWidth - 120, windowWidth / 12, windowHeight / 6.5);
         // robot1 = new Robot(1000, windowWidth - 120, windowWidth / 12, windowHeight / 6.5);
-       
+
         enemies.push(boss1);
         // enemies.push(alien1, alien2, alien3, boss1);
-        
+
         Alien.asset = alienImage;
         EnragedAlien.asset = alienEnragedImage
         Robot.assetWalk = robotWalk;

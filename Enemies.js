@@ -415,7 +415,7 @@ class Boss extends Enemy {
         this.frameDelay = 10;
 
         this.projTimer = 0;
-        this.projectile = null; // place holder for laser or first. Only one will be on map at same time.
+        this.projectile = null; // place holder for laser or fist. Only one will be on map at same time.
         this.isCharging = false;
         this.chargeTimer = 0;
         this.changeSwitchDir = true;
@@ -431,13 +431,17 @@ class Boss extends Enemy {
             this.canShoot = false;
             this.isCharging = true;
 
-            const laserX = this.x + this.w / 2;
-            const laserY = this.y + this.h / 2;
+            const projX = this.x + this.w / 2;
+            const projY = this.y + this.h / 2;
 
             const targetX = player.x + player.w / 2;
             const targetY = player.y + player.h / 2;
-
-            this.projectile = new Laserbeam(laserX, laserY, targetX, targetY);
+            //Chooses which type of projectile to make. More likely to choose lazer over Fist
+            if (Math.random() < 0.8) {
+                this.projectile = new Laserbeam(projX, projY, targetX, targetY);
+            } else {
+                this.projectile = new Fist(projX, projY, targetX, targetY);
+            }
         }
     }
 
@@ -463,12 +467,12 @@ class Boss extends Enemy {
         if (this.projectile == null) {
             return;
         }
-        
+
         if (
             this.projectile.x < playerHitBox.x + playerHitBox.w &&
-            this.projectile.x + this.projectile.x.w > playerHitBox.x &&
+            this.projectile.x + this.projectile.w > playerHitBox.x &&
             this.projectile.y < playerHitBox.y + playerHitBox.h &&
-                this.projectile.x.y + this.projectile.x.h > playerHitBox.y
+            this.projectile.y + this.projectile.h > playerHitBox.y
         ) {
             this.projectiles = null;
             return true;
@@ -536,8 +540,17 @@ class Boss extends Enemy {
             this.projTimer = 0;
             this.multiShotPrevention = false;
         }
+        if (this.projectile) {
+            this.projectile.move();
+            this.projectile.draw();
 
-
+            // Check if the projectile is out of bounds or has hit something
+            if (!this.projectile.active ||
+                this.projectile.x < 0 || this.projectile.x > windowWidth ||
+                this.projectile.y < 0 || this.projectile.y > windowHeight) {
+                this.projectile = null;
+            }
+        }
         this.assignMovementDirection(player);
         this.draw();
         this.move();
@@ -577,13 +590,30 @@ class Laserbeam {
 }
 
 class Fist {
+    static assetFist = null;
     constructor(x, y, targetX, targetY) {
+        this.x = x;
+        this.y = y;
+
+        this.w = windowWidth / 50;
+        this.h = windowHeight / 50;
+
+        this.speed = 4.5
+
+        const dx = targetX - x;
+        const dy = targetY - y;
+        const magnitude = Math.sqrt(dx * dx + dy * dy);
+
+        this.vx = (dx / magnitude) * this.speed;
+        this.vy = (dy / magnitude) * this.speed;
 
     }
     move() {
+        this.x += this.vx;
+        this.y += this.vy;
 
     }
     draw() {
-
+        image(Laser.assetFist, this.x, this.y, this.w, this.h, 50, 50, 25, 25);
     }
 }
