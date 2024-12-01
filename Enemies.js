@@ -394,7 +394,7 @@ class Boss extends Enemy {
     static maxHealth = 3;
 
     constructor(x, y, w, h) {
-        
+
         super(x, y, w, h);
 
         this.direction = 1;
@@ -504,16 +504,16 @@ class Boss extends Enemy {
         const barHeight = 20;
         const x = (windowWidth - barWidth) / 2;
         const y = 50;
-    
+
         const healthRatio = currentHealth / Boss.maxHealth;
         const healthWidth = barWidth * healthRatio;
-    
-        fill(100,0,0);
+
+        fill(100, 0, 0);
         rect(x, y, barWidth, barHeight);
-    
+
         fill(255, 0, 0);
         rect(x, y, healthWidth, barHeight);
-    
+
         noFill();
         stroke(0);
         rect(x, y, barWidth, barHeight);
@@ -543,15 +543,15 @@ class Boss extends Enemy {
         if (!this.isCharging && !this.isFiring) {
             this.projTimer += deltaTime;
             this.changeSwitchDir = true;
-        // charging up shot
+            // charging up shot
         } else if (this.isCharging) {
             this.chargeTimer += deltaTime;
             this.changeSwitchDir = false;
-            
+
             this.speedX = 0;
             this.speedY = 0;
-        // firing
-        } else if(this.isFiring) {
+            // firing
+        } else if (this.isFiring) {
             this.fireTimer += deltaTime;
             this.changeSwitchDir = false;
         }
@@ -592,7 +592,9 @@ class Boss extends Enemy {
                 this.projectile = null;
             }
         }
-
+        if (this.projectile instanceof Laserbeam && (isCollidingObject(this.projectile, purpleP) || isCollidingObject(this.projectile, goldP))) {
+            destroyPortal();
+        }
         this.assignMovementDirection(player);
         this.draw();
         this.move();
