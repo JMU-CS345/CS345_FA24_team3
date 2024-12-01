@@ -36,7 +36,7 @@ var playerSpawn = { x: 10, y: -1 };
 //Map/Game State variables
 let platforms = []; // platform imp starts here
 let mapLevel = ["title", "map1", "portals_tutorial", "map3", "map4", "map5", "map6", "map7", "map8"];
-let curLevel = 6;
+let curLevel = 0;
 let gameStart = false;
 let standard_platform_size = windowWidth * 0.02;
 
@@ -59,6 +59,7 @@ function preload() {
   robotWalk = loadImage("assets/Robot_walk.png");
   laser = loadImage("assets/Laser.png");
   bossImage = loadImage("assets/boss.png");
+  bossRImage = loadImage("assets/bossR.png");
   bossFist = loadImage("assets/boss_fist.png");
   bossLaser = loadImage("assets/boss_laser.png");
   mapAssets = loadImage("assets/PlanetAssets.png"); //space stuff

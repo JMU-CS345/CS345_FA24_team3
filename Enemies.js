@@ -380,9 +380,13 @@ class Laser {
 class Boss extends Enemy {
 
     static asset = null;
+    static assetR = null;
 
     static FRAME_WIDTH = 48;
     static FRAME_HEIGHT = 48;
+
+    static shootingIntervals = 6000;
+    static chargeInterval = 2000;
 
     constructor(x, y, w, h) {
         if (new.target == Enemy)
@@ -410,16 +414,38 @@ class Boss extends Enemy {
         this.frameCounter = 0;
         this.frameDelay = 10;
 
-        this.updateTimer = 0;
+        this.projTimer = 0;
+        this.projectile = null; // place holder for laser or first. Only one will be on map at same time.
+        this.isCharging = false;
+        this.chargeTimer = 0;
+        this.changeSwitchDir = true;
+
     }
     attack(player) {
         spawnPlayer();
         player.v = 0;
     }
-    shootAtPlayer(player) {
 
+    shootAtPlayer(player) {
+        if (this.canShoot) {
+            this.canShoot = false;
+            this.isCharging = true;
+
+            const laserX = this.x + this.w / 2;
+            const laserY = this.y + this.h / 2;
+
+            const targetX = player.x + player.w / 2;
+            const targetY = player.y + player.h / 2;
+
+            this.projectile = new Laserbeam(laserX, laserY, targetX, targetY);
+        }
     }
+
     assignMovementDirection(player) {
+        if (!this.changeSwitchDir) {
+            return;
+        }
+
         if (player.x > this.x) {
             this.direction = 1; // Move right
         } else if (player.x < this.x) {
@@ -432,14 +458,42 @@ class Boss extends Enemy {
             this.directionY = -1; // Move up
         }
     }
-    updateProjectiles() {
 
+    checkProjHitsPlayer(player) {
+        if (this.projectile == null) {
+            return;
+        }
+        
+        if (
+            this.projectile.x < playerHitBox.x + playerHitBox.w &&
+            this.projectile.x + this.projectile.x.w > playerHitBox.x &&
+            this.projectile.y < playerHitBox.y + playerHitBox.h &&
+                this.projectile.x.y + this.projectile.x.h > playerHitBox.y
+        ) {
+            this.projectiles = null;
+            return true;
+        }
+        return false;
     }
+
     draw() {
         const sx = this.currentFrame * Boss.FRAME_WIDTH;
-        image(Boss.asset, this.x, this.y, this.w, this.h, sx + 25, 0 + 25, Alien.FRAME_WIDTH, Alien.FRAME_HEIGHT);
+
+        if (this.isCharging) {
+            if (this.direction == 1) {
+                image(Boss.asset, this.x, this.y, this.w, this.h, 300, 200, 100, 100);
+            } else {
+                image(Boss.assetR, this.x, this.y, this.w, this.h, 600, 200, 100, 100);
+            }
+        } else {
+            image(Boss.asset, this.x, this.y, this.w, this.h, sx, 0, 100, 100);
+        }
     }
     move() {
+        if (!this.changeSwitchDir) {
+            return;
+        }
+
         this.x += this.speedX * this.direction;
         this.y += this.speedY * this.directionY;
 
@@ -451,10 +505,39 @@ class Boss extends Enemy {
             this.directionY *= -1;
         }
     }
+
     killed() {
 
     }
+
     update() {
+
+        if (!this.isCharging) {
+            this.projTimer += deltaTime;
+            this.changeSwitchDir = true;
+        } else {
+            this.chargeTimer += deltaTime;
+            this.changeSwitchDir = false;
+
+            this.speedX = 0;
+            this.speedY = 0;
+        }
+
+        if (this.chargeTimer >= Boss.chargeInterval) {
+            this.isCharging = false;
+            this.chargeTimer = 0;
+
+            this.speedX = 2;
+            this.speedY = 1.5;
+        }
+
+        if (this.projTimer >= Boss.shootingIntervals) {
+            this.canShoot = true;
+            this.projTimer = 0;
+            this.multiShotPrevention = false;
+        }
+
+
         this.assignMovementDirection(player);
         this.draw();
         this.move();

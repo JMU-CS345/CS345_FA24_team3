@@ -126,6 +126,17 @@ function enemyLoop() {
         // boss enemy
         if (enemy instanceof Boss) {
             enemy.assignMovementDirection(player); // similar functionality to the above if statement
+
+            enemy.shootAtPlayer(player);
+
+            if (enemy.checkProjHitsPlayer(player) && canGetHurt) {
+                enemy.attack(player);
+                player.health--;
+                hurtSound.play();
+                canGetHurt = false;
+            }
+            
+            enemy.projTimer += 16;
         }
 
         // enemy update cycle
