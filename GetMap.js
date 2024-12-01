@@ -138,18 +138,53 @@ function GetMap(level) {
 
     case "map5":
       //Starting square player stands on
-      let l5_p1 = {
-        x: windowWidth * 0.0005, y: windowHeight * 0.88, w: windowWidth * 0.162, h: windowHeight * 0.07, type: "platform"
-      };
+      // let l5_p1 = {
+      //   x: windowWidth * 0.0005, y: windowHeight * 0.65, w: windowWidth * 0.162, h: windowHeight * 0.05, type: "platform"
+      // };
+      // let l5_p2 = {
+      //   x: windowWidth * 0.0005, y: windowHeight * 0.0001, w: windowWidth * 0.162, h: windowHeight * 0.05, type: "platform"
+      // };
+
+      //!!!!!!!!!!!!!!!
+      // Have a top platform move on this map, making it harder to get aliens in?
+      // Have level reset if player kills all enemies
 
       // JAIL
       let jail1 = {
-        x: windowWidth / 2 * 0.85, y: windowHeight * 0.5, w: windowWidth * 0.162, h: windowHeight * 0.07, type: "platform"
+        x: windowWidth * 0.425, y: windowHeight * 0.5, w: windowWidth * 0.162, h: windowHeight * 0.05, type: "platform"
       };
       let jail2 = {
-        x: windowWidth / 2 * 0.85, y: windowHeight * 0.5, w: windowWidth * 0.162, h: windowHeight * 0.07, type: "platform"
+        x: windowWidth * 0.402, y: windowHeight * 0.2884, w: windowWidth * 0.023, h: windowHeight * 0.262, type: "platform"
       };
-      map = [l5_p1, jail1, jail2];
+      let jail3 = {
+        x: windowWidth * 0.587, y: windowHeight * 0.2884, w: windowWidth * 0.023, h: windowHeight * 0.262, type: "platform"
+      };
+      let jail4 = {
+        x: windowWidth * 0.468, y: windowHeight * 0.01, w: windowWidth * 0.082, h: windowHeight * 0.05, type: "platform"
+      };
+
+      // Walls to get aliens into jail
+      let wall0 = {
+        x: windowWidth * 0.202, y: windowHeight * 0.82, w: windowWidth * 0.023, h: windowHeight * 0.06, type: "platform"
+      };
+      let wall1 = {
+        x: windowWidth * 0.202, y: windowHeight * 0.92, w: windowWidth * 0.023, h: windowHeight * 0.06, type: "platform"
+      };
+      let wall2 = {
+        x: windowWidth * 0.787, y: windowHeight * 0.82, w: windowWidth * 0.023, h: windowHeight * 0.18, type: "platform"
+      };
+      let wall3 = {
+        x: windowWidth * 0.202, y: windowHeight * 0.775, w: windowWidth * 0.608, h: windowHeight * 0.045, type: "platform"
+      };
+      map = [jail1, jail2, jail3, jail4, wall0, wall1, wall2, wall3];
+      return map;
+
+    case "map6":
+      // JAIL
+      let l6_p1 = {
+        x: windowWidth * 0.425, y: windowHeight * 0.5, w: windowWidth * 0.162, h: windowHeight * 0.05, type: "platform"
+      };
+      map = [l6_p1];
       return map;
 
     case "map7":
