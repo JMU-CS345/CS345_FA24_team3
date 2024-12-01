@@ -377,6 +377,8 @@ class Laser {
 
 // =====================================================================
 
+let drawHelper;
+
 class Boss extends Enemy {
 
     static asset = null;
@@ -385,12 +387,12 @@ class Boss extends Enemy {
     static FRAME_WIDTH = 48;
     static FRAME_HEIGHT = 48;
 
-    static shootingIntervals = 6000;
+    static shootingIntervals = 5000;
     static chargeInterval = 2000;
+    static fireIntervals = 1000;
 
     constructor(x, y, w, h) {
-        if (new.target == Enemy)
-            throw new Error("Specify what enemy instance is being constructed")
+        
         super(x, y, w, h);
 
         this.direction = 1;
@@ -410,15 +412,13 @@ class Boss extends Enemy {
         this.canShoot = false;
         this.detectionRange = windowWidth;
 
-        this.currentFrame = 0;
-        this.frameCounter = 0;
-        this.frameDelay = 10;
-
         this.projTimer = 0;
         this.projectile = null; // place holder for laser or fist. Only one will be on map at same time.
         this.isCharging = false;
         this.chargeTimer = 0;
         this.changeSwitchDir = true;
+        this.fireTimer = 0;
+        this.isFiring = false;
 
     }
     attack(player) {
@@ -428,8 +428,8 @@ class Boss extends Enemy {
 
     shootAtPlayer(player) {
         if (this.canShoot) {
+            console.log("shot at palyer");
             this.canShoot = false;
-            this.isCharging = true;
 
             const projX = this.x + this.w / 2;
             const projY = this.y + this.h / 2;
@@ -439,6 +439,7 @@ class Boss extends Enemy {
             //Chooses which type of projectile to make. More likely to choose lazer over Fist
             if (Math.random() < 0.8) {
                 this.projectile = new Laserbeam(projX, projY, targetX, targetY);
+                console.log("created  laser");
             } else {
                 this.projectile = new Fist(projX, projY, targetX, targetY);
             }
@@ -446,10 +447,6 @@ class Boss extends Enemy {
     }
 
     assignMovementDirection(player) {
-        if (!this.changeSwitchDir) {
-            return;
-        }
-
         if (player.x > this.x) {
             this.direction = 1; // Move right
         } else if (player.x < this.x) {
@@ -485,18 +482,19 @@ class Boss extends Enemy {
 
         if (this.isCharging) {
             if (this.direction == 1) {
+                image(Laserbeam.assetLaser, this.x + 100, this.y - 25, 400, 400, 0, 800, 100, 100);
                 image(Boss.asset, this.x, this.y, this.w, this.h, 300, 200, 100, 100);
+                drawHelper = true;
             } else {
+                image(Laserbeam.assetLaser, this.x - 250, this.y - 25, 400, 400, 0, 800, 100, 100);
                 image(Boss.assetR, this.x, this.y, this.w, this.h, 600, 200, 100, 100);
+                drawHelper = false;
             }
         } else {
             image(Boss.asset, this.x, this.y, this.w, this.h, sx, 0, 100, 100);
         }
     }
     move() {
-        if (!this.changeSwitchDir) {
-            return;
-        }
 
         this.x += this.speedX * this.direction;
         this.y += this.speedY * this.directionY;
@@ -516,33 +514,51 @@ class Boss extends Enemy {
 
     update() {
 
-        if (!this.isCharging) {
+        // moving around waiting to charge
+        if (!this.isCharging && !this.isFiring) {
             this.projTimer += deltaTime;
             this.changeSwitchDir = true;
-        } else {
+        // charging up shot
+        } else if (this.isCharging) {
             this.chargeTimer += deltaTime;
             this.changeSwitchDir = false;
-
+            
             this.speedX = 0;
             this.speedY = 0;
-        }
-
-        if (this.chargeTimer >= Boss.chargeInterval) {
-            this.isCharging = false;
-            this.chargeTimer = 0;
-
-            this.speedX = 2;
-            this.speedY = 1.5;
+        // firing
+        } else if(this.isFiring) {
+            this.fireTimer += deltaTime;
+            this.changeSwitchDir = false;
         }
 
         if (this.projTimer >= Boss.shootingIntervals) {
-            this.canShoot = true;
             this.projTimer = 0;
-            this.multiShotPrevention = false;
+            this.isCharging = true;
         }
+
+
+        if (this.chargeTimer >= Boss.chargeInterval) {
+            this.isCharging = false;
+
+            this.canShoot = true;
+
+            this.isFiring = true;
+
+            this.chargeTimer = 0;
+        }
+
+        if (this.fireTimer >= Boss.fireIntervals) {
+            this.isFiring = false;
+
+            this.speedX = 2;
+            this.speedY = 1.5;
+
+            this.fireTimer = 0;
+        }
+
         if (this.projectile) {
-            this.projectile.move();
             this.projectile.draw();
+            this.projectile.move();
 
             // Check if the projectile is out of bounds or has hit something
             if (!this.projectile.active ||
@@ -551,6 +567,7 @@ class Boss extends Enemy {
                 this.projectile = null;
             }
         }
+
         this.assignMovementDirection(player);
         this.draw();
         this.move();
@@ -564,10 +581,10 @@ class Laserbeam {
         this.x = x;
         this.y = y;
 
-        this.w = windowWidth / 100;
-        this.h = windowHeight / 100;
+        this.w = 400;
+        this.h = 400;
 
-        this.speed = 4.5;
+        this.speed = 10;
 
         const dx = targetX - x;
         const dy = targetY - y;
@@ -585,7 +602,11 @@ class Laserbeam {
     }
 
     draw() {
-        image(Laser.assetLaser, this.x, this.y, this.w, this.h, 50, 50, 25, 25);
+        if (drawHelper) {
+            image(Laserbeam.assetLaser, this.x + 100, this.y - 25, this.w, this.h, 0, 800, 100, 100);
+        } else {
+            image(Laserbeam.assetLaser, this.x - 250, this.y - 25, this.w, this.h, 0, 800, 100, 100);
+        }
     }
 }
 

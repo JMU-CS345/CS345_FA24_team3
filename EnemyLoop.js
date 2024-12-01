@@ -139,7 +139,7 @@ function enemyLoop() {
                 canGetHurt = false;
             }
 
-            enemy.projTimer += 16;
+
         }
 
         // enemy update cycle
