@@ -128,6 +128,7 @@ function enemyLoop() {
 
             enemy.drawBossHealthBar(enemy.currentHealth)
             enemy.shootAtPlayer(player);
+            fistTeleport(enemy);
 
             if (enemy.checkProjHitsPlayer(player) && canGetHurt) {
                 enemy.attack(player);
