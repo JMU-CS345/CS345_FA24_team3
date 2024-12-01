@@ -421,6 +421,7 @@ class Boss extends Enemy {
         this.changeSwitchDir = true;
         this.fireTimer = 0;
         this.isFiring = false;
+        this.random = Math.random(); //Chooses which type of projectile to make. More likely to choose lazer over Fist
 
         this.currentHealth = Boss.maxHealth;
 
@@ -440,13 +441,16 @@ class Boss extends Enemy {
 
             const targetX = player.x + player.w / 2;
             const targetY = player.y + player.h / 2;
-            //Chooses which type of projectile to make. More likely to choose lazer over Fist
-            if (Math.random() < 0.8) {
+
+            
+            if (this.random < 0.8) {
                 this.projectile = new Laserbeam(projX, projY, targetX, targetY);
                 console.log("created  laser");
             } else {
                 this.projectile = new Fist(projX, projY, targetX, targetY);
             }
+
+            this.random = Math.random()// so i can have access to it when drawing. 
         }
     }
 
@@ -484,13 +488,21 @@ class Boss extends Enemy {
     draw() {
         const sx = this.currentFrame * Boss.FRAME_WIDTH;
 
-        if (this.isCharging) {
+        if (this.isCharging && this.projectile instanceof Laserbeam) {
             if (this.direction == 1) {
                 image(Laserbeam.assetLaser, this.x + 100, this.y - 25, 400, 400, 0, 800, 100, 100);
                 image(Boss.asset, this.x, this.y, this.w, this.h, 300, 200, 100, 100);
                 drawHelper = true;
             } else {
                 image(Laserbeam.assetLaser, this.x - 250, this.y - 25, 400, 400, 0, 800, 100, 100);
+                image(Boss.assetR, this.x, this.y, this.w, this.h, 600, 200, 100, 100);
+                drawHelper = false;
+            }
+        } else if (this.isCharging) {
+            if (this.direction == 1) {
+                image(Boss.asset, this.x, this.y, this.w, this.h, 300, 200, 100, 100);
+                drawHelper = true;
+            } else {
                 image(Boss.assetR, this.x, this.y, this.w, this.h, 600, 200, 100, 100);
                 drawHelper = false;
             }
@@ -637,14 +649,16 @@ class Laserbeam {
 
 class Fist {
     static assetFist = null;
+    static assetFistR = null;
+
     constructor(x, y, targetX, targetY) {
         this.x = x;
         this.y = y;
 
-        this.w = windowWidth / 50;
-        this.h = windowHeight / 50;
+        this.w = 200;
+        this.h = 200;
 
-        this.speed = 4.5
+        this.speed = 6;
 
         const dx = targetX - x;
         const dy = targetY - y;
@@ -653,6 +667,8 @@ class Fist {
         this.vx = (dx / magnitude) * this.speed;
         this.vy = (dy / magnitude) * this.speed;
 
+        this.active = true;
+
     }
     move() {
         this.x += this.vx;
@@ -660,6 +676,10 @@ class Fist {
 
     }
     draw() {
-        image(Laser.assetFist, this.x, this.y, this.w, this.h, 50, 50, 25, 25);
+        if (drawHelper) {
+            image(Fist.assetFistR, this.x + 100, this.y - 25, this.w, this.h, 0, 0);
+        } else {
+            image(Fist.assetFist, this.x - 250, this.y - 25, this.w, this.h, 0,0);
+        }
     }
 }

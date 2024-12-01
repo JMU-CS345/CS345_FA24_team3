@@ -118,6 +118,8 @@ function nextState(state) {
         Boss.asset = bossImage;
         Boss.assetR = bossRImage;
         Laserbeam.assetLaser = bossLaser;
+        Fist.assetFist = bossFist;
+        Fist.assetFistR = bossFistR;
 
         //making sure to clear the restart if applicable
         restartLevel = false;
