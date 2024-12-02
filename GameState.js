@@ -389,6 +389,8 @@ function nextState(state) {
 
     case "map7":
       if ((isCollidingObject(playerHitBox, goal) || restartLevel == true) && !checkPlayerMoveAndJump()) {
+        bMusic.pause();
+        bossMusic.loop();
 
         //clean up this level
         for (i = 0; i < enemies.length; i++) {
@@ -434,7 +436,6 @@ function nextState(state) {
       break;
     case "map8":
       if ((isCollidingObject(playerHitBox, goal) || restartLevel == true) && !checkPlayerMoveAndJump()) {
-
         //clean up this level
         for (i = 0; i < enemies.length; i++) {
           enemies[i] = null;

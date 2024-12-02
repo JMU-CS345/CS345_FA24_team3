@@ -36,6 +36,7 @@ function Health() {
 function Death() {
   if (player.dead) {
     bMusic.pause(); // pause background music while dead
+    bossMusic.pause();
     background('black');
     fill('red');
     textSize(100);
