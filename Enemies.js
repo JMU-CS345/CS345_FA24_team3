@@ -547,14 +547,14 @@ class Boss extends Enemy {
         const healthWidth = barWidth * healthRatio;
 
         fill(100, 0, 0);
-        rect(x, y, barWidth, barHeight);
+        rect(x, y, healthWidth, barHeight);
 
         fill(255, 0, 0);
         rect(x, y, healthWidth, barHeight);
 
         noFill();
         stroke(0);
-        rect(x, y, barWidth, barHeight);
+        rect(x, y, healthWidth, barHeight);
     }
 
     move() {

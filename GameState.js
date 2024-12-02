@@ -100,12 +100,10 @@ function nextState(state) {
 
         //Enemies
 
-        //alien1 = new Alien(600, windowHeight - 120, windowWidth / 12, windowHeight / 6.5);
-        //alien2 = new Alien(732, 360, windowWidth / 12, windowHeight / 6.5);
-        //alien3 = new Alien(340, 480, windowWidth / 12, windowHeight / 6.5);
-
-        boss1 = new Boss(100, 100, windowWidth / 9, windowHeight / 4.875);
-        enemies.push(boss1);
+        alien1 = new Alien(600, windowHeight - 120, windowWidth / 12, windowHeight / 6.5);
+        alien2 = new Alien(732, 360, windowWidth / 12, windowHeight / 6.5);
+        alien3 = new Alien(340, 480, windowWidth / 12, windowHeight / 6.5);
+        enemies.push(alien1, alien2, alien3);
         // enemies.push(alien1, alien2, alien3, boss1);
 
         Alien.asset = alienImage;
@@ -414,11 +412,14 @@ function nextState(state) {
         platforms = GetMap(mapLevel[curLevel]);
 
         //enemies for next level
-        robot1 = new Robot(windowWidth * 0.1, windowHeight * 0.15, windowWidth / 12, windowHeight / 6.5);
+        /*robot1 = new Robot(windowWidth * 0.1, windowHeight * 0.15, windowWidth / 12, windowHeight / 6.5);
         robot2 = new Robot(windowWidth * 0.4, windowHeight * 0.15, windowWidth / 12, windowHeight / 6.5);
-        robot3 = new Robot(windowWidth * 0.9, windowHeight * 0.15, windowWidth / 12, windowHeight / 6.5);
+        robot3 = new Robot(windowWidth * 0.9, windowHeight * 0.15, windowWidth / 12, windowHeight / 6.5);*/
+        boss1 = new Boss(windowWidth * 0.9, windowHeight * 0.15, windowWidth / 9, windowHeight / 4.875);
 
-        enemies.push(robot1, robot2, robot3);
+        enemies.push(boss1);
+
+        //enemies.push(robot1, robot2, robot3);
 
         //If no textures, just use colored platforms. Must change to false after other level
         drawColoredPlatforms = false;
