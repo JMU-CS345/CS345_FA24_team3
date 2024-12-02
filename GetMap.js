@@ -275,5 +275,6 @@ function GetMap(level) {
         l6_top_right_platform
       ];
       return map;
+
   }
 }

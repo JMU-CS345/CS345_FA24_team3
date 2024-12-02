@@ -482,3 +482,42 @@ function checkPlayerMoveAndJump() {
   }
   return false;
 }
+/*case "boss":
+if ((isCollidingObject(playerHitBox, goal) || restartLevel == true) && !checkPlayerMoveAndJump()) {
+
+  //clean up this level
+  for (i = 0; i < enemies.length; i++) {
+    enemies[i] = null;
+    enemies.splice(i);
+  }
+
+  //clean up the portals
+  purpleP.x = -1;
+  goldP.x = -1;
+
+  //set spawn point for next level
+  playerSpawn.x = windowWidth * 0.05;
+  playerSpawn.y = windowHeight * 0.8;
+  spawnPlayer();
+
+  //Set up the things for the next level
+
+  curLevel++;
+  background(level3);
+  platforms = GetMap(mapLevel[curLevel]);
+
+  //If no textures, just use colored platforms. Must change to false after other level
+  drawColoredPlatforms = false;
+
+  //Set up the goal for next level
+    for (let i = 0; i < enemies.length; i++) {
+    let enemy = enemies[i];
+    if (enemy.currentHealth <= 0) {
+      goal.x = windowWidth * 0.9;
+      goal.y = windowHeight * 0.9;
+    }
+  }
+  //make sure to clear restart if applicable
+  restartLevel = false;
+  break;
+}*/

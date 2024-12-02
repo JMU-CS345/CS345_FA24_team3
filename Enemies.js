@@ -444,8 +444,8 @@ class Boss extends Enemy {
             const targetX = player.x + player.w / 2;
             const targetY = player.y + player.h / 2;
 
-            
-            if (this.random < 0.7) {
+
+            if (this.random < 0.6) {
                 this.projectile = new Laserbeam(projX, projY, targetX, targetY);
                 console.log("created  laser");
             } else {
@@ -572,7 +572,7 @@ class Boss extends Enemy {
     }
 
     killed() {
-        
+
     }
 
     update() {
@@ -708,7 +708,7 @@ class Fist {
         if (drawHelper) {
             image(Fist.assetFistR, this.x + 100, this.y - 25, this.w, this.h, 0, 0);
         } else {
-            image(Fist.assetFist, this.x - 250, this.y - 25, this.w, this.h, 0,0);
+            image(Fist.assetFist, this.x - 250, this.y - 25, this.w, this.h, 0, 0);
         }
     }
 }
