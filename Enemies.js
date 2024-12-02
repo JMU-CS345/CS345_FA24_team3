@@ -445,7 +445,7 @@ class Boss extends Enemy {
             const targetY = player.y + player.h / 2;
 
             
-            if (this.random < 0.1) {
+            if (this.random < 0.7) {
                 this.projectile = new Laserbeam(projX, projY, targetX, targetY);
                 console.log("created  laser");
             } else {
