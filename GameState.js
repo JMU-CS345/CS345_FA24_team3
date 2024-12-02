@@ -360,7 +360,7 @@ function nextState(state) {
 
         //set spawn point for next level
         playerSpawn.x = windowWidth * 0.01;
-        playerSpawn.y = windowHeight * 0.5;
+        playerSpawn.y = windowHeight * 0.05;
         spawnPlayer();
 
         //Set up the things for the next level
