@@ -354,10 +354,41 @@ function DrawMap(map) {
 
 
       //goal
-      image(mapAssets, windowWidth * 0.45, windowHeight * 0.05 + mapScroll, 140, 140, 1440, 38, 49, 48);
+      if (enemies[0].dead) {
+        image(mapAssets, windowWidth * 0.45, windowHeight * 0.05 + mapScroll, 140, 140, 1440, 38, 49, 48);
+      }
 
       break;
+    case "end":
+      //background
+      image(mapAssets_SpaceStation, 0, 0, windowWidth, windowHeight, 266, 25, 535, 807);
+
+      image(mapAssets, windowWidth * 0.8 * windowWidth / 1600, windowHeight * 0.1 * windowHeight / 900 + mapScroll, 90, 90, 1680, 940, 55, 52);
+
+
+
+      //Planets
+      image(mapAssets, windowWidth * 0.8 * windowWidth / 1600, windowHeight * 0.6 * windowHeight / 900 + mapScroll, 60, 70, 340, 885, 79, 76);
+      image(mapAssets, windowWidth * 0.1 * windowWidth / 1600, windowHeight * 0.9 * windowHeight / 900 + mapScroll, 90, 90, 890, 765, 57, 51);
+
+      //Cosmetics
+      image(mapAssets, windowWidth * 0.79 * windowWidth / 1600, windowHeight * 0.585 * windowHeight / 900 + mapScroll, 90, 90, 917, 354, 102, 109);
+      image(mapAssets, windowWidth * 0.1 * windowWidth / 1600, windowHeight * 0.05 * windowHeight / 900 + mapScroll, 60, 70, 610, 746, 66, 65);
+
+      //Comets
+      image(mapAssets, windowWidth * 0.9 * windowWidth / 1600, windowHeight * 0.9 * windowHeight / 900 + mapScroll, 90, 90, 3, 230, 40, 50);
+      image(mapAssets, windowWidth * 0.05 * windowWidth / 1600, windowHeight * 0.4 * windowHeight / 900 + mapScroll, 60, 70, 176, 59, 51, 41);
+
+
+      textSize(50);
+      fill("white");
+      textFont("Courier New");
+      text("YOU ARE THE GALAXY MASTER", windowWidth / 4.2, windowHeight / 2.3);
+      textSize(25);
+      text("   Credits:\nNicholas Drake\nLance Bender\nBen Cook\nDaniel Grasmeder\nJohn Adams", windowWidth / 2.5, windowHeight / 1.5)
+      break;
   }
+
 }
 
 

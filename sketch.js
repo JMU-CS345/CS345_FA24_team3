@@ -35,10 +35,11 @@ var playerSpawn = { x: 10, y: -1 };
 
 //Map/Game State variables
 let platforms = []; // platform imp starts here
-let mapLevel = ["title", "map1", "portals_tutorial", "map3", "map4", "map5", "map6", "map7", "map8"];
-let curLevel = 0;
+let mapLevel = ["title", "map1", "portals_tutorial", "map3", "map4", "map5", "map6", "map7", "map8", "end"];
+let curLevel = 0
 let gameStart = false;
-let standard_platform_size = windowWidth * 0.02;
+let gameEnd = false;
+let standard_platform_size = 0;
 
 
 function preload() {
@@ -78,6 +79,7 @@ function preload() {
 }
 
 function setup() {
+  let standard_platform_size = windowWidth * 0.02;
   createCanvas(windowWidth, windowHeight);
   frameRate(60);
   noSmooth();
@@ -91,84 +93,90 @@ function setup() {
 }
 
 function draw() {
-  if (player.dead == false) {
-    GameState(mapLevel[curLevel]);
-  }
-  if (player.v > 0 && !player.moving) {
-    curDirection = 'down'
-  }
-  else if (player.v < 0 && !player.moving) {
-    curDirection = 'up';
-  }
-  //use to see hitboxes and platforms easily
-  //fill("gray")
+  if (!gameEnd) {
+    if (player.dead == false) {
+      GameState(mapLevel[curLevel]);
+    }
+    if (player.v > 0 && !player.moving) {
+      curDirection = 'down'
+    }
+    else if (player.v < 0 && !player.moving) {
+      curDirection = 'up';
+    }
+    //use to see hitboxes and platforms easily
+    //fill("gray")
 
-  //rect(playerHitBox.x, playerHitBox.y, playerHitBox.w, playerHitBox.h);
+    //rect(playerHitBox.x, playerHitBox.y, playerHitBox.w, playerHitBox.h);
 
-  // make the hitboxes invisible
+    // make the hitboxes invisible
 
-  if (drawColoredPlatforms == true) {
-    stroke(0);
-    strokeWeight(3);
-    fill("gray");
-  } else {
-    //noStroke();
-    noFill();
-  }
+    if (drawColoredPlatforms == true) {
+      stroke(0);
+      strokeWeight(3);
+      fill("gray");
+    } else {
+      //noStroke();
+      noFill();
+    }
 
-  // load the maps continously to make the hit boxes bounce
+    // load the maps continously to make the hit boxes bounce
 
-  for (let i = 0; i < platforms.length; i++) {
+    for (let i = 0; i < platforms.length; i++) {
 
-    rect(platforms[i].x, platforms[i].y, platforms[i].w, platforms[i].h);
-  }
-  let isOnPlatform = false;
-  player.v += player.a;
-  player.y += player.v;
+      rect(platforms[i].x, platforms[i].y, platforms[i].w, platforms[i].h);
+    }
+    let isOnPlatform = false;
+    player.v += player.a;
+    player.y += player.v;
 
 
-  for (let i = 0; i < platforms.length; i++) {
-    if (isCollidingPlayer(player, playerHitBox, platforms[i])) {
-      let direction = collisionDirectionPlayer(player, playerHitBox, platforms[i]);
-      if (direction == "top") {
-        player.y = platforms[i].y - player.h;
-        player.v = 0;
-        jumped = false;
-        isOnPlatform = true;
-      } else if (direction == "bottom") {
-        player.y = platforms[i].y + platforms[i].h;
-        player.v = 0;
-      } else if (direction == "left") {
-        player.x = platforms[i].x - player.w + 40;
-      } else if (direction == "right") {
-        player.x = platforms[i].x + platforms[i].w - 40;
+    for (let i = 0; i < platforms.length; i++) {
+      if (isCollidingPlayer(player, playerHitBox, platforms[i])) {
+        let direction = collisionDirectionPlayer(player, playerHitBox, platforms[i]);
+        if (direction == "top") {
+          player.y = platforms[i].y - player.h;
+          player.v = 0;
+          jumped = false;
+          isOnPlatform = true;
+        } else if (direction == "bottom") {
+          player.y = platforms[i].y + platforms[i].h;
+          player.v = 0;
+        } else if (direction == "left") {
+          player.x = platforms[i].x - player.w + 40;
+        } else if (direction == "right") {
+          player.x = platforms[i].x + platforms[i].w - 40;
+        }
       }
     }
+
+    if (!isOnPlatform) {
+      player.v += player.a;
+    }
+
+    if (player.y + player.h >= windowHeight) {
+      player.y = windowHeight - player.h;
+      player.v = 0;
+      jumped = false;
+    }
+
+    if (player.health <= 0) {
+      GameState("death");
+    }
+    if (gameStart == true && gameEnd == false) {
+      changePortalColor();
+      Teleportation();
+      PlayerMovement();
+      updatePortals();
+      enemyLoop();
+      drawPortals();
+      Health();
+      updateHitbox();
+    }
+  }
+  else {
+    GameState("end");
   }
 
-  if (!isOnPlatform) {
-    player.v += player.a;
-  }
-
-  if (player.y + player.h >= windowHeight) {
-    player.y = windowHeight - player.h;
-    player.v = 0;
-    jumped = false;
-  }
-
-  if (player.health <= 0) {
-    GameState("death");
-  }
-  if (gameStart == true) {
-    changePortalColor();
-    Teleportation();
-    PlayerMovement();
-    updatePortals();
-    enemyLoop();
-    drawPortals();
-    Health();
-    updateHitbox();
-  }
 }
 
 function keyPressed() {
@@ -191,8 +199,11 @@ function keyPressed() {
     spawnPlayer();
 
     nextState(mapLevel[--curLevel]); //have to call the previous state
-    if (curLevel > 1) { // no repeating music
-      bMusic.loop(); //resume background music
+    if (curLevel == 7) { // no repeating music
+      bossMusic.loop(); //resume background music
+    }
+    else if (curLevel > 1) {
+      bMusic.loop();
     }
   }
 }

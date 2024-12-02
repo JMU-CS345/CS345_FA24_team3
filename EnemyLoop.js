@@ -128,6 +128,7 @@ function enemyLoop() {
 
             if (enemy.currentHealth <= 0) {
                 enemy.dead = true;
+                bossGoalVisible = true;
             } else {
                 enemy.drawBossHealthBar(enemy.currentHealth)
             }
