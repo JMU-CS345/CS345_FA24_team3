@@ -391,7 +391,6 @@ class Boss extends Enemy {
     static chargeInterval = 2000;
     static fireIntervals = 1000;
 
-    static maxHealth = 3;
 
     constructor(x, y, w, h) {
 
@@ -423,7 +422,10 @@ class Boss extends Enemy {
         this.isFiring = false;
         this.random = Math.random(); //Chooses which type of projectile to make. More likely to choose lazer over Fist
 
-        this.currentHealth = Boss.maxHealth;
+        this.currentHealth = 3
+
+        this.invulnerabilityTimer = 0;
+        this.invulnerabilityDelay = 500;
 
     }
     attack(player) {
@@ -485,6 +487,30 @@ class Boss extends Enemy {
         return false;
     }
 
+    checkProjHitsItself() {
+        if (this.projectile == null) {
+            this.invulnerabilityTimer = 0;
+            return;
+        }
+
+        this.invulnerabilityTimer += deltaTime;
+
+        if (this.invulnerabilityDelay <= this.invulnerabilityTimer) {
+            if (this.projectile instanceof Fist) {
+                if (
+                    this.projectile.x < this.x + this.w &&
+                    this.projectile.x + this.projectile.w > this.x &&
+                    this.projectile.y < this.y + this.h &&
+                    this.projectile.y + this.projectile.h > this.y
+                ) {
+                    this.projectile = null;
+                    return true;
+                }
+            }
+            return false;
+        }
+    }
+
     draw() {
         const sx = this.currentFrame * Boss.FRAME_WIDTH;
 
@@ -517,7 +543,7 @@ class Boss extends Enemy {
         const x = (windowWidth - barWidth) / 2;
         const y = 50;
 
-        const healthRatio = currentHealth / Boss.maxHealth;
+        const healthRatio = currentHealth / 3;
         const healthWidth = barWidth * healthRatio;
 
         fill(100, 0, 0);
@@ -546,7 +572,7 @@ class Boss extends Enemy {
     }
 
     killed() {
-
+        
     }
 
     update() {
@@ -607,6 +633,7 @@ class Boss extends Enemy {
         if (this.projectile instanceof Laserbeam && (isCollidingObject(this.projectile, purpleP) || isCollidingObject(this.projectile, goldP))) {
             destroyPortal();
         }
+
         this.assignMovementDirection(player);
         this.draw();
         this.move();

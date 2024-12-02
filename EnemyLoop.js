@@ -126,7 +126,12 @@ function enemyLoop() {
         if (enemy instanceof Boss) {
             enemy.assignMovementDirection(player); // similar functionality to the above if statement
 
-            enemy.drawBossHealthBar(enemy.currentHealth)
+            if (enemy.currentHealth <= 0) {
+                enemy.dead = true;
+            } else {
+                enemy.drawBossHealthBar(enemy.currentHealth)
+            }
+
             enemy.shootAtPlayer(player);
             fistTeleport(enemy);
 
@@ -137,9 +142,9 @@ function enemyLoop() {
                 canGetHurt = false;
             }
 
-            
-
-
+            if (enemy.checkProjHitsItself()) {
+                enemy.currentHealth -= 1;
+            }
         }
 
         // enemy update cycle
