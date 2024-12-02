@@ -103,12 +103,14 @@ function nextState(state) {
         drawColoredPlatforms = true;
 
         //Enemies
+        boss1 = new Boss(windowWidth * 0.9, windowHeight * 0.15, windowWidth / 9, windowHeight / 4.875);
 
-        alien1 = new Alien(600, windowHeight - 120, windowWidth / 12, windowHeight / 6.5);
+        enemies.push(boss1);
+        /*alien1 = new Alien(600, windowHeight - 120, windowWidth / 12, windowHeight / 6.5);
         alien2 = new Alien(732, 360, windowWidth / 12, windowHeight / 6.5);
         alien3 = new Alien(340, 480, windowWidth / 12, windowHeight / 6.5);
         enemies.push(alien1, alien2, alien3);
-        // enemies.push(alien1, alien2, alien3, boss1);
+        enemies.push(alien1, alien2, alien3, boss1);*/
 
         Alien.asset = alienImage;
         EnragedAlien.asset = alienEnragedImage
@@ -119,6 +121,8 @@ function nextState(state) {
         Laserbeam.assetLaser = bossLaser;
         Fist.assetFist = bossFist;
         Fist.assetFistR = bossFistR;
+        Fist.assetFistUp = bossFistUp;
+        Fist.assetFistDown = bossFistDown;
 
         //making sure to clear the restart if applicable
         restartLevel = false;

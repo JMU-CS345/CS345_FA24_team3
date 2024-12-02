@@ -102,7 +102,7 @@ class Boss extends Enemy {
             this.projectile.y < playerHitBox.y + playerHitBox.h &&
             this.projectile.y + this.projectile.h > playerHitBox.y
         ) {
-            this.projectiles = null;
+            this.projectile = null;
             return true;
         }
         return false;
@@ -280,6 +280,7 @@ class Laserbeam {
         this.vx = (dx / magnitude) * this.speed;
         this.vy = (dy / magnitude) * this.speed;
 
+
         this.active = true;
     }
 
@@ -298,8 +299,10 @@ class Laserbeam {
 }
 
 class Fist {
-    static assetFist = null;
-    static assetFistR = null;
+    static assetFist = null;      // Left-facing
+    static assetFistR = null;     // Right-facing
+    static assetFistUp = null;    // Up-facing
+    static assetFistDown = null;  // Down-facing
 
     constructor(x, y, targetX, targetY) {
         this.x = x;
@@ -318,17 +321,25 @@ class Fist {
         this.vy = (dy / magnitude) * this.speed;
 
         this.active = true;
-
+        this.teleportationTimer = 0;
+        this.canTeleport = true;
+        // Determine direction and assign the correct asset
+        if (Math.abs(dx) > Math.abs(dy)) {
+            this.currentAsset = dx > 0 ? Fist.assetFistR : Fist.assetFist; // Horizontal movement
+        } else {
+            this.currentAsset = dy > 0 ? Fist.assetFistDown : Fist.assetFistUp; // Vertical movement
+        }
     }
+
     move() {
         this.x += this.vx;
         this.y += this.vy;
-
     }
+
     draw() {
-        if (drawHelper) {
+        if (drawHelper) { // Boss facing left
             image(Fist.assetFistR, this.x + 100, this.y - 25, this.w, this.h, 0, 0);
-        } else {
+        } else { // Boss facing left
             image(Fist.assetFist, this.x - 250, this.y - 25, this.w, this.h, 0, 0);
         }
     }

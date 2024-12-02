@@ -63,6 +63,8 @@ function preload() {
   bossRImage = loadImage("assets/bossR.png");
   bossFist = loadImage("assets/boss_fist.png");
   bossFistR = loadImage("assets/boss_fistR.png");
+  bossFistUp = loadImage("assets/boss_fist_up.png");
+  bossFistDown = loadImage("assets/boss_fist_down.png");
   bossLaser = loadImage("assets/boss_laser.png");
   mapAssets = loadImage("assets/PlanetAssets.png"); //space stuff
   heart = loadImage("assets/Heart.png");

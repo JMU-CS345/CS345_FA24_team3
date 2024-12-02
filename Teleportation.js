@@ -134,7 +134,7 @@ function enemyTeleport(enemy) {
         }
     }
 }
-function fistTeleport(enemy) {
+/*function fistTeleport(enemy) {
     const portals = [
         { entry: purpleP, exit: goldP },
         { entry: goldP, exit: purpleP }
@@ -181,6 +181,74 @@ function fistTeleport(enemy) {
                 }
 
                 // Disable teleportation and break out of the loop after teleporting
+            }
+        }
+    }
+}*/
+function fistTeleport(enemy) {
+    const portals = [
+        { entry: purpleP, exit: goldP },
+        { entry: goldP, exit: purpleP }
+    ];
+    if (enemy instanceof Boss && enemy.projectile instanceof Fist) {
+        if (!enemy.projectile.canTeleport) {
+            enemy.projectile.teleportationTimer += deltaTime;
+            if (enemy.projectile.teleportationTimer >= voidDuration) {
+                enemy.projectile.teleportationTimer = 0;
+                enemy.projectile.canTeleport = true;
+            }
+        }
+        for (const portal of portals) {
+            const { entry, exit } = portal;
+
+            // Check if the projectile is colliding with the entry portal
+            if (isCollidingObject(enemy.projectile, entry) && purpleP.x != -1 && goldP.x != -1) {
+                // Update position based on portal orientation
+                if (entry.vertical) {
+                    if (exit.vertical) { // Entry is vertical, Exit is vertical
+                        enemy.projectile.x = exit.direction === 'left' ? exit.x - 200 : exit.x + exit.w;
+                        enemy.projectile.y = exit.y;
+                        enemy.projectile.vx = exit.direction === 'left' ? -Math.abs(enemy.projectile.vx) : Math.abs(enemy.projectile.vx);
+                        enemy.projectile.vy = 0; // No vertical movement
+                    } else { // Entry is vertical, Exit is horizontal
+                        enemy.projectile.x = exit.x;
+                        enemy.projectile.y = exit.direction === 'bottom' ? exit.y + exit.h : exit.y - 150;
+                        enemy.projectile.vx = 0; // No horizontal movement
+                        enemy.projectile.vy = exit.direction === 'bottom' ? Math.abs(enemy.projectile.vy) : -Math.abs(enemy.projectile.vy);
+                    }
+                } else { // Entry is horizontal
+                    if (exit.vertical) { // Exit is vertical
+                        enemy.projectile.x = exit.direction === 'left' ? exit.x - 200 : exit.x + exit.w;
+                        enemy.projectile.y = exit.y;
+                        enemy.projectile.vx = exit.direction === 'left' ? -Math.abs(enemy.projectile.vx) : Math.abs(enemy.projectile.vx);
+                        enemy.projectile.vy = 0; // No vertical movement
+                    } else { // Exit is horizontal
+                        enemy.projectile.x = exit.x;
+                        enemy.projectile.y = exit.direction === 'bottom' ? exit.y + exit.h : exit.y - 150;
+                        enemy.projectile.vx = 0; // No horizontal movement
+                        enemy.projectile.vy = exit.direction === 'bottom' ? Math.abs(enemy.projectile.vy) : -Math.abs(enemy.projectile.vy);
+                    }
+                }
+
+                // Select the correct asset and rotation based on exit orientation
+                switch (exit.direction) {
+                    case 'left':
+                        enemy.projectile.currentAsset = Fist.assetFist; // Default asset for facing left
+                        break;
+                    case 'right':
+                        enemy.projectile.currentAsset = Fist.assetFistR; // Facing right
+                        break;
+                    case 'up':
+                        enemy.projectile.currentAsset = Fist.assetFistUp; // Facing up
+                        break;
+                    case 'down':
+                        enemy.projectile.currentAsset = Fist.assetFistDown; // Facing down
+                        break;
+                }
+                // Disable teleportation temporarily to avoid repeated collisions
+                enemy.projectile.canTeleport = false;
+
+                break; // Exit the loop after teleporting
             }
         }
     }
