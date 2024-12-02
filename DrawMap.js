@@ -248,7 +248,11 @@ function DrawMap(map) {
 
     case "map5":
       mapPlatforms = GetMap(map);
-      image(mapAssets, windowWidth * 0.93, windowHeight * 0.45 + mapScroll, 140, 140, 1440, 38, 49, 48);
+      image(mapAssets, windowWidth * 0.93, windowHeight * 0.78 + mapScroll, 140, 140, 1440, 38, 49, 48);
+      break;
+    case "map6":
+      mapPlatforms = GetMap(map);
+      image(mapAssets, windowWidth * 0.93, windowHeight * 0.3 + mapScroll, 140, 140, 1440, 38, 49, 48);
       break;
 
     case "map7":

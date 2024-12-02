@@ -138,53 +138,80 @@ function GetMap(level) {
 
     case "map5":
       //Starting square player stands on
-      // let l5_p1 = {
-      //   x: windowWidth * 0.0005, y: windowHeight * 0.65, w: windowWidth * 0.162, h: windowHeight * 0.05, type: "platform"
-      // };
-      // let l5_p2 = {
-      //   x: windowWidth * 0.0005, y: windowHeight * 0.0001, w: windowWidth * 0.162, h: windowHeight * 0.05, type: "platform"
-      // };
-
-      //!!!!!!!!!!!!!!!
-      // Have a top platform move on this map, making it harder to get aliens in?
-      // Have level reset if player kills all enemies
+      let l5_p1 = {
+        x: windowWidth * 0.0005, y: windowHeight * 0.95, w: windowWidth * 1, h: windowHeight * 0.05, type: "platform"
+      };
+      let l5_p2 = {
+        x: windowWidth * 0.161, y: windowHeight * 0.88, w: windowWidth * 0.023, h: windowHeight * 0.25, type: "platform"
+      };
+      let l5_p3 = {
+        x: windowWidth * 0.161, y: windowHeight * 0.72, w: windowWidth * 0.323, h: windowHeight * 0.06, type: "platform"
+      };
+      let l5_p4 = {
+        x: windowWidth * 0.461, y: windowHeight * 0.52, w: windowWidth * 0.023, h: windowHeight * 0.2, type: "platform"
+      };
+      let l5_p5 = {
+        x: windowWidth * 0.4838, y: windowHeight * 0.52, w: windowWidth * 0.18, h: windowHeight * 0.05, type: "platform"
+      };
+      let l5_p6 = {
+        x: windowWidth * 0.6637, y: windowHeight * 0.52, w: windowWidth * 0.023, h: windowHeight * 0.2, type: "platform"
+      };
+      let l5_p7 = {
+        x: windowWidth * 0.6637, y: windowHeight * 0.72, w: windowWidth * 0.343, h: windowHeight * 0.06, type: "platform"
+      };
+      let l5_p8 = {
+        x: windowWidth * 0.5637, y: windowHeight * 0.69, w: windowWidth * 0.023, h: windowHeight * 0.26, type: "platform"
+      };
 
       // JAIL
       let jail1 = {
-        x: windowWidth * 0.425, y: windowHeight * 0.5, w: windowWidth * 0.162, h: windowHeight * 0.05, type: "platform"
+        x: windowWidth * 0.025, y: windowHeight * 0.4, w: windowWidth * 0.162, h: windowHeight * 0.05, type: "platform"
       };
       let jail2 = {
-        x: windowWidth * 0.402, y: windowHeight * 0.2884, w: windowWidth * 0.023, h: windowHeight * 0.262, type: "platform"
+        x: windowWidth * 0.002, y: windowHeight * 0.1884, w: windowWidth * 0.023, h: windowHeight * 0.262, type: "platform"
       };
       let jail3 = {
-        x: windowWidth * 0.587, y: windowHeight * 0.2884, w: windowWidth * 0.023, h: windowHeight * 0.262, type: "platform"
+        x: windowWidth * 0.187, y: windowHeight * 0.1884, w: windowWidth * 0.023, h: windowHeight * 0.262, type: "platform"
       };
       let jail4 = {
-        x: windowWidth * 0.468, y: windowHeight * 0.01, w: windowWidth * 0.082, h: windowHeight * 0.05, type: "platform"
+        x: windowWidth * 0.048, y: windowHeight * 0.01, w: windowWidth * 0.132, h: windowHeight * 0.05, type: "platform"
       };
 
-      // Walls to get aliens into jail
-      let wall0 = {
-        x: windowWidth * 0.202, y: windowHeight * 0.82, w: windowWidth * 0.023, h: windowHeight * 0.06, type: "platform"
-      };
-      let wall1 = {
-        x: windowWidth * 0.202, y: windowHeight * 0.92, w: windowWidth * 0.023, h: windowHeight * 0.06, type: "platform"
-      };
-      let wall2 = {
-        x: windowWidth * 0.787, y: windowHeight * 0.82, w: windowWidth * 0.023, h: windowHeight * 0.18, type: "platform"
-      };
-      let wall3 = {
-        x: windowWidth * 0.202, y: windowHeight * 0.775, w: windowWidth * 0.608, h: windowHeight * 0.045, type: "platform"
-      };
-      map = [jail1, jail2, jail3, jail4, wall0, wall1, wall2, wall3];
+      map = [l5_p1, l5_p2, l5_p3, l5_p4, l5_p5, l5_p6, l5_p7, l5_p8, jail1, jail2, jail3, jail4];
       return map;
 
     case "map6":
-      // JAIL
       let l6_p1 = {
-        x: windowWidth * 0.425, y: windowHeight * 0.5, w: windowWidth * 0.162, h: windowHeight * 0.05, type: "platform"
+        x: windowWidth * 0, y: windowHeight * 0.15, w: windowWidth * 0.162, h: windowHeight * 0.05, type: "platform"
       };
-      map = [l6_p1];
+      let l6_p2 = {
+        x: windowWidth * 0.162, y: windowHeight * 0.15, w: windowWidth * 0.023, h: windowHeight * 0.662, type: "platform"
+      };
+      let l6_p3 = {
+        x: windowWidth * 0.162, y: windowHeight * 0.812, w: windowWidth * 0.38, h: windowHeight * 0.05, type: "platform"
+      };
+      let l6_p4 = {
+        x: windowWidth * 0.262, y: windowHeight * 0, w: windowWidth * 0.023, h: windowHeight * 0.63, type: "platform"
+      };
+      let l6_p5 = {
+        x: windowWidth * 0.285, y: windowHeight * 0.58, w: windowWidth * 0.03, h: windowHeight * 0.05, type: "platform"
+      };
+      let l6_p6 = {
+        x: windowWidth * 0.34, y: windowHeight * 0.58, w: windowWidth * 0.03, h: windowHeight * 0.05, type: "platform"
+      };
+      let l6_p7 = {
+        x: windowWidth * 0.285, y: windowHeight * 0.0, w: windowWidth * 0.1, h: windowHeight * 0.05, type: "platform"
+      };
+      let l6_p8 = {
+        x: windowWidth * 0.370, y: windowHeight * 0, w: windowWidth * 0.023, h: windowHeight * 0.63, type: "platform"
+      };
+      let l6_p9 = {
+        x: windowWidth * 0.519, y: windowHeight * 0.521, w: windowWidth * 0.023, h: windowHeight * 0.29, type: "platform"
+      };
+      let l6_p10 = {
+        x: windowWidth * 0.519, y: windowHeight * 0.47, w: windowWidth * 0.5, h: windowHeight * 0.05, type: "platform"
+      };
+      map = [l6_p1, l6_p2, l6_p3, l6_p4, l6_p5, l6_p6, l6_p7, l6_p8, l6_p9, l6_p10];
       return map;
 
     case "map7":

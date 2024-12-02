@@ -91,8 +91,8 @@ function nextState(state) {
         goal.y = windowHeight * 0.4 + mapScroll;
 
         //Starting Location for this map
-        playerSpawn.x = windowWidth * 0.1;
-        playerSpawn.y = windowHeight * 0.9;
+        playerSpawn.x = windowWidth * 0.05;
+        playerSpawn.y = windowHeight * 0.8;
         spawnPlayer();
 
         //If no textures, just use colored platforms. Must change to false after other level
@@ -105,9 +105,6 @@ function nextState(state) {
         //alien3 = new Alien(340, 480, windowWidth / 12, windowHeight / 6.5);
 
         boss1 = new Boss(100, 100, windowWidth / 9, windowHeight / 4.875);
-        // eAlien1 = new EnragedAlien(1200, windowWidth - 120, windowWidth / 12, windowHeight / 6.5);
-        // robot1 = new Robot(1000, windowWidth - 120, windowWidth / 12, windowHeight / 6.5);
-
         enemies.push(boss1);
         // enemies.push(alien1, alien2, alien3, boss1);
 
@@ -289,26 +286,27 @@ function nextState(state) {
         background(level1);
         platforms = GetMap(mapLevel[curLevel]);
 
-        eAlien1 = new EnragedAlien(windowWidth * 0.6, windowHeight - 120, windowWidth / 12, windowHeight / 6.5);
+        eAlien1 = new EnragedAlien(windowWidth * 0.43, windowHeight - 120, windowWidth / 12, windowHeight / 6.5);
         eAlien2 = new EnragedAlien(windowWidth * 0.45, windowHeight - 120, windowWidth / 12, windowHeight / 6.5);
         eAlien3 = new EnragedAlien(windowWidth * 0.5, windowHeight - 120, windowWidth / 12, windowHeight / 6.5);
         eAlien4 = new EnragedAlien(windowWidth * 0.35, windowHeight - 120, windowWidth / 12, windowHeight / 6.5);
-        eAlien5 = new EnragedAlien(windowWidth * 0.3, windowHeight - 120, windowWidth / 12, windowHeight / 6.5);
-        enemies.push(eAlien1, eAlien2, eAlien3, eAlien4, eAlien5);
+        eAlien5 = new EnragedAlien(windowWidth * 0.4, windowHeight - 120, windowWidth / 12, windowHeight / 6.5);
+        eAlien6 = new EnragedAlien(windowWidth * 0.32, windowHeight - 120, windowWidth / 12, windowHeight / 6.5);
+        enemies.push(eAlien1, eAlien2, eAlien3, eAlien4, eAlien5, eAlien6);
 
         //If no textures, just use colored platforms. Must change to false after other level
         drawColoredPlatforms = true;
 
         //Set up the goal for next level
         goal.x = windowWidth * 0.93;
-        goal.y = windowHeight * 0.45;
+        goal.y = windowHeight * 0.75;
 
         //make sure to clear restart if applicable
         restartLevel = false;
       }
       break;
 
-    case "map5":
+    case "map5": // Pushing to level 6
       if ((isCollidingObject(playerHitBox, goal) || restartLevel == true) && !checkPlayerMoveAndJump()) {
 
         //clean up this level
@@ -322,8 +320,8 @@ function nextState(state) {
         goldP.x = -1;
 
         //set spawn point for next level
-        playerSpawn.x = windowWidth * 0.01;
-        playerSpawn.y = windowHeight * 0.5;
+        playerSpawn.x = windowWidth * 0.05;
+        playerSpawn.y = windowHeight * 0.01;
         spawnPlayer();
 
         //Set up the things for the next level
@@ -332,19 +330,17 @@ function nextState(state) {
         background(level1);
         platforms = GetMap(mapLevel[curLevel]);
 
-        eAlien1 = new EnragedAlien(windowWidth * 0.6, windowHeight - 120, windowWidth / 12, windowHeight / 6.5);
-        eAlien2 = new EnragedAlien(windowWidth * 0.4, windowHeight - 120, windowWidth / 12, windowHeight / 6.5);
-
-        eAlien3 = new EnragedAlien(windowWidth * 0.5, windowHeight - 120, windowWidth / 12, windowHeight / 6.5);
-        eAlien4 = new EnragedAlien(windowWidth * 0.3, windowHeight - 120, windowWidth / 12, windowHeight / 6.5);
-        enemies.push(eAlien1, eAlien2, eAlien3, eAlien4);
+        robot1 = new Robot(300, windowHeight - 300, windowWidth / 12, windowHeight / 6.5);
+        robot2 = new Robot(1100, windowHeight - 1000, windowWidth / 12, windowHeight / 6.5);
+        robot3 = new Robot(1300, windowHeight - 1000, windowWidth / 12, windowHeight / 6.5);
+        enemies.push(robot1, robot2, robot3);
 
         //If no textures, just use colored platforms. Must change to false after other level
         drawColoredPlatforms = true;
 
         //Set up the goal for next level
-        goal.x = windowWidth * 0.05;
-        goal.y = windowHeight * 0.8 + mapScroll;
+        goal.x = windowWidth * 0.93;
+        goal.y = windowHeight * 0.3 + mapScroll;
 
         //make sure to clear restart if applicable
         restartLevel = false;
@@ -375,7 +371,11 @@ function nextState(state) {
         background(level1);
         platforms = GetMap(mapLevel[curLevel]);
 
-        //enemies.push(eAlien1, eAlien2, eAlien3, eAlien4);
+        eAlien1 = new EnragedAlien(windowWidth * 0.43, windowHeight - 120, windowWidth / 12, windowHeight / 6.5);
+        eAlien2 = new EnragedAlien(windowWidth * 0.45, windowHeight - 120, windowWidth / 12, windowHeight / 6.5);
+        eAlien3 = new EnragedAlien(windowWidth * 0.5, windowHeight - 120, windowWidth / 12, windowHeight / 6.5);
+        eAlien4 = new EnragedAlien(windowWidth * 0.35, windowHeight - 120, windowWidth / 12, windowHeight / 6.5);
+        enemies.push(eAlien1, eAlien2, eAlien3, eAlien4);
 
         //If no textures, just use colored platforms. Must change to false after other level
         drawColoredPlatforms = true;
