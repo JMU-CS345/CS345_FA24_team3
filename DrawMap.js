@@ -146,7 +146,7 @@ function DrawMap(map) {
 
 
       //goal
-      image(mapAssets, windowWidth * 0.1, windowHeight * 0.2 + mapScroll, 140, 140, 1440, 38, 49, 48);
+      image(mapAssets, windowWidth * 0.2, windowHeight * 0.1 + mapScroll, 140, 140, 1440, 38, 49, 48);
 
       break;
 

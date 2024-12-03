@@ -109,8 +109,8 @@ function nextState(state) {
         /*alien1 = new Alien(600, windowHeight - 120, windowWidth / 12, windowHeight / 6.5);
         alien2 = new Alien(732, 360, windowWidth / 12, windowHeight / 6.5);
         alien3 = new Alien(340, 480, windowWidth / 12, windowHeight / 6.5);
-        enemies.push(alien1, alien2, alien3);
-        enemies.push(alien1, alien2, alien3, boss1);*/
+        enemies.push(alien1, alien2, alien3);*/
+        //enemies.push(alien1, alien2, alien3, boss1);
 
         Alien.asset = alienImage;
         EnragedAlien.asset = alienEnragedImage
@@ -159,8 +159,8 @@ function nextState(state) {
         drawColoredPlatforms = false;
 
         //Setting up goal
-        goal.x = windowWidth * 0.11;
-        goal.y = windowHeight * 0.21 + mapScroll;
+        goal.x = windowWidth * 0.2;
+        goal.y = windowHeight * 0.1 + mapScroll;
 
         //Player spawn
         playerSpawn.x = windowWidth * 0.8;
@@ -214,8 +214,8 @@ function nextState(state) {
 
         eAlien1 = new EnragedAlien(windowWidth * 0.6, windowHeight - 120, windowWidth / 12, windowHeight / 6.5);
         eAlien2 = new EnragedAlien(windowWidth * 0.4, windowHeight - 120, windowWidth / 12, windowHeight / 6.5);
-        robot1 = new Robot(windowWidth * 0.1, windowHeight / 4, windowWidth / 12, windowHeight / 6.5);
-        robot2 = new Robot(windowWidth * 0.1, windowHeight / 3, windowWidth / 12, windowHeight / 6.5);
+        robot1 = new Robot(windowWidth * 0.05, windowHeight / 4, windowWidth / 12, windowHeight / 6.5);
+        robot2 = new Robot(windowWidth * 0.05, windowHeight / 3, windowWidth / 12, windowHeight / 6.5);
         EnragedAlien.asset = alienEnragedImage;
         Robot.asset = robotWalk;
 
