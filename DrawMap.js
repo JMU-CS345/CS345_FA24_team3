@@ -278,7 +278,6 @@ function DrawMap(map) {
       //right wall
       image(mapAssets_SpaceStation, platforms[6].x, platforms[6].y, platforms[6].w, platforms[6].h, 180, 69, 22, 31);
 
-
       //Bottom right corner
       image(mapAssets_SpaceStation, windowWidth * 0.9805, windowHeight * 0.738, windowWidth * 0.025, windowHeight * 0.04, 199, 35, 23, 23);
       image(mapAssets_SpaceStation, windowWidth * 0.98, windowHeight * 0.77, windowWidth * 0.02, windowHeight * 0.028, 190, 71, 10, 25);
@@ -352,13 +351,46 @@ function DrawMap(map) {
       image(mapAssets_SpaceStation, windowWidth * 0.9715, windowHeight * 0.017, windowWidth * 0.025, windowHeight * 0.05, 176, 34, 21, 24);
       image(mapAssets_SpaceStation, windowWidth * 0.97, 0, windowWidth * 0.03, windowHeight * 0.02, 190, 71, 10, 25);
 
+      //goal
+      image(mapAssets, windowWidth * 0.45, windowHeight * 0.01 + mapScroll, 140, 140, 1440, 38, 49, 48);
+      break;
+
+    case "boss":
+
+      //left wall
+      image(mapAssets_SpaceStation, platforms[1].x, platforms[1].y, platforms[1].w, platforms[1].h, 181, 103, 23, 32);
+
+      //right wall
+      image(mapAssets_SpaceStation, platforms[0].x, platforms[0].y, platforms[0].w, platforms[0].h, 180, 69, 22, 31);
+
+      //floor
+      image(mapAssets_SpaceStation, platforms[2].x, platforms[2].y, platforms[2].w, platforms[2].h, 145, 94, 30, 23);
+
+      //left platform
+      image(mapAssets_SpaceStation, platforms[3].x, platforms[3].y, platforms[3].w, platforms[3].h, 145, 94, 30, 23);
+
+      //right platform
+      image(mapAssets_SpaceStation, platforms[4].x, platforms[4].y, platforms[4].w, platforms[4].h, 145, 94, 30, 23);
+
+
+      //corners
+
+      //Bottom left corner
+      image(mapAssets_SpaceStation, windowWidth * 0.001, windowHeight * 0.963, windowWidth * 0.03, windowHeight * 0.045, 146, 67, 29, 22);
+      image(mapAssets_SpaceStation, 0, windowHeight * 0.96, windowWidth * 0.01, windowHeight * 0.04, 190, 71, 10, 25);
+
+
+      //Bottom right corner
+      image(mapAssets_SpaceStation, windowWidth * 0.971, windowHeight * 0.967, windowWidth * 0.025, windowHeight * 0.04, 199, 35, 23, 23);
+      image(mapAssets_SpaceStation, windowWidth * 0.99, windowHeight * 0.9, windowWidth * 0.01, windowHeight * 0.04, 190, 71, 10, 25);
 
       //goal
       if (enemies[0].dead) {
-        image(mapAssets, windowWidth * 0.45, windowHeight * 0.05 + mapScroll, 140, 140, 1440, 38, 49, 48);
+        image(mapAssets, windowWidth * 0.45, windowHeight * 0.73 + mapScroll, 140, 140, 1440, 38, 49, 48);
       }
 
       break;
+
     case "end":
       //background
       image(mapAssets_SpaceStation, 0, 0, windowWidth, windowHeight, 266, 25, 535, 807);

@@ -216,64 +216,88 @@ function GetMap(level) {
 
     case "map7":
       //the top platform
-      let l5_top_p1 = { x: 0, y: windowHeight * 0.2, w: windowWidth * 0.2, h: windowHeight * 0.05 };
-      let l5_top_p2 = { x: windowWidth * 0.3, y: windowHeight * 0.2, w: windowWidth, h: windowHeight * 0.05 };
+      let l7_top_p1 = { x: 0, y: windowHeight * 0.2, w: windowWidth * 0.2, h: windowHeight * 0.05 };
+      let l7_top_p2 = { x: windowWidth * 0.3, y: windowHeight * 0.2, w: windowWidth, h: windowHeight * 0.05 };
 
 
       //middle platform
-      let l5_mid_p1 = { x: windowWidth * 0.2, y: windowHeight * 0.45, w: windowWidth * 0.2, h: windowHeight * 0.05 };
+      let l7_mid_p1 = { x: windowWidth * 0.2, y: windowHeight * 0.45, w: windowWidth * 0.2, h: windowHeight * 0.05 };
 
 
       //Bottom pieces
-      let l5_bottom_right_piece = { x: 0, y: windowHeight * 0.75, w: windowWidth * 0.2, h: windowHeight * 0.05 };
-      let l5_bottom_left_piece = { x: windowWidth * 0.8, y: windowHeight * 0.75, w: windowWidth * 0.2, h: windowHeight * 0.05 };
+      let l7_bottom_right_piece = { x: 0, y: windowHeight * 0.75, w: windowWidth * 0.2, h: windowHeight * 0.05 };
+      let l7_bottom_left_piece = { x: windowWidth * 0.8, y: windowHeight * 0.75, w: windowWidth * 0.2, h: windowHeight * 0.05 };
 
       //left platform wall
-      let l5_left_wall = { x: windowWidth * 0.75, y: windowHeight * 0.25, w: windowWidth * 0.025, h: windowHeight * 0.4 };
+      let l7_left_wall = { x: windowWidth * 0.75, y: windowHeight * 0.25, w: windowWidth * 0.025, h: windowHeight * 0.4 };
 
       //right wall
-      let l5_right_wall = { x: windowWidth * 0.99, y: windowHeight * 0.25, w: windowWidth * 0.025, h: windowHeight * 0.53 };
+      let l7_right_wall = { x: windowWidth * 0.99, y: windowHeight * 0.25, w: windowWidth * 0.025, h: windowHeight * 0.53 };
 
-      map = [l5_top_p1, l5_top_p2, l5_mid_p1, l5_bottom_right_piece, l5_bottom_left_piece, l5_left_wall, l5_right_wall];
+      map = [l7_top_p1, l7_top_p2, l7_mid_p1, l7_bottom_right_piece, l7_bottom_left_piece, l7_left_wall, l7_right_wall];
       return map;
 
     case "map8":
 
       // left wall
-      let l6_left_wall = { x: windowWidth * 0.25, y: windowHeight * 0.85, w: windowWidth * 0.025, h: windowHeight * 0.15 };
+      let l8_left_wall = { x: windowWidth * 0.25, y: windowHeight * 0.85, w: windowWidth * 0.025, h: windowHeight * 0.15 };
 
       //left innner wall
-      let l6_left_inner_wall = { x: windowWidth * 0.4, y: windowHeight * 0.75, w: windowWidth * 0.025, h: windowHeight * 0.25 };
+      let l8_left_inner_wall = { x: windowWidth * 0.4, y: windowHeight * 0.75, w: windowWidth * 0.025, h: windowHeight * 0.25 };
 
       // right wall
-      let l6_right_wall = { x: windowWidth * 0.75, y: windowHeight * 0.85, w: windowWidth * 0.025, h: windowHeight * 0.2 };
+      let l8_right_wall = { x: windowWidth * 0.75, y: windowHeight * 0.85, w: windowWidth * 0.025, h: windowHeight * 0.2 };
 
       //right innner walls
-      let l6_right_inner_wall = { x: windowWidth * 0.6, y: windowHeight * 0.75, w: windowWidth * 0.025, h: windowHeight * 0.3 };
+      let l8_right_inner_wall = { x: windowWidth * 0.6, y: windowHeight * 0.75, w: windowWidth * 0.025, h: windowHeight * 0.3 };
 
       //Roof
-      let l6_roof = { x: 0, y: 0, w: windowWidth, h: windowHeight * 0.05 };
+      let l8_roof = { x: 0, y: 0, w: windowWidth, h: windowHeight * 0.05 };
 
       //top left wall
-      let l6_top_left_wall = { x: 0, y: 0, w: windowWidth * 0.025, h: windowHeight * 0.3 };
+      let l8_top_left_wall = { x: 0, y: 0, w: windowWidth * 0.025, h: windowHeight * 0.3 };
 
       //top right wall
-      let l6_top_right_wall = { x: windowWidth * 0.98, y: 0, w: windowWidth * 0.025, h: windowHeight * 0.29 };
+      let l8_top_right_wall = { x: windowWidth * 0.98, y: 0, w: windowWidth * 0.025, h: windowHeight * 0.29 };
 
       //top left platform
-      let l6_top_left_platform = { x: 0, y: windowHeight * 0.25, w: windowWidth * 0.2, h: windowHeight * 0.05 };
+      let l8_top_left_platform = { x: 0, y: windowHeight * 0.25, w: windowWidth * 0.2, h: windowHeight * 0.05 };
 
       //top middle platform
-      let l6_top_middle_platform = { x: windowWidth * 0.4, y: windowHeight * 0.25, w: windowWidth * 0.2, h: windowHeight * 0.05 };
+      let l8_top_middle_platform = { x: windowWidth * 0.4, y: windowHeight * 0.25, w: windowWidth * 0.2, h: windowHeight * 0.05 };
 
       //top right platform
-      let l6_top_right_platform = { x: windowWidth * 0.8, y: windowHeight * 0.25, w: windowWidth * 0.2, h: windowHeight * 0.05 };
+      let l8_top_right_platform = { x: windowWidth * 0.8, y: windowHeight * 0.25, w: windowWidth * 0.2, h: windowHeight * 0.05 };
 
 
-      map = [l6_left_wall, l6_left_inner_wall, l6_right_wall, l6_right_inner_wall, l6_roof,
-        l6_top_left_wall, l6_top_left_platform, l6_top_middle_platform, l6_top_right_wall,
-        l6_top_right_platform
+      map = [l8_left_wall, l8_left_inner_wall, l8_right_wall, l8_right_inner_wall, l8_roof,
+        l8_top_left_wall, l8_top_left_platform, l8_top_middle_platform, l8_top_right_wall,
+        l8_top_right_platform
       ];
+      return map;
+
+    case "boss":
+
+      //left wall
+      let boss_left_wall = { x: 0, y: 0, w: windowWidth * 0.025, h: windowHeight };
+
+      //right wall
+      let boss_right_wall = { x: windowWidth * 0.98, y: 0, w: windowWidth * 0.025, h: windowHeight };
+
+      //floor
+
+      let boss_floor = { x: windowWidth * 0.01, y: windowHeight * 0.98, w: windowWidth * 0.98, h: windowHeight * 0.05 };
+
+      //left platform
+
+      let boss_left_platform = { x: windowWidth * 0.05, y: windowHeight * 0.73, w: windowWidth * 0.2, h: windowHeight * 0.05 };
+
+      //right platform
+
+      let boss_right_platform = { x: windowWidth * 0.75, y: windowHeight * 0.73, w: windowWidth * 0.2, h: windowHeight * 0.05 };
+
+
+      map = [boss_right_wall, boss_left_wall, boss_floor, boss_left_platform, boss_right_platform];
       return map;
 
   }

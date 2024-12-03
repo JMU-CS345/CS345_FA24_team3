@@ -1,4 +1,3 @@
-let drawColoredPlatforms = true;
 
 //Portal Objects
 var purpleP = { x: -1, y: -1, w: -1, h: -1, vertical: false, direction: 'none' };
@@ -35,11 +34,13 @@ var playerSpawn = { x: 10, y: -1 };
 
 //Map/Game State variables
 let platforms = []; // platform imp starts here
-let mapLevel = ["title", "map1", "portals_tutorial", "map3", "map4", "map5", "map6", "map7", "map8", "end"];
-let curLevel = 0
+let mapLevel = ["title", "map1", "portals_tutorial", "map3", "map4", "map5", "map6",
+  "map7", "map8", "boss", "end"];
+let curLevel = 0;
 let gameStart = false;
 let gameEnd = false;
 let standard_platform_size = 0;
+let drawColoredPlatforms = false;
 
 
 function preload() {

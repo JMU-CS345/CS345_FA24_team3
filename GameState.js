@@ -39,14 +39,12 @@ function GameState(state) {
 
     case "map5":
       background(level2);
-      platforms = GetMap(state);
       DrawMap(state);
       nextState(state);
       break;
 
     case "map6":
       background(level3);
-      platforms = GetMap(state);
       DrawMap(state);
       nextState(state);
       break;
@@ -58,9 +56,17 @@ function GameState(state) {
       break;
 
     case "map8":
+      background(level1);
+      DrawMap(state);
+      nextState(state);
+      break;
+
+    case "boss":
       background(level3);
       DrawMap(state);
+      nextState(state);
       break;
+
     case "end":
       background("black");
       DrawMap("end");
@@ -384,7 +390,7 @@ function nextState(state) {
         enemies.push(eAlien1, eAlien2, eAlien3, eAlien4);
 
         //If no textures, just use colored platforms. Must change to false after other level
-        drawColoredPlatforms = true;
+        drawColoredPlatforms = false;
 
         //Set up the goal for next level
         goal.x = windowWidth * 0.05;
@@ -422,21 +428,18 @@ function nextState(state) {
         platforms = GetMap(mapLevel[curLevel]);
 
         //enemies for next level
-        /*robot1 = new Robot(windowWidth * 0.1, windowHeight * 0.15, windowWidth / 12, windowHeight / 6.5);
+        robot1 = new Robot(windowWidth * 0.1, windowHeight * 0.15, windowWidth / 12, windowHeight / 6.5);
         robot2 = new Robot(windowWidth * 0.4, windowHeight * 0.15, windowWidth / 12, windowHeight / 6.5);
-        robot3 = new Robot(windowWidth * 0.9, windowHeight * 0.15, windowWidth / 12, windowHeight / 6.5);*/
-        boss1 = new Boss(windowWidth * 0.9, windowHeight * 0.15, windowWidth / 9, windowHeight / 4.875);
+        robot3 = new Robot(windowWidth * 0.9, windowHeight * 0.15, windowWidth / 12, windowHeight / 6.5);
 
-        enemies.push(boss1);
-
-        //enemies.push(robot1, robot2, robot3);
+        enemies.push(robot1, robot2, robot3);
 
         //If no textures, just use colored platforms. Must change to false after other level
         drawColoredPlatforms = false;
 
         //Set up the goal for next level
         goal.x = windowWidth * 0.45;
-        goal.y = windowHeight * 0.05;
+        goal.y = windowHeight * 0.01;
 
         //make sure to clear restart if applicable
         restartLevel = false;
@@ -465,20 +468,23 @@ function nextState(state) {
         background(level2);
         platforms = GetMap(mapLevel[curLevel]);
 
+        //enemies
+        boss1 = new Boss(windowWidth * 0.9, windowHeight * 0.15, windowWidth / 9, windowHeight / 4.875);
+        enemies.push(boss1);
+
         //If no textures, just use colored platforms. Must change to false after other level
         drawColoredPlatforms = false;
 
         //Set up the goal for next level
-        goal.x = windowWidth * 0.73;
-        goal.y = windowHeight * 0.05;
+        goal.x = windowWidth * 0.45;
+        goal.y = windowHeight * 0.73;
 
         //make sure to clear restart if applicable
         restartLevel = false;
       }
       break;
-    case "end":
-      if ((isCollidingObject(playerHitBox, goal) || restartLevel == true) && !checkPlayerMoveAndJump() && bossGoalVisible) {
-        gameEnd = true;
+    case "boss":
+      if (((isCollidingObject(playerHitBox, goal) && enemies[0].dead) || restartLevel == true) && !checkPlayerMoveAndJump()) {
         //clean up this level
 
         //clear enemies
@@ -492,12 +498,17 @@ function nextState(state) {
         goldP.x = -1;
 
         //Do the things needed for the next level
+        curLevel++;
 
         //LEVEL UP
         drawColoredPlatforms = false;
         nextLevel.play();
         gameEnd = true;
       }
+      break;
+    case "end":
+
+      break;
   }
 }
 
