@@ -43,7 +43,7 @@ class Boss extends Enemy {
         this.isFiring = false;
         this.random = Math.random(); //Chooses which type of projectile to make. More likely to choose lazer over Fist
 
-        this.currentHealth = 3
+        this.currentHealth = 1
 
         this.invulnerabilityTimer = 0;
         this.invulnerabilityDelay = 500;
@@ -156,6 +156,7 @@ class Boss extends Enemy {
         } else {
             image(Boss.asset, this.x, this.y, this.w, this.h, sx, 0, 100, 100);
         }
+
     }
 
     drawBossHealthBar(currentHealth) {
@@ -193,7 +194,6 @@ class Boss extends Enemy {
     }
 
     killed() {
-
     }
 
     update() {
@@ -337,10 +337,22 @@ class Fist {
     }
 
     draw() {
-        if (drawHelper) { // Boss facing left
+        if (this.currentAsset == Fist.assetFistR) {
+            image(Fist.assetFistR, this.x + 100, this.y - 25, this.w, this.h, 0, 0);
+        }
+        else if (this.currentAsset == Fist.assetFist) {
+            image(Fist.assetFist, this.x - 250, this.y - 25, this.w, this.h, 0, 0);
+        }
+        else if (this.currentAsset == Fist.assetFistUp) {
+            image(Fist.assetFistUp, this.x - 25, this.y + 100, this.w, this.h, 0, 0);
+        }
+        else {
+            image(Fist.assetFistDown, this.x - 25, this.y - 250, this.w, this.h, 0, 0);
+        }
+        /*if (drawHelper && (this.currentAsset == Fist.assetFistR || this.currentAsset == Fist.assetFist)) { // Boss facing left
             image(Fist.assetFistR, this.x + 100, this.y - 25, this.w, this.h, 0, 0);
         } else { // Boss facing left
             image(Fist.assetFist, this.x - 250, this.y - 25, this.w, this.h, 0, 0);
-        }
+        }*/
     }
 }
