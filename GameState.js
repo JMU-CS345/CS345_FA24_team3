@@ -499,6 +499,8 @@ function nextState(state) {
     case "boss":
       if (((isCollidingObject(playerHitBox, goal) && enemies[0].dead) || restartLevel == true) && !checkPlayerMoveAndJump()) {
         //clean up this level
+        bossMusic.pause();
+        bMusic.loop();
 
         //clear enemies
         for (i = 0; i < enemies.length; i++) {
