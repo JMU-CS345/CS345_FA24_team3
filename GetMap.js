@@ -99,7 +99,7 @@ function GetMap(level) {
 
       //Wall next to player blocking projectiles
       let l4_p2 = {
-        x: windowWidth * 0.1076, y: windowHeight * 0.5185, w: windowWidth * 0.0349, h: windowHeight * 0.3616, type: "platform"
+        x: windowWidth * 0.1076, y: windowHeight * 0.5 + mapScroll, w: windowWidth * 0.0349, h: windowHeight * 0.3734, type: "platform"
       };
 
       //Bottom left platform

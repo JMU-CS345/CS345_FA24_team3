@@ -418,9 +418,6 @@ function nextState(state) {
 
     case "map7":
       if ((isCollidingObject(playerHitBox, goal) || restartLevel == true) && !checkPlayerMoveAndJump()) {
-        bMusic.pause();
-        bossMusic.loop();
-
         //clean up this level
         for (i = 0; i < enemies.length; i++) {
           enemies[i] = null;
@@ -478,7 +475,8 @@ function nextState(state) {
         spawnPlayer();
 
         //Set up the things for the next level
-
+        bMusic.pause();
+        bossMusic.loop();
         curLevel++;
         background(level2);
         platforms = GetMap(mapLevel[curLevel]);
