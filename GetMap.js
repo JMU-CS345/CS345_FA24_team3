@@ -104,7 +104,7 @@ function GetMap(level) {
 
       //Bottom left platform
       let l4_p3_left_bottom = {
-        x: windowWidth * 0.15, y: (windowHeight * 0.5) + mapScroll, w: windowWidth * 0.08, h: windowHeight * 0.07, type: "platform"
+        x: windowWidth * 0.1076, y: (windowHeight * 0.5) + mapScroll, w: windowWidth * 0.125, h: windowHeight * 0.07, type: "platform"
       };
 
       //Upper left platform
