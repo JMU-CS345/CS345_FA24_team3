@@ -24,7 +24,7 @@ class Boss extends Enemy {
         this.speedY = 1.5;
 
         this.hitboxOffsetX = 50;
-        this.hitboxOffsetY = 0;
+        this.hitboxOffsetY = 50;
         this.hitboxWidth = 10;
         this.hitboxHeight = 0;
 
