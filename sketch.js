@@ -202,7 +202,7 @@ function keyPressed() {
     spawnPlayer();
 
     nextState(mapLevel[--curLevel]); //have to call the previous state
-    if (curLevel == 7) { // no repeating music
+    if (curLevel == 9) { // no repeating music
       bossMusic.loop(); //resume background music
     }
     else if (curLevel > 1) {

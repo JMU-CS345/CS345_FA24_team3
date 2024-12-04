@@ -387,7 +387,22 @@ function nextState(state) {
         eAlien2 = new EnragedAlien(windowWidth * 0.45, windowHeight - 120, windowWidth / 12, windowHeight / 6.5);
         eAlien3 = new EnragedAlien(windowWidth * 0.5, windowHeight - 120, windowWidth / 12, windowHeight / 6.5);
         eAlien4 = new EnragedAlien(windowWidth * 0.35, windowHeight - 120, windowWidth / 12, windowHeight / 6.5);
-        enemies.push(eAlien1, eAlien2, eAlien3, eAlien4);
+        eAlien5 = new EnragedAlien(windowWidth * 0.52, windowHeight - 120, windowWidth / 12, windowHeight / 6.5);
+        eAlien6 = new EnragedAlien(windowWidth * 0.54, windowHeight - 120, windowWidth / 12, windowHeight / 6.5);
+        eAlien7 = new EnragedAlien(windowWidth * 0.56, windowHeight - 120, windowWidth / 12, windowHeight / 6.5);
+        eAlien8 = new EnragedAlien(windowWidth * 0.58, windowHeight - 120, windowWidth / 12, windowHeight / 6.5);
+        eAlien9 = new EnragedAlien(windowWidth * 0.60, windowHeight - 120, windowWidth / 12, windowHeight / 6.5);
+        eAlien10 = new EnragedAlien(windowWidth * 0.62, windowHeight - 120, windowWidth / 12, windowHeight / 6.5);
+        eAlien11 = new EnragedAlien(windowWidth * 0.64, windowHeight - 120, windowWidth / 12, windowHeight / 6.5);
+        eAlien12 = new EnragedAlien(windowWidth * 0.66, windowHeight - 120, windowWidth / 12, windowHeight / 6.5);
+        eAlien13 = new EnragedAlien(windowWidth * 0.68, windowHeight - 120, windowWidth / 12, windowHeight / 6.5);
+        eAlien15 = new EnragedAlien(windowWidth * 0.24, windowHeight - 120, windowWidth / 12, windowHeight / 6.5);
+        eAlien16 = new EnragedAlien(windowWidth * 0.26, windowHeight - 120, windowWidth / 12, windowHeight / 6.5);
+        eAlien17 = new EnragedAlien(windowWidth * 0.28, windowHeight - 120, windowWidth / 12, windowHeight / 6.5);
+        eAlien18 = new EnragedAlien(windowWidth * 0.35, windowHeight - 120, windowWidth / 12, windowHeight / 6.5);
+        eAlien19 = new EnragedAlien(windowWidth * 0.4, windowHeight - 120, windowWidth / 12, windowHeight / 6.5);
+        eAlien20 = new EnragedAlien(windowWidth * 0.3, windowHeight - 120, windowWidth / 12, windowHeight / 6.5);
+        enemies.push(eAlien1, eAlien2, eAlien3, eAlien4, eAlien5, eAlien6, eAlien7, eAlien8, eAlien9, eAlien10, eAlien11, eAlien12, eAlien13, eAlien15, eAlien16, eAlien17, eAlien18, eAlien19, eAlien20);
 
         //If no textures, just use colored platforms. Must change to false after other level
         drawColoredPlatforms = false;

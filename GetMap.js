@@ -226,10 +226,10 @@ function GetMap(level) {
 
       //Bottom pieces
       let l7_bottom_right_piece = { x: 0, y: windowHeight * 0.75, w: windowWidth * 0.2, h: windowHeight * 0.05 };
-      let l7_bottom_left_piece = { x: windowWidth * 0.8, y: windowHeight * 0.75, w: windowWidth * 0.2, h: windowHeight * 0.05 };
+      let l7_bottom_left_piece = { x: windowWidth * 0.75, y: windowHeight * 0.75, w: windowWidth * 0.3, h: windowHeight * 0.05 };
 
       //left platform wall
-      let l7_left_wall = { x: windowWidth * 0.75, y: windowHeight * 0.25, w: windowWidth * 0.025, h: windowHeight * 0.4 };
+      let l7_left_wall = { x: windowWidth * 0.75, y: windowHeight * 0.35, w: windowWidth * 0.025, h: windowHeight * 0.8 };
 
       //right wall
       let l7_right_wall = { x: windowWidth * 0.99, y: windowHeight * 0.25, w: windowWidth * 0.025, h: windowHeight * 0.53 };
