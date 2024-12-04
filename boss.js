@@ -5,8 +5,8 @@ class Boss extends Enemy {
     static asset = null;
     static assetR = null;
 
-    static FRAME_WIDTH = 48;
-    static FRAME_HEIGHT = 48;
+    static FRAME_WIDTH = 100;
+    static FRAME_HEIGHT = 100;
 
     static shootingIntervals = 5000;
     static chargeInterval = 2000;
@@ -23,9 +23,9 @@ class Boss extends Enemy {
         this.speedX = 2;
         this.speedY = 1.5;
 
-        this.hitboxOffsetX = 0;
-        this.hitboxOffsetY = 0;
-        this.hitboxWidth = 30;
+        this.hitboxOffsetX = 50;
+        this.hitboxOffsetY = 50;
+        this.hitboxWidth = 10;
         this.hitboxHeight = 0;
 
         this.v = 0;
@@ -119,8 +119,8 @@ class Boss extends Enemy {
         if (this.invulnerabilityDelay <= this.invulnerabilityTimer) {
             if (this.projectile instanceof Fist) {
                 if (
-                    this.projectile.x < this.x + this.w &&
-                    this.projectile.x + this.projectile.w > this.x &&
+                    this.projectile.x < (this.x - this.hitboxOffsetX) + (this.w - this.hitboxWidth) &&
+                    this.projectile.x + this.projectile.w > (this.x - this.hitboxOffsetX) &&
                     this.projectile.y < this.y + this.h &&
                     this.projectile.y + this.projectile.h > this.y
                 ) {

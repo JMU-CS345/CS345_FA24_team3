@@ -15,7 +15,7 @@ function isCollidingPlayerWithEnemy(player, playerHitBox, enemy) {
     // Check if player is above enemy
     if (player.y + player.h < enemy.y) return false;
     // Check if player is below enemy
-    if (playerHitBox.y > enemy.y + enemy.h) return false;
+    if (playerHitBox.y > (enemy.y - enemy.hitboxOffsetY) + enemy.h) return false;
     // Check if player is to the left of enemy
     if (playerHitBox.x + playerHitBox.w < enemy.x + enemy.hitboxOffsetX) return false;
     // Check if player is to the right of enemy
