@@ -203,7 +203,7 @@ function fistTeleport(enemy) {
 
             // Check if the projectile is colliding with the entry portal
             if (isCollidingObject(enemy.projectile, entry) && purpleP.x != -1 && goldP.x != -1) {
-                // Update position based on portal orientation
+                // Update position and velocity based on portal orientation
                 if (entry.vertical) {
                     if (exit.vertical) { // Entry is vertical, Exit is vertical
                         enemy.projectile.x = exit.direction === 'left' ? exit.x - 200 : exit.x + exit.w;
@@ -230,26 +230,22 @@ function fistTeleport(enemy) {
                     }
                 }
 
-                // Select the correct asset and rotation based on exit orientation
-                switch (exit.direction) {
-                    case 'left':
-                        enemy.projectile.currentAsset = Fist.assetFist; // Default asset for facing left
-                        break;
-                    case 'right':
-                        enemy.projectile.currentAsset = Fist.assetFistR; // Facing right
-                        break;
-                    case 'up':
-                        enemy.projectile.currentAsset = Fist.assetFistUp; // Facing up
-                        break;
-                    case 'down':
-                        enemy.projectile.currentAsset = Fist.assetFistDown; // Facing down
-                        break;
+                if (Math.abs(enemy.projectile.vx) > Math.abs(enemy.projectile.vy)) {
+                    // Horizontal movement dominates
+                    enemy.projectile.currentAsset = enemy.projectile.vx > 0
+                        ? Fist.assetFistR // Right-facing
+                        : Fist.assetFist; // Left-facing
+                } else {
+                    // Vertical movement dominates
+                    enemy.projectile.currentAsset = enemy.projectile.vy > 0
+                        ? Fist.assetFistUp // Up-facing
+                        : Fist.assetFistDown; // Down-facing
                 }
+
                 // Disable teleportation temporarily to avoid repeated collisions
                 enemy.projectile.canTeleport = false;
                 console.log(`Exit direction: ${exit.direction}`);
                 console.log(`Assigned asset: ${enemy.projectile.currentAsset}`);
-
                 break; // Exit the loop after teleporting
             }
         }

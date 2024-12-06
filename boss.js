@@ -329,25 +329,23 @@ class Fist {
         this.canTeleport = true;
 
         // Determine direction and assign the correct asset
-        if (Math.abs(dx) > Math.abs(dy)) {
-            if (this.currentAsset = dx > 0) {
-                this.currentAsset = Fist.assetFistR
+        if (Math.abs(dx) > Math.abs(dy)) { // Horizontal movement dominates
+            if (dx > 0) {
+                this.currentAsset = Fist.assetFistR; // Right-facing
                 this.x += 100;
                 this.y -= 25;
-            }
-            else {
-                this.currentAsset = Fist.assetFist;
+            } else {
+                this.currentAsset = Fist.assetFist; // Left-facing
                 this.x -= 250;
                 this.y -= 25;
-            }// Horizontal movement
-        } else {
-            if (this.currentAsset = dy > 0) {
-                this.currentAsset = Fist.assetFistDown
+            }
+        } else { // Vertical movement dominates
+            if (dy > 0) {
+                this.currentAsset = Fist.assetFistDown; // Down-facing
                 this.x -= 25;
                 this.y -= 250;
-            }
-            else {
-                this.currentAsset = Fist.assetFistUp; // Vertical movement
+            } else {
+                this.currentAsset = Fist.assetFistUp; // Up-facing
                 this.x -= 25;
                 this.y += 100;
             }
