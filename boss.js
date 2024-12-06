@@ -62,7 +62,7 @@ class Boss extends Enemy {
             const projX = this.x + this.w / 2;
             const projY = this.y + this.h / 2;
 
-            const argetX = player.x + player.w / 2;
+            const targetX = player.x + player.w / 2;
             const targetY = player.y + player.h / 2;
 
 
