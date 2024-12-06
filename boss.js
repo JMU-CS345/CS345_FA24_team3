@@ -62,8 +62,9 @@ class Boss extends Enemy {
             const projX = this.x + this.w / 2;
             const projY = this.y + this.h / 2;
 
-            const targetX = player.x + player.w / 2;
+            const argetX = player.x + player.w / 2;
             const targetY = player.y + player.h / 2;
+
 
 
             if (this.random < 1) {
@@ -73,7 +74,7 @@ class Boss extends Enemy {
                 this.projectile = new Fist(projX, projY, targetX, targetY);
             }
 
-            this.random = Math.random()// so i can have access to it when drawing. 
+            this.random = Math.random()// so i can have access to it when drawing.
         }
     }
 
@@ -152,7 +153,11 @@ class Boss extends Enemy {
                 drawHelper = false;
             }
         } else {
-            image(Boss.asset, this.x, this.y, this.w, this.h, sx, 0, 100, 100);
+            if (this.direction == 1) {
+                image(Boss.asset, this.x, this.y, this.w, this.h, sx, 0, 100, 100);
+            } else {
+                image(Boss.assetR, this.x, this.y, this.w, this.h, 600, 0, 100, 100);
+            }
         }
 
     }
