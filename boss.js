@@ -66,7 +66,7 @@ class Boss extends Enemy {
             const targetY = player.y + player.h / 2;
 
 
-            if (this.random < 0.6) {
+            if (this.random < 1) {
                 this.projectile = new Laserbeam(projX, projY, targetX, targetY);
                 console.log("created  laser");
             } else {
@@ -91,7 +91,7 @@ class Boss extends Enemy {
         }
     }
 
-    checkProjHitsPlayer(player) {
+    checkProjHitsPlayer() {
         if (this.projectile == null) {
             return;
         }
@@ -137,11 +137,9 @@ class Boss extends Enemy {
 
         if (this.isCharging && this.projectile instanceof Laserbeam) {
             if (this.direction == 1) {
-                image(Laserbeam.assetLaser, this.x + 100, this.y - 25, 400, 400, 0, 800, 100, 100);
                 image(Boss.asset, this.x, this.y, this.w, this.h, 300, 200, 100, 100);
                 drawHelper = true;
             } else {
-                image(Laserbeam.assetLaser, this.x - 250, this.y - 25, 400, 400, 0, 800, 100, 100);
                 image(Boss.assetR, this.x, this.y, this.w, this.h, 600, 200, 100, 100);
                 drawHelper = false;
             }
@@ -268,8 +266,8 @@ class Laserbeam {
         this.x = x;
         this.y = y;
 
-        this.w = 400;
-        this.h = 400;
+        this.w = 100;
+        this.h = 100;
 
         this.speed = 10;
 
@@ -291,9 +289,11 @@ class Laserbeam {
 
     draw() {
         if (drawHelper) {
-            image(Laserbeam.assetLaser, this.x + 100, this.y - 25, this.w, this.h, 0, 800, 100, 100);
+            image(Laserbeam.assetLaser, this.x + 100, this.y, this.w, this.h, 35, 710, 40, 50);
+            //rect(this.x + 100, this.y, this.w, this.h);
         } else {
-            image(Laserbeam.assetLaser, this.x - 250, this.y - 25, this.w, this.h, 0, 800, 100, 100);
+            image(Laserbeam.assetLaser, this.x - 250, this.y, this.w, this.h, 35, 710, 40, 50);
+            //rect(this.x - 250, this.y, this.w, this.h);
         }
     }
 }

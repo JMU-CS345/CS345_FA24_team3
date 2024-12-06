@@ -136,7 +136,7 @@ function enemyLoop() {
             enemy.shootAtPlayer(player);
             fistTeleport(enemy);
 
-            if (enemy.checkProjHitsPlayer(player) && canGetHurt) {
+            if (enemy.checkProjHitsPlayer() && canGetHurt) {
                 enemy.attack(player);
                 player.health--;
                 hurtSound.play();
