@@ -294,10 +294,10 @@ class Laserbeam {
 
     draw() {
         if (drawHelper) {
-            image(Laserbeam.assetLaser, this.x + 100, this.y, this.w, this.h, 35, 710, 40, 50);
+            image(Laserbeam.assetLaser, this.x, this.y, this.w, this.h, 35, 710, 40, 50);
             //rect(this.x + 100, this.y, this.w, this.h);
         } else {
-            image(Laserbeam.assetLaser, this.x - 250, this.y, this.w, this.h, 35, 710, 40, 50);
+            image(Laserbeam.assetLaser, this.x, this.y, this.w, this.h, 35, 710, 40, 50);
             //rect(this.x - 250, this.y, this.w, this.h);
         }
     }
