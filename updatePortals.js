@@ -74,15 +74,7 @@ function shootPortal(passedMouseX, passedMouseY, colorP) {
     if (projectiles.length == 1 && projectiles[0].c == colorP) {
         return;
     }
-
-    // Debugging purposes
-    // console.log("mouseX: ", passedMouseX, "mouseY: ", passedMouseY)
-    // console.log("playerX: ", player.x, "playerY: ", player.y)
-
-    /*xTarget = passedMouseX - player.x - windowWidth * 0.07;
-    yTarget = passedMouseY - player.y - windowHeight * 0.05;*/
-
-    //This seems to work to fix the mouse stuff?
+    //Mouse Portal Calculation
     xTarget = passedMouseX - (player.x + player.w / 2);
     yTarget = passedMouseY - (player.y + player.h / 2);
     portalTarget = sqrt((xTarget * xTarget) + (yTarget * yTarget));

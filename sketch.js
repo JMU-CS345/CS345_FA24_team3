@@ -106,12 +106,6 @@ function draw() {
     else if (player.v < 0 && !player.moving) {
       curDirection = 'up';
     }
-    //use to see hitboxes and platforms easily
-    //fill("gray")
-
-    //rect(playerHitBox.x, playerHitBox.y, playerHitBox.w, playerHitBox.h);
-
-    // make the hitboxes invisible
 
     if (drawColoredPlatforms == true) {
       stroke(0);

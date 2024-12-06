@@ -80,7 +80,7 @@ function GetMap(level) {
       let m3_left_lower_platform_bottom = { x: 0, y: windowHeight * 0.595, h: standard_platform_size, w: windowWidth * 0.15 };
 
       //asteriod Belt
-      let asteriod_Belt_platform = { x: windowWidth * 0.62, y: windowHeight * 0.4 + mapScroll, h: 10, w: windowWidth * 0.27 };
+      let asteriod_Belt_platform = { x: windowWidth * 0.62, y: windowHeight * 0.4 + mapScroll, h: windowHeight * 0.05, w: windowWidth * 0.27 };
 
 
       map = [m3_right_wall, m3_top_left_wall, m3_left_ceiling,
@@ -288,6 +288,9 @@ function GetMap(level) {
 
       let boss_floor = { x: windowWidth * 0.01, y: windowHeight * 0.98, w: windowWidth * 0.98, h: windowHeight * 0.05 };
 
+      //roof
+      let boss_roof = { x: 0, y: 0, w: windowWidth, h: windowHeight * 0.05 };
+
       //left platform
 
       let boss_left_platform = { x: windowWidth * 0.05, y: windowHeight * 0.73, w: windowWidth * 0.2, h: windowHeight * 0.05 };
@@ -297,7 +300,7 @@ function GetMap(level) {
       let boss_right_platform = { x: windowWidth * 0.75, y: windowHeight * 0.73, w: windowWidth * 0.2, h: windowHeight * 0.05 };
 
 
-      map = [boss_right_wall, boss_left_wall, boss_floor, boss_left_platform, boss_right_platform];
+      map = [boss_right_wall, boss_left_wall, boss_floor, boss_roof, boss_left_platform, boss_right_platform];
       return map;
 
   }

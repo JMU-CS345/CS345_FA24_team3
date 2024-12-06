@@ -109,14 +109,10 @@ function nextState(state) {
         drawColoredPlatforms = true;
 
         //Enemies
-        boss1 = new Boss(windowWidth * 0.9, windowHeight * 0.15, windowWidth / 9, windowHeight / 4.875);
-
-        enemies.push(boss1);
-        /*alien1 = new Alien(600, windowHeight - 120, windowWidth / 12, windowHeight / 6.5);
+        alien1 = new Alien(600, windowHeight - 120, windowWidth / 12, windowHeight / 6.5);
         alien2 = new Alien(732, 360, windowWidth / 12, windowHeight / 6.5);
         alien3 = new Alien(340, 480, windowWidth / 12, windowHeight / 6.5);
-        enemies.push(alien1, alien2, alien3);*/
-        //enemies.push(alien1, alien2, alien3, boss1);
+        enemies.push(alien1, alien2, alien3);
 
         Alien.asset = alienImage;
         EnragedAlien.asset = alienEnragedImage
@@ -162,7 +158,7 @@ function nextState(state) {
         background(level2);
 
         //If no textures, just use colored platforms. Must change to false after other level
-        drawColoredPlatforms = false;
+        drawColoredPlatforms = true;
 
         //Setting up goal
         goal.x = windowWidth * 0.2;
@@ -213,6 +209,9 @@ function nextState(state) {
         playerSpawn.x = windowWidth * 0.1;
         playerSpawn.y = windowHeight * 0.9;
         spawnPlayer();
+
+        //If no textures, just use colored platforms. Must change to false after other level
+        drawColoredPlatforms = false;
 
         //Set up the goal for next level
         goal.x = windowWidth * 0.73;

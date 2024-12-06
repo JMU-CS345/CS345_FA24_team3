@@ -134,57 +134,6 @@ function enemyTeleport(enemy) {
         }
     }
 }
-/*function fistTeleport(enemy) {
-    const portals = [
-        { entry: purpleP, exit: goldP },
-        { entry: goldP, exit: purpleP }
-    ];
-    if (enemy instanceof Boss && enemy.projectile instanceof Fist) {
-        for (const portal of portals) {
-            const { entry, exit } = portal;
-            if (isCollidingObject(enemy.projectile, entry) && purpleP.x != -1 && goldP.x != -1) {
-                //console.log(`Enemy collided with ${entry === purpleP ? 'Purple' : 'Gold'} portal`);
-                if (entry.vertical) {
-                    if (exit.vertical) { // Entry is vertical, Exit is vertical
-                        if (exit.direction === 'left') {
-                            enemy.projectile.x = exit.x - 200;
-                        } else {
-                            enemy.projectile.x = exit.x + exit.w;
-                        }
-                        enemy.projectile.y = exit.y;
-                    } else { // Entry is vertical, Exit is horizontal
-                        if (exit.direction === 'bottom') {
-                            enemy.projectile.x = exit.x;
-                            enemy.projectile.y = exit.y + exit.h;
-                        } else {
-                            enemy.projectile.x = exit.x;
-                            enemy.projectile.y = exit.y - 150;
-                        }
-                    }
-                } else { // Entry is horizontal
-                    if (exit.vertical) { // Exit is vertical
-                        if (exit.direction === 'left') {
-                            enemy.projectile.x = exit.x - 200;
-                        } else {
-                            enemy.projectile.x = exit.x + exit.w;
-                        }
-                        enemy.projectile.y = exit.y;
-                    } else { // Exit is horizontal
-                        if (exit.direction === 'bottom') {
-                            enemy.projectile.x = exit.x;
-                            enemy.projectile.y = exit.y + exit.h;
-                        } else {
-                            enemy.projectile.x = exit.x;
-                            enemy.projectile.y = exit.y - 150;
-                        }
-                    }
-                }
-
-                // Disable teleportation and break out of the loop after teleporting
-            }
-        }
-    }
-}*/
 function fistTeleport(enemy) {
     const portals = [
         { entry: purpleP, exit: goldP },
@@ -244,8 +193,8 @@ function fistTeleport(enemy) {
 
                 // Disable teleportation temporarily to avoid repeated collisions
                 enemy.projectile.canTeleport = false;
-                console.log(`Exit direction: ${exit.direction}`);
-                console.log(`Assigned asset: ${enemy.projectile.currentAsset}`);
+                //console.log(`Exit direction: ${exit.direction}`);
+                //console.log(`Assigned asset: ${enemy.projectile.currentAsset}`);
                 break; // Exit the loop after teleporting
             }
         }
