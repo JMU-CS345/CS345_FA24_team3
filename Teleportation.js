@@ -208,25 +208,25 @@ function fistTeleport(enemy) {
                     if (exit.vertical) { // Entry is vertical, Exit is vertical
                         enemy.projectile.x = exit.direction === 'left' ? exit.x - 200 : exit.x + exit.w;
                         enemy.projectile.y = exit.y;
-                        enemy.projectile.vx = exit.direction === 'left' ? -Math.abs(enemy.projectile.vx) : Math.abs(enemy.projectile.vx);
+                        enemy.projectile.vx = exit.direction === 'left' ? -enemy.projectile.speed : enemy.projectile.speed;
                         enemy.projectile.vy = 0; // No vertical movement
                     } else { // Entry is vertical, Exit is horizontal
                         enemy.projectile.x = exit.x;
                         enemy.projectile.y = exit.direction === 'bottom' ? exit.y + exit.h : exit.y - 150;
                         enemy.projectile.vx = 0; // No horizontal movement
-                        enemy.projectile.vy = exit.direction === 'bottom' ? Math.abs(enemy.projectile.vy) : -Math.abs(enemy.projectile.vy);
+                        enemy.projectile.vy = exit.direction === 'bottom' ? enemy.projectile.speed : -enemy.projectile.speed;
                     }
                 } else { // Entry is horizontal
                     if (exit.vertical) { // Exit is vertical
                         enemy.projectile.x = exit.direction === 'left' ? exit.x - 200 : exit.x + exit.w;
                         enemy.projectile.y = exit.y;
-                        enemy.projectile.vx = exit.direction === 'left' ? -Math.abs(enemy.projectile.vx) : Math.abs(enemy.projectile.vx);
+                        enemy.projectile.vx = exit.direction === 'left' ? -enemy.projectile.speed : enemy.projectile.speed;
                         enemy.projectile.vy = 0; // No vertical movement
                     } else { // Exit is horizontal
                         enemy.projectile.x = exit.x;
                         enemy.projectile.y = exit.direction === 'bottom' ? exit.y + exit.h : exit.y - 150;
                         enemy.projectile.vx = 0; // No horizontal movement
-                        enemy.projectile.vy = exit.direction === 'bottom' ? Math.abs(enemy.projectile.vy) : -Math.abs(enemy.projectile.vy);
+                        enemy.projectile.vy = exit.direction === 'bottom' ? enemy.projectile.speed : -enemy.projectile.speed;
                     }
                 }
 
@@ -247,6 +247,8 @@ function fistTeleport(enemy) {
                 }
                 // Disable teleportation temporarily to avoid repeated collisions
                 enemy.projectile.canTeleport = false;
+                console.log(`Exit direction: ${exit.direction}`);
+                console.log(`Assigned asset: ${enemy.projectile.currentAsset}`);
 
                 break; // Exit the loop after teleporting
             }

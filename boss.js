@@ -54,9 +54,8 @@ class Boss extends Enemy {
         player.v = 0;
     }
 
-    shootAtPlayer(player) {
+    shootAtPlayerBoss(player) {
         if (this.canShoot) {
-            console.log("shot at palyer");
             this.canShoot = false;
 
             const projX = this.x + this.w / 2;
@@ -67,9 +66,8 @@ class Boss extends Enemy {
 
 
 
-            if (this.random < 1) {
+            if (this.random < 0) {
                 this.projectile = new Laserbeam(projX, projY, targetX, targetY);
-                console.log("created  laser");
             } else {
                 this.projectile = new Fist(projX, projY, targetX, targetY);
             }
@@ -309,12 +307,13 @@ class Fist {
     static assetFistUp = null;    // Up-facing
     static assetFistDown = null;  // Down-facing
 
+
     constructor(x, y, targetX, targetY) {
         this.x = x;
         this.y = y;
 
-        this.w = 200;
-        this.h = 200;
+        this.w = 75;
+        this.h = 75;
 
         this.speed = 6;
 
@@ -328,11 +327,30 @@ class Fist {
         this.active = true;
         this.teleportationTimer = 0;
         this.canTeleport = true;
+
         // Determine direction and assign the correct asset
         if (Math.abs(dx) > Math.abs(dy)) {
-            this.currentAsset = dx > 0 ? Fist.assetFistR : Fist.assetFist; // Horizontal movement
+            if (this.currentAsset = dx > 0) {
+                this.currentAsset = Fist.assetFistR
+                this.x += 100;
+                this.y -= 25;
+            }
+            else {
+                this.currentAsset = Fist.assetFist;
+                this.x -= 250;
+                this.y -= 25;
+            }// Horizontal movement
         } else {
-            this.currentAsset = dy > 0 ? Fist.assetFistDown : Fist.assetFistUp; // Vertical movement
+            if (this.currentAsset = dy > 0) {
+                this.currentAsset = Fist.assetFistDown
+                this.x -= 25;
+                this.y -= 250;
+            }
+            else {
+                this.currentAsset = Fist.assetFistUp; // Vertical movement
+                this.x -= 25;
+                this.y += 100;
+            }
         }
     }
 
@@ -343,16 +361,24 @@ class Fist {
 
     draw() {
         if (this.currentAsset == Fist.assetFistR) {
-            image(Fist.assetFistR, this.x + 100, this.y - 25, this.w, this.h, 0, 0);
+            image(Fist.assetFistR, this.x, this.y, this.w, this.h, 0, 0, 50, 70);
+            rect(this.x, this.y, this.w, this.h);
+            console.log("Right");
         }
         else if (this.currentAsset == Fist.assetFist) {
-            image(Fist.assetFist, this.x - 250, this.y - 25, this.w, this.h, 0, 0);
+            image(Fist.assetFist, this.x, this.y, this.w, this.h, 50, 0, 50, 70);
+            rect(this.x, this.y, this.w, this.h);
+            console.log("Left");
         }
         else if (this.currentAsset == Fist.assetFistUp) {
-            image(Fist.assetFistUp, this.x - 25, this.y + 100, this.w, this.h, 0, 0);
+            image(Fist.assetFistUp, this.x, this.y, this.w, this.h, 5, 0, 50, 70);
+            rect(this.x, this.y, this.w, this.h);
+            console.log("up");
         }
         else {
-            image(Fist.assetFistDown, this.x - 25, this.y - 250, this.w, this.h, 0, 0);
+            image(Fist.assetFistDown, this.x, this.y, this.w, this.h, 40, 50, 50, 70);
+            rect(this.x, this.y, this.w, this.h);
+            console.log("down");
         }
         /*if (drawHelper && (this.currentAsset == Fist.assetFistR || this.currentAsset == Fist.assetFist)) { // Boss facing left
             image(Fist.assetFistR, this.x + 100, this.y - 25, this.w, this.h, 0, 0);
