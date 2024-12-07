@@ -134,7 +134,8 @@ function nextState(state) {
       //0.69 was 0.72, Hopefully this fixed this entry into portal tutorial
       //check if the player is touching the goal or need to restart the level
       if ((isCollidingObject(playerHitBox, goal) || restartLevel == true) && !checkPlayerMoveAndJump()) {
-
+        bMusic.pause()
+        bMusic.loop();
         //clean up this level
 
         //clear enemies
@@ -184,7 +185,8 @@ function nextState(state) {
     case "portals_tutorial":
       //checking if the player is touching the goal or need to restart the level
       if ((isCollidingObject(playerHitBox, goal) || restartLevel == true) && !checkPlayerMoveAndJump()) {
-
+        bMusic.pause()
+        bMusic.loop();
         //clean up this level
 
         //Clear Enemies
@@ -232,7 +234,8 @@ function nextState(state) {
       break;
     case "map3":
       if ((isCollidingObject(playerHitBox, goal) || restartLevel == true) && !checkPlayerMoveAndJump()) {
-
+        bMusic.pause()
+        bMusic.loop();
         //clean up this level
         for (i = 0; i < enemies.length; i++) {
           enemies[i] = null;
@@ -275,7 +278,8 @@ function nextState(state) {
 
     case "map4":
       if ((isCollidingObject(playerHitBox, goal) || restartLevel == true) && !checkPlayerMoveAndJump()) {
-
+        bMusic.pause()
+        bMusic.loop();
         //clean up this level
         for (i = 0; i < enemies.length; i++) {
           enemies[i] = null;
@@ -319,7 +323,8 @@ function nextState(state) {
 
     case "map5": // Pushing to level 6
       if ((isCollidingObject(playerHitBox, goal) || restartLevel == true) && !checkPlayerMoveAndJump()) {
-
+        bMusic.pause()
+        bMusic.loop();
         //clean up this level
         for (i = 0; i < enemies.length; i++) {
           enemies[i] = null;
@@ -360,7 +365,8 @@ function nextState(state) {
 
     case "map6":
       if ((isCollidingObject(playerHitBox, goal) || restartLevel == true) && !checkPlayerMoveAndJump()) {
-
+        bMusic.pause()
+        bMusic.loop();
         //clean up this level
         for (i = 0; i < enemies.length; i++) {
           enemies[i] = null;
@@ -417,6 +423,8 @@ function nextState(state) {
 
     case "map7":
       if ((isCollidingObject(playerHitBox, goal) || restartLevel == true) && !checkPlayerMoveAndJump()) {
+        bMusic.pause()
+        bMusic.loop();
         //clean up this level
         for (i = 0; i < enemies.length; i++) {
           enemies[i] = null;
@@ -456,7 +464,7 @@ function nextState(state) {
         restartLevel = false;
       }
       break;
-    case "map8": // NEW BOSS LEVEL
+    case "map8":
       if ((isCollidingObject(playerHitBox, goal) || restartLevel == true) && !checkPlayerMoveAndJump()) {
         //clean up this level
         for (i = 0; i < enemies.length; i++) {

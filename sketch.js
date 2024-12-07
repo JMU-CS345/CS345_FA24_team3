@@ -194,6 +194,7 @@ function keyPressed() {
     player.dead = false; //no longer dead
     player.health = 3; //full health
     spawnPlayer();
+    deadSound.stop();
 
     nextState(mapLevel[--curLevel]); //have to call the previous state
   }

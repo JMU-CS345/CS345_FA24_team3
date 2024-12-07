@@ -83,7 +83,12 @@ function enemyLoop() {
             if (enemy.checkLaserHitsPlayer(player) && canGetHurt) {
                 enemy.attack(player);
                 player.health--;
-                hurtSound.play();
+                if (player.health <= 0) {
+                    deadSound.play();
+                }
+                else {
+                    hurtSound.play();
+                }
                 canGetHurt = false;
             }
 
@@ -139,7 +144,12 @@ function enemyLoop() {
             if (enemy.checkProjHitsPlayer() && canGetHurt) {
                 enemy.attack(player);
                 player.health--;
-                hurtSound.play();
+                if (player.health <= 0) {
+                    deadSound.play();
+                }
+                else {
+                    hurtSound.play();
+                }
                 canGetHurt = false;
             }
 

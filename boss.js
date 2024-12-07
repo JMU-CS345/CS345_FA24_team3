@@ -43,7 +43,7 @@ class Boss extends Enemy {
         this.isFiring = false;
         this.random = Math.random(); //Chooses which type of projectile to make. More likely to choose lazer over Fist
 
-        this.currentHealth = 3
+        this.currentHealth = 3;
 
         this.invulnerabilityTimer = 0;
         this.invulnerabilityDelay = 500;

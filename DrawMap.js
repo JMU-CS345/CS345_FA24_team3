@@ -395,6 +395,9 @@ function DrawMap(map) {
       image(mapAssets_SpaceStation, windowWidth * 0.99, windowHeight * 0.9, windowWidth * 0.01, windowHeight * 0.04, 190, 71, 10, 25);
 
       //goal
+      if (enemies[0].dead) {
+        image(mapAssets, windowWidth * 0.45, windowHeight * 0.73 + mapScroll, 140, 140, 1440, 38, 49, 48);
+      }
 
       break;
 
