@@ -37,22 +37,20 @@ function DrawMap(map) {
 
     case "map1":
 
-
-      //the first platform
-      //an asteriod belt to jump on.
-      image(mapAssets, platforms[0].x, platforms[0].y + mapScroll, platforms[0].w, platforms[0].h, 346, 481, 114, 31);
-
       //A little floating and moving rock
       image(mapAssets, windowWidth * 0.4 + (mapScroll % 2), windowHeight * 0.75 + mapScroll, 80, 80, 812, 87, 44, 48);
 
-      //The second platform to jump on
-      image(mapAssets, platforms[1].x, platforms[1].y + mapScroll, platforms[1].w, platforms[1].h, 539, 474, 112, 41);
 
       image(mapAssets, windowWidth * 0.9, windowHeight * 0.1 + mapScroll, 140, 140, 348, 805, 64, 56);
 
       image(mapAssets, windowWidth * 0.1, windowHeight * 0 + mapScroll, 140, 140, 1860, 940, 53, 50);
 
       image(mapAssets, windowWidth * 0.7, windowHeight * 0.4 + mapScroll, 140, 140, 1440, 38, 49, 48);
+
+      image(mapAssets, windowWidth * 0.1, windowHeight * 0.08 + mapScroll, windowWidth * 0.1, windowHeight * 0.09, 539, 474, 112, 41);
+
+      image(mapAssets, windowWidth * 0.9, windowHeight * 0.2 + mapScroll, windowWidth * 0.09, windowHeight * 0.07, 346, 481, 114, 31);
+
       break;
 
 
@@ -366,7 +364,7 @@ function DrawMap(map) {
       image(mapAssets_SpaceStation, platforms[2].x, platforms[2].y, platforms[2].w, platforms[2].h, 145, 94, 30, 23);
 
       //roof
-      image(mapAssets_SpaceStation, platforms[3].x, platforms[3].y, platforms[3].w, platforms[3].h, 145, 94, 30, 23);
+      image(mapAssets_SpaceStation, platforms[3].x, platforms[3].y, platforms[3].w, platforms[3].h, 145, 121, 30, 21);
 
       //left platform
       image(mapAssets_SpaceStation, platforms[4].x, platforms[4].y, platforms[4].w, platforms[4].h, 145, 94, 30, 23);
@@ -376,6 +374,16 @@ function DrawMap(map) {
 
 
       //corners
+
+      //top right corner
+      image(mapAssets_SpaceStation, windowWidth * 0.9715, windowHeight * 0.017, windowWidth * 0.025, windowHeight * 0.05, 176, 34, 21, 24);
+      image(mapAssets_SpaceStation, windowWidth * 0.99, 0, windowWidth * 0.01, windowHeight * 0.05, 190, 71, 10, 25);
+
+
+      //top left corner
+      image(mapAssets_SpaceStation, windowWidth * 0.0065, windowHeight * 0.019, windowWidth * 0.025, windowHeight * 0.04, 144, 36, 23, 23);
+      image(mapAssets_SpaceStation, 0, 0, windowWidth * 0.01, windowHeight * 0.05, 190, 71, 10, 25);
+
 
       //Bottom left corner
       image(mapAssets_SpaceStation, windowWidth * 0.001, windowHeight * 0.963, windowWidth * 0.03, windowHeight * 0.045, 146, 67, 29, 22);
@@ -387,9 +395,6 @@ function DrawMap(map) {
       image(mapAssets_SpaceStation, windowWidth * 0.99, windowHeight * 0.9, windowWidth * 0.01, windowHeight * 0.04, 190, 71, 10, 25);
 
       //goal
-      if (enemies[0].dead) {
-        image(mapAssets, windowWidth * 0.45, windowHeight * 0.73 + mapScroll, 140, 140, 1440, 38, 49, 48);
-      }
 
       break;
 
