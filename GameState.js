@@ -520,9 +520,6 @@ function nextState(state) {
         gameEnd = true;
       }
       break;
-    case "end":
-
-      break;
   }
 }
 
