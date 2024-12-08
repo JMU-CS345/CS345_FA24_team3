@@ -113,22 +113,24 @@ function mousePressed() {
 
 // Change portal color by pressing Q to purple, E to gold
 function changePortalColor() {
-    if (keyIsDown(81)) {
-        portalColor = "purple";
-    }
+    if (player.health > 0) {
+        if (keyIsDown(81)) {
+            portalColor = "purple";
+        }
 
-    if (keyIsDown(69)) {
-        portalColor = "gold";
-    }
+        if (keyIsDown(69)) {
+            portalColor = "gold";
+        }
 
-    if (portalColor == "purple") {
-        fill(69, 0, 132);
-    }
+        if (portalColor == "purple") {
+            fill(69, 0, 132);
+        }
 
-    if (portalColor == "gold") {
-        fill(203, 182, 119);
+        if (portalColor == "gold") {
+            fill(203, 182, 119);
+        }
+        square(windowWidth - 95, 125, 35);
     }
-    square(windowWidth - 95, 125, 35);
 }
 //Destroys the Portals
 function destroyPortal() {

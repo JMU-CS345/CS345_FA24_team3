@@ -76,6 +76,7 @@ function GameState(state) {
       player.dead = true;
       restartLevel = true;
       Death();
+      DrawMap("death");
       break;
 
   }

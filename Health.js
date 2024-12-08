@@ -37,12 +37,7 @@ function Death() {
   if (player.dead) {
     bMusic.pause(); // pause background music while dead
     bossMusic.pause();
-    background('black');
-    fill('red');
-    textSize(100);
-    textFont("times new roman");
-    text("You Died.", 550, 100);
-    text("Press Enter to Restart", 350, 200)
+    //background('black');
     for (i = 0; i < enemies.length; i++) {
       enemies[i] = null;
       enemies.splice(i, 1);

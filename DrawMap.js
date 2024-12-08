@@ -28,10 +28,11 @@ function DrawMap(map) {
       image(mapAssets, windowWidth * 0.05 * windowWidth / 1600, windowHeight * 0.4 * windowHeight / 900 + mapScroll, 60, 70, 176, 59, 51, 41);
 
 
-      textSize(100);
+      textSize(80);
       fill("white");
-      textFont("Courier New");
-      text("Press Enter!", windowWidth * 0.25 * windowWidth / 1600, windowHeight * 1.1 * windowHeight / 900 + mapScroll);
+      textFont(gameFont);
+      //text("Press Enter!", windowWidth * 0.25 * windowWidth / 1600, windowHeight * 1.1 * windowHeight / 900 + mapScroll);
+      text("Press Enter!", (windowWidth * 0.2) * windowWidth / 1600, (windowHeight * 0.8) * windowHeight / 900 + mapScroll);
 
       break;
 
@@ -429,11 +430,20 @@ function DrawMap(map) {
 
       textSize(50);
       fill("white");
-      textFont("Courier New");
-      text("YOU ARE THE GALAXY MASTER!", windowWidth / 4.2, windowHeight / 2.3 + mapScroll);
+      textFont(gameFont);
+      text("YOU ARE THE GALAXY MASTER!", (windowWidth * 0.15) * windowWidth / 1600, windowHeight / 2.3 + mapScroll);
       textSize(25);
       text("   Credits:\nNicholas Drake\nLance Bender\nBen Cook\nDaniel Grasmeder\nJohn Adams", windowWidth / 2.5, windowHeight / 1.5 + mapScroll)
       break;
+
+    case "death":
+      //background
+      image(mapAssets_SpaceStation, 0, 0, windowWidth, windowHeight, 266, 25, 535, 807);
+      fill('red');
+      textSize(80);
+      textFont(gameFont);
+      text("You Died.", (windowWidth * 0.25) * windowWidth / 1600, (windowHeight * 0.3) * windowHeight / 900);
+      text("Press Enter to Restart", (windowWidth * 0.05) * windowWidth / 1600, (windowHeight * 0.5) * windowHeight / 900)
   }
 
 }

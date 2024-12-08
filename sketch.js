@@ -79,6 +79,7 @@ function preload() {
   killEnemy = loadSound('music/killEnemy.wav');
   deadSound = loadSound('music/deadNoise.mp3');
   deadRobot = loadImage('assets/deadRobot.png');
+  gameFont = loadFont('assets/PressStart2P-Regular.ttf')
 }
 
 function setup() {
