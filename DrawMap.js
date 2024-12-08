@@ -114,6 +114,9 @@ function DrawMap(map) {
 
       //Top Right Corner
       image(mapAssets_SpaceStation, windowWidth * 0.977, windowHeight * 0.015, windowWidth * 0.02, windowHeight * 0.04, 176, 34, 21, 24);
+      image(mapAssets_SpaceStation, windowWidth * 0.99, 0, windowWidth * 0.01, windowHeight * 0.05, 190, 71, 10, 25);
+
+
 
       //Block Bottom left outer Corner
       image(mapAssets_SpaceStation, windowWidth * 0.331, windowHeight * 0.645, windowWidth * 0.015, windowHeight * 0.025, 208, 62, 14, 16);
@@ -138,6 +141,8 @@ function DrawMap(map) {
 
       //Top Left Corner
       image(mapAssets_SpaceStation, windowWidth * 0.005, windowHeight * 0.014, windowWidth * 0.02, windowHeight * 0.04, 144, 36, 23, 23);
+      image(mapAssets_SpaceStation, 0, 0, windowWidth * 0.013, windowHeight * 0.025, 190, 71, 10, 25);
+
 
       //Bottom Right Corner
       image(mapAssets_SpaceStation, windowWidth * 0.976, windowHeight * 0.965, windowWidth * 0.02, windowHeight * 0.04, 199, 35, 23, 23);

@@ -112,7 +112,7 @@ function draw() {
       strokeWeight(3);
       fill("gray");
     } else {
-      //noStroke();
+      noStroke();
       noFill();
     }
 
@@ -160,6 +160,7 @@ function draw() {
       GameState("death");
     }
     if (gameStart == true && gameEnd == false) {
+      stroke(0);
       changePortalColor();
       Teleportation();
       PlayerMovement();

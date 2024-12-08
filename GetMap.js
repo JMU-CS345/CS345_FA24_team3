@@ -293,11 +293,11 @@ function GetMap(level) {
 
       //left platform
 
-      let boss_left_platform = { x: windowWidth * 0.05, y: windowHeight * 0.73, w: windowWidth * 0.2, h: windowHeight * 0.05 };
+      let boss_left_platform = { x: windowWidth * 0.13, y: windowHeight * 0.73, w: windowWidth * 0.2, h: windowHeight * 0.05 };
 
       //right platform
 
-      let boss_right_platform = { x: windowWidth * 0.75, y: windowHeight * 0.73, w: windowWidth * 0.2, h: windowHeight * 0.05 };
+      let boss_right_platform = { x: windowWidth * 0.67, y: windowHeight * 0.73, w: windowWidth * 0.2, h: windowHeight * 0.05 };
 
 
       map = [boss_right_wall, boss_left_wall, boss_floor, boss_roof, boss_left_platform, boss_right_platform];

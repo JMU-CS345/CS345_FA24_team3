@@ -159,7 +159,7 @@ function nextState(state) {
         background(level2);
 
         //If no textures, just use colored platforms. Must change to false after other level
-        drawColoredPlatforms = true;
+        drawColoredPlatforms = false;
 
         //Setting up goal
         goal.x = windowWidth * 0.2;
@@ -211,6 +211,7 @@ function nextState(state) {
         playerSpawn.x = windowWidth * 0.1;
         playerSpawn.y = windowHeight * 0.9;
         spawnPlayer();
+        nextLevel.play();
 
         //If no textures, just use colored platforms. Must change to false after other level
         drawColoredPlatforms = false;
@@ -256,12 +257,12 @@ function nextState(state) {
         curLevel++;
         background(level1);
         platforms = GetMap(mapLevel[curLevel]);
+        nextLevel.play();
 
         robot1 = new Robot(800, windowWidth - 120, windowWidth / 12, windowHeight / 6.5);
         robot2 = new Robot(1200, windowWidth - 120, windowWidth / 12, windowHeight / 6.5);
         robot3 = new Robot(1600, windowWidth - 120, windowWidth / 12, windowHeight / 6.5);
         robot4 = new Robot(1050, windowWidth - 120, windowWidth / 12, windowHeight / 6.5);
-        robot5 = new Robot(1350, windowWidth - 120, windowWidth / 12, windowHeight / 6.5);
         enemies.push(robot1, robot2, robot3, robot4);
 
         //If no textures, just use colored platforms. Must change to false after other level
@@ -300,6 +301,7 @@ function nextState(state) {
         curLevel++;
         background(level1);
         platforms = GetMap(mapLevel[curLevel]);
+        nextLevel.play();
 
         eAlien1 = new EnragedAlien(windowWidth * 0.43, windowHeight - 120, windowWidth / 12, windowHeight / 6.5);
         eAlien2 = new EnragedAlien(windowWidth * 0.45, windowHeight - 120, windowWidth / 12, windowHeight / 6.5);
@@ -345,6 +347,7 @@ function nextState(state) {
         curLevel++;
         background(level1);
         platforms = GetMap(mapLevel[curLevel]);
+        nextLevel.play();
 
         robot1 = new Robot(300, windowHeight - 300, windowWidth / 12, windowHeight / 6.5);
         robot2 = new Robot(1100, windowHeight - 1000, windowWidth / 12, windowHeight / 6.5);
@@ -387,6 +390,7 @@ function nextState(state) {
         curLevel++;
         background(level1);
         platforms = GetMap(mapLevel[curLevel]);
+        nextLevel.play();
 
         eAlien1 = new EnragedAlien(windowWidth * 0.43, windowHeight - 120, windowWidth / 12, windowHeight / 6.5);
         eAlien2 = new EnragedAlien(windowWidth * 0.45, windowHeight - 120, windowWidth / 12, windowHeight / 6.5);
@@ -444,6 +448,7 @@ function nextState(state) {
 
         curLevel++;
         background(level3);
+        nextLevel.play();
         platforms = GetMap(mapLevel[curLevel]);
 
         //enemies for next level
@@ -484,6 +489,7 @@ function nextState(state) {
         //Set up the things for the next level
         bMusic.pause();
         bossMusic.loop();
+        nextLevel.play();
         curLevel++;
         background(level2);
         platforms = GetMap(mapLevel[curLevel]);
