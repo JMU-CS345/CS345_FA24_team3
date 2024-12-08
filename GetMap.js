@@ -191,19 +191,7 @@ function GetMap(level) {
         x: windowWidth * 0.162, y: windowHeight * 0.812, w: windowWidth * 0.38, h: windowHeight * 0.05, type: "platform"
       };
       let l6_p4 = {
-        x: windowWidth * 0.262, y: windowHeight * 0, w: windowWidth * 0.023, h: windowHeight * 0.63, type: "platform"
-      };
-      let l6_p5 = {
-        x: windowWidth * 0.285, y: windowHeight * 0.58, w: windowWidth * 0.03, h: windowHeight * 0.05, type: "platform"
-      };
-      let l6_p6 = {
-        x: windowWidth * 0.34, y: windowHeight * 0.58, w: windowWidth * 0.03, h: windowHeight * 0.05, type: "platform"
-      };
-      let l6_p7 = {
-        x: windowWidth * 0.285, y: windowHeight * 0.0, w: windowWidth * 0.1, h: windowHeight * 0.05, type: "platform"
-      };
-      let l6_p8 = {
-        x: windowWidth * 0.370, y: windowHeight * 0, w: windowWidth * 0.023, h: windowHeight * 0.63, type: "platform"
+        x: windowWidth * 0.262, y: (windowHeight * 0) - (windowHeight * 0.3), w: windowWidth * 0.15, h: windowHeight * 0.93, type: "platform"
       };
       let l6_p9 = {
         x: windowWidth * 0.519, y: windowHeight * 0.521, w: windowWidth * 0.023, h: windowHeight * 0.29, type: "platform"
@@ -211,7 +199,7 @@ function GetMap(level) {
       let l6_p10 = {
         x: windowWidth * 0.519, y: windowHeight * 0.47, w: windowWidth * 0.5, h: windowHeight * 0.05, type: "platform"
       };
-      map = [l6_p1, l6_p2, l6_p3, l6_p4, l6_p5, l6_p6, l6_p7, l6_p8, l6_p9, l6_p10];
+      map = [l6_p1, l6_p2, l6_p3, l6_p4, l6_p9, l6_p10];
       return map;
 
     case "map7":
