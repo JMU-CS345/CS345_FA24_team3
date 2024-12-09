@@ -58,15 +58,15 @@ function PlayerMovement() {
     player.moving = false;
   }
   else if (!player.dead) { //Idle
-    if (lastDir == 'left') {
+    /*if (lastDir == 'left') {
       image(playerReverse, player.x, player.y, player.w, player.h, frameWidth * currentFrame, 0, frameWidth, frameHeight);
       currentFrame = (floor(frame) % 2) + 6;
       frame = frame - 0.05;
     } else {
-      image(playerImage, player.x, player.y, player.w, player.h, frameWidth * currentFrame, 0, frameWidth, frameHeight);
-      currentFrame = floor(frame) % 2;
-      frame = frame + 0.05;
-    }
+    */
+    image(playerImage, player.x, player.y, player.w, player.h, frameWidth * currentFrame, 0, frameWidth, frameHeight);
+    currentFrame = floor(frame) % 2;
+    frame = frame + 0.05;
     player.moving = false;
   }
   else {
