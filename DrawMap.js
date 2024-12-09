@@ -428,7 +428,7 @@ function DrawMap(map) {
       image(mapAssets, windowWidth * 0.05 * windowWidth / 1600, windowHeight * 0.4 * windowHeight / 900 + mapScroll, 60, 70, 176, 59, 51, 41);
 
 
-      textSize(50);
+      textSize(40);
       fill("white");
       textFont(gameFont);
       text("YOU ARE THE GALAXY MASTER!", (windowWidth * 0.15) * windowWidth / 1600, windowHeight / 2.3 + mapScroll);
@@ -440,9 +440,9 @@ function DrawMap(map) {
       //background
       image(mapAssets_SpaceStation, 0, 0, windowWidth, windowHeight, 266, 25, 535, 807);
       fill('red');
-      textSize(80);
+      textSize(60);
       textFont(gameFont);
-      text("You Died.", (windowWidth * 0.25) * windowWidth / 1600, (windowHeight * 0.3) * windowHeight / 900);
+      text("  You Died.", (windowWidth * 0.25) * windowWidth / 1600, (windowHeight * 0.3) * windowHeight / 900);
       text("Press Enter to Restart", (windowWidth * 0.05) * windowWidth / 1600, (windowHeight * 0.5) * windowHeight / 900)
   }
 
