@@ -433,7 +433,7 @@ function DrawMap(map) {
       textFont(gameFont);
       text("YOU ARE THE GALAXY MASTER!", (windowWidth * 0.15) * windowWidth / 1600, windowHeight / 2.3 + mapScroll);
       textSize(25);
-      text("   Credits:\nNicholas Drake\nLance Bender\nBen Cook\nDaniel Grasmeder\nJohn Adams", windowWidth / 2.5, windowHeight / 1.5 + mapScroll)
+      text("   Credits:\nNicholas Drake\nLance Bender\nBen Cook\nDaniel Grasmeder\nJohn Adams", windowWidth / 2.7, windowHeight / 1.5 + mapScroll)
       break;
 
     case "death":
